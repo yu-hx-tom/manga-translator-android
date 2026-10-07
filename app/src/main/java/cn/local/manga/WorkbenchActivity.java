@@ -51,7 +51,6 @@ public class WorkbenchActivity extends ShellActivity {
     }
 
     private static final int PANEL_COLLAPSED = 0, PANEL_NORMAL = 1, PANEL_EXPANDED = 2;
-    private static final float MIN_SCALE = .5f, MAX_SCALE = 2f, SCALE_STEP = .1f;
 
     private final Handler main = new Handler(Looper.getMainLooper());
     private final ExecutorService renderer = Executors.newSingleThreadExecutor(r -> new Thread(r, "workbench-render"));
@@ -69,10 +68,11 @@ public class WorkbenchActivity extends ShellActivity {
     private String selected;
 
     private ResultView preview;
-    private TextView title, pageInfo, panelTitle, exportStatus;
+    private TextView title,panelTitle;
     private Button saveButton; private int editRevision; private boolean saving;
-    private Button reviewedChip, undoButton, redoButton, peekButton, prevButton, nextButton;
-    private ProgressBar loading, exportProgress;
+    private android.widget.ImageButton reviewedChip,undoButton,redoButton,peekButton,prevButton,nextButton;
+    private boolean pageHotspots=true;private FrameLayout panelBody;private StylePanel.Editor styleEditor;private LinearLayout editorRoot;
+    private ProgressBar loading;
     private LinearLayout panel, cards;
     private ScrollView cardScroll;
     private int panelState = PANEL_NORMAL;
@@ -91,7 +91,7 @@ public class WorkbenchActivity extends ShellActivity {
         }
     }
     private final class Card {
-        final String region; View root; TextView status, reason; EditText input; TextView scaleLabel; Button orient; boolean binding;
+        final String region; View root; TextView status, reason; EditText input; TextView scaleLabel; android.widget.ImageButton orient; boolean binding;
         Card(String region) { this.region = region; }
     }
 
@@ -107,7 +107,7 @@ public class WorkbenchActivity extends ShellActivity {
                 main.post(() -> {
                     if (destroyed) return;
                     project = loaded;
-                    title.setText(project.title);
+                    title.setContentDescription(project.title);
                     showPage(Math.max(0, Math.min(start, project.pages.size() - 1)), 0);offerRecovery();
                 });
             } catch (Exception failure) {
@@ -118,120 +118,28 @@ public class WorkbenchActivity extends ShellActivity {
 
     // ------------------------------------------------------------------ layout
 
-    private void buildUi() {
-        LinearLayout root = new LinearLayout(this); root.setOrientation(LinearLayout.VERTICAL); root.setBackgroundColor(Ui.BG);
-        Ui.insets(root, 0, 0, 0, 0, true);
-
-        LinearLayout bar = new LinearLayout(this); bar.setGravity(Gravity.CENTER_VERTICAL); bar.setPadding(dp(4), dp(4), dp(8), dp(4));
-        Button back = Ui.button(this, "‹", Ui.TEXT, v -> onBackPressed()); back.setTextSize(24); back.setContentDescription("返回");
-        bar.addView(back, new LinearLayout.LayoutParams(dp(48), dp(48)));
-        title = Ui.heading(this, "汉化工作台", 17); title.setSingleLine(true); title.setEllipsize(TextUtils.TruncateAt.END);
-        bar.addView(title, new LinearLayout.LayoutParams(0, -2, 1));
-        undoButton = Ui.button(this, "↶", Ui.TEXT, v -> undo()); undoButton.setTextSize(20); undoButton.setContentDescription("撤销");
-        redoButton = Ui.button(this, "↷", Ui.TEXT, v -> redo()); redoButton.setTextSize(20); redoButton.setContentDescription("重做");
-        bar.addView(undoButton, new LinearLayout.LayoutParams(dp(44), dp(44)));
-        bar.addView(redoButton, new LinearLayout.LayoutParams(dp(44), dp(44)));
-        Button export = Ui.button(this, "保存", Ui.PRIMARY, v -> {flushPendingText();saveExplicit(null);}); saveButton=export;
-        export.setPadding(dp(16), 0, dp(16), 0);
-        LinearLayout.LayoutParams exportParams = new LinearLayout.LayoutParams(-2, dp(40)); exportParams.leftMargin = dp(4);
-        bar.addView(export, exportParams);
-        Button more = Ui.button(this, "⋮", Ui.TEXT, null); more.setTextSize(22); more.setContentDescription("更多");
-        more.setOnClickListener(v -> projectMenu(more));
-        bar.addView(more, new LinearLayout.LayoutParams(dp(40), dp(44)));
-        root.addView(bar);
-
-        LinearLayout exportRow = new LinearLayout(this); exportRow.setOrientation(LinearLayout.VERTICAL); exportRow.setPadding(dp(16), 0, dp(16), dp(4));
-        exportStatus = Ui.text(this, "", 12, Ui.ACCENT_DEEP); exportRow.addView(exportStatus);
-        exportProgress = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
-        exportProgress.setProgressTintList(android.content.res.ColorStateList.valueOf(Ui.ACCENT));
-        exportRow.addView(exportProgress, new LinearLayout.LayoutParams(-1, dp(4)));
-        exportRow.setVisibility(View.GONE); exportRow.setTag("exportRow");
-        exportStatus.setOnClickListener(v -> { if (project != null && ExportJob.running(project)) new AlertDialog.Builder(this).setMessage("取消导出？已写入的页面会保留在文件夹/相册中，压缩包会被删除。")
-                .setNegativeButton("继续导出", null).setPositiveButton("取消导出", (d, w) -> ExportJob.cancel()).show(); });
-        root.addView(exportRow);
-
-        LinearLayout info = new LinearLayout(this); info.setGravity(Gravity.CENTER_VERTICAL); info.setPadding(dp(16), 0, dp(12), dp(6));
-        pageInfo = Ui.text(this, "", 13, Ui.MUTED); pageInfo.setSingleLine(true); pageInfo.setEllipsize(TextUtils.TruncateAt.MIDDLE);
-        pageInfo.setOnClickListener(v->jump());
-        info.addView(pageInfo, new LinearLayout.LayoutParams(0, -2, 1));
-        reviewedChip = Ui.button(this, "标记已校对", Ui.OUTLINED, v -> toggleReviewed());
-        reviewedChip.setTextSize(12); reviewedChip.setMinHeight(dp(34)); reviewedChip.setMinimumHeight(dp(34)); reviewedChip.setPadding(dp(12), 0, dp(12), 0);
-        info.addView(reviewedChip, new LinearLayout.LayoutParams(-2, dp(34)));
-        root.addView(info);
-
-        FrameLayout stage = new FrameLayout(this);
-        preview = new ResultView(this);
-        preview.setEditable(false); preview.setShowBoxes(true);preview.setOnBoxChanged(this::boxChanged);preview.setOnAddBox(this::addBox);
-        preview.setOnSwipe(this::turn);
-        preview.setOnPick(this::select);
-        preview.setContentDescription("漫画页面：点文字段可选中，左右滑动翻页，双指缩放");
-        stage.addView(preview, new FrameLayout.LayoutParams(-1, -1));
-        loading = new ProgressBar(this); loading.setIndeterminateTintList(android.content.res.ColorStateList.valueOf(Ui.ACCENT));
-        stage.addView(loading, new FrameLayout.LayoutParams(dp(40), dp(40), Gravity.CENTER));
-        peekButton = Ui.button(this, "按住看原图", Ui.TONAL, null);
-        peekButton.setTextSize(12); peekButton.setMinHeight(dp(36)); peekButton.setMinimumHeight(dp(36)); peekButton.setPadding(dp(14), 0, dp(14), 0);
-        peekButton.setOnTouchListener(this::peek);
-        FrameLayout.LayoutParams peekParams = new FrameLayout.LayoutParams(-2, dp(36), Gravity.BOTTOM | Gravity.START);
-        peekParams.setMargins(dp(12), 0, 0, dp(12));
-        stage.addView(peekButton, peekParams);
-        root.addView(stage, new LinearLayout.LayoutParams(-1, 0, 1));
-
-        panel = new LinearLayout(this); panel.setOrientation(LinearLayout.VERTICAL);
-        GradientDrawable sheet = new GradientDrawable(); sheet.setColor(Ui.SURFACE);
-        float r = dp(20); sheet.setCornerRadii(new float[]{r, r, r, r, 0, 0, 0, 0});
-        panel.setBackground(sheet); panel.setElevation(dp(8));
-        LinearLayout handle = new LinearLayout(this); handle.setGravity(Gravity.CENTER_VERTICAL); handle.setPadding(dp(16), dp(6), dp(8), dp(4));
-        View grip = new View(this); grip.setBackground(Ui.round(this, 0xffD5DCE6, 3));
-        LinearLayout handleColumn = new LinearLayout(this); handleColumn.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams gripParams = new LinearLayout.LayoutParams(dp(36), dp(4)); gripParams.gravity = Gravity.CENTER_HORIZONTAL; gripParams.bottomMargin = dp(6);
-        panelTitle = Ui.heading(this, "本页段落", 15);
-        handleColumn.addView(panelTitle);
-        handle.addView(handleColumn, new LinearLayout.LayoutParams(0, -2, 1));
-        Button batch=Ui.button(this,"批量样式",Ui.TEXT,v->batchStyle());handle.addView(batch);
-        Button size = Ui.button(this, "⌃", Ui.TEXT, v -> cyclePanel()); size.setContentDescription("展开或收起段落面板"); size.setTextSize(18);
-        handle.addView(size, new LinearLayout.LayoutParams(dp(44), dp(40)));
-        LinearLayout gripRow = new LinearLayout(this); gripRow.setGravity(Gravity.CENTER); gripRow.setPadding(0, dp(6), 0, 0);
-        gripRow.addView(grip, new LinearLayout.LayoutParams(dp(36), dp(4)));
-        panel.addView(gripRow);
-        panel.addView(handle);
-        handle.setOnClickListener(v -> cyclePanel()); gripRow.setOnClickListener(v -> cyclePanel());
-        View.OnTouchListener drag=new View.OnTouchListener(){float start; public boolean onTouch(View v,MotionEvent e){if(e.getActionMasked()==MotionEvent.ACTION_DOWN){start=e.getRawY();return true;}if(e.getActionMasked()==MotionEvent.ACTION_UP){float delta=e.getRawY()-start;if(Math.abs(delta)>dp(20))setPanel(Math.max(0,Math.min(2,panelState+(delta<0?1:-1))));else v.performClick();return true;}return true;}};gripRow.setOnTouchListener(drag);handleColumn.setOnTouchListener(drag);
-        cardScroll = new ScrollView(this); cardScroll.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
-        cards = new LinearLayout(this); cards.setOrientation(LinearLayout.VERTICAL); cards.setPadding(dp(12), 0, dp(12), dp(12));
-        cardScroll.addView(cards);
-        panel.addView(cardScroll, new LinearLayout.LayoutParams(-1, 0, 1));
-        LinearLayout nav = new LinearLayout(this); nav.setPadding(dp(12), dp(6), dp(12), dp(8));
-        nav.setTag("pageNav");
-        prevButton = Ui.button(this, "‹ 上一页", Ui.TONAL, v -> turn(-1));
-        nextButton = Ui.button(this, "下一页 ›", Ui.TONAL, v -> turn(1));
-        nav.addView(prevButton, new LinearLayout.LayoutParams(0, -2, 1));
-        LinearLayout.LayoutParams nextParams = new LinearLayout.LayoutParams(0, -2, 1); nextParams.leftMargin = dp(8);
-        nav.addView(nextButton, nextParams);
-        panel.addView(nav);
-        root.addView(panel, new LinearLayout.LayoutParams(-1, panelHeight(PANEL_NORMAL)));
-        // With the keyboard open the window shrinks: keep the page visible by capping the sheet at 62% of the space.
-        root.addOnLayoutChangeListener((changed, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
-            if (panelAnimating) return;
-            int wanted = Math.min(panelHeight(panelState), Math.round((bottom - top) * (panelState==PANEL_EXPANDED?.84f:.62f)));
-            if (panel.getLayoutParams().height != wanted) { panel.getLayoutParams().height = wanted; panel.post(panel::requestLayout); }
-        });
-        setContentView(root);
-        refreshUndo();
-        if (Ui.motion()) { panel.setTranslationY(dp(60)); panel.setAlpha(0f); panel.animate().translationY(0).alpha(1f).setDuration(380).setInterpolator(Ui.EASE).start(); }
+    private void buildUi(){
+        LinearLayout root=new LinearLayout(this);editorRoot=root;root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(Ui.BG);Ui.insets(root,0,0,0,0,true);
+        undoButton=Icons.iconButton(this,R.drawable.ic_undo,"撤销",v->undo());redoButton=Icons.iconButton(this,R.drawable.ic_redo,"重做",v->redo());saveButton=Ui.button(this,"保存",Ui.PRIMARY,v->{if(styleEditor!=null)styleEditor.commit();flushPendingText();saveExplicit(null);});saveButton.setPadding(0,0,0,0);saveButton.setTextSize(12);saveButton.setSingleLine(true);saveButton.setMinWidth(0);saveButton.setMinimumWidth(0);
+        LinearLayout bar=Ui.appBar(this,Icons.iconButton(this,R.drawable.ic_arrow_back,"返回",v->onBackPressed()),"编辑",null,undoButton,redoButton,saveButton,Icons.iconButton(this,R.drawable.ic_more_vert,"工程选项",this::projectMenu));title=bar.findViewWithTag("app-bar-title");title.setTextSize(14);title.setMinimumHeight(dp(48));title.setGravity(Gravity.CENTER_VERTICAL);title.setOnClickListener(v->jump());Icons.setIcon(title,R.drawable.ic_expand_more,Ui.MUTED,14);root.addView(bar);
+        FrameLayout stage=new FrameLayout(this);preview=new ResultView(this);preview.setEditable(false);preview.setShowBoxes(true);preview.setOnBoxChanged(this::boxChanged);preview.setOnAddBox(this::addBox);preview.setOnSwipe(this::turn);preview.setOnPick(this::select);preview.setContentDescription("漫画页面：点文字段选中，左右滑动翻页，双指缩放");stage.addView(preview,new FrameLayout.LayoutParams(-1,-1));
+        loading=new ProgressBar(this);loading.setIndeterminateTintList(android.content.res.ColorStateList.valueOf(Ui.ACCENT));stage.addView(loading,new FrameLayout.LayoutParams(dp(40),dp(40),Gravity.CENTER));
+        peekButton=Icons.iconButton(this,R.drawable.ic_visibility,"按住看原图",v->{});peekButton.setOnTouchListener(this::peek);peekButton.setBackground(Ui.round(this,Ui.OVERLAY,24));FrameLayout.LayoutParams peek=new FrameLayout.LayoutParams(dp(48),dp(48),Gravity.BOTTOM|Gravity.START);peek.setMargins(dp(12),0,0,dp(12));stage.addView(peekButton,peek);
+        reviewedChip=Icons.iconButton(this,R.drawable.ic_check_circle,"标记已校对",v->toggleReviewed());reviewedChip.setBackground(Ui.round(this,Ui.OVERLAY,24));FrameLayout.LayoutParams checked=new FrameLayout.LayoutParams(dp(48),dp(48),Gravity.BOTTOM|Gravity.END);checked.setMargins(0,0,dp(12),dp(12));stage.addView(reviewedChip,checked);
+        prevButton=Icons.iconButton(this,R.drawable.ic_chevron_left,"上一页",v->turn(-1));nextButton=Icons.iconButton(this,R.drawable.ic_chevron_right,"下一页",v->turn(1));prevButton.setBackground(Ui.round(this,Ui.OVERLAY,24));nextButton.setBackground(Ui.round(this,Ui.OVERLAY,24));stage.addView(prevButton,new FrameLayout.LayoutParams(dp(48),dp(48),Gravity.CENTER_VERTICAL|Gravity.START));stage.addView(nextButton,new FrameLayout.LayoutParams(dp(48),dp(48),Gravity.CENTER_VERTICAL|Gravity.END));root.addView(stage,new LinearLayout.LayoutParams(-1,0,1));
+        panel=new LinearLayout(this);panel.setOrientation(LinearLayout.VERTICAL);GradientDrawable surface=Ui.round(this,Ui.SURFACE,20);float r=dp(20);surface.setCornerRadii(new float[]{r,r,r,r,0,0,0,0});panel.setBackground(surface);panel.setElevation(dp(8));
+        LinearLayout handle=new LinearLayout(this);handle.setGravity(Gravity.CENTER_VERTICAL);handle.setPadding(dp(16),0,dp(8),0);panelTitle=Ui.heading(this,"本页段落",14);handle.addView(panelTitle,new LinearLayout.LayoutParams(0,dp(64),1));panelTitle.setGravity(Gravity.CENTER_VERTICAL);handle.addView(Ui.button(this,"批量样式",Ui.TEXT,v->batchStyle()));handle.addView(Icons.iconButton(this,R.drawable.ic_expand_less,"展开或收起段落面板",v->cyclePanel()),new LinearLayout.LayoutParams(dp(48),dp(48)));panel.addView(handle,new LinearLayout.LayoutParams(-1,dp(64)));handle.setOnClickListener(v->cyclePanel());
+        panelTitle.setOnTouchListener(new View.OnTouchListener(){float start;public boolean onTouch(View v,MotionEvent event){if(event.getActionMasked()==MotionEvent.ACTION_DOWN){start=event.getRawY();return true;}if(event.getActionMasked()==MotionEvent.ACTION_UP){float delta=event.getRawY()-start;if(Math.abs(delta)>dp(20))setPanel(Math.max(0,Math.min(2,panelState+(delta<0?1:-1))));else cyclePanel();v.performClick();return true;}return true;}});
+        cardScroll=new ScrollView(this);cardScroll.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);cards=new LinearLayout(this);cards.setOrientation(LinearLayout.VERTICAL);cards.setPadding(dp(12),0,dp(12),dp(12));cardScroll.addView(cards);panelBody=new FrameLayout(this);panelBody.addView(cardScroll,new FrameLayout.LayoutParams(-1,-1));panel.addView(panelBody,new LinearLayout.LayoutParams(-1,0,1));root.addView(panel,new LinearLayout.LayoutParams(-1,panelHeight(PANEL_NORMAL)));
+        root.addOnLayoutChangeListener((view,l,t,right,bottom,ol,ot,or,ob)->{if(panelAnimating)return;int height=panelHeight(panelState);if(panel.getLayoutParams().height!=height){panel.getLayoutParams().height=height;panel.post(panel::requestLayout);}});setContentView(root);refreshUndo();
     }
-
-    private int panelHeight(int state) {
-        int screen = getResources().getDisplayMetrics().heightPixels;
-        return state == PANEL_COLLAPSED ? dp(66) : state == PANEL_EXPANDED ? Math.round(screen * .78f) : Math.round(screen * .44f);
-    }
+    private int panelHeight(int state){int available=editorRoot!=null&&editorRoot.getHeight()>0?editorRoot.getHeight()-dp(56):getResources().getDisplayMetrics().heightPixels-dp(144);return state==PANEL_COLLAPSED?dp(64):Math.max(dp(64),Math.round(available*(state==PANEL_EXPANDED?.80f:.40f)));}
+    @Override protected void onKeyboardVisibility(boolean visible){if(visible&&panel!=null){setPanel(PANEL_NORMAL);if(selected!=null)preview.post(()->preview.focusRegion(selected));}}
     private void cyclePanel() { setPanel(panelState == PANEL_NORMAL ? PANEL_EXPANDED : panelState == PANEL_EXPANDED ? PANEL_COLLAPSED : PANEL_NORMAL); }
     private void setPanel(int state) {
         panelState = state;
-        View nav=panel.findViewWithTag("pageNav");if(nav!=null)nav.setVisibility(state==PANEL_COLLAPSED?View.GONE:View.VISIBLE);
         int from = panel.getLayoutParams().height, to = panelHeight(state);
         if (!Ui.motion()) { panel.getLayoutParams().height = to; panel.requestLayout(); return; }
-        View root = (View) panel.getParent();
-        if (root != null && root.getHeight() > 0) to = Math.min(to, Math.round(root.getHeight() * (state==PANEL_EXPANDED?.84f:.62f)));
         ValueAnimator animator = ValueAnimator.ofInt(from, to).setDuration(200);
         animator.setInterpolator(Ui.EASE);
         animator.addUpdateListener(a -> { panel.getLayoutParams().height = (Integer) a.getAnimatedValue(); panel.requestLayout(); });
@@ -246,7 +154,7 @@ public class WorkbenchActivity extends ShellActivity {
     // ------------------------------------------------------------------ pages
 
     private void turn(int direction) {
-        if (project == null) return;
+        if (project == null || styleEditor!=null) return;
         int target = pageIndex + direction;
         if (target < 0 || target >= project.pages.size()) {
             Toast.makeText(this, direction > 0 ? "已经是最后一页" : "已经是第一页", Toast.LENGTH_SHORT).show();
@@ -336,18 +244,14 @@ public class WorkbenchActivity extends ShellActivity {
     private void updateHeader() {
         ComicProject.Page page = project.pages.get(pageIndex);
         String kind = page.editable() ? "" : ComicProject.KIND_ORIGINAL.equals(page.kind) ? " · 未翻译" : " · 成品图";
-        pageInfo.setText("第 " + (pageIndex + 1) + " / " + project.pages.size() + " 页 · " + page.label + kind);
+        title.setText((pageIndex+1)+"/"+project.pages.size());title.setContentDescription("第 "+(pageIndex+1)+" 页，共 "+project.pages.size()+" 页，点击选择页面。"+page.label+kind);
         prevButton.setEnabled(pageIndex > 0);
         nextButton.setEnabled(pageIndex + 1 < project.pages.size());
         peekButton.setVisibility(page.editable() ? View.VISIBLE : View.GONE);
         paintReviewed(page.reviewed);
     }
 
-    private void paintReviewed(boolean reviewed) {
-        reviewedChip.setText(reviewed ? "✓ 已校对" : "标记已校对");
-        Ui.style(reviewedChip, reviewed ? Ui.TONAL : Ui.OUTLINED);
-        reviewedChip.setTextSize(12); reviewedChip.setMinHeight(dp(34)); reviewedChip.setMinimumHeight(dp(34)); reviewedChip.setPadding(dp(12), 0, dp(12), 0);
-    }
+    private void paintReviewed(boolean reviewed){reviewedChip.setImageDrawable(Icons.icon(this,reviewed?R.drawable.ic_check_circle_active:R.drawable.ic_check_circle,reviewed?Ui.SUCCESS:Ui.MUTED));reviewedChip.setImageTintList(android.content.res.ColorStateList.valueOf(reviewed?Ui.SUCCESS:Ui.MUTED));reviewedChip.setSelected(reviewed);reviewedChip.setContentDescription(reviewed?"已校对，点击取消标记":"标记已校对");}
     private void toggleReviewed() {
         if (project == null || pageIndex < 0) return;
         ComicProject.Page page = project.pages.get(pageIndex);
@@ -406,12 +310,10 @@ public class WorkbenchActivity extends ShellActivity {
         card.status = Ui.text(this, "", 12, Ui.MUTED); card.status.setSingleLine(true); card.status.setEllipsize(TextUtils.TruncateAt.END);
         LinearLayout.LayoutParams statusParams = new LinearLayout.LayoutParams(0, -2, 1); statusParams.leftMargin = dp(8);
         head.addView(card.status, statusParams);
-        Button more = Ui.button(this, "⋯", Ui.TEXT, null); more.setTextSize(18); more.setContentDescription("段落操作");
-        more.setOnClickListener(v -> regionMenu(more, item));
-        head.addView(more, new LinearLayout.LayoutParams(dp(40), dp(36)));
+        android.widget.ImageButton more=Icons.iconButton(this,R.drawable.ic_more_horiz,"段落操作",v->regionMenu(v,item));head.addView(more,new LinearLayout.LayoutParams(dp(48),dp(48)));
         root.addView(head);
 
-        TextView original = Ui.text(this, item.original.isEmpty() ? "（未识读到原文）" : "原文：" + item.original, 13, 0xff5B6475);
+        TextView original = Ui.text(this, item.original.isEmpty() ? "（未识读到原文）" : "原文：" + item.original, 13, Ui.MUTED);
         original.setMaxLines(4); original.setEllipsize(TextUtils.TruncateAt.END); original.setTextIsSelectable(true);
         original.setOnClickListener(v->original.setMaxLines(original.getMaxLines()==4?Integer.MAX_VALUE:4));
         root.addView(original, Ui.margins(this, 0, 6, 0, 6));
@@ -431,21 +333,10 @@ public class WorkbenchActivity extends ShellActivity {
         input.setOnFocusChangeListener((v, focused) -> { if (focused) select(item.region.id, false); });
         root.addView(input, new LinearLayout.LayoutParams(-1, -2));
 
-        LinearLayout controls = new LinearLayout(this); controls.setGravity(Gravity.CENTER_VERTICAL);
-        Button smaller = Ui.button(this, "A−", Ui.OUTLINED, v -> scale(item, -SCALE_STEP));
-        Button larger = Ui.button(this, "A+", Ui.OUTLINED, v -> scale(item, SCALE_STEP));
-        for (Button b : new Button[]{smaller, larger}) { b.setTextSize(13); b.setPadding(0, 0, 0, 0); b.setMinWidth(0); b.setMinimumWidth(0); b.setMinHeight(dp(38)); b.setMinimumHeight(dp(38)); }
-        card.scaleLabel = Ui.text(this, "", 12, 0xff3C4657); card.scaleLabel.setGravity(Gravity.CENTER);
-        controls.addView(smaller, new LinearLayout.LayoutParams(dp(46), dp(38)));
-        controls.addView(card.scaleLabel, new LinearLayout.LayoutParams(dp(78), -2));
-        controls.addView(larger, new LinearLayout.LayoutParams(dp(46), dp(38)));
-        controls.addView(new View(this), new LinearLayout.LayoutParams(0, 1, 1));
-        card.orient = Ui.button(this, "", Ui.TONAL, v -> cycleOrientation(item));
-        card.orient.setTextSize(12); card.orient.setPadding(dp(12), 0, dp(12), 0); card.orient.setMinHeight(dp(38)); card.orient.setMinimumHeight(dp(38));
-        controls.addView(card.orient, new LinearLayout.LayoutParams(-2, dp(38)));
-        root.addView(controls, Ui.margins(this, 0, 8, 0, 0));root.addView(Ui.button(this,"字号 / 字体 / 颜色 / 描边 / 文本框",Ui.TEXT,v->{flushPendingText();select(item.region.id,false);StylePanel.show(this,editOf(page,item.region.id),item.region.box,e->apply(page,item.region.id,editOf(page,item.region.id).copy(),e,false));}));
+        card.scaleLabel=Ui.text(this,"",12,Ui.ICON);root.addView(card.scaleLabel,Ui.margins(this,0,8,0,0));LinearLayout controls=new LinearLayout(this);controls.setGravity(Gravity.CENTER_VERTICAL);
+        controls.addView(Icons.iconButton(this,R.drawable.ic_text_decrease,"字号减小 2",v->fontSize(item,-2)),new LinearLayout.LayoutParams(0,dp(48),1));controls.addView(Icons.iconButton(this,R.drawable.ic_text_increase,"字号增大 2",v->fontSize(item,2)),new LinearLayout.LayoutParams(0,dp(48),1));card.orient=Icons.iconButton(this,R.drawable.ic_text_rotate_vertical,"切换横排和竖排",v->cycleOrientation(item));controls.addView(card.orient,new LinearLayout.LayoutParams(0,dp(48),1));controls.addView(Icons.iconButton(this,R.drawable.ic_palette,"文字样式",v->openStyle(item)),new LinearLayout.LayoutParams(0,dp(48),1));controls.addView(Icons.iconButton(this,R.drawable.ic_more_horiz,"段落更多操作",v->regionMenu(v,item)),new LinearLayout.LayoutParams(0,dp(48),1));root.addView(controls);
 
-        card.reason = Ui.text(this, "", 12, 0xffB06000); card.reason.setVisibility(View.GONE);
+        card.reason = Ui.text(this, "", 12, Ui.WARNING); card.reason.setVisibility(View.GONE);
         root.addView(card.reason, Ui.margins(this, 0, 6, 0, 0));
         root.setOnClickListener(v -> select(item.region.id, false));
         paintControls(card, editOf(page, item.region.id));
@@ -453,14 +344,14 @@ public class WorkbenchActivity extends ShellActivity {
     }
 
     private GradientDrawable cardBackground(boolean active) {
-        GradientDrawable shape = Ui.round(this, active ? 0xffF5F9FF : Ui.SURFACE, 16);
+        GradientDrawable shape = Ui.round(this, active ? Ui.ACCENT_SOFT : Ui.SURFACE, 16);
         shape.setStroke(dp(active ? 2 : 1), active ? Ui.ACCENT : Ui.OUTLINE);
         return shape;
     }
 
     private void paintControls(Card card, PageComposer.Edit edit) {
-        card.scaleLabel.setText(Math.round(edit.scale * 100) + "%");
-        card.orient.setText(edit.vertical == null ? "方向：自动" : edit.vertical ? "方向：竖排" : "方向：横排");
+        card.scaleLabel.setText("字号 "+Math.round(displayFont(edit,card.region)));
+        card.orient.setSelected(Boolean.TRUE.equals(edit.vertical));card.orient.setContentDescription(Boolean.TRUE.equals(edit.vertical)?"当前竖排，点击切换横排":"当前横排或跟随原文，点击切换竖排");
         float alpha = edit.hidden ? .5f : 1f;
         card.input.setAlpha(alpha);
     }
@@ -470,11 +361,11 @@ public class WorkbenchActivity extends ShellActivity {
         String status;
         int color = Ui.MUTED;
         switch (placement.mode) {
-            case BUBBLE: status = "● 气泡排版 · " + Math.round(placement.font) + " px"; color = 0xff137333; break;
-            case IN_PLACE: status = "● 原位排字 · " + Math.round(placement.font) + " px"; color = 0xffB06000; break;
-            default: status = "○ 不渲染译文"; break;
+            case BUBBLE: status = "气泡排版 · " + Math.round(placement.font) + " px"; color = Ui.SUCCESS; break;
+            case IN_PLACE: status = "原位排字 · " + Math.round(placement.font) + " px"; color = Ui.WARNING; break;
+            default: status = "不渲染译文"; break;
         }
-        card.status.setText(status); card.status.setTextColor(color);
+        card.status.setText(status);card.status.setTextColor(color);Icons.setIcon(card.status,placement.mode==PageComposer.Mode.BUBBLE?R.drawable.ic_check_circle:placement.mode==PageComposer.Mode.IN_PLACE?R.drawable.ic_error:R.drawable.ic_visibility_off,color,14);if(project!=null&&pageIndex>=0)paintControls(card,editOf(project.pages.get(pageIndex),card.region));
         String reason = placement.reason;
         if (placement.mode == PageComposer.Mode.BUBBLE) {
             PageComposer.Edit edit = editOf(project.pages.get(pageIndex), card.region);
@@ -540,17 +431,19 @@ public class WorkbenchActivity extends ShellActivity {
         after.text = value.equals(item.machine) ? null : value;
         apply(page, item.region.id, before, after, true);
     }
-    private void scale(PageDraft.Item item, float delta) {
-        ComicProject.Page page = project.pages.get(pageIndex);
-        PageComposer.Edit before = editOf(page, item.region.id).copy(), after = before.copy();
-        after.scale = Math.round(Math.max(MIN_SCALE, Math.min(MAX_SCALE, before.scale + delta)) * 10) / 10f;
-        if (after.scale == before.scale) { Toast.makeText(this, delta > 0 ? "已是最大比例 200%" : "已是最小比例 50%", Toast.LENGTH_SHORT).show(); return; }
-        apply(page, item.region.id, before, after, false);
+    private float displayFont(PageComposer.Edit edit,String region){if(!edit.format.isDefault())return Math.max(8,Math.min(96,edit.format.fontSize*edit.scale));PageComposer.Placement placement=composer==null?null:composer.placement(region);return placement!=null&&placement.font>0?Math.max(8,Math.min(96,placement.font)):24;}
+    private void fontSize(PageDraft.Item item,float delta){ComicProject.Page page=project.pages.get(pageIndex);PageComposer.Edit before=editOf(page,item.region.id).copy(),after=before.copy();after.format.fontSize=Math.max(8,Math.min(96,displayFont(before,item.region.id)+delta));after.format.custom=true;after.scale=1;apply(page,item.region.id,before,after,false);}
+    private void openStyle(PageDraft.Item item){
+        if(styleEditor!=null||TranslationTaskManager.running())return;flushPendingText();select(item.region.id,false);ComicProject.Page page=project.pages.get(pageIndex);PageComposer.Edit before=editOf(page,item.region.id).copy(),initial=before.copy();initial.format.fontSize=displayFont(before,item.region.id);initial.scale=1;if(initial.vertical==null)initial.vertical=item.region.vertical;final int token=pageToken;
+        styleEditor=StylePanel.create(this,initial,item.region.box,edit->{if(token!=pageToken)return;render(item.region.id,edit);previewStyleBox(item,edit);},edit->{closeStyle();if(token==pageToken){apply(page,item.region.id,before,edit,false);updateBoxes(draft);}},()->{closeStyle();if(token==pageToken){render(item.region.id,before);updateBoxes(draft);}});
+        cardScroll.setVisibility(View.GONE);panelBody.addView(styleEditor,new FrameLayout.LayoutParams(-1,-1));panelTitle.setText("文本样式 · 实时预览");setPanel(PANEL_NORMAL);refreshUndo();prevButton.setEnabled(false);nextButton.setEnabled(false);reviewedChip.setEnabled(false);
     }
+    private void previewStyleBox(PageDraft.Item item,PageComposer.Edit edit){if(draft==null)return;List<Region> regions=new ArrayList<>();float sx=onScreen==null?1:onScreen.getWidth()/(float)draft.width,sy=onScreen==null?1:onScreen.getHeight()/(float)draft.height;for(PageDraft.Item current:draft.items){PageComposer.Edit value=current.region.id.equals(item.region.id)?edit:editOf(project.pages.get(pageIndex),current.region.id);android.graphics.Rect box=value.format.box==null?current.region.box:value.format.box;if(!value.format.deleted)regions.add(new Region(current.region.id,new android.graphics.Rect(Math.round(box.left*sx),Math.round(box.top*sy),Math.round(box.right*sx),Math.round(box.bottom*sy)),java.util.Collections.emptyList(),current.region.vertical));}preview.setRegionsQuiet(regions);}
+    private void closeStyle(){if(styleEditor!=null){panelBody.removeView(styleEditor);styleEditor=null;}cardScroll.setVisibility(View.VISIBLE);reviewedChip.setEnabled(true);updateHeader();refreshUndo();refreshPanelTitle();}
     private void cycleOrientation(PageDraft.Item item) {
         ComicProject.Page page = project.pages.get(pageIndex);
         PageComposer.Edit before = editOf(page, item.region.id).copy(), after = before.copy();
-        after.vertical = before.vertical == null ? Boolean.TRUE : before.vertical ? Boolean.FALSE : null;
+        after.vertical = !(before.vertical==null?item.region.vertical:before.vertical);
         apply(page, item.region.id, before, after, false);
     }
 
@@ -635,8 +528,8 @@ public class WorkbenchActivity extends ShellActivity {
         if(draft!=null)updateBoxes(draft);render(step.region,project.effective(page,step.region));
     }
     private void refreshUndo() {
-        undoButton.setEnabled(!undo.isEmpty()); undoButton.setAlpha(undo.isEmpty() ? .35f : 1f);
-        redoButton.setEnabled(!redo.isEmpty()); redoButton.setAlpha(redo.isEmpty() ? .35f : 1f);
+        undoButton.setEnabled(styleEditor==null&&!undo.isEmpty()); undoButton.setAlpha(undo.isEmpty() ? .35f : 1f);
+        redoButton.setEnabled(styleEditor==null&&!redo.isEmpty()); redoButton.setAlpha(redo.isEmpty() ? .35f : 1f);
     }
 
     // ------------------------------------------------------------------ rendering
@@ -691,7 +584,7 @@ public class WorkbenchActivity extends ShellActivity {
     // ------------------------------------------------------------------ saving, export, menu
 
     private void changed() { editRevision++;if(!dirty)main.postDelayed(autosave,30000);dirty=true;paintSave(); }
-    private void paintSave(){if(saveButton!=null){saveButton.setText(saving?"保存中…":dirty?"保存 ●":"保存");saveButton.setEnabled(!saving);saveButton.setAlpha(dirty?1f:.65f);}}
+    private void paintSave(){if(saveButton!=null){saveButton.setText(saving?"保存中…":dirty?"保存*":"保存");saveButton.setEnabled(!saving);saveButton.setAlpha(dirty?1f:.65f);}}
     private void saveDraft(){
         main.removeCallbacks(autosave);if(project==null||!dirty)return;
         try{String snapshot=project.snapshot();ComicProject p=project;io.execute(()->{try{p.write("draft.json",snapshot);}catch(Exception e){main.post(()->{if(!destroyed)Toast.makeText(this,"草稿保存失败："+e.getMessage(),1).show();});}});}catch(Exception e){Toast.makeText(this,"草稿保存失败",1).show();}
@@ -705,6 +598,7 @@ public class WorkbenchActivity extends ShellActivity {
         saving=true;paintSave();io.execute(()->{try{p.write("project.json",snapshot);new java.io.File(p.dir,"draft.json").delete();main.post(()->{saving=false;if(revision==editRevision)dirty=false;paintSave();Toast.makeText(this,"已保存",0).show();if(next!=null&&!dirty)next.run();});}catch(Exception e){main.post(()->{saving=false;paintSave();Toast.makeText(this,"保存失败："+e.getMessage(),1).show();});}});
     }
     @Override protected void leaveEditor(Runnable next){
+        if(styleEditor!=null)styleEditor.cancel();
         flushPendingText();if(!dirty){next.run();return;}saveDraft();
         new AlertDialog.Builder(this).setTitle("有未保存的修改").setMessage("保存后再离开？")
             .setPositiveButton("保存",(d,w)->saveExplicit(next)).setNegativeButton("不保存",(d,w)->{
@@ -728,36 +622,11 @@ public class WorkbenchActivity extends ShellActivity {
         ExportFlow.show(this, project, this::saveBlocking);
     }
 
-    private void refreshExport() {
-        View row = getWindow().getDecorView().findViewWithTag("exportRow");
-        if (row == null || project == null) return;
-        String status = ExportJob.status(project);
-        int[] progress = ExportJob.progress(project);
-        boolean show = !status.isEmpty();
-        if (show != (row.getVisibility() == View.VISIBLE)) Ui.reveal(row, show, View.GONE);
-        exportStatus.setText(status + (progress != null ? "（点此可取消）" : ""));
-        exportProgress.setVisibility(progress != null ? View.VISIBLE : View.GONE);
-        if (progress != null) { exportProgress.setMax(progress[1]); exportProgress.setProgress(progress[0], true); }
-        getWindow().getDecorView().setKeepScreenOn(progress != null);
-    }
+    private void refreshExport(){if(project!=null)getWindow().getDecorView().setKeepScreenOn(ExportJob.running(project));}
 
     private void projectMenu(View anchor) {
-        if (project == null) return;
-        PopupMenu menu = new PopupMenu(this, anchor);
-        menu.getMenu().add(0, 1, 0, "重命名工程");
-        menu.getMenu().add(0, 2, 1, "查找替换（全部页面）");
-        menu.getMenu().add(0, 3, 2, "跳转到页…");
-        menu.getMenu().add(0, 4, 3, "我的汉化工程");menu.getMenu().add(0,5,4,"导出");menu.getMenu().add(0,6,5,"设置");
-        menu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case 1: rename(); break;
-                case 2: findReplace(); break;
-                case 3: jump(); break;
-                case 4: leaveEditor(()->startActivity(new Intent(this, ProjectListActivity.class))); break;case 5:export();break;case 6:startActivity(new Intent(this,SettingsActivity.class));break;
-            }
-            return true;
-        });
-        menu.show();
+        if (project == null || styleEditor!=null) return;
+        Ui.Sheet menu=Ui.sheet(this,"工程选项");menu.item(R.drawable.ic_edit,"重命名工程",this::rename);menu.item(R.drawable.ic_find_replace,"查找替换（全部页面）",this::findReplace);menu.item(R.drawable.ic_photo_library,"跳转到页",this::jump);menu.item(R.drawable.ic_tab_workshop,"在汉化工具中打开",()->leaveEditor(()->startActivity(new Intent(this,ProjectListActivity.class))));menu.item(R.drawable.ic_ios_share,"导出",this::export);menu.item(R.drawable.ic_visibility,pageHotspots?"隐藏翻页按钮":"显示翻页按钮",()->{pageHotspots=!pageHotspots;prevButton.setVisibility(pageHotspots?View.VISIBLE:View.GONE);nextButton.setVisibility(pageHotspots?View.VISIBLE:View.GONE);});menu.item(R.drawable.ic_settings,"设置",()->startActivity(new Intent(this,SettingsActivity.class)));menu.show();
     }
 
     private void rename() {
@@ -767,18 +636,11 @@ public class WorkbenchActivity extends ShellActivity {
                 .setNegativeButton("取消", null).setPositiveButton("保存", (d, w) -> {
                     String value = name.getText().toString().trim();
                     if (value.isEmpty()) return;
-                    project.title = value; title.setText(value); changed();
+                    project.title = value;title.setContentDescription(value);changed();
                 }).show();
     }
 
-    private void jump() {
-        String[] labels = new String[project.pages.size()];
-        for (int i = 0; i < labels.length; i++) {
-            ComicProject.Page page = project.pages.get(i);
-            labels[i] = (i + 1) + " · " + page.label + (page.reviewed ? "  ✓" : "") + (page.editedCount() > 0 ? "  已改" : "") + (page.editable() ? "" : "  只读");
-        }
-        new AlertDialog.Builder(this).setTitle("跳转到页").setItems(labels, (d, which) -> { if (which != pageIndex) leaveEditor(()->showPage(which, which > pageIndex ? 1 : -1)); }).show();
-    }
+    private void jump(){if(project==null||styleEditor!=null)return;PageGrid.jump(this,project,pageIndex,index->{if(index!=pageIndex)leaveEditor(()->showPage(index,index>pageIndex?1:-1));});}
 
     /** Replaces text in every editable page's current translation (e.g. unify a character name). */
     private void findReplace() {
@@ -826,13 +688,14 @@ public class WorkbenchActivity extends ShellActivity {
             io.execute(()->{try{ComicProject loaded=ComicProject.load(current.dir);main.post(()->{if(destroyed||dirty||saving||revision!=editRevision||loaded.updated==current.updated)return;project=loaded;undoPages.clear();redoPages.clear();undo.clear();redo.clear();showPage(Math.max(0,Math.min(pageIndex,project.pages.size()-1)),0);});}catch(Exception e){main.post(()->{if(!destroyed)Toast.makeText(this,"工程更新读取失败："+e.getMessage(),1).show();});}});
         }
     }
-    @Override protected void onPause() { flushPendingText(); saveDraft(); ExportJob.unlisten(exportChanged); super.onPause(); }
+    @Override protected void onPause() { if(styleEditor!=null)styleEditor.cancel();flushPendingText(); saveDraft(); ExportJob.unlisten(exportChanged); super.onPause(); }
     @Override protected void onSaveInstanceState(Bundle out) { super.onSaveInstanceState(out); out.putInt("page", Math.max(0, pageIndex)); }
     @Override protected void onActivityResult(int request, int result, Intent data) {
         super.onActivityResult(request, result, data);
         ExportFlow.onActivityResult(this, request, result, data);
     }
     @Override public void onBackPressed() {
+        if(styleEditor!=null){styleEditor.cancel();return;}
         flushPendingText(); saveNow();
         if (project != null) { ComicProject target = project; io.execute(() -> ProjectStore.writeCover(target)); }
         super.onBackPressed();
@@ -850,7 +713,7 @@ public class WorkbenchActivity extends ShellActivity {
         for (Map.Entry<String, PageComposer.Edit> e : edits.entrySet()) out.put(e.getKey(), e.getValue().copy());
         return out;
     }
-    protected String translationDisabled(){return project==null?"请先打开工程":dirty?"请先保存编辑再翻译":null;}
+    protected String translationDisabled(){return project==null?"请先打开工程":styleEditor!=null?"请先完成或取消样式编辑":dirty?"请先保存编辑再翻译":null;}
     protected void startTranslation(){if(project!=null)ProjectTranslation.start(this,project,-1,()->showPage(pageIndex,0));}
     private void updateBoxes(PageDraft data){
         List<Region> regions=new ArrayList<>();if(project==null||pageIndex<0)return;
@@ -859,13 +722,14 @@ public class WorkbenchActivity extends ShellActivity {
         preview.setRegionsQuiet(regions);
     }
     private android.graphics.Rect originalBox(android.graphics.Rect box){float sx=draft==null||onScreen==null?1:draft.width/(float)onScreen.getWidth(),sy=draft==null||onScreen==null?1:draft.height/(float)onScreen.getHeight();return new android.graphics.Rect(Math.round(box.left*sx),Math.round(box.top*sy),Math.round(box.right*sx),Math.round(box.bottom*sy));}
-    private void boxChanged(String id,android.graphics.Rect box){if(project==null||pageIndex<0)return;ComicProject.Page page=project.pages.get(pageIndex);PageComposer.Edit before=editOf(page,id).copy(),after=before.copy();after.format.box=originalBox(box);after.format.custom=true;apply(page,id,before,after,false);}
+    private void boxChanged(String id,android.graphics.Rect box){if(styleEditor!=null)return;if(project==null||pageIndex<0)return;ComicProject.Page page=project.pages.get(pageIndex);PageComposer.Edit before=editOf(page,id).copy(),after=before.copy();after.format.box=originalBox(box);after.format.custom=true;apply(page,id,before,after,false);}
     private void addBox(android.graphics.Rect box){
-        if(project==null||draft==null)return;flushPendingText();ComicProject.Page page=project.pages.get(pageIndex);String id="manual-"+java.util.UUID.randomUUID();
+        if(styleEditor!=null||project==null||draft==null)return;flushPendingText();ComicProject.Page page=project.pages.get(pageIndex);String id="manual-"+java.util.UUID.randomUUID();
         PageComposer.Edit edit=project.defaultStyle.copy();edit.format.added=true;edit.format.custom=true;edit.format.box=originalBox(box);edit.text="新增译文";
         apply(page,id,new PageComposer.Edit(),edit,false);showPage(pageIndex,0);
     }
     private void batchStyle(){
+        if(styleEditor!=null)return;
         if(draft==null||selected==null){Toast.makeText(this,"请先选择一个文本条目",0).show();return;}
         PageComposer.Edit source=editOf(project.pages.get(pageIndex),selected).copy();
         new AlertDialog.Builder(this).setTitle("应用当前条目的样式").setItems(new String[]{"本页全部条目","整个工程全部条目","选择本页条目"},(d,which)->{

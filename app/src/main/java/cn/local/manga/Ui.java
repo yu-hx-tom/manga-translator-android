@@ -48,6 +48,7 @@ final class Ui {
     static final int ICON=0xff3C4657, SUCCESS=0xff137333, SUCCESS_SOFT=0xffE6F4EA, WARNING=0xff8A5700, WARNING_SOFT=0xffFFF3D6;
     static final int DISABLED=0xff8C96A6, DISABLED_SOFT=0xffEEF1F5, PLACEHOLDER=0xffA9B1BD, RIPPLE=0x241A73E8;
     static final int TRANSPARENT=0x00000000, OVERLAY=0xCCFFFFFF, BLACK=0xff000000;
+    static final int PURPLE=0xff673AB7,PINK=0xffC2185B,CYAN=0xff00838F,ORANGE=0xffEF6C00,BROWN=0xff795548,GRAY=0xff616161;
     static final int NEUTRAL=0, INFO=1, POSITIVE=2, CAUTION=3, NEGATIVE=4;
     static final int PRIMARY = 0, TONAL = 1, OUTLINED = 2, TEXT = 3, DANGER_TONAL = 4;
     /** Material "emphasized decelerate"-like curve: quick start, gentle settle. */
