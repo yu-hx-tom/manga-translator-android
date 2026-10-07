@@ -64,6 +64,7 @@ public final class SettingsActivity extends ShellActivity {
         LinearLayout.LayoutParams cancelParams=new LinearLayout.LayoutParams(0,-2,1);cancelParams.leftMargin=dp(8);footerActions.addView(cancel,cancelParams);
         footer.addView(footerActions,Ui.margins(this,0,8,0,0));
         shell.addView(footer,new LinearLayout.LayoutParams(-1,-2));setContentView(shell);
+        if(getIntent().getBooleanExtra("openCache",false))getWindow().getDecorView().post(this::clearDrafts);
         label(page,"常用设置在前，高级参数默认收起。修改后点底部「保存并使用」；返回时保留正在阅读的章节。",13);
 
         LinearLayout connection=Ui.section(this,page,"① 连接接口",null,8);
