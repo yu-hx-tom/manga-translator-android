@@ -11,6 +11,7 @@ public final class ChecksInstrumentation extends Instrumentation {
     @Override public void onStart(){
         Bundle results=new Bundle();
         try{
+            if("ui110".equals(suite)){results.putString("stream","\nPASS: "+Ui110Checks.run(this)+"\n");finish(Activity.RESULT_OK,results);return;}
             if("ui-shell".equals(suite)){results.putString("stream","\nPASS: "+UiShellChecks.run(this)+"\n");finish(Activity.RESULT_OK,results);return;}
             if("refactor".equals(suite)){
                 results.putString("stream","\nPASS: "+RefactorChecks.run(getTargetContext())+"\n");

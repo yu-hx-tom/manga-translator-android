@@ -31,9 +31,9 @@ public final class LibraryActivity extends ShellActivity {
         super.onCreate(state);bookmarks=getIntent().getBooleanExtra("bookmarks",true);
         LinearLayout page=new LinearLayout(this);page.setOrientation(LinearLayout.VERTICAL);page.setBackgroundColor(Ui.BG);
         Ui.insets(page,0,0,0,0,true);
-        Button back=new Button(this);back.setText("‹  返回阅读");back.setOnClickListener(v->finish());page.addView(Ui.topBar(this,back,bookmarks?"收藏夹":"历史记录"));
+        page.addView(Ui.appBar(this,Icons.iconButton(this,R.drawable.ic_arrow_back,"返回阅读",v->finish()),bookmarks?"收藏夹":"历史记录",null));
         LinearLayout body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(16),0,dp(16),0);page.addView(body,new LinearLayout.LayoutParams(-1,0,1));
-        search=new EditText(this);search.setSingleLine(true);search.setHint("🔍  搜索标题或网址");search.setTextSize(14);Ui.field(search);body.addView(search,Ui.margins(this,0,4,0,0));
+        search=new EditText(this);search.setSingleLine(true);search.setHint("搜索标题或网址");Icons.setIcon(search,R.drawable.ic_search,Ui.MUTED,20);search.setTextSize(14);Ui.field(search);body.addView(search,Ui.margins(this,0,4,0,0));
         status=new Ui.StatusText(this);status.setText("读取中…");status.setTextSize(12);status.setTextColor(Ui.MUTED);status.setPadding(dp(4),dp(10),dp(4),dp(6));body.addView(status);
         list=new ListView(this);list.setDivider(null);list.setDividerHeight(0);list.setSelector(new android.graphics.drawable.ColorDrawable(0));list.setClipToPadding(false);list.setPadding(0,0,0,dp(16));list.setVerticalScrollBarEnabled(false);
         // Rows slide up one after another whenever a fresh result set is shown.
@@ -84,15 +84,15 @@ public final class LibraryActivity extends ShellActivity {
     /** Card row reusing the stock text1/text2 ids so getView stays a plain bind. */
     private View makeRow(){
         LinearLayout row=new LinearLayout(this);row.setGravity(android.view.Gravity.CENTER_VERTICAL);row.setPadding(dp(14),dp(12),dp(12),dp(12));
-        row.setBackground(Ui.ripple(Ui.card(this,16),Ui.round(this,0xffFFFFFF,16),0x241A73E8));
-        TextView badge=Ui.text(this,bookmarks?"☆":"↺",17,0xff54719C);badge.setGravity(android.view.Gravity.CENTER);badge.setBackground(Ui.round(this,0xffEDF2FA,12));
+        row.setBackground(Ui.ripple(Ui.card(this,16),Ui.round(this,Ui.SURFACE,16),Ui.RIPPLE));
+        ImageView badge=new ImageView(this);badge.setImageDrawable(Icons.icon(this,bookmarks?R.drawable.ic_star:R.drawable.ic_history,Ui.ACCENT));badge.setPadding(dp(8),dp(8),dp(8),dp(8));badge.setBackground(Ui.round(this,Ui.ACCENT_SOFT,12));
         row.addView(badge,new LinearLayout.LayoutParams(dp(38),dp(38)));
         LinearLayout words=new LinearLayout(this);words.setOrientation(LinearLayout.VERTICAL);
         TextView title=Ui.text(this,"",15,Ui.INK);title.setId(android.R.id.text1);title.setTypeface(android.graphics.Typeface.create("sans-serif-medium",android.graphics.Typeface.NORMAL));title.setEllipsize(android.text.TextUtils.TruncateAt.END);
-        TextView detail=Ui.text(this,"",12,0xff8790A0);detail.setId(android.R.id.text2);detail.setEllipsize(android.text.TextUtils.TruncateAt.END);
+        TextView detail=Ui.text(this,"",12,Ui.MUTED);detail.setId(android.R.id.text2);detail.setEllipsize(android.text.TextUtils.TruncateAt.END);
         words.addView(title);words.addView(detail,Ui.margins(this,0,3,0,0));
         LinearLayout.LayoutParams wordsParams=new LinearLayout.LayoutParams(0,-2,1);wordsParams.leftMargin=dp(12);row.addView(words,wordsParams);
-        row.addView(Ui.text(this,"›",20,0xffA8B2C2),new LinearLayout.LayoutParams(-2,-2));
+        ImageView arrow=new ImageView(this);arrow.setImageDrawable(Icons.icon(this,R.drawable.ic_chevron_right,Ui.MUTED));row.addView(arrow,new LinearLayout.LayoutParams(dp(24),dp(24)));
         // Cards sit in a FrameLayout so the gap between rows is real spacing, not part of the ripple.
         FrameLayout holder=new FrameLayout(this);holder.setPadding(0,dp(4),0,dp(4));
         holder.addView(row,new FrameLayout.LayoutParams(-1,-2));

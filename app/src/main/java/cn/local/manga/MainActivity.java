@@ -78,34 +78,9 @@ public final class MainActivity extends ShellActivity {
         shell.addView(scroll, new LinearLayout.LayoutParams(-1, -1));
         setContentView(shell);
 
-        LinearLayout navigation=row();
-        navigation.setGravity(Gravity.CENTER_VERTICAL);
-        Button back=Ui.button(this,"‹  返回",Ui.TEXT,v->finish());
-        back.setPadding(dp(10),0,dp(12),0);
-        navigation.addView(back,new LinearLayout.LayoutParams(-2,dp(44)));
-        navigation.addView(new View(this),new LinearLayout.LayoutParams(0,1,1));
-        Button settingsButton=Ui.button(this,"⚙  设置",Ui.TONAL,v->startActivity(new Intent(this,SettingsActivity.class)));
-        navigation.addView(settingsButton,new LinearLayout.LayoutParams(-2,dp(44)));
-        page.addView(navigation,space(-8,0,0,6));
-
-        TextView eyebrow = label("MANGA · 本地文字检测", 12, ACCENT);
-        eyebrow.setLetterSpacing(.08f);
-        eyebrow.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-        page.addView(eyebrow, space(0, 6, 0, 0));
-        TextView title = label("单页翻译", 28, INK);
-        title.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-        page.addView(title, space(0, 4, 0, 4));
-        page.addView(label("导入、确认文字、翻译并保存。", 15, MUTED));
-
-        LinearLayout imageCard = card(page, "单页翻译", "导入图片 → 本地检测 → 确认选区 → 翻译回填", 16);
-        Button importButton = Ui.button(this, "＋  导入漫画图片", Ui.OUTLINED, v -> {
-            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT).setType("image/*")
-                    .addCategory(Intent.CATEGORY_OPENABLE);
-            startActivityForResult(intent, IMPORT);
-        });
-        imageCard.addView(importButton, space(0, 10, 0, 8));
-        lockedWhileBusy.add(importButton);
-        imageInfo = label("支持相册、文件，以及其他应用分享来的图片", 12, MUTED);
+        page.addView(Ui.appBar(this,Icons.iconButton(this,R.drawable.ic_arrow_back,"返回",v->finish()),"分享图片翻译",null,Icons.iconButton(this,R.drawable.ic_settings,"设置",v->startActivity(new Intent(this,SettingsActivity.class)))));
+        LinearLayout imageCard=card(page,"分享来的图片","本地检测、确认选区、翻译并保存。",8);
+        imageInfo = label("从相册、文件管理器或其他应用分享图片到这里", 12, MUTED);
         imageCard.addView(imageInfo, space(0, 0, 0, 8));
         preview = new ResultView(this);
         Ui.roundClip(preview, 14);
@@ -130,9 +105,9 @@ public final class MainActivity extends ShellActivity {
         saveImageButton = button("保存译图", false, v -> saveImage());
         addEqual(resultRow, compareButton, 0); addEqual(resultRow, saveImageButton, 8);
         imageCard.addView(resultRow, space(0, 6, 0, 0));
-        transcriptButton=Ui.button(this,"识读原文 / 译文",Ui.OUTLINED,v->TranscriptDialog.show(this,transcript));
+        transcriptButton=Icons.iconTextButton(this,R.drawable.ic_subtitles,"识读原文 / 译文",Ui.OUTLINED,v->TranscriptDialog.show(this,transcript));
         imageCard.addView(transcriptButton,space(0,5,0,0));
-        workbenchButton=Ui.button(this,"编辑与导出（逐段改字、调字号）",Ui.TONAL,v->openWorkbench());
+        workbenchButton=Icons.iconTextButton(this,R.drawable.ic_edit_note,"编辑与导出",Ui.TONAL,v->openWorkbench());
         imageCard.addView(workbenchButton,space(0,5,0,0));
         reviewButton = button("调整选区", false, v -> {
             preview.setBitmap(original);
@@ -151,7 +126,7 @@ public final class MainActivity extends ShellActivity {
         Ui.smoothLayout(statusCard);
         page.addView(statusCard, space(0, 14, 0, 0));
         status = new Ui.StatusText(this);
-        status.setText("导入一页图片。文字检测无需联网。");
+        status.setText("接收分享的图片。文字检测无需联网。");
         status.setTextSize(14); status.setTextColor(INK); status.setLineSpacing(dp(3), 1f);
         status.setTextIsSelectable(true);
         statusCard.addView(status);
@@ -164,6 +139,7 @@ public final class MainActivity extends ShellActivity {
         cancelButton.setVisibility(View.GONE);
         statusCard.addView(cancelButton, space(0, 6, 0, 0));
 
+        Icons.setIcon(detectButton,R.drawable.ic_document_scanner,Ui.ACCENT,18);Icons.setIcon(translateButton,R.drawable.ic_translate,Ui.SURFACE,18);Icons.setIcon(compareButton,R.drawable.ic_compare,Ui.ACCENT,18);Icons.setIcon(saveImageButton,R.drawable.ic_ios_share,Ui.ACCENT,18);
         updateControls();
         Ui.enter(page, 40);
     }

@@ -24,4 +24,10 @@
     <color name="ui_transparent">#00000000</color>
     <color name="ui_overlay">#CCFFFFFF</color>
     <color name="ui_black">#FF000000</color>
+    <color name="ui_purple">#FF673AB7</color>
+    <color name="ui_pink">#FFC2185B</color>
+    <color name="ui_cyan">#FF00838F</color>
+    <color name="ui_orange">#FFEF6C00</color>
+    <color name="ui_brown">#FF795548</color>
+    <color name="ui_gray">#FF616161</color>
 </resources>

@@ -21,6 +21,7 @@ import java.util.Set;
 
 /** One image surface for region review and a zoomable original/result comparison. */
 public final class ResultView extends View {
+    private android.graphics.drawable.Drawable placeholderIcon;
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
     private final List<Region> regions = new ArrayList<>();
     private final Set<String> selected = new HashSet<>();
@@ -268,21 +269,21 @@ public final class ResultView extends View {
     @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) { clampPan(); }
     @Override protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(Color.rgb(241, 244, 249));
+        canvas.drawColor(Ui.SURFACE_SOFT);
         float density = getResources().getDisplayMetrics().density;
         if (bitmap == null) {
             float inset = 14 * density;
             dash.setStyle(Paint.Style.STROKE);
             dash.setStrokeWidth(1.5f * density);
-            dash.setColor(Color.rgb(196, 206, 222));
+            dash.setColor(Ui.OUTLINE);
             dash.setPathEffect(new DashPathEffect(new float[]{8 * density, 6 * density}, 0));
             canvas.drawRoundRect(inset, inset, getWidth() - inset, getHeight() - inset, 16 * density, 16 * density, dash);
             paint.setStyle(Paint.Style.FILL);
             paint.setTextAlign(Paint.Align.CENTER);
-            paint.setColor(Color.rgb(160, 174, 196));
+            paint.setColor(Ui.PLACEHOLDER);
             paint.setTextSize(34 * density);
-            canvas.drawText("▣", getWidth() / 2f, getHeight() / 2f - 14 * density, paint);
-            paint.setColor(Color.rgb(102, 112, 133));
+            if(placeholderIcon==null)placeholderIcon=Icons.icon(getContext(),R.drawable.ic_image,Ui.PLACEHOLDER);android.graphics.drawable.Drawable placeholder=placeholderIcon;int size=Math.round(40*density),left=(getWidth()-size)/2,top=Math.round(getHeight()/2f-44*density);placeholder.setBounds(left,top,left+size,top+size);placeholder.draw(canvas);
+            paint.setColor(Ui.MUTED);
             paint.setTextSize(15 * getResources().getDisplayMetrics().scaledDensity);
             canvas.drawText("导入一页漫画，开始离线检测", getWidth() / 2f, getHeight() / 2f + 22 * density, paint);
             return;
@@ -315,7 +316,7 @@ public final class ResultView extends View {
                 canvas.drawRect(box, paint);
                 paint.setStyle(Paint.Style.STROKE);
                 paint.setStrokeWidth(1.6f * density / scale);
-                paint.setColor(active ? 0xff1A73E8 : 0xff8A999C);
+                paint.setColor(active ? Ui.ACCENT : Ui.MUTED);
                 paint.setAlpha(alpha);
                 canvas.drawRect(box, paint);
                 if (pulse > 0f && region.id.equals(pulseId)) {
@@ -344,7 +345,7 @@ public final class ResultView extends View {
                 RectF box = new RectF(region.box.left - pad - ring, region.box.top - pad - ring, region.box.right + pad + ring, region.box.bottom + pad + ring);
                 paint.setStyle(Paint.Style.STROKE);
                 paint.setStrokeWidth(2.4f * density / scale);
-                paint.setColor(0xff1A73E8);
+                paint.setColor(Ui.ACCENT);
                 paint.setAlpha(ring > 0f ? Math.round(255 * Math.max(.35f, pulse)) : 255);
                 canvas.drawRoundRect(box, 6 * density / scale, 6 * density / scale, paint);
                 paint.setAlpha(255);
