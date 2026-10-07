@@ -13,7 +13,7 @@ import java.util.zip.*;
 /** SAF imports. Archive extraction uses generated file names, with bounded count and expanded bytes. */
 final class LocalImport {
     static final int FOLDER=9101,IMAGES=9102,ARCHIVE=9103;
-    static void choose(Activity a){new AlertDialog.Builder(a).setTitle("选择本地文件").setItems(new String[]{"选择文件夹","选择图片（可多选）","选择压缩包（zip/cbz）"},(d,i)->pick(a,i)).show();}
+    static void choose(Activity a){Ui.Sheet s=Ui.sheet(a,"导入本地漫画");s.item(R.drawable.ic_folder_open,"文件夹",()->pick(a,0));s.item(R.drawable.ic_photo_library,"图片（可多选）",()->pick(a,1));s.item(R.drawable.ic_archive,"压缩包（ZIP / CBZ）",()->pick(a,2));s.show();}
     static void pick(Activity a,int choice){
         Intent intent=choice==0?new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE):new Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType(choice==1?"image/*":"*/*");
         if(choice==1)intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
@@ -44,7 +44,7 @@ final class LocalImport {
                 }
                 specs.sort((x,y)->NaturalOrder.INSTANCE.compare(x.label,y.label));
                 ComicProject project=ProjectStore.create(a,title,"local","",specs,(n,t)->a.runOnUiThread(()->dialog.setMessage("正在导入 "+n+" / "+t)),stop::get);
-                a.runOnUiThread(()->{dialog.dismiss();if(!a.isDestroyed())a.startActivity(ProjectReaderActivity.intent(a,project.id,a instanceof LocalLibraryActivity?1:2));});
+                a.runOnUiThread(()->{dialog.dismiss();if(!a.isDestroyed()){int tab=a instanceof LocalLibraryActivity?1:2;a.startActivity(request==IMAGES&&project.pages.size()==1?WorkbenchActivity.intent(a,project.id,0).putExtra("shellTab",tab):ProjectReaderActivity.intent(a,project.id,tab));}});
             }catch(java.util.concurrent.CancellationException ignored){a.runOnUiThread(dialog::dismiss);}
             catch(Exception|OutOfMemoryError e){a.runOnUiThread(()->{dialog.dismiss();if(!a.isDestroyed())new AlertDialog.Builder(a).setTitle("导入失败").setMessage(e instanceof OutOfMemoryError?"内存不足，请减少图片数量":e.getMessage()).setPositiveButton("重新选择",(d,w)->choose(a)).setNegativeButton("关闭",null).show();});}
             finally{try{PageDraftStore.deleteTree(staging);}finally{CacheStorage.endUse();}}

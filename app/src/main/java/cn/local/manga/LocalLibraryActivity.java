@@ -1,161 +1,58 @@
 package cn.local.manga;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
 
-/** Entry for the local-folder mode: pick an extracted comic folder, or reopen a recent one. */
+/** Project imports are the primary path; existing folder-mode records remain accessible. */
 public final class LocalLibraryActivity extends ShellActivity {
-    private static final int PICK_FOLDER = 71;
-    private LinearLayout recentList, runningCard;
-    private TextView runningText;
-    private final LocalBatch.Listener batchChanged = this::refreshRunning;
-
-    @Override public void onCreate(Bundle state) {
-        super.onCreate(state);
-        LinearLayout root = new LinearLayout(this); root.setOrientation(LinearLayout.VERTICAL); root.setBackgroundColor(Ui.BG);
-        Ui.insets(root, 0, 0, 0, 0, false);
-        root.addView(Ui.appBar(this,null,"本地翻译",null,Icons.iconButton(this,R.drawable.ic_more_vert,"页面选项",this::settings)));
-        ScrollView scroll = new ScrollView(this); scroll.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
-        LinearLayout page = new LinearLayout(this); page.setOrientation(LinearLayout.VERTICAL);
-        page.setPadding(Ui.dp(this, 16), Ui.dp(this, 2), Ui.dp(this, 16), Ui.dp(this, 24));
-        Ui.smoothLayout(page);
-        scroll.addView(page); root.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1));
-        setContentView(root);
-
-        Button more=Ui.button(this,"⋮ 设置",Ui.TEXT,v->startActivity(new Intent(this,SettingsActivity.class))); page.addView(more);
-        LinearLayout hero = Ui.section(this, page, "选择漫画文件夹",
-                "适合下载并解压好的漫画：选中装有图片的文件夹即可逐页翻译；含多个章节子文件夹时可逐个进入。\n"
-                        + "译图保存到该文件夹下的「" + LocalComics.OUTPUT_DIR + "」子文件夹，原图不会被修改。", 8);
-        TextView icon = Ui.text(this, "📂", 34, Ui.INK); icon.setGravity(Gravity.CENTER);
-        hero.addView(icon, 0, Ui.margins(this, 0, 0, 0, 6));
-        hero.addView(Ui.button(this, "＋  选择文件夹", Ui.PRIMARY, v -> LocalImport.pick(this,0)), Ui.margins(this, 0, 12, 0, 0));
-        hero.addView(Ui.button(this, "✍️  我的汉化工程（编辑与导出）", Ui.TONAL, v -> startActivity(new android.content.Intent(this, ProjectListActivity.class))), Ui.margins(this, 0, 8, 0, 0));
-
-        runningCard = Ui.section(this, page, "正在翻译", null, 14);
-        runningText = new Ui.StatusText(this); runningText.setTextSize(13); runningText.setTextColor(0xff3C4657);
-        runningCard.addView(runningText, Ui.margins(this, 0, 4, 0, 0));
-        runningCard.addView(Ui.button(this, "查看进度", Ui.TONAL, v -> {
-            LocalComics.Folder folder = LocalBatch.activeFolder();
-            if (folder != null) open(folder);
-        }), Ui.margins(this, 0, 8, 0, 0));
-        runningCard.setVisibility(View.GONE);
-
-        hero.addView(Ui.button(this,"选择图片（可多选）",Ui.TONAL,v->LocalImport.pick(this,1)));hero.addView(Ui.button(this,"选择压缩包（zip/cbz）",Ui.TONAL,v->LocalImport.pick(this,2)));
-        TextView recentTitle = Ui.heading(this, "最近打开", 15);
-        page.addView(recentTitle, Ui.margins(this, 4, 18, 0, 6));
-        recentList = new LinearLayout(this); recentList.setOrientation(LinearLayout.VERTICAL); Ui.smoothLayout(recentList);
-        page.addView(recentList);
-        Ui.enter(page, 40);
+    private LinearLayout recentList,runningCard;
+    private final ExecutorService io=Executors.newSingleThreadExecutor();
+    private final android.os.Handler handler=new android.os.Handler(android.os.Looper.getMainLooper());
+    private boolean active,legacyExpanded;private int generation;
+    private final Runnable tick=new Runnable(){public void run(){if(!active)return;refreshRunning();handler.postDelayed(this,800);}};
+    @Override public void onCreate(Bundle state){
+        super.onCreate(state);LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(Ui.BG);Ui.insets(root,0,0,0,0,false);
+        root.addView(Ui.appBar(this,null,"本地翻译",null,Icons.iconButton(this,R.drawable.ic_more_vert,"设置与翻译日志",this::settings)));
+        ScrollView scroll=new ScrollView(this);LinearLayout page=new LinearLayout(this);page.setOrientation(LinearLayout.VERTICAL);page.setPadding(dp(16),dp(8),dp(16),dp(24));scroll.addView(page);root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));
+        LinearLayout imports=new LinearLayout(this);imports.setBackground(Ui.card(this,18));
+        int[] icons={R.drawable.ic_folder_open,R.drawable.ic_photo_library,R.drawable.ic_archive};String[] names={"文件夹","图片","压缩包"};
+        for(int i=0;i<3;i++){final int choice=i;LinearLayout card=new LinearLayout(this);card.setOrientation(LinearLayout.VERTICAL);card.setGravity(Gravity.CENTER);card.setPadding(dp(4),dp(14),dp(4),dp(14));
+            ImageView icon=new ImageView(this);icon.setImageDrawable(Icons.icon(this,icons[i],Ui.ACCENT));card.addView(icon,new LinearLayout.LayoutParams(dp(28),dp(28)));TextView text=Ui.text(this,"导入\n"+names[i],14,Ui.INK);text.setGravity(Gravity.CENTER);card.addView(text,Ui.margins(this,0,8,0,0));card.setContentDescription("导入"+names[i]);card.setBackground(Ui.ripple(null,Ui.round(this,Ui.SURFACE,18),Ui.RIPPLE));card.setOnClickListener(v->LocalImport.pick(this,choice));Ui.pressable(card);imports.addView(card,new LinearLayout.LayoutParams(0,-2,1));}
+        page.addView(imports);runningCard=new LinearLayout(this);runningCard.setOrientation(LinearLayout.VERTICAL);page.addView(runningCard,Ui.margins(this,0,16,0,0));
+        page.addView(Ui.heading(this,"我的本地漫画",16),Ui.margins(this,4,18,0,8));recentList=new LinearLayout(this);recentList.setOrientation(LinearLayout.VERTICAL);page.addView(recentList);setContentView(root);
     }
-
-    @Override protected void onResume() {
-        super.onResume();
-        LocalBatch.listen(batchChanged);
-        refreshRunning();
-        showRecents();
+    @Override void settings(View anchor){Ui.Sheet sheet=Ui.sheet(this,"本地翻译");sheet.item(R.drawable.ic_settings,"设置",()->startActivity(new Intent(this,SettingsActivity.class)));sheet.item(R.drawable.ic_receipt_long,"翻译日志",()->startActivity(new Intent(this,LogsActivity.class)));sheet.show();}
+    @Override protected void onResume(){super.onResume();active=true;handler.removeCallbacks(tick);tick.run();showRecents();}
+    @Override protected void onPause(){active=false;handler.removeCallbacks(tick);super.onPause();}
+    @Override protected void onDestroy(){generation++;io.shutdownNow();super.onDestroy();}
+    @Override protected void onActivityResult(int request,int result,Intent data){super.onActivityResult(request,result,data);LocalImport.result(this,request,result,data);}
+    private void refreshRunning(){
+        runningCard.removeAllViews();String owner=TranslationTaskManager.owner;
+        if(!TranslationTaskManager.running()||!(owner.startsWith("project:")||LocalBatch.activeFolder()!=null)){runningCard.setVisibility(View.GONE);return;}
+        runningCard.setVisibility(View.VISIBLE);runningCard.setBackground(Ui.card(this,16));runningCard.setPadding(dp(12),dp(10),dp(12),dp(10));runningCard.addView(Ui.chip(this,"正在翻译",R.drawable.ic_translate,Ui.INFO));
+        TextView status=Ui.text(this,TranslationTaskManager.detail,13,Ui.INK);status.setMaxLines(2);runningCard.addView(status);
+        ProgressBar bar=Ui.progressLine(this);int[] counts=TranslationTaskManager.counts;bar.setIndeterminate(counts[3]<=0);if(counts[3]>0)bar.setProgress((counts[0]+counts[1])*1000/Math.max(1,counts[3]));runningCard.addView(bar);
+        if(owner.startsWith("project:")){String id=owner.substring(8);runningCard.setOnClickListener(v->startActivity(ProjectReaderActivity.intent(this,id,1)));}else runningCard.setOnClickListener(v->{if(LocalBatch.activeFolder()!=null)open(LocalBatch.activeFolder());});
     }
-    @Override protected void onPause() { LocalBatch.unlisten(batchChanged); super.onPause(); }
-
-    private void refreshRunning() {
-        LocalComics.Folder folder = LocalBatch.activeFolder();
-        runningCard.setVisibility(folder == null ? View.GONE : View.VISIBLE);
-        if (folder != null) runningText.setText("「" + folder.name + "」\n" + LocalBatch.progressLine(folder));
+    private void showRecents(){int token=++generation;io.execute(()->{List<ComicProject> projects=ProjectStore.list(this);List<LocalComics.Recent> old=LocalComics.recents(this);runOnUiThread(()->{if(isDestroyed()||token!=generation)return;recentList.removeAllViews();int count=0;
+        for(ComicProject p:projects)if("local".equals(p.sourceKind)){count++;recentList.addView(projectRow(p),Ui.margins(this,0,0,0,10));}
+        if(count==0)recentList.addView(Ui.text(this,"导入文件夹、图片或压缩包，开始翻译并保留编辑记录。",14,Ui.MUTED));
+        if(!old.isEmpty()){Button fold=Icons.iconTextButton(this,legacyExpanded?R.drawable.ic_expand_less:R.drawable.ic_expand_more,"旧版文件夹（"+old.size()+"）",Ui.TEXT,null);recentList.addView(fold);LinearLayout legacy=new LinearLayout(this);legacy.setOrientation(LinearLayout.VERTICAL);legacy.setVisibility(legacyExpanded?View.VISIBLE:View.GONE);recentList.addView(legacy);fold.setOnClickListener(v->{legacyExpanded=!legacyExpanded;legacy.setVisibility(legacyExpanded?View.VISIBLE:View.GONE);Icons.setIcon(fold,legacyExpanded?R.drawable.ic_expand_less:R.drawable.ic_expand_more,Ui.ACCENT,18);});
+            for(LocalComics.Recent r:old){View row=Ui.menuRow(this,R.drawable.ic_folder,r.folder.name,"旧版");row.setOnClickListener(v->open(r.folder));row.setOnLongClickListener(v->{Ui.Sheet s=Ui.sheet(this,r.folder.name);s.item(R.drawable.ic_delete,"从列表移除",()->{LocalComics.forget(this,r.folder);showRecents();});s.show();return true;});legacy.addView(row);}}
+    });});}
+    private View projectRow(ComicProject p){
+        LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);row.setPadding(dp(10),dp(10),0,dp(10));row.setBackground(Ui.card(this,16));ImageView cover=new ImageView(this);cover.setScaleType(ImageView.ScaleType.CENTER_CROP);Ui.roundClip(cover,8);ProjectCover.bind(cover,ProjectStore.cover(p));row.addView(cover,new LinearLayout.LayoutParams(dp(64),dp(88)));
+        LinearLayout words=new LinearLayout(this);words.setOrientation(LinearLayout.VERTICAL);TextView title=Ui.heading(this,p.title,15);title.setMaxLines(2);words.addView(title);int translated=0;for(ComicProject.Page page:p.pages)if(page.editable()||"translated".equals(page.status))translated++;
+        words.addView(Ui.text(this,p.pages.size()+" 页 · 已翻 "+translated,12,Ui.MUTED));words.addView(Ui.text(this,android.text.format.DateUtils.getRelativeTimeSpanString(p.updated),12,Ui.MUTED));LinearLayout.LayoutParams wp=new LinearLayout.LayoutParams(0,-2,1);wp.setMarginStart(dp(10));row.addView(words,wp);
+        row.addView(Icons.iconButton(this,R.drawable.ic_more_vert,"管理 "+p.title,v->{Ui.Sheet s=Ui.sheet(this,p.title);s.item(R.drawable.ic_book,"继续阅读",()->startActivity(ProjectReaderActivity.intent(this,p.id,1)));s.item(R.drawable.ic_edit_note,"在汉化工具中打开",()->startActivity(ProjectReaderActivity.intent(this,p.id,2)));s.show();}),new LinearLayout.LayoutParams(dp(48),dp(48)));
+        row.setOnClickListener(v->startActivity(ProjectReaderActivity.intent(this,p.id,1)));return row;
     }
-
-    private void showRecents() {
-        recentList.removeAllViews();
-        for(ComicProject p:ProjectStore.list(this))if("local".equals(p.sourceKind)){Button entry=Ui.button(this,p.title+" · "+p.pages.size()+" 页",Ui.TONAL,v->startActivity(ProjectReaderActivity.intent(this,p.id,1)));recentList.addView(entry);}
-        List<LocalComics.Recent> recents = LocalComics.recents(this);
-        if (recents.isEmpty()) {
-            TextView empty = Ui.text(this, "还没有打开过本地文件夹。选好文件夹后会出现在这里，下次点一下即可继续。", 13, Ui.MUTED);
-            empty.setPadding(Ui.dp(this, 4), Ui.dp(this, 4), Ui.dp(this, 4), 0);
-            recentList.addView(empty);
-            return;
-        }
-        int index = 0;
-        for (LocalComics.Recent recent : recents) {
-            View row = recentRow(recent);
-            recentList.addView(row, Ui.margins(this, 0, 0, 0, 8));
-            if (Ui.motion()) {
-                row.setAlpha(0f); row.setTranslationY(Ui.dp(this, 10));
-                row.animate().alpha(1f).translationY(0f).setStartDelay(60L + Math.min(index++, 8) * 40L).setDuration(300).setInterpolator(Ui.EASE).start();
-            }
-        }
-    }
-
-    private View recentRow(LocalComics.Recent recent) {
-        LinearLayout row = new LinearLayout(this); row.setGravity(Gravity.CENTER_VERTICAL);
-        row.setPadding(Ui.dp(this, 14), Ui.dp(this, 12), Ui.dp(this, 12), Ui.dp(this, 12));
-        row.setBackground(Ui.ripple(Ui.card(this, 16), Ui.round(this, 0xffFFFFFF, 16), 0x241A73E8));
-        TextView badge = Ui.text(this, "📁", 18, Ui.INK); badge.setGravity(Gravity.CENTER); badge.setBackground(Ui.round(this, 0xffEDF2FA, 12));
-        row.addView(badge, new LinearLayout.LayoutParams(Ui.dp(this, 40), Ui.dp(this, 40)));
-        LinearLayout words = new LinearLayout(this); words.setOrientation(LinearLayout.VERTICAL);
-        TextView name = Ui.text(this, recent.folder.name, 15, Ui.INK); name.setSingleLine(true); name.setEllipsize(TextUtils.TruncateAt.MIDDLE);
-        name.setTypeface(android.graphics.Typeface.create("sans-serif-medium", android.graphics.Typeface.NORMAL));
-        String when = recent.opened > 0 ? DateUtils.getRelativeTimeSpanString(recent.opened, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS).toString() : "";
-        TextView detail = Ui.text(this, (LocalBatch.isActive(recent.folder) ? "正在翻译 · " : "") + "上次打开 " + when, 12, 0xff8790A0);
-        words.addView(name); words.addView(detail, Ui.margins(this, 0, 3, 0, 0));
-        LinearLayout.LayoutParams wordsParams = new LinearLayout.LayoutParams(0, -2, 1); wordsParams.leftMargin = Ui.dp(this, 12);
-        row.addView(words, wordsParams);
-        row.addView(Ui.text(this, "›", 20, 0xffA8B2C2));
-        Ui.pressable(row);
-        row.setOnClickListener(v -> open(recent.folder));
-        row.setOnLongClickListener(v -> {
-            new AlertDialog.Builder(this).setTitle(recent.folder.name).setItems(new String[]{"从列表移除"}, (d, which) -> {
-                LocalComics.forget(this, recent.folder); showRecents();
-            }).show();
-            return true;
-        });
-        return row;
-    }
-
-    private void pick() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-                        | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION | Intent.FLAG_GRANT_PREFIX_URI_PERMISSION);
-        try { startActivityForResult(intent, PICK_FOLDER); }
-        catch (Exception missing) { Toast.makeText(this, "本机没有可用的文件夹选择器", Toast.LENGTH_LONG).show(); }
-    }
-
-    @Override protected void onActivityResult(int request, int result, Intent data) {
-        super.onActivityResult(request, result, data); if(LocalImport.result(this,request,result,data))return;
-        if (request != PICK_FOLDER || result != RESULT_OK || data == null || data.getData() == null) return;
-        Uri tree = data.getData();
-        int flags = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        try { getContentResolver().takePersistableUriPermission(tree, flags); } catch (Exception ignored) { /* still usable this session */ }
-        String id = DocumentsContract.getTreeDocumentId(tree);
-        String name = id.contains(":") ? id.substring(id.lastIndexOf(':') + 1) : id;
-        if (name.contains("/")) name = name.substring(name.lastIndexOf('/') + 1);
-        if (name.isEmpty()) name = "所选文件夹";
-        LocalComics.Folder folder = new LocalComics.Folder(tree, id, name);
-        open(folder);
-    }
-
-    private void open(LocalComics.Folder folder) {
-        if (!LocalComics.granted(this, folder.tree) && !LocalBatch.isActive(folder)) {
-            // Session-only grants (when persisting failed) still work until the app restarts.
-            try { LocalComics.list(this, folder); }
-            catch (Exception lost) {
-                LocalComics.forget(this, folder); showRecents();
-                Toast.makeText(this, "该文件夹的访问权限已失效，请重新选择", Toast.LENGTH_LONG).show();
-                return;
-            }
-        }
-        LocalComics.remember(this, folder);
-        startActivity(LocalFolderActivity.intent(this, folder));
-    }
+    private void open(LocalComics.Folder folder){LocalComics.remember(this,folder);startActivity(LocalFolderActivity.intent(this,folder));}
+    private int dp(float value){return Ui.dp(this,value);}
 }
