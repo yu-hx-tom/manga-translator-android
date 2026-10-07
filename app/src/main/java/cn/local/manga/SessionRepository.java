@@ -59,10 +59,8 @@ final class SessionRepository {
             List<ComicProject> sessions=list(activity);
             activity.runOnUiThread(()->{
                 if(activity.isDestroyed())return;
-                LinearLayout body=new LinearLayout(activity);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(Ui.dp(activity,16),Ui.dp(activity,16),Ui.dp(activity,16),Ui.dp(activity,16));
+                Ui.Sheet dialog=Ui.sheet(activity,"导入浏览器译本");LinearLayout body=dialog.body;
                 if(sessions.isEmpty())body.addView(Ui.text(activity,"暂无翻译会话。先在浏览器翻译漫画，再到这里导入。",15,Ui.MUTED));
-                ScrollView scroll=new ScrollView(activity);scroll.addView(body);
-                AlertDialog dialog=new AlertDialog.Builder(activity).setTitle("导入浏览器已翻译的漫画").setView(scroll).setNegativeButton("关闭",null).create();
                 for(ComicProject session:sessions){
                     LinearLayout row=new LinearLayout(activity);row.setGravity(Gravity.CENTER_VERTICAL);
                     ImageView cover=new ImageView(activity);cover.setScaleType(ImageView.ScaleType.CENTER_CROP);row.addView(cover,new LinearLayout.LayoutParams(Ui.dp(activity,52),Ui.dp(activity,72)));
@@ -70,10 +68,10 @@ final class SessionRepository {
                     long translated=session.pages.stream().filter(p->p.editable()||"translated".equals(p.status)).count();
                     TextView label=Ui.text(activity,current+session.title+"\n"+Uri.parse(session.sourceKey).getHost()+" · "+session.pages.size()+" 页 · 已翻 "+translated+"\n"+android.text.format.DateUtils.getRelativeTimeSpanString(session.updated),13,Ui.INK);
                     label.setPadding(Ui.dp(activity,12),Ui.dp(activity,8),0,Ui.dp(activity,8));row.addView(label,new LinearLayout.LayoutParams(0,-2,1));body.addView(row);
-                    if(!session.pages.isEmpty())new Thread(()->{BitmapFactory.Options o=new BitmapFactory.Options();o.inSampleSize=8;File image=session.imageFile(session.pages.get(0));android.graphics.Bitmap b=image==null?null:BitmapFactory.decodeFile(image.getPath(),o);activity.runOnUiThread(()->cover.setImageBitmap(b));}).start();
+                    if(!session.pages.isEmpty())ProjectCover.bind(cover,session.imageFile(session.pages.get(0)));
                     row.setOnClickListener(v->{dialog.dismiss();importSession(activity,session);});
                 }
-                dialog.show();dialog.getWindow().setGravity(Gravity.BOTTOM);dialog.getWindow().setLayout(-1,Math.min(Ui.dp(activity,560),activity.getResources().getDisplayMetrics().heightPixels*4/5));
+                dialog.show();
             });
         },"session-list").start();
     }

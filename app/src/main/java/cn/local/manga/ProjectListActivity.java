@@ -25,7 +25,10 @@ import java.util.concurrent.Executors;
 /** 我的汉化工程: open, export, rename or delete saved projects. */
 public final class ProjectListActivity extends ShellActivity {
     private final ExecutorService io = Executors.newSingleThreadExecutor();
-    private LinearLayout list;
+    private android.widget.ListView list;
+    private java.util.List<ComicProject> projects=new java.util.ArrayList<>();
+    private android.widget.BaseAdapter rows;
+    private TextView currentSession;
     private TextView summary;
     private boolean destroyed;
     private final ExportJob.Listener exportChanged = this::reload;
@@ -35,20 +38,14 @@ public final class ProjectListActivity extends ShellActivity {
         LinearLayout root = new LinearLayout(this); root.setOrientation(LinearLayout.VERTICAL); root.setBackgroundColor(Ui.BG);
         Ui.insets(root, 0, 0, 0, 0, false);
         root.addView(Ui.appBar(this,null,"汉化工具",null,Icons.iconButton(this,R.drawable.ic_more_vert,"页面选项",this::settings)));
-        ScrollView scroll = new ScrollView(this); scroll.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
-        LinearLayout page = new LinearLayout(this); page.setOrientation(LinearLayout.VERTICAL);
-        page.setPadding(dp(16), dp(2), dp(16), dp(24));
-        Button more=Ui.button(this,"⋮ 设置",Ui.TEXT,v->startActivity(new Intent(this,SettingsActivity.class)));page.addView(more);
-        LinearLayout sources=new LinearLayout(this); sources.addView(Ui.button(this,"导入浏览器已翻译的漫画",Ui.TONAL,v->SessionRepository.choose(this)),new LinearLayout.LayoutParams(0,-2,1)); sources.addView(Ui.button(this,"选择本地文件开始翻译",Ui.TONAL,v->LocalImport.choose(this)),new LinearLayout.LayoutParams(0,-2,1));page.addView(sources);
-        summary = Ui.text(this, "读取中…", 13, Ui.MUTED);
-        page.addView(summary, Ui.margins(this, 4, 0, 4, 8));
-        list = new LinearLayout(this); list.setOrientation(LinearLayout.VERTICAL); Ui.smoothLayout(list);
-        page.addView(list);
-        LinearLayout help = Ui.section(this, page, "如何创建工程",
-                "在浏览器翻译完一章后，点菜单「汉化与导出本章」；或在本地漫画文件夹页点「汉化与导出」。工程会保存每页的原文、译文和你的修改，可随时继续编辑和重新导出。", 16);
-        help.setAlpha(.92f);
-        scroll.addView(page);
-        root.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1));
+        LinearLayout page=new LinearLayout(this);page.setOrientation(LinearLayout.VERTICAL);page.setPadding(dp(16),dp(8),dp(16),dp(16));
+        LinearLayout web=importCard(R.drawable.ic_public,"导入浏览器译本","从浏览器已翻译的章节继续精修",()->SessionRepository.choose(this));
+        currentSession=Ui.chip(this,"当前页面",R.drawable.ic_public,Ui.INFO);currentSession.setVisibility(View.GONE);web.addView(currentSession);page.addView(web,Ui.margins(this,0,0,0,10));
+        page.addView(importCard(R.drawable.ic_upload_file,"本地文件","文件夹 / 图片 / ZIP / CBZ",()->LocalImport.choose(this)));
+        summary=Ui.text(this,"读取中…",13,Ui.MUTED);page.addView(summary,Ui.margins(this,4,16,4,8));
+        list=new android.widget.ListView(this);list.setDivider(null);list.addHeaderView(page,null,false);list.setClipToPadding(false);list.setPadding(0,0,0,dp(16));
+        rows=new android.widget.BaseAdapter(){public int getCount(){return projects.size();}public Object getItem(int i){return projects.get(i);}public long getItemId(int i){return i;}public View getView(int i,View old,android.view.ViewGroup parent){LinearLayout box=new LinearLayout(ProjectListActivity.this);box.setPadding(dp(16),0,dp(16),dp(10));box.addView(row(projects.get(i),0,null),new LinearLayout.LayoutParams(-1,-2));return box;}};
+        list.setAdapter(rows);root.addView(list,new LinearLayout.LayoutParams(-1,0,1));
         setContentView(root);
     }
 
@@ -60,42 +57,20 @@ public final class ProjectListActivity extends ShellActivity {
         ExportFlow.onActivityResult(this, request, result, data);
     }
 
-    private boolean animatedOnce;
-    private void reload() {
-        io.execute(() -> {
-            List<ComicProject> projects = ProjectStore.list(this);
-            long[] sizes = new long[projects.size()];
-            Bitmap[] covers = new Bitmap[projects.size()];
-            for (int i = 0; i < projects.size(); i++) {
-                sizes[i] = ProjectStore.size(projects.get(i));
-                java.io.File cover = ProjectStore.cover(projects.get(i));
-                if (cover.isFile()) covers[i] = BitmapFactory.decodeFile(cover.getPath());
-            }
-            runOnUiThread(() -> {
-                if (destroyed) return;
-                list.removeAllViews();
-                long total = 0; for (long size : sizes) total += size;
-                summary.setText(projects.isEmpty() ? "还没有汉化工程。" : projects.size() + " 个工程 · 共占用 " + Formatter.formatShortFileSize(this, total));
-                for (int i = 0; i < projects.size(); i++) {
-                    View row = row(projects.get(i), sizes[i], covers[i]);
-                    list.addView(row, Ui.margins(this, 0, 0, 0, 10));
-                    if (!animatedOnce && Ui.motion()) {
-                        row.setAlpha(0f); row.setTranslationY(dp(12));
-                        row.animate().alpha(1f).translationY(0).setStartDelay(50L * Math.min(i, 8)).setDuration(320).setInterpolator(Ui.EASE).start();
-                    }
-                }
-                animatedOnce = true;
-            });
-        });
+    private LinearLayout importCard(int icon,String title,String caption,Runnable action){
+        LinearLayout card=new LinearLayout(this);card.setOrientation(LinearLayout.VERTICAL);card.setPadding(dp(16),dp(14),dp(16),dp(14));card.setBackground(Ui.card(this,18));TextView heading=Ui.heading(this,title,16);Icons.setIcon(heading,icon,Ui.ACCENT,24);card.addView(heading);card.addView(Ui.text(this,caption,13,Ui.MUTED),Ui.margins(this,0,8,0,0));card.setContentDescription(title+"，"+caption);card.setOnClickListener(v->action.run());Ui.pressable(card);return card;
     }
+    @Override void settings(View anchor){Ui.Sheet sheet=Ui.sheet(this,"汉化工具");sheet.item(R.drawable.ic_settings,"设置",()->startActivity(new Intent(this,SettingsActivity.class)));sheet.item(R.drawable.ic_delete,"缓存管理",()->startActivity(new Intent(this,SettingsActivity.class).putExtra("openCache",true)));sheet.show();}
+    private int loadRevision;
+    private void reload(){int token=++loadRevision;io.execute(()->{List<ComicProject> loaded=ProjectStore.list(this);boolean hasCurrent=false;String url=SessionRepository.currentUrl==null?"":SessionRepository.currentUrl.split("#",2)[0];for(ComicProject session:SessionRepository.list(this))if(session.sourceKey.equals(url)){hasCurrent=true;break;}boolean current=hasCurrent;runOnUiThread(()->{if(destroyed||token!=loadRevision)return;projects=loaded;summary.setText(loaded.isEmpty()?"还没有工程，使用上方入口导入漫画开始编辑。":loaded.size()+" 个工程");Icons.setIcon(summary,loaded.isEmpty()?R.drawable.ic_book:R.drawable.ic_folder,Ui.MUTED,loaded.isEmpty()?48:18);currentSession.setVisibility(current?View.VISIBLE:View.GONE);rows.notifyDataSetChanged();});});}
 
     private View row(ComicProject project, long size, Bitmap cover) {
         LinearLayout row = new LinearLayout(this); row.setGravity(Gravity.CENTER_VERTICAL);
         row.setPadding(dp(10), dp(10), dp(12), dp(10));
-        row.setBackground(Ui.ripple(Ui.card(this, 18), Ui.round(this, 0xffFFFFFF, 18), 0x241A73E8));
-        FrameLayout thumbBox = new FrameLayout(this); thumbBox.setBackground(Ui.round(this, 0xffE6EBF2, 12)); Ui.roundClip(thumbBox, 12);
+        row.setBackground(Ui.ripple(Ui.card(this, 18), Ui.round(this, Ui.SURFACE, 18), Ui.RIPPLE));
+        FrameLayout thumbBox = new FrameLayout(this); thumbBox.setBackground(Ui.round(this, Ui.SURFACE_SOFT, 12)); Ui.roundClip(thumbBox, 12);
         ImageView thumb = new ImageView(this); thumb.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        if (cover != null) thumb.setImageBitmap(cover);
+        ProjectCover.bind(thumb,ProjectStore.cover(project));
         thumbBox.addView(thumb, new FrameLayout.LayoutParams(-1, -1));
         row.addView(thumbBox, new LinearLayout.LayoutParams(dp(64), dp(88)));
         LinearLayout words = new LinearLayout(this); words.setOrientation(LinearLayout.VERTICAL);
@@ -103,22 +78,25 @@ public final class ProjectListActivity extends ShellActivity {
         int edited = 0; for (ComicProject.Page p : project.pages) edited += p.editedCount();
         String detail = project.pages.size() + " 页 · 已校对 " + project.reviewedCount() + (edited > 0 ? " · 修改 " + edited + " 段" : "")
                 + "\n" + (project.updated > 0 ? DateUtils.getRelativeTimeSpanString(project.updated, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) + " 编辑 · " : "")
-                + Formatter.formatShortFileSize(this, size);
-        TextView info = Ui.text(this, detail, 12, 0xff8790A0);
+                + "";
+        TextView info = Ui.text(this, detail, 12, Ui.MUTED);
         words.addView(name); words.addView(info, Ui.margins(this, 0, 4, 0, 0));
         String export = ExportJob.status(project);
         if (!export.isEmpty()) { TextView status = Ui.text(this, export, 12, Ui.ACCENT_DEEP); status.setMaxLines(2); words.addView(status, Ui.margins(this, 0, 4, 0, 0)); }
+        boolean failed=false;for(ComicProject.Page page:project.pages)if("failed".equals(page.status)){failed=true;break;}
+        boolean translating=TranslationTaskManager.running()&&TranslationTaskManager.owner.equals("project:"+project.id);
+        if(translating||failed||!project.pages.isEmpty()&&project.reviewedCount()==project.pages.size())words.addView(Ui.chip(this,translating?"翻译中":failed?"有失败页":"已全部校对",translating?R.drawable.ic_translate:failed?R.drawable.ic_error:R.drawable.ic_check_circle,translating?Ui.INFO:failed?Ui.NEGATIVE:Ui.POSITIVE),Ui.margins(this,0,6,0,0));
         // Reviewed progress as a slim bar.
-        View track = new View(this); track.setBackground(Ui.round(this, 0xffE8EEF8, 2));
+        View track = new View(this); track.setBackground(Ui.round(this, Ui.INFO_SOFT, 2));
         FrameLayout bar = new FrameLayout(this); bar.addView(track, new FrameLayout.LayoutParams(-1, dp(4)));
-        View fill = new View(this); fill.setBackground(Ui.round(this, 0xff137333, 2));
+        View fill = new View(this); fill.setBackground(Ui.round(this, Ui.SUCCESS, 2));
         float ratio = project.pages.isEmpty() ? 0 : project.reviewedCount() / (float) project.pages.size();
         bar.addView(fill, new FrameLayout.LayoutParams(0, dp(4)));
         bar.post(() -> { fill.getLayoutParams().width = Math.round(bar.getWidth() * ratio); fill.requestLayout(); });
         words.addView(bar, Ui.margins(this, 0, 8, 0, 0));
         LinearLayout.LayoutParams wordsParams = new LinearLayout.LayoutParams(0, -2, 1); wordsParams.leftMargin = dp(12);
         row.addView(words, wordsParams);
-        row.addView(Ui.text(this, "›", 22, 0xffA8B2C2));
+        row.addView(Icons.iconButton(this,R.drawable.ic_more_vert,"管理 "+project.title,v->manage(project)),new LinearLayout.LayoutParams(dp(48),dp(48)));
         Ui.pressable(row);
         row.setOnClickListener(v -> startActivity(ProjectReaderActivity.intent(this, project.id, 2)));
         row.setOnLongClickListener(v -> { manage(project); return true; });
@@ -127,7 +105,7 @@ public final class ProjectListActivity extends ShellActivity {
 
     private void manage(ComicProject project) {
         if(TranslationTaskManager.running()&&TranslationTaskManager.owner.equals("project:"+project.id)){android.widget.Toast.makeText(this,"请先停止该工程的翻译",0).show();return;}
-        new AlertDialog.Builder(this).setTitle(project.title).setItems(new String[]{"打开编辑", "导出…", "重命名", "删除工程"}, (d, which) -> {
+        Ui.Sheet menu=Ui.sheet(this,project.title);String[] labels={"打开编辑","导出","重命名","删除工程"};int[] icons={R.drawable.ic_edit_note,R.drawable.ic_ios_share,R.drawable.ic_edit,R.drawable.ic_delete};for(int n=0;n<labels.length;n++){final int which=n;menu.item(icons[n],labels[n],()->{
             if (which == 0) startActivity(ProjectReaderActivity.intent(this, project.id, 2));
             else if (which == 1) ExportFlow.show(this, project, () -> {});
             else if (which == 2) {
@@ -144,7 +122,7 @@ public final class ProjectListActivity extends ShellActivity {
                         if (ExportJob.running(project)||TranslationTaskManager.owner.equals("project:"+project.id)&&TranslationTaskManager.running()) { summary.setText("该工程正在导出，完成后再删除。"); return; }
                         io.execute(() -> { ProjectStore.delete(project); runOnUiThread(this::reload); });
                     }).show();
-        }).show();
+        });}menu.show();
     }
 
     private int dp(float value) { return Ui.dp(this, value); }
