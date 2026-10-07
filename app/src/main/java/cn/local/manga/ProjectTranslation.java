@@ -25,6 +25,7 @@ final class ProjectTranslation {
                     if(only>=0?i!=only:(page.editable()||"translated".equals(page.status))&&!"failed".equals(page.status))continue;
                     String previousStatus=page.status;
                     page.status="translating";activePageId=page.id; final int number=i+1;
+                    publishCounts(project,owner,only);
                     TranslationTaskManager.progress(owner,"正在翻译 "+number+" / "+project.pages.size());
                     Bitmap source=null;
                     try{
@@ -50,12 +51,21 @@ final class ProjectTranslation {
                     }catch(java.util.concurrent.CancellationException e){page.status=previousStatus;break;}
                     catch(Exception|OutOfMemoryError e){failed++;page.status="failed";last=e instanceof OutOfMemoryError?"图片过大，内存不足":e.getMessage();}
                     finally{if(source!=null&&!source.isRecycled())source.recycle();}
+                    publishCounts(project,owner,only);
                     activity.runOnUiThread(()->{if(!activity.isDestroyed())refresh.run();});
                 }
                 synchronized(project){project.save();}
             }catch(Exception e){last=e.getMessage();}
-            activePageId="";TranslationTaskManager.done(owner,(cancelled.get()?"已停止 · ":"")+"完成 "+done+" 页 · 失败 "+failed+(last.isEmpty()?"":" · "+last));
+            activePageId="";publishCounts(project,owner,only);TranslationTaskManager.done(owner,(cancelled.get()?"已停止 · ":"")+"完成 "+done+" 页 · 失败 "+failed+(last.isEmpty()?"":" · "+last));
             activity.runOnUiThread(()->{if(!activity.isDestroyed())refresh.run();});
         },"project-translation").start();
+    }
+    /** Display-only counters; does not affect selection, retries or persisted page status. */
+    private static void publishCounts(ComicProject project,String owner,int only){
+        int success=0,failed=0,processing=0,total=0;
+        for(int i=0;i<project.pages.size();i++){if(only>=0&&i!=only)continue;total++;ComicProject.Page p=project.pages.get(i);
+            if("failed".equals(p.status))failed++;else if("translating".equals(p.status))processing++;else if("translated".equals(p.status)||"edited".equals(p.status)||p.editable())success++;
+        }
+        TranslationTaskManager.counts(owner,success,failed,processing,total);
     }
 }

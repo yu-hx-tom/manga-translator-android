@@ -447,7 +447,8 @@ public final class BrowserActivity extends ShellActivity {
         main.post(()->{if(valid(token)&&autoRunning){rememberOutcome(item.key,pageOutcome,timing,failure,unmeasured,performance);long now=SystemClock.elapsedRealtime();if(diskFull){queue.defer(item,queueToken);queue.blockNewTranslations();}else queue.finish(item,queueToken,done,empty,now,allowPageRetry);if(item.retryMode!=0)requestBadge(item.id,item.url,"");if(!failure.isEmpty()){autoError=failure;if(!diskFull){if(queueDelay>=0)queue.backoff(now,throttled,queueDelay);else queue.backoff(now,throttled);}}autoStatus();}});
     }
     private void autoStatus(){main.post(()->TranslationTaskManager.progress("browser",status.getText().toString()));
-        int incomplete=0;for(PageOutcome outcome:pageOutcomes.values())if(outcome.incomplete())incomplete++;
+        int incomplete=0;java.util.HashSet<String> failures=new java.util.HashSet<>(failedPages);for(Map.Entry<String,PageOutcome> entry:pageOutcomes.entrySet())if(entry.getValue().incomplete()){incomplete++;failures.add(entry.getKey());}
+        TranslationTaskManager.counts("browser",Math.max(0,queue.completed()-incomplete),failures.size(),queue.running(),-1);
         status.setText("已处理 "+queue.completed()+" 张 · 部分未完成 "+incomplete+" 张 · 请求中 "+(stages==null?0:stages.networkActive())+" 张 · 待翻译 "+queue.waiting()+" 张 · 处理中 "+queue.running()+" 张\n"
             +"前方就绪 "+queue.readyAhead()+" 张 · "+(queue.waitingForStorage()?"可用存储不足，暂缓新图":queue.waitingForMemory()?"手机可用内存不足，暂缓新图":queue.running()==0?(queue.waiting()>0?"稍候自动继续":"等待新图加载") : "继续向下阅读即可")
             +(incomplete>0?"\n仍有段落未回填，菜单「重试未完成部分」可补发，或查看处理详情和日志":"")

@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /** Separate settings screen; returning never recreates the browser page. */
 public final class SettingsActivity extends ShellActivity {
+    @Override protected boolean showsNavigation(){return false;}
     private Runnable afterSave;
     private EditText baseUrl,apiKey,textModel,imageModel,textPrompt,imagePrompt,concurrency,requestTimeout,retryInterval,rateLimitWait;
     private Spinner mode,reasoning,tier,retries,detector,textChoices,imageChoices,presetChoices;
@@ -66,7 +67,7 @@ public final class SettingsActivity extends ShellActivity {
         label(page,"常用设置在前，高级参数默认收起。修改后点底部「保存并使用」；返回时保留正在阅读的章节。",13);
 
         LinearLayout connection=Ui.section(this,page,"① 连接接口",null,8);
-        baseUrl=field(connection,"API 地址",settings.baseUrl,false,false);baseUrl.setHint("https://api.example.com/v1");
+        baseUrl=field(connection,"API 地址",settings.baseUrl,false,false);baseUrl.setHint("https://example.com/v1");
         apiKey=field(connection,"API Key",settings.apiKey,true,false);label(connection,"Key 只保存在本机，并用系统密钥库加密。",12);
         LinearLayout connectionActions=new LinearLayout(this);
         Button testButton=Ui.button(this,"测试连接",Ui.TONAL,x->runAction(1));Button listButton=Ui.button(this,"读取模型列表",Ui.TONAL,x->loadModels());

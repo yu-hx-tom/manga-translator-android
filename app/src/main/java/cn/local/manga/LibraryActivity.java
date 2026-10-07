@@ -16,6 +16,7 @@ import java.util.*;
 
 /** Searchable bookmarks/history, returning a selected URL to the existing WebView. */
 public final class LibraryActivity extends ShellActivity {
+    @Override protected boolean showsNavigation(){return false;}
     private boolean bookmarks,destroyed,loading;
     private int generation;
     private EditText search;
