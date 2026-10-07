@@ -30,7 +30,8 @@ public final class LocalReaderActivity extends ShellActivity {
     private final ExecutorService io = Executors.newSingleThreadExecutor();
     private ResultView preview;
     private TextView title, status;
-    private Button previous, next, toggle, translate, transcript, save;
+    private android.widget.ImageButton previous,next,compare;
+    private boolean holdingOriginal;
     private String lastStage;
     private final LocalBatch.Listener batchChanged = this::batchChanged;
 
@@ -42,17 +43,15 @@ public final class LocalReaderActivity extends ShellActivity {
         if (state != null) { index = state.getInt("index", index); showTranslated = state.getBoolean("translated", true); }
         LinearLayout root = new LinearLayout(this); root.setOrientation(LinearLayout.VERTICAL); root.setBackgroundColor(Ui.BG);
         Ui.insets(root, 0, 0, 0, 0, false);
-        Button back = new Button(this); back.setText("‹  " + folder.name); back.setOnClickListener(v -> finish());
-        back.setMaxWidth(Ui.dp(this, 220)); back.setSingleLine(true); back.setEllipsize(android.text.TextUtils.TruncateAt.END);
-        LinearLayout bar = Ui.topBar(this, back, "");
-        title = (TextView) bar.getChildAt(1);
-        root.addView(bar);
-
+        root.addView(Ui.appBar(this,Icons.iconButton(this,R.drawable.ic_arrow_back,"返回",v->finish()),folder.name,"旧版文件夹"));
         preview = new ResultView(this);
         preview.setEditable(false); preview.setShowBoxes(false);
         preview.setOnSwipe(this::turn);
         preview.setContentDescription("漫画页面，左右滑动翻页，双击或双指缩放");
-        root.addView(preview, new LinearLayout.LayoutParams(-1, 0, 1));
+        android.widget.FrameLayout frame=new android.widget.FrameLayout(this);frame.addView(preview,new android.widget.FrameLayout.LayoutParams(-1,-1));
+        compare=Icons.iconButton(this,R.drawable.ic_visibility,"按住看原图",v->{});compare.setBackground(Ui.round(this,Ui.OVERLAY,24));
+        compare.setOnTouchListener((v,event)->{if(event.getActionMasked()==android.view.MotionEvent.ACTION_DOWN){holdingOriginal=true;show(false,0);return true;}if(event.getActionMasked()==android.view.MotionEvent.ACTION_UP||event.getActionMasked()==android.view.MotionEvent.ACTION_CANCEL){holdingOriginal=false;show(false,0);v.performClick();return true;}return true;});
+        android.widget.FrameLayout.LayoutParams cp=new android.widget.FrameLayout.LayoutParams(dp(48),dp(48),android.view.Gravity.BOTTOM|android.view.Gravity.START);cp.setMargins(dp(12),0,0,dp(12));frame.addView(compare,cp);root.addView(frame,new LinearLayout.LayoutParams(-1,0,1));
 
         LinearLayout panel = new LinearLayout(this); panel.setOrientation(LinearLayout.VERTICAL);
         panel.setPadding(dp(12), dp(8), dp(12), dp(10)); panel.setBackgroundColor(Ui.SURFACE); panel.setElevation(dp(6));
@@ -61,20 +60,9 @@ public final class LocalReaderActivity extends ShellActivity {
         status.setEllipsize(android.text.TextUtils.TruncateAt.END);
         status.setOnClickListener(v -> showDetail());
         panel.addView(status, Ui.margins(this, 4, 0, 4, 6));
-        LinearLayout row1 = new LinearLayout(this);
-        previous = Ui.button(this, "‹ 上一页", Ui.TONAL, v -> turn(-1));
-        toggle = Ui.button(this, "看原图", Ui.OUTLINED, v -> { showTranslated = !showTranslated; show(false, 0); });
-        next = Ui.button(this, "下一页 ›", Ui.TONAL, v -> turn(1));
-        add(row1, previous, 0); add(row1, toggle, 6); add(row1, next, 6);
-        panel.addView(row1);
-        LinearLayout row2 = new LinearLayout(this);
-        translate = Ui.button(this, "翻译本页", Ui.PRIMARY, v -> translateCurrent());
-        transcript = Ui.button(this, "原文 / 译文", Ui.OUTLINED, v -> showTranscript());
-        // 汉化编辑 opens the workbench at this page; a long press still saves the shown translation to the gallery.
-        save = Ui.button(this, "汉化编辑", Ui.TONAL, v -> openWorkbench());
-        save.setOnLongClickListener(v -> { if (translatedShown != null) saveCurrent(); else Toast.makeText(this, "当前显示的不是译图", Toast.LENGTH_SHORT).show(); return true; });
-        add(row2, translate, 0); add(row2, transcript, 6); add(row2, save, 6);
-        panel.addView(row2, Ui.margins(this, 0, 6, 0, 0));
+        LinearLayout row=new LinearLayout(this);row.setGravity(android.view.Gravity.CENTER_VERTICAL);
+        previous=Icons.iconButton(this,R.drawable.ic_chevron_left,"上一页",v->turn(-1));next=Icons.iconButton(this,R.drawable.ic_chevron_right,"下一页",v->turn(1));
+        row.addView(previous,new LinearLayout.LayoutParams(dp(48),dp(48)));title=Ui.text(this,"读取中…",14,Ui.INK);title.setGravity(android.view.Gravity.CENTER);title.setMinHeight(dp(48));title.setContentDescription("页码，点击跳转");title.setOnClickListener(v->jump());row.addView(title,new LinearLayout.LayoutParams(0,dp(48),1));row.addView(next,new LinearLayout.LayoutParams(dp(48),dp(48)));row.addView(Icons.iconButton(this,R.drawable.ic_more_vert,"阅读选项",v->readerMenu()),new LinearLayout.LayoutParams(dp(48),dp(48)));panel.addView(row);
         root.addView(panel, new LinearLayout.LayoutParams(-1, -2));
         setContentView(root);
         updateButtons();
@@ -126,7 +114,7 @@ public final class LocalReaderActivity extends ShellActivity {
         LocalComics.Page page = listing.pages.get(index);
         currentName = page.source.name;
         title.setText((index + 1) + " / " + listing.pages.size());
-        boolean wantTranslated = showTranslated && page.output != null;
+        boolean wantTranslated = showTranslated && !holdingOriginal && page.output != null;
         int token = ++loadToken;
         if (direction != 0 && Ui.motion()) {
             preview.animate().cancel();
@@ -181,13 +169,7 @@ public final class LocalReaderActivity extends ShellActivity {
         LocalComics.Page page = ready ? listing.pages.get(index) : null;
         previous.setEnabled(ready && index > 0);
         next.setEnabled(ready && index + 1 < listing.pages.size());
-        toggle.setEnabled(page != null && page.output != null);
-        toggle.setText(showTranslated && page != null && page.output != null ? "看原图" : "看译图");
-        String stage = page == null ? null : LocalBatch.stage(folder, page.source.name);
-        translate.setEnabled(page != null && stage == null);
-        translate.setText(stage != null ? "翻译中…" : page != null && (page.output != null || currentOutcome != null) ? "重新翻译" : "翻译本页");
-        transcript.setEnabled(currentOutcome != null && !currentOutcome.transcript.rows.isEmpty());
-        save.setEnabled(ready);
+        compare.setEnabled(page!=null&&page.output!=null);
         getWindow().getDecorView().setKeepScreenOn(LocalBatch.isActive(folder));
     }
 
@@ -241,7 +223,7 @@ public final class LocalReaderActivity extends ShellActivity {
     private void saveCurrent() {
         Bitmap image = translatedShown;
         if (image == null) return;
-        save.setEnabled(false);
+
         io.submit(() -> {
             String message;
             try { Storage.save(this, image, "漫画译图"); message = "已保存到相册的“漫画翻译助手”文件夹"; }
@@ -251,10 +233,16 @@ public final class LocalReaderActivity extends ShellActivity {
         });
     }
 
-    private void add(LinearLayout row, View child, int left) {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, -2, 1); params.leftMargin = dp(left);
-        if (child instanceof Button) ((Button) child).setPadding(dp(6), dp(6), dp(6), dp(6));
-        row.addView(child, params);
+    @Override protected String translationDisabled(){return listing==null||listing.pages.isEmpty()?"请先打开漫画页面":null;}
+    @Override protected void startTranslation(){translateCurrent();}
+    private void readerMenu(){
+        boolean ready=listing!=null&&!listing.pages.isEmpty();Ui.Sheet s=Ui.sheet(this,"阅读选项");
+        s.item(R.drawable.ic_compare,showTranslated?"切换到原图":"切换到译图",()->{showTranslated=!showTranslated;show(false,0);});
+        s.item(R.drawable.ic_subtitles,"原文 / 译文",null,currentOutcome!=null&&!currentOutcome.transcript.rows.isEmpty(),this::showTranscript);
+        s.item(R.drawable.ic_translate,"翻译本页",null,ready&&!TranslationTaskManager.running(),this::translateCurrent);
+        s.item(R.drawable.ic_edit_note,"在汉化工具中打开",null,ready,this::openWorkbench);
+        s.item(R.drawable.ic_ios_share,"保存到相册",null,translatedShown!=null,this::saveCurrent);s.show();
     }
+    private void jump(){if(listing==null||listing.pages.isEmpty())return;android.widget.EditText input=new android.widget.EditText(this);input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);input.setHint("1–"+listing.pages.size());Ui.field(input);new AlertDialog.Builder(this).setTitle("跳转到页码").setView(input).setNegativeButton("取消",null).setPositiveButton("跳转",(d,w)->{try{int target=Integer.parseInt(input.getText().toString())-1;if(target>=0&&target<listing.pages.size()){index=target;show(false,0);}}catch(NumberFormatException ignored){}}).show();}
     private int dp(float value) { return Ui.dp(this, value); }
 }

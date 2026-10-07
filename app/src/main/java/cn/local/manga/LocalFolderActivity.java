@@ -52,11 +52,10 @@ public final class LocalFolderActivity extends ShellActivity {
     private Adapter adapter;
     private TextView summary, status;
     private ProgressBar progress;
-    private Button primary, more, workbench;
+    private Button more, workbench;
     private GradientDrawable summaryBackground;
     private LinearLayout summaryCard;
     private boolean destroyed, firstLoad = true;
-    private int primaryKind = Ui.PRIMARY;
     private int loadToken;
     private final LocalBatch.Listener batchChanged = this::batchChanged;
 
@@ -66,8 +65,7 @@ public final class LocalFolderActivity extends ShellActivity {
         if (folder == null) { finish(); return; }
         LinearLayout root = new LinearLayout(this); root.setOrientation(LinearLayout.VERTICAL); root.setBackgroundColor(Ui.BG);
         Ui.insets(root, 0, 0, 0, 0, false);
-        Button back = new Button(this); back.setText("‹  返回"); back.setOnClickListener(v -> finish());
-        root.addView(Ui.topBar(this, back, folder.name));
+        root.addView(Ui.appBar(this,Icons.iconButton(this,R.drawable.ic_arrow_back,"返回",v->finish()),folder.name,"旧版文件夹"));
 
         summaryCard = new LinearLayout(this); summaryCard.setOrientation(LinearLayout.VERTICAL);
         summaryCard.setPadding(dp(16), dp(14), dp(16), dp(14));
@@ -85,10 +83,8 @@ public final class LocalFolderActivity extends ShellActivity {
         progress.setVisibility(View.GONE);
         summaryCard.addView(progress, new LinearLayout.LayoutParams(-1, dp(6)) {{ topMargin = dp(8); }});
         LinearLayout actions = new LinearLayout(this);
-        primary = Ui.button(this, "开始翻译", Ui.PRIMARY, v -> primaryAction());
         more = Ui.button(this, "更多", Ui.OUTLINED, v -> moreActions());
         workbench = Ui.button(this, "汉化与导出", Ui.TONAL, v -> openWorkbench(null));
-        actions.addView(primary, new LinearLayout.LayoutParams(0, -2, 1));
         LinearLayout.LayoutParams workbenchParams = new LinearLayout.LayoutParams(-2, -2); workbenchParams.leftMargin = dp(8);
         actions.addView(workbench, workbenchParams);
         LinearLayout.LayoutParams moreParams = new LinearLayout.LayoutParams(-2, -2); moreParams.leftMargin = dp(8);
@@ -150,7 +146,6 @@ public final class LocalFolderActivity extends ShellActivity {
                     if (destroyed) return;
                     summary.setText("无法读取文件夹");
                     status.setText(error.getMessage());
-                    primary.setEnabled(false);
                 });
             }
         });
@@ -183,10 +178,10 @@ public final class LocalFolderActivity extends ShellActivity {
         if (pages == 0) {
             summary.setText(listing.folders.isEmpty() ? "这个文件夹里没有图片" : listing.folders.size() + " 个子文件夹");
             status.setText(listing.folders.isEmpty() ? "请选择直接装有漫画图片（jpg / png / webp 等）的文件夹。" : "点开章节文件夹查看页面并翻译。");
-            primary.setVisibility(View.GONE); more.setVisibility(View.GONE); workbench.setVisibility(View.GONE); progress.setVisibility(View.GONE);
+            more.setVisibility(View.GONE); workbench.setVisibility(View.GONE); progress.setVisibility(View.GONE);
             return;
         }
-        primary.setVisibility(View.VISIBLE); more.setVisibility(View.VISIBLE); workbench.setVisibility(View.VISIBLE);
+        more.setVisibility(View.VISIBLE); workbench.setVisibility(View.VISIBLE);
         summary.setText("共 " + pages + " 页 · 已完成 " + (done + noText) + (listing.folders.isEmpty() ? "" : " · " + listing.folders.size() + " 个子文件夹"));
         String states = (partial > 0 ? "部分完成 " + partial + " · " : "") + (failed > 0 ? "失败 " + failed + " · " : "") + "未翻译 " + fresh;
         String line = LocalBatch.progressLine(folder);
@@ -197,11 +192,7 @@ public final class LocalFolderActivity extends ShellActivity {
             progress.setVisibility(View.VISIBLE); progress.setMax(Math.max(1, counts[1])); progress.setProgress(counts[0], true);
         } else progress.setVisibility(View.GONE);
         int remaining = partial + failed + fresh;
-        primary.setText(running ? "停止翻译" : remaining == 0 ? "全部已完成" : done + partial + failed + noText > 0 ? "继续翻译（剩 " + remaining + " 页）" : "开始翻译 " + remaining + " 页");
-        int kind = running ? Ui.DANGER_TONAL : Ui.PRIMARY;
-        if (primaryKind != kind) { primaryKind = kind; Ui.style(primary, kind); }
-        primary.setEnabled(running || (!busyElsewhere && remaining > 0));
-        Ui.tint(summaryCard, summaryBackground, running ? 0xffF3F7FE : Ui.SURFACE);
+        Ui.tint(summaryCard, summaryBackground, running ? Ui.ACCENT_SOFT : Ui.SURFACE);
     }
 
     protected String translationDisabled(){return listing==null||listing.pages.isEmpty()?"请先打开漫画章节":null;}
@@ -305,7 +296,7 @@ public final class LocalFolderActivity extends ShellActivity {
             view.setPadding(dp(8), dp(10), dp(8), dp(10));
             view.setBackground(Ui.ripple(Ui.card(this, 16), Ui.round(this, 0xffFFFFFF, 16), 0x241A73E8));
             view.setLayoutParams(new android.widget.AbsListView.LayoutParams(-1, dp(150)));
-            TextView icon = Ui.text(this, "📁", 34, Ui.INK); icon.setGravity(Gravity.CENTER);
+            ImageView icon=new ImageView(this);icon.setImageDrawable(Icons.icon(this,R.drawable.ic_folder,Ui.ACCENT));
             TextView name = Ui.text(this, "", 13, Ui.INK); name.setGravity(Gravity.CENTER); name.setMaxLines(3); name.setEllipsize(TextUtils.TruncateAt.END);
             name.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
             view.addView(icon); view.addView(name, Ui.margins(this, 0, 8, 0, 0));
