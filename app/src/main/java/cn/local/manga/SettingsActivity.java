@@ -28,7 +28,7 @@ public final class SettingsActivity extends ShellActivity {
     private final List<String> availableModels=new ArrayList<>();
     private boolean loadingModels;
     private TextView status;
-    private Button cancel,back,saveButton;
+    private Button cancel,saveButton;private ImageButton back;
     private TextView modeNote,storageInfo,advancedSummary;
     private LinearLayout reasoningSection,advancedBody;
     /** Widget values when last saved/loaded; differing values light up 保存并使用. */
@@ -50,12 +50,12 @@ public final class SettingsActivity extends ShellActivity {
         if(Build.VERSION.SDK_INT>=33){systemBack=this::onBackPressed;getOnBackInvokedDispatcher().registerOnBackInvokedCallback(android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT,systemBack);}
         LinearLayout shell=new LinearLayout(this);shell.setOrientation(LinearLayout.VERTICAL);shell.setBackgroundColor(Ui.BG);
         Ui.insets(shell,0,0,0,0,true);
-        back=new Button(this);back.setText("‹  返回");back.setOnClickListener(v->onBackPressed());shell.addView(Ui.topBar(this,back,"设置"));
+        back=Icons.iconButton(this,R.drawable.ic_arrow_back,"返回",v->onBackPressed());shell.addView(Ui.appBar(this,back,"设置",null));
         ScrollView scroll=new ScrollView(this);scroll.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);LinearLayout page=new LinearLayout(this);page.setOrientation(LinearLayout.VERTICAL);page.setPadding(dp(16),dp(2),dp(16),dp(24));scroll.addView(page);shell.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));
         // Sticky footer: status + the single 保存并使用 (highlighted while there are unsaved changes).
         LinearLayout footer=new LinearLayout(this);footer.setOrientation(LinearLayout.VERTICAL);footer.setPadding(dp(16),dp(10),dp(16),dp(10));
         android.graphics.drawable.GradientDrawable footerBg=new android.graphics.drawable.GradientDrawable();footerBg.setColor(Ui.SURFACE);footer.setBackground(footerBg);footer.setElevation(dp(6));Ui.smoothLayout(footer);
-        status=new Ui.StatusText(this);status.setTextSize(13);status.setTextColor(0xff3C4657);status.setLineSpacing(dp(2),1f);
+        status=new Ui.StatusText(this);status.setTextSize(13);status.setTextColor(Ui.ICON);status.setLineSpacing(dp(2),1f);
         status.setText(settings.keyUnavailable?"原有Key无法读取，请重新填写。":"未改配置可直接返回；修改后点「保存并使用」。");status.setTextIsSelectable(true);footer.addView(status);
         busyBar=new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal);busyBar.setIndeterminate(true);busyBar.setIndeterminateTintList(android.content.res.ColorStateList.valueOf(Ui.ACCENT));busyBar.setVisibility(View.GONE);footer.addView(busyBar,new LinearLayout.LayoutParams(-1,dp(4)));
         LinearLayout footerActions=new LinearLayout(this);Ui.smoothLayout(footerActions);
@@ -67,7 +67,7 @@ public final class SettingsActivity extends ShellActivity {
         if(getIntent().getBooleanExtra("openCache",false))getWindow().getDecorView().post(this::clearDrafts);
         label(page,"常用设置在前，高级参数默认收起。修改后点底部「保存并使用」；返回时保留正在阅读的章节。",13);
 
-        LinearLayout connection=Ui.section(this,page,"① 连接接口",null,8);
+        LinearLayout connection=section(page,R.drawable.ic_link,"连接接口",8);
         baseUrl=field(connection,"API 地址",settings.baseUrl,false,false);baseUrl.setHint("https://example.com/v1");
         apiKey=field(connection,"API Key",settings.apiKey,true,false);label(connection,"Key 只保存在本机，并用系统密钥库加密。",12);
         LinearLayout connectionActions=new LinearLayout(this);
@@ -75,7 +75,7 @@ public final class SettingsActivity extends ShellActivity {
         connectionActions.addView(testButton,new LinearLayout.LayoutParams(0,-2,1));LinearLayout.LayoutParams listParams=new LinearLayout.LayoutParams(0,-2,1);listParams.leftMargin=dp(8);connectionActions.addView(listButton,listParams);
         inputs.add(testButton);inputs.add(listButton);connection.addView(connectionActions,Ui.margins(this,0,10,0,0));
 
-        LinearLayout translation=Ui.section(this,page,"② 翻译方式与模型",null,14);
+        LinearLayout translation=section(page,R.drawable.ic_translate,"翻译方式与模型",14);
         mode=spinner(translation,"翻译模式",new String[]{"文字翻译＋本地嵌字（推荐）","图像编辑翻译"},"image".equals(settings.mode)?1:0);
         modeNote=label(translation,"",12);
         textModelSection=new LinearLayout(this);textModelSection.setOrientation(LinearLayout.VERTICAL);translation.addView(textModelSection);
@@ -90,25 +90,21 @@ public final class SettingsActivity extends ShellActivity {
         tier=spinner(translation,"服务级别",new String[]{"默认（自动）","标准","Fast（Priority）"},"priority".equals(settings.serviceTier)?2:"default".equals(settings.serviceTier)?1:0);
         label(translation,"服务级别用于文字翻译和图像编辑请求。标准或 Fast 需要接口和模型支持；不支持时会报错，不会自动改为其他级别。Fast 可能增加额度消耗。",12);
 
-        LinearLayout detection=Ui.section(this,page,"③ 本地文字检测",null,14);
+        LinearLayout detection=section(page,R.drawable.ic_document_scanner,"本地文字检测",14);
         String[] detectorLabels=new String[DetectorModels.IDS.length];int detectorIndex=0;
         for(int i=0;i<DetectorModels.IDS.length;i++){detectorLabels[i]=DetectorModels.label(DetectorModels.IDS[i]);if(DetectorModels.IDS[i].equals(settings.detectorModel))detectorIndex=i;}
         detector=spinner(detection,"本地检测模型",detectorLabels,detectorIndex);
         label(detection,"仅内置 PP-OCR 分块补检＋紧贴裁剪，离线运行；保留 2 像素留白，可能误检纹理。旧版本模型配置会自动迁移。",12);
 
-        LinearLayout workbench=Ui.section(this,page,"④ 汉化工作台",null,14);
-        Switch drafts=new Switch(this);drafts.setText("翻译时保存可编辑草稿");drafts.setTextSize(14);drafts.setTextColor(0xff3C4657);drafts.setChecked(PageDraftStore.enabled(this));
+        LinearLayout workbench=section(page,R.drawable.ic_edit_note,"汉化工作台",14);
+        Switch drafts=new Switch(this);drafts.setText("翻译时保存可编辑草稿");drafts.setTextSize(14);drafts.setTextColor(Ui.ICON);drafts.setChecked(PageDraftStore.enabled(this));
         drafts.setOnCheckedChangeListener((b,on)->{PageDraftStore.setEnabled(this,on);status.setText(on?"已开启：之后翻译的页面可在汉化工作台逐段修改。":"已关闭：之后翻译的页面在工作台中只能浏览和导出。");});
         workbench.addView(drafts,Ui.margins(this,0,8,0,0));
         label(workbench,"开启后保存原图、去字底图和文字数据，便于逐段修改与导出，会增加存储占用。此开关立即生效。",12);
         storageInfo=label(workbench,"占用统计中…",12);
-        LinearLayout workbenchActions=new LinearLayout(this);
-        Button projects=Ui.button(this,"我的汉化工程",Ui.TONAL,x->startActivity(new android.content.Intent(this,ProjectListActivity.class)));
-        Button clearDrafts=Ui.button(this,"缓存管理",Ui.OUTLINED,x->clearDrafts());
-        workbenchActions.addView(projects,new LinearLayout.LayoutParams(0,-2,1));LinearLayout.LayoutParams clearParams=new LinearLayout.LayoutParams(0,-2,1);clearParams.leftMargin=dp(8);workbenchActions.addView(clearDrafts,clearParams);
-        workbench.addView(workbenchActions,Ui.margins(this,0,8,0,0));refreshStorage();
+        workbench.addView(Icons.iconTextButton(this,R.drawable.ic_delete,"缓存管理",Ui.OUTLINED,x->clearDrafts()),Ui.margins(this,0,8,0,0));refreshStorage();
 
-        LinearLayout presetSection=Ui.section(this,page,"⑤ 整套配置预设",null,14);
+        LinearLayout presetSection=section(page,R.drawable.ic_bookmark,"整套配置预设",14);
         presetChoices=spinner(presetSection,"已保存的预设",new String[]{"尚无预设"},0);
         button(presetSection,"切换并使用所选预设",this::loadPreset);
         button(presetSection,"保存为预设并使用",this::savePreset);
@@ -119,9 +115,9 @@ public final class SettingsActivity extends ShellActivity {
         LinearLayout advanced=Ui.section(this,page,null,null,14);
         LinearLayout advancedHead=new LinearLayout(this);advancedHead.setGravity(android.view.Gravity.CENTER_VERTICAL);
         LinearLayout advancedWords=new LinearLayout(this);advancedWords.setOrientation(LinearLayout.VERTICAL);
-        advancedWords.addView(Ui.heading(this,"⑥ 高级参数",17));advancedSummary=Ui.text(this,"",12,Ui.MUTED);advancedWords.addView(advancedSummary,Ui.margins(this,0,3,0,0));
+        TextView advancedTitle=Ui.heading(this,"高级参数",17);Icons.setIcon(advancedTitle,R.drawable.ic_tune,Ui.ACCENT,24);advancedWords.addView(advancedTitle);advancedSummary=Ui.text(this,"",12,Ui.MUTED);advancedWords.addView(advancedSummary,Ui.margins(this,0,3,0,0));
         advancedHead.addView(advancedWords,new LinearLayout.LayoutParams(0,-2,1));
-        TextView arrow=Ui.text(this,"▾",20,Ui.MUTED);advancedHead.addView(arrow);
+        ImageView arrow=new ImageView(this);arrow.setImageDrawable(Icons.icon(this,R.drawable.ic_expand_more,Ui.MUTED));arrow.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);advancedHead.addView(arrow,new LinearLayout.LayoutParams(dp(24),dp(24)));advancedHead.setMinimumHeight(dp(52));advancedHead.setContentDescription("展开或收起高级参数");
         advanced.addView(advancedHead);
         advancedBody=new LinearLayout(this);advancedBody.setOrientation(LinearLayout.VERTICAL);advancedBody.setVisibility(View.GONE);advanced.addView(advancedBody);
         advancedHead.setOnClickListener(v->{boolean open=advancedBody.getVisibility()!=View.VISIBLE;advancedBody.setVisibility(open?View.VISIBLE:View.GONE);
@@ -137,7 +133,7 @@ public final class SettingsActivity extends ShellActivity {
         textPrompt=field(advancedBody,"文字翻译提示词",settings.textPrompt,false,true);imagePrompt=field(advancedBody,"图像翻译提示词",settings.imagePrompt,false,true);
         button(advancedBody,"恢复默认提示词",()->{textPrompt.setText(AppSettings.DEFAULT_TEXT_PROMPT);imagePrompt.setText(AppSettings.DEFAULT_IMAGE_PROMPT);},Ui.OUTLINED);
 
-        LinearLayout checks=Ui.section(this,page,"⑦ 诊断",null,14);
+        LinearLayout checks=section(page,R.drawable.ic_pulse,"诊断",14);
         button(checks,"验证文字模型服务级别（会调用）",()->new AlertDialog.Builder(this).setTitle("发送小型测试请求")
             .setMessage("将使用当前文字模型发送一句测试文字，失败时按上方设置重试，可能产生费用；只核对代理返回的服务级别，不能独立证明上游实际加速或计费。")
             .setNegativeButton("取消",null).setPositiveButton("发送测试",(d,w)->runAction(2)).show(),Ui.OUTLINED);
@@ -363,7 +359,8 @@ public final class SettingsActivity extends ShellActivity {
         });
     }
     private void setBusy(boolean value){busy=value;for(View v:inputs)v.setEnabled(!value);presetChoices.setEnabled(!value&&!presets.isEmpty());back.setEnabled(!saving);cancel.setEnabled(!saving);cancel.setVisibility(value?View.VISIBLE:View.GONE);busyBar.setVisibility(value?View.VISIBLE:View.GONE);if(saveButton!=null)saveButton.setVisibility(value?View.GONE:View.VISIBLE);}
-    private TextView label(LinearLayout parent,String text,int size){TextView v=Ui.text(this,text,size,size<=12?Ui.MUTED:size<=14?0xff3C4657:Ui.INK);if(size==14)v.setTypeface(android.graphics.Typeface.create("sans-serif-medium",android.graphics.Typeface.NORMAL));v.setPadding(0,dp(size<=12?6:12),0,dp(6));parent.addView(v);return v;}
+    private LinearLayout section(LinearLayout parent,int icon,String title,int margin){LinearLayout section=Ui.section(this,parent,title,null,margin);Icons.setIcon((TextView)section.getChildAt(0),icon,Ui.ACCENT,24);return section;}
+    private TextView label(LinearLayout parent,String text,int size){TextView v=Ui.text(this,text,size,size<=12?Ui.MUTED:size<=14?Ui.ICON:Ui.INK);if(size==14)v.setTypeface(android.graphics.Typeface.create("sans-serif-medium",android.graphics.Typeface.NORMAL));v.setPadding(0,dp(size<=12?6:12),0,dp(6));parent.addView(v);return v;}
     private EditText field(LinearLayout parent,String name,String value,boolean secret,boolean multi){label(parent,name,14);EditText v=new EditText(this);v.setTextSize(14);v.setText(value);v.setSingleLine(!multi);v.setInputType(InputType.TYPE_CLASS_TEXT|(secret?InputType.TYPE_TEXT_VARIATION_PASSWORD:multi?InputType.TYPE_TEXT_FLAG_MULTI_LINE:InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS));v.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);if(multi){v.setMinLines(3);v.setMaxLines(7);v.setGravity(android.view.Gravity.TOP|android.view.Gravity.START);}Ui.field(v);parent.addView(v,new LinearLayout.LayoutParams(-1,-2));inputs.add(v);return v;}
     private Spinner spinner(LinearLayout parent,String name,String[] entries,int selected){label(parent,name,14);Spinner v=new Spinner(this);ArrayAdapter<String> adapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,entries);adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);v.setAdapter(adapter);v.setSelection(selected);parent.addView(Ui.framed(v),new LinearLayout.LayoutParams(-1,dp(48)));inputs.add(v);return v;}
     private void button(LinearLayout parent,String text,Runnable action){button(parent,text,action,Ui.TONAL);}

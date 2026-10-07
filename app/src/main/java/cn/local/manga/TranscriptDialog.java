@@ -29,9 +29,9 @@ final class TranscriptDialog {
         }
         float density=activity.getResources().getDisplayMetrics().density;int pad=(int)(16*density);
         LinearLayout root=new LinearLayout(activity);root.setOrientation(LinearLayout.VERTICAL);root.setPadding(pad,pad,pad,0);
-        TextView note=new TextView(activity);note.setText("原文是模型识读结果，可能有误。查看或复制不会请求翻译。\n段落位置对应处理时的原图。"+(transcript.truncated?"\n记录过长，仅保留部分；译图不受影响。":""));note.setTextSize(13);note.setTextColor(0xff637085);root.addView(note);
+        TextView note=new TextView(activity);note.setText("原文是模型识读结果，可能有误。查看或复制不会请求翻译。\n段落位置对应处理时的原图。"+(transcript.truncated?"\n记录过长，仅保留部分；译图不受影响。":""));note.setTextSize(13);note.setTextColor(Ui.MUTED);root.addView(note);
         LinearLayout pager=new LinearLayout(activity);pager.setGravity(Gravity.CENTER_VERTICAL);pager.setPadding(0,pad/2,0,0);
-        Button previous=Ui.button(activity,"‹ 上一组",Ui.TONAL,null),next=Ui.button(activity,"下一组 ›",Ui.TONAL,null);
+        Button previous=Icons.iconTextButton(activity,R.drawable.ic_chevron_left,"上一组",Ui.TONAL,null),next=Icons.iconTextButton(activity,R.drawable.ic_chevron_right,"下一组",Ui.TONAL,null);
         TextView pageInfo=Ui.text(activity,"",13,Ui.MUTED);pageInfo.setGravity(Gravity.CENTER);
         pager.addView(previous,new LinearLayout.LayoutParams(-2,-2));pager.addView(pageInfo,new LinearLayout.LayoutParams(0,-2,1));pager.addView(next,new LinearLayout.LayoutParams(-2,-2));root.addView(pager);
         ScrollView scroll=new ScrollView(activity);TextView text=new TextView(activity);text.setTextSize(16);text.setTextColor(Ui.INK);text.setTextIsSelectable(true);text.setLineSpacing(4*density,1f);text.setPadding(0,pad/2,0,pad);scroll.addView(text);
@@ -44,8 +44,8 @@ final class TranscriptDialog {
                 if(i>start)muted(content,"\n\n────────────\n\n");
                 bold(content,"段落 "+(i+1)+" · "+row.id,Ui.ACCENT_DEEP);content.append("\n");
                 muted(content,row.statusLabel()+"\n位置 "+row.left+","+row.top+" — "+row.right+","+row.bottom+(row.vertical?" · 竖排":" · 横排"));
-                content.append("\n\n");bold(content,"原文",0xff3C4657);content.append("\n").append(row.originalLabel());
-                content.append("\n\n");bold(content,"译文",0xff3C4657);content.append("\n").append(row.zh.isEmpty()?"（无文字译文）":row.zh);
+                content.append("\n\n");bold(content,"原文",Ui.ICON);content.append("\n").append(row.originalLabel());
+                content.append("\n\n");bold(content,"译文",Ui.ICON);content.append("\n").append(row.zh.isEmpty()?"（无文字译文）":row.zh);
                 if(!row.error.isEmpty()){content.append("\n\n");int at=content.length();content.append("说明：").append(row.error);content.setSpan(new ForegroundColorSpan(Ui.DANGER),at,content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);}
             }
             text.setText(content);pageInfo.setText((page[0]+1)+" / "+pages+" · 共"+transcript.rows.size()+"段");previous.setEnabled(page[0]>0);next.setEnabled(page[0]+1<pages);scroll.post(()->scroll.scrollTo(0,0));

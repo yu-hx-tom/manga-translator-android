@@ -71,7 +71,7 @@ public class WorkbenchActivity extends ShellActivity {
     private TextView title,panelTitle;
     private Button saveButton; private int editRevision; private boolean saving;
     private android.widget.ImageButton reviewedChip,undoButton,redoButton,peekButton,prevButton,nextButton;
-    private boolean pageHotspots=true;private FrameLayout panelBody;private StylePanel.Editor styleEditor;private LinearLayout editorRoot;
+    private android.widget.ImageButton panelToggle;private boolean pageHotspots=true;private FrameLayout panelBody;private StylePanel.Editor styleEditor;private LinearLayout editorRoot;
     private ProgressBar loading;
     private LinearLayout panel, cards;
     private ScrollView cardScroll;
@@ -128,7 +128,7 @@ public class WorkbenchActivity extends ShellActivity {
         reviewedChip=Icons.iconButton(this,R.drawable.ic_check_circle,"标记已校对",v->toggleReviewed());reviewedChip.setBackground(Ui.round(this,Ui.OVERLAY,24));FrameLayout.LayoutParams checked=new FrameLayout.LayoutParams(dp(48),dp(48),Gravity.BOTTOM|Gravity.END);checked.setMargins(0,0,dp(12),dp(12));stage.addView(reviewedChip,checked);
         prevButton=Icons.iconButton(this,R.drawable.ic_chevron_left,"上一页",v->turn(-1));nextButton=Icons.iconButton(this,R.drawable.ic_chevron_right,"下一页",v->turn(1));prevButton.setBackground(Ui.round(this,Ui.OVERLAY,24));nextButton.setBackground(Ui.round(this,Ui.OVERLAY,24));stage.addView(prevButton,new FrameLayout.LayoutParams(dp(48),dp(48),Gravity.CENTER_VERTICAL|Gravity.START));stage.addView(nextButton,new FrameLayout.LayoutParams(dp(48),dp(48),Gravity.CENTER_VERTICAL|Gravity.END));root.addView(stage,new LinearLayout.LayoutParams(-1,0,1));
         panel=new LinearLayout(this);panel.setOrientation(LinearLayout.VERTICAL);GradientDrawable surface=Ui.round(this,Ui.SURFACE,20);float r=dp(20);surface.setCornerRadii(new float[]{r,r,r,r,0,0,0,0});panel.setBackground(surface);panel.setElevation(dp(8));
-        LinearLayout handle=new LinearLayout(this);handle.setGravity(Gravity.CENTER_VERTICAL);handle.setPadding(dp(16),0,dp(8),0);panelTitle=Ui.heading(this,"本页段落",14);handle.addView(panelTitle,new LinearLayout.LayoutParams(0,dp(64),1));panelTitle.setGravity(Gravity.CENTER_VERTICAL);handle.addView(Ui.button(this,"批量样式",Ui.TEXT,v->batchStyle()));handle.addView(Icons.iconButton(this,R.drawable.ic_expand_less,"展开或收起段落面板",v->cyclePanel()),new LinearLayout.LayoutParams(dp(48),dp(48)));panel.addView(handle,new LinearLayout.LayoutParams(-1,dp(64)));handle.setOnClickListener(v->cyclePanel());
+        LinearLayout handle=new LinearLayout(this);handle.setGravity(Gravity.CENTER_VERTICAL);handle.setPadding(dp(16),0,dp(8),0);panelTitle=Ui.heading(this,"本页段落",14);handle.addView(panelTitle,new LinearLayout.LayoutParams(0,dp(64),1));panelTitle.setGravity(Gravity.CENTER_VERTICAL);handle.addView(Ui.button(this,"批量样式",Ui.TEXT,v->batchStyle()));panelToggle=Icons.iconButton(this,R.drawable.ic_expand_less,"展开或收起段落面板",v->cyclePanel());handle.addView(panelToggle,new LinearLayout.LayoutParams(dp(48),dp(48)));panel.addView(handle,new LinearLayout.LayoutParams(-1,dp(64)));handle.setOnClickListener(v->cyclePanel());
         panelTitle.setOnTouchListener(new View.OnTouchListener(){float start;public boolean onTouch(View v,MotionEvent event){if(event.getActionMasked()==MotionEvent.ACTION_DOWN){start=event.getRawY();return true;}if(event.getActionMasked()==MotionEvent.ACTION_UP){float delta=event.getRawY()-start;if(Math.abs(delta)>dp(20))setPanel(Math.max(0,Math.min(2,panelState+(delta<0?1:-1))));else cyclePanel();v.performClick();return true;}return true;}});
         cardScroll=new ScrollView(this);cardScroll.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);cards=new LinearLayout(this);cards.setOrientation(LinearLayout.VERTICAL);cards.setPadding(dp(12),0,dp(12),dp(12));cardScroll.addView(cards);panelBody=new FrameLayout(this);panelBody.addView(cardScroll,new FrameLayout.LayoutParams(-1,-1));panel.addView(panelBody,new LinearLayout.LayoutParams(-1,0,1));root.addView(panel,new LinearLayout.LayoutParams(-1,panelHeight(PANEL_NORMAL)));
         root.addOnLayoutChangeListener((view,l,t,right,bottom,ol,ot,or,ob)->{if(panelAnimating)return;int height=panelHeight(panelState);if(panel.getLayoutParams().height!=height){panel.getLayoutParams().height=height;panel.post(panel::requestLayout);}});setContentView(root);refreshUndo();
@@ -137,7 +137,7 @@ public class WorkbenchActivity extends ShellActivity {
     @Override protected void onKeyboardVisibility(boolean visible){if(visible&&panel!=null){setPanel(PANEL_NORMAL);if(selected!=null)preview.post(()->preview.focusRegion(selected));}}
     private void cyclePanel() { setPanel(panelState == PANEL_NORMAL ? PANEL_EXPANDED : panelState == PANEL_EXPANDED ? PANEL_COLLAPSED : PANEL_NORMAL); }
     private void setPanel(int state) {
-        panelState = state;
+        panelState = state;if(panelToggle!=null){if(Ui.motion())panelToggle.animate().rotation(state==PANEL_EXPANDED?180:0).setDuration(200).start();else panelToggle.setRotation(state==PANEL_EXPANDED?180:0);}
         int from = panel.getLayoutParams().height, to = panelHeight(state);
         if (!Ui.motion()) { panel.getLayoutParams().height = to; panel.requestLayout(); return; }
         ValueAnimator animator = ValueAnimator.ofInt(from, to).setDuration(200);
@@ -257,7 +257,7 @@ public class WorkbenchActivity extends ShellActivity {
         ComicProject.Page page = project.pages.get(pageIndex);
         page.reviewed = !page.reviewed;
         paintReviewed(page.reviewed);
-        if (page.reviewed && Ui.motion()) { reviewedChip.setScaleX(.9f); reviewedChip.setScaleY(.9f); reviewedChip.animate().scaleX(1f).scaleY(1f).setDuration(260).setInterpolator(new android.view.animation.OvershootInterpolator(2.5f)).start(); }
+        if(Ui.motion())reviewedChip.animate().scaleX(1.15f).scaleY(1.15f).setDuration(100).withEndAction(()->reviewedChip.animate().scaleX(1f).scaleY(1f).setDuration(100).start()).start();
         changed();
     }
 
@@ -351,7 +351,7 @@ public class WorkbenchActivity extends ShellActivity {
 
     private void paintControls(Card card, PageComposer.Edit edit) {
         card.scaleLabel.setText("字号 "+Math.round(displayFont(edit,card.region)));
-        card.orient.setSelected(Boolean.TRUE.equals(edit.vertical));card.orient.setContentDescription(Boolean.TRUE.equals(edit.vertical)?"当前竖排，点击切换横排":"当前横排或跟随原文，点击切换竖排");
+        boolean vertical=edit.vertical==null&&draft!=null&&draft.item(card.region)!=null?draft.item(card.region).region.vertical:Boolean.TRUE.equals(edit.vertical);card.orient.setImageDrawable(Icons.icon(this,vertical?R.drawable.ic_text_fields:R.drawable.ic_text_rotate_vertical,Ui.ICON));card.orient.setSelected(vertical);card.orient.setContentDescription(Boolean.TRUE.equals(edit.vertical)?"当前竖排，点击切换横排":"当前横排或跟随原文，点击切换竖排");
         float alpha = edit.hidden ? .5f : 1f;
         card.input.setAlpha(alpha);
     }

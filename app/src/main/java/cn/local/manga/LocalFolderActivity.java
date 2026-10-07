@@ -218,6 +218,7 @@ public final class LocalFolderActivity extends ShellActivity {
         ProjectLauncher.launch(this, folder.name, "local", "local:" + folder.key(), () -> ProjectLauncher.localFolder(this, folder), startLabel);
     }
 
+    @Override protected void showFailedPages(){Ui.Sheet sheet=Ui.sheet(this,"失败或未完成的页面");int count=0;if(listing!=null)for(int i=0;i<listing.pages.size();i++){LocalComics.Page page=listing.pages.get(i);LocalComics.State state=LocalComics.state(outcomes.get(page.source.name),page);if(state==LocalComics.State.FAILED||state==LocalComics.State.PARTIAL){final int index=i;count++;sheet.item(R.drawable.ic_error,page.source.name,()->startActivity(LocalReaderActivity.intent(this,folder,index)));}}if(count==0)sheet.body.addView(Ui.text(this,"没有失败页",14,Ui.MUTED));sheet.show();}
     private void moreActions() {
         if (listing == null) return;
         boolean running = LocalBatch.isActive(folder);
@@ -294,7 +295,7 @@ public final class LocalFolderActivity extends ShellActivity {
         if (view == null) {
             view = new LinearLayout(this); view.setOrientation(LinearLayout.VERTICAL); view.setGravity(Gravity.CENTER);
             view.setPadding(dp(8), dp(10), dp(8), dp(10));
-            view.setBackground(Ui.ripple(Ui.card(this, 16), Ui.round(this, 0xffFFFFFF, 16), 0x241A73E8));
+            view.setBackground(Ui.ripple(Ui.card(this, 16), Ui.round(this, Ui.SURFACE, 16), Ui.RIPPLE));
             view.setLayoutParams(new android.widget.AbsListView.LayoutParams(-1, dp(150)));
             ImageView icon=new ImageView(this);icon.setImageDrawable(Icons.icon(this,R.drawable.ic_folder,Ui.ACCENT));
             TextView name = Ui.text(this, "", 13, Ui.INK); name.setGravity(Gravity.CENTER); name.setMaxLines(3); name.setEllipsize(TextUtils.TruncateAt.END);
@@ -312,7 +313,7 @@ public final class LocalFolderActivity extends ShellActivity {
         if (view == null) {
             view = new FrameLayout(this);
             view.setLayoutParams(new android.widget.AbsListView.LayoutParams(-1, dp(150)));
-            view.setBackground(Ui.round(this, 0xffE6EBF2, 14));
+            view.setBackground(Ui.round(this, Ui.SURFACE_SOFT, 14));
             Ui.roundClip(view, 14);
             ImageView image = new ImageView(this); image.setScaleType(ImageView.ScaleType.CENTER_CROP);
             view.addView(image, new FrameLayout.LayoutParams(-1, -1));
@@ -326,7 +327,7 @@ public final class LocalFolderActivity extends ShellActivity {
             badgeParams.setMargins(0, dp(6), dp(6), 0);
             view.addView(badge, badgeParams);
             View press = new View(this);
-            press.setBackground(Ui.ripple(null, Ui.round(this, 0xffFFFFFF, 14), 0x33FFFFFF));
+            press.setBackground(Ui.ripple(null, Ui.round(this, Ui.SURFACE, 14), Ui.RIPPLE));
             press.setDuplicateParentStateEnabled(true);
             view.addView(press, new FrameLayout.LayoutParams(-1, -1));
             Ui.pressable(view);
@@ -339,7 +340,7 @@ public final class LocalFolderActivity extends ShellActivity {
         int color; String text;
         if (stage != null) { text = "排队中".equals(stage) ? "排队" : "翻译中"; color = "排队中".equals(stage) ? 0xE0667085 : 0xE01A73E8; }
         else switch (state) {
-            case DONE: text = "✓ 已译"; color = 0xE0137333; break;
+            case DONE: text = "已译"; color = 0xE0137333; break;
             case PARTIAL: text = "部分"; color = 0xE0B06000; break;
             case FAILED: text = "失败"; color = 0xE0B3261E; break;
             case NO_TEXT: text = "无文字"; color = 0xE0667085; break;
