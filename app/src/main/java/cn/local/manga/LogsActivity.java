@@ -8,6 +8,7 @@ import java.io.*;
 
 /** Android document picker provides an explicit destination; no broad storage permission. */
 public final class LogsActivity extends ShellActivity {
+    @Override protected boolean showsNavigation(){return false;}
     private final java.util.concurrent.ExecutorService worker=java.util.concurrent.Executors.newSingleThreadExecutor();
     private TranslationLog log;private TextView text;private Button export;
     @Override public void onCreate(Bundle state){

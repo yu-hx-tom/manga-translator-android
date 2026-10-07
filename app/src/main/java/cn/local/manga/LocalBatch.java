@@ -178,7 +178,7 @@ final class LocalBatch {
     static void listen(Listener listener) { synchronized (LISTENERS) { LISTENERS.add(listener); } }
     static void unlisten(Listener listener) { synchronized (LISTENERS) { LISTENERS.remove(listener); } }
     /** Coalesces bursts of progress callbacks into at most one UI refresh every ~150 ms. */
-    private static void changed() { if(active!=null) TranslationTaskManager.progress("local",progressLine(active.folder));
+    private static void changed() { if(active!=null){TranslationTaskManager.progress("local",progressLine(active.folder));TranslationTaskManager.counts("local",Math.max(0,active.done-active.partial),active.failed+active.partial,active.running.size(),active.total);}
         synchronized (LISTENERS) { if (notifyPending) return; notifyPending = true; }
         MAIN.postDelayed(() -> {
             List<Listener> copy;

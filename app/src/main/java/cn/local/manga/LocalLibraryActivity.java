@@ -28,8 +28,7 @@ public final class LocalLibraryActivity extends ShellActivity {
         super.onCreate(state);
         LinearLayout root = new LinearLayout(this); root.setOrientation(LinearLayout.VERTICAL); root.setBackgroundColor(Ui.BG);
         Ui.insets(root, 0, 0, 0, 0, false);
-        Button back = new Button(this); back.setText("‹  返回"); back.setOnClickListener(v -> finish());
-        root.addView(Ui.topBar(this, back, "本地翻译"));
+        root.addView(Ui.appBar(this,null,"本地翻译",null,Icons.iconButton(this,R.drawable.ic_more_vert,"页面选项",this::settings)));
         ScrollView scroll = new ScrollView(this); scroll.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
         LinearLayout page = new LinearLayout(this); page.setOrientation(LinearLayout.VERTICAL);
         page.setPadding(Ui.dp(this, 16), Ui.dp(this, 2), Ui.dp(this, 16), Ui.dp(this, 24));
