@@ -20,7 +20,7 @@ public final class TranslationService extends Service {
     private Notification notification() {
         PendingIntent open = PendingIntent.getActivity(this, 0, new Intent(this, BrowserActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT), PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent stop = PendingIntent.getService(this, 1, new Intent(this, TranslationService.class).setAction("stop"), PendingIntent.FLAG_IMMUTABLE);
-        return new Notification.Builder(this, "translation").setSmallIcon(R.drawable.ic_browser).setContentTitle("漫画翻译")
+        return new Notification.Builder(this, "translation").setSmallIcon(R.drawable.ic_stat_translate).setColor(Ui.ACCENT).setContentTitle("漫游浏览器 · 翻译中")
                 .setContentText(TranslationTaskManager.detail).setContentIntent(open).setOnlyAlertOnce(true).setOngoing(true)
                 .addAction(new Notification.Action.Builder(null, "停止翻译", stop).build()).build();
     }
