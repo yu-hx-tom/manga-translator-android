@@ -9,7 +9,7 @@ final class TextRenderer {
         if(edit.hidden||edit.format.deleted)return;
         String text=edit.text==null?item.machine:edit.text;if(text==null||text.isEmpty())return;
         TextStyle s=edit.format;Rect r=s.box==null?item.region.box:s.box;int width=Math.max(1,r.width()),height=Math.max(1,r.height());
-        TextPaint p=new TextPaint(Paint.ANTI_ALIAS_FLAG);p.setTypeface(Typeface.create(s.fontFamily,Typeface.NORMAL));
+        TextPaint p=new TextPaint(Paint.ANTI_ALIAS_FLAG);p.setTypeface(FontChoices.typeface(s.fontFamily));
         boolean vertical=edit.vertical==null?item.region.vertical:edit.vertical;
         float font=Math.max(8,Math.min(96,s.fontSize*edit.scale));p.setTextSize(font);p.setLetterSpacing(s.letterSpacing/font);
         StaticLayout layout=null;
