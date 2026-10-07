@@ -33,7 +33,7 @@ final class BrowserSearch {
         accessory.setFocusable(false);accessory.setDescendantFocusability(android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS);accessory.setVisibility(View.GONE);
         accessory.setContentDescription("网站历史搜索词，可左右滑动");
         chips=new LinearLayout(activity);chips.setOrientation(LinearLayout.HORIZONTAL);chips.setGravity(Gravity.CENTER_VERTICAL);chips.setPadding(dp(8),dp(2),dp(8),dp(2));accessory.addView(chips);
-        panel=new ScrollView(activity);panel.setFillViewport(true);panel.setBackgroundColor(0xffF8FAFD);panel.setVisibility(View.GONE);
+        panel=new ScrollView(activity);panel.setFillViewport(true);panel.setBackgroundColor(Ui.BG);panel.setVisibility(View.GONE);
         rows=new LinearLayout(activity);rows.setOrientation(LinearLayout.VERTICAL);rows.setPadding(dp(12),dp(8),dp(12),dp(16));panel.addView(rows);
         body.addView(panel,new FrameLayout.LayoutParams(-1,-1));
         address.addTextChangedListener(new TextWatcher(){public void beforeTextChanged(CharSequence s,int st,int c,int a){}public void onTextChanged(CharSequence s,int st,int before,int count){if(address.hasFocus())refresh();}public void afterTextChanged(Editable e){}});
@@ -52,7 +52,7 @@ final class BrowserSearch {
         edit.putString("sites",new JSONArray(sites).toString()).putString(key,SearchTerms.add(prefs.getString(key,"[]"),term,8)).apply();
     }
     private void updateAccessory(){accessory.setVisibility(imeVisible&&siteFocused&&!address.hasFocus()&&chips.getChildCount()>0?View.VISIBLE:View.GONE);}
-    private void showEmptyTerms(){if(chips.getChildCount()==0){TextView empty=label("暂无历史词，提交搜索后会保留",13,0xff637085);empty.setGravity(Gravity.CENTER_VERTICAL);empty.setPadding(dp(8),0,dp(8),0);chips.addView(empty,new LinearLayout.LayoutParams(-2,dp(48)));}}
+    private void showEmptyTerms(){if(chips.getChildCount()==0){TextView empty=label("暂无历史词，提交搜索后会保留",13,Ui.MUTED);empty.setGravity(Gravity.CENTER_VERTICAL);empty.setPadding(dp(8),0,dp(8),0);chips.addView(empty,new LinearLayout.LayoutParams(-2,dp(48)));}}
     void focus(boolean focused){panel.setVisibility(focused?View.VISIBLE:View.GONE);if(focused)refresh();else revision++;updateAccessory();}
     void open(){address.requestFocus();address.setText("");address.post(()->((InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(address,InputMethodManager.SHOW_IMPLICIT));}
     boolean close(){if(!address.hasFocus())return false;address.clearFocus();((InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(address.getWindowToken(),0);return true;}
@@ -76,8 +76,8 @@ final class BrowserSearch {
                 siteFocused=request.optBoolean("focused");chips.removeAllViews();
                 String target=request.optString("target");
                 for(String term:SearchTerms.read(prefs.getString(key,"[]"),8)){
-                    TextView chip=label(term,14,0xff303B4D);chip.setSingleLine();chip.setEllipsize(TextUtils.TruncateAt.END);chip.setMaxWidth(dp(240));chip.setGravity(Gravity.CENTER);chip.setPadding(dp(14),0,dp(14),0);
-                    android.graphics.drawable.GradientDrawable outline=Ui.round(activity,0xffFAFAFC,8);outline.setStroke(dp(1),0xffBDC1C6);chip.setBackground(outline);chip.setFocusable(false);
+                    TextView chip=label(term,14,Ui.INK);chip.setSingleLine();chip.setEllipsize(TextUtils.TruncateAt.END);chip.setMaxWidth(dp(240));chip.setGravity(Gravity.CENTER);chip.setPadding(dp(14),0,dp(14),0);
+                    android.graphics.drawable.GradientDrawable outline=Ui.round(activity,Ui.SURFACE,8);outline.setStroke(dp(1),Ui.OUTLINE);chip.setBackground(outline);chip.setFocusable(false);
                     chip.setContentDescription("填入搜索框："+term+"，长按删除");chip.setOnClickListener(v->{try{
                         reply.postMessage(new JSONObject().put("op","fill").put("target",target).put("term",term).toString());
                     }catch(Exception ignored){pageStarted();}});
@@ -95,23 +95,23 @@ final class BrowserSearch {
     }
     private void refresh(){
         int token=++revision;String query=address.getText().toString().trim(),needle=query.toLowerCase(Locale.ROOT);
-        rows.removeAllViews();TextView caption=label("搜索记录和浏览历史",12,0xff637085);caption.setPadding(dp(8),dp(8),0,dp(12));rows.addView(caption);
+        rows.removeAllViews();TextView caption=label("搜索记录和浏览历史",12,Ui.MUTED);caption.setPadding(dp(8),dp(8),0,dp(12));rows.addView(caption);
         int count=0;
-        for(String term:SearchTerms.read(prefs.getString("omnibox","[]"),100))if(term.toLowerCase(Locale.ROOT).contains(needle)){addRow("◷",term,"历史搜索",term);if(++count==20)break;}
+        for(String term:SearchTerms.read(prefs.getString("omnibox","[]"),100))if(term.toLowerCase(Locale.ROOT).contains(needle)){addRow(R.drawable.ic_history,term,"历史搜索",term);if(++count==20)break;}
         final int termCount=count;
         BrowserLibrary.list(activity,false,query,0,(entries,error)->{
             if(token!=revision||!address.hasFocus()||activity.isDestroyed())return;
-            int urls=0;if(entries!=null)for(LibraryStore.Entry entry:entries){if(BrowserAddress.HOME.equals(entry.url))continue;addRow("↗",entry.title,entry.url,entry.url);if(++urls==30)break;}
-            if(termCount+urls==0){TextView empty=label(error!=null?error:query.isEmpty()?"搜索或访问网站后，记录会显示在这里":"没有匹配记录，可直接搜索或打开网址",14,0xff637085);empty.setPadding(dp(8),dp(24),dp(8),0);rows.addView(empty);}
+            int urls=0;if(entries!=null)for(LibraryStore.Entry entry:entries){if(BrowserAddress.HOME.equals(entry.url))continue;addRow(R.drawable.ic_public,entry.title,entry.url,entry.url);if(++urls==30)break;}
+            if(termCount+urls==0){TextView empty=label(error!=null?error:query.isEmpty()?"搜索或访问网站后，记录会显示在这里":"没有匹配记录，可直接搜索或打开网址",14,Ui.MUTED);empty.setPadding(dp(8),dp(24),dp(8),0);rows.addView(empty);}
         });
     }
-    private void addRow(String icon,String title,String subtitle,String value){
+    private void addRow(int icon,String title,String subtitle,String value){
         LinearLayout row=new LinearLayout(activity);row.setGravity(Gravity.CENTER_VERTICAL);row.setMinimumHeight(dp(68));
-        TextView symbol=label(icon,22,0xff637085);symbol.setGravity(Gravity.CENTER);row.addView(symbol,new LinearLayout.LayoutParams(dp(36),-1));
+        ImageView symbol=new ImageView(activity);symbol.setImageDrawable(Icons.icon(activity,icon,Ui.MUTED));symbol.setScaleType(ImageView.ScaleType.CENTER_INSIDE);symbol.setPadding(dp(6),dp(6),dp(6),dp(6));row.addView(symbol,new LinearLayout.LayoutParams(dp(36),dp(36)));
         LinearLayout text=new LinearLayout(activity);text.setOrientation(LinearLayout.VERTICAL);text.setPadding(dp(8),dp(10),dp(8),dp(10));
-        TextView first=label(title,15,0xff202124),second=label(subtitle,12,0xff637085);first.setSingleLine();second.setSingleLine();first.setEllipsize(TextUtils.TruncateAt.END);second.setEllipsize(TextUtils.TruncateAt.END);text.addView(first);text.addView(second);row.addView(text,new LinearLayout.LayoutParams(0,-2,1));
-        row.setOnClickListener(v->navigate.accept(value));row.setContentDescription(title+"，打开");row.setBackground(Ui.round(activity,0xffF8FAFD,12));
-        TextView fill=label("↖",23,0xff185ABC);fill.setGravity(Gravity.CENTER);fill.setContentDescription("填入搜索框："+title);fill.setOnClickListener(v->{address.setText(value);address.setSelection(address.length());});row.addView(fill,new LinearLayout.LayoutParams(dp(48),dp(48)));rows.addView(row);
+        TextView first=label(title,15,Ui.INK),second=label(subtitle,12,Ui.MUTED);first.setSingleLine();second.setSingleLine();first.setEllipsize(TextUtils.TruncateAt.END);second.setEllipsize(TextUtils.TruncateAt.END);text.addView(first);text.addView(second);row.addView(text,new LinearLayout.LayoutParams(0,-2,1));
+        row.setOnClickListener(v->navigate.accept(value));row.setContentDescription(title+"，打开");row.setBackground(Ui.round(activity,Ui.BG,12));
+        ImageButton fill=Icons.iconButton(activity,R.drawable.ic_north_west,"填入搜索框："+title,v->{address.setText(value);address.setSelection(address.length());});row.addView(fill,new LinearLayout.LayoutParams(dp(48),dp(48)));rows.addView(row);
     }
     private TextView label(String value,int size,int color){TextView v=new TextView(activity);v.setText(value);v.setTextSize(size);v.setTextColor(color);return v;}
     private int dp(int value){return Math.round(value*activity.getResources().getDisplayMetrics().density);}

@@ -30,8 +30,8 @@ public final class BrowserActivity extends ShellActivity {
     private String fullAddress="";
     private TextView status;
     private ProgressBar progress;
-    private Button cancelButton,autoButton,backButton,forwardButton,go; private boolean loadingPage; private boolean bookmarked;
-    private LinearLayout controls,report;
+    private ImageButton go; private boolean loadingPage; private boolean bookmarked;
+    
     private final Handler main=new Handler(Looper.getMainLooper());
     private final ExecutorService worker=Executors.newSingleThreadExecutor();
     private final ExecutorService translators=Executors.newCachedThreadPool();
@@ -68,8 +68,6 @@ public final class BrowserActivity extends ShellActivity {
     private float touchX,touchY;
     private String touchDocument;
     private boolean selectingPage;
-    private android.graphics.drawable.GradientDrawable autoBackground;
-    private android.animation.ValueAnimator autoPulse;
 
     @Override public void onCreate(Bundle state){
         super.onCreate(state);
@@ -97,29 +95,22 @@ public final class BrowserActivity extends ShellActivity {
     private void buildUi(){
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR|View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-        getWindow().setStatusBarColor(0xffF8FAFD);getWindow().setNavigationBarColor(0xffF8FAFD);
-        LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(0xffF8FAFD);
+        getWindow().setStatusBarColor(Ui.BG);getWindow().setNavigationBarColor(Ui.BG);
+        LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(Ui.BG);
         root.setOnApplyWindowInsetsListener((v,i)->{if(Build.VERSION.SDK_INT>=30){Insets b=i.getInsets(WindowInsets.Type.systemBars()|WindowInsets.Type.displayCutout());v.setPadding(b.left,b.top,b.right,b.bottom);}else v.setPadding(i.getSystemWindowInsetLeft(),i.getSystemWindowInsetTop(),i.getSystemWindowInsetRight(),i.getSystemWindowInsetBottom());return i;});
         LinearLayout location=new LinearLayout(this);location.setGravity(Gravity.CENTER_VERTICAL);location.setPadding(dp(4),dp(6),dp(4),dp(6));root.addView(location,new LinearLayout.LayoutParams(-1,dp(64)));
-        Button home=button("⌂",location,()->navigate(BrowserAddress.HOME));home.setContentDescription("返回首页");home.setTextSize(25);
-        address=new EditText(this);address.setSingleLine();address.setTextSize(14);address.setTextColor(0xff303B4D);address.setHintTextColor(0xff737F90);address.setHint("搜索或输入网址");address.setPadding(dp(16),0,dp(12),0);address.setBackground(addressBackground());address.setInputType(android.text.InputType.TYPE_CLASS_TEXT|android.text.InputType.TYPE_TEXT_VARIATION_URI);address.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_GO);location.addView(address,new LinearLayout.LayoutParams(0,dp(48),1));
-        go=button("↻",location,()->{if(address.hasFocus())navigate(address.getText().toString());else if(loadingPage)web.stopLoading();else web.reload();});go.setContentDescription("搜索或打开网址");go.setTextSize(23);
-        Button menu=button("⋮",location,()->{});menu.setContentDescription("浏览器菜单");menu.setTextSize(25);menu.setOnClickListener(v->showMenu(menu));
+        location.addView(Icons.iconButton(this,R.drawable.ic_home,"返回首页",v->navigate(BrowserAddress.HOME)),new LinearLayout.LayoutParams(dp(48),dp(48)));
+        address=new EditText(this);address.setSingleLine();address.setTextSize(14);address.setTextColor(Ui.INK);address.setHintTextColor(Ui.MUTED);address.setHint("搜索或输入网址");address.setPadding(dp(16),0,dp(12),0);address.setBackground(addressBackground());address.setInputType(android.text.InputType.TYPE_CLASS_TEXT|android.text.InputType.TYPE_TEXT_VARIATION_URI);address.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_GO);location.addView(address,new LinearLayout.LayoutParams(0,dp(48),1));
+        go=Icons.iconButton(this,R.drawable.ic_refresh,"刷新网页",v->{if(address.hasFocus())navigate(address.getText().toString());else if(loadingPage)web.stopLoading();else web.reload();});location.addView(go,new LinearLayout.LayoutParams(dp(48),dp(48)));
+        location.addView(Icons.iconButton(this,R.drawable.ic_more_vert,"浏览器菜单",this::showMenu),new LinearLayout.LayoutParams(dp(48),dp(48)));
         address.setOnEditorActionListener((v,a,event)->{navigate(address.getText().toString());return true;});
-        address.setOnFocusChangeListener((v,focused)->{go.setText(focused?"→":loadingPage?"✕":"↻");String url=web==null?null:web.getUrl();if(url!=null){if(focused){address.setText(isHome(url)?"":url);address.selectAll();}else showAddress(url);}if(search!=null)search.focus(focused);});
-        progress=new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal);progress.setProgressTintList(android.content.res.ColorStateList.valueOf(0xff4285F4));progress.setIndeterminateTintList(android.content.res.ColorStateList.valueOf(0xff4285F4));progress.setVisibility(View.INVISIBLE);root.addView(progress,new LinearLayout.LayoutParams(-1,dp(2)));
+        address.setOnFocusChangeListener((v,focused)->{updateGo();String url=web==null?null:web.getUrl();if(url!=null){if(focused){address.setText(isHome(url)?"":url);address.selectAll();}else showAddress(url);}if(search!=null)search.focus(focused);});
+        progress=new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal);progress.setProgressTintList(android.content.res.ColorStateList.valueOf(Ui.ACCENT));progress.setIndeterminateTintList(android.content.res.ColorStateList.valueOf(Ui.ACCENT));progress.setVisibility(View.INVISIBLE);root.addView(progress,new LinearLayout.LayoutParams(-1,dp(2)));
         FrameLayout body=new FrameLayout(this);root.addView(body,new LinearLayout.LayoutParams(-1,0,1));
-        web=new WebView(this);web.setBackgroundColor(0xffF8FAFD);body.addView(web,new FrameLayout.LayoutParams(-1,-1));
+        web=new WebView(this);web.setBackgroundColor(Ui.BG);body.addView(web,new FrameLayout.LayoutParams(-1,-1));
         search=new BrowserSearch(this,address,body,this::navigate);search.install(web,searchScript);
-        report=new LinearLayout(this);report.setPadding(dp(16),0,dp(12),0);report.setVisibility(View.GONE);
-        status=new Ui.StatusText(this);status.setGravity(Gravity.CENTER_VERTICAL);status.setTextSize(11);status.setTextColor(0xff637085);status.setSingleLine(true);status.setEllipsize(android.text.TextUtils.TruncateAt.END);status.setText("打开网页，自由浏览");status.setContentDescription("翻译状态，点击查看完整详情");status.setOnClickListener(v->new AlertDialog.Builder(this).setTitle("浏览与翻译状态").setMessage(status.getText()).setPositiveButton("继续浏览",null).show());report.addView(status,new LinearLayout.LayoutParams(-1,-1));
-        controls=new LinearLayout(this);controls.setGravity(Gravity.CENTER_VERTICAL);controls.setPadding(dp(8),dp(4),dp(8),dp(4));controls.setVisibility(View.GONE);
-        backButton=button("‹",controls,()->{if(web.canGoBack())web.goBack();else navigate(BrowserAddress.HOME);});backButton.setContentDescription("后退");backButton.setTextSize(27);
-        forwardButton=button("›",controls,()->{if(web.canGoForward())web.goForward();});forwardButton.setContentDescription("前进");forwardButton.setTextSize(27);
-        Button refresh=button("↻",controls,()->web.reload());refresh.setContentDescription("刷新网页");refresh.setTextSize(23);
-        autoButton=button("开始翻译",controls,()->{if(busy)cancelWork();else startAuto();});autoButton.setLayoutParams(new LinearLayout.LayoutParams(0,dp(44),1));autoButton.setTextColor(0xff185ABC);autoBackground=rounded(0xffD3E3FD,22);autoButton.setBackground(Ui.ripple(autoBackground,rounded(0xffFFFFFF,22),0x30185ABC));autoButton.setTag(R.id.ui_tint_color,0xffD3E3FD);autoButton.setTypeface(android.graphics.Typeface.create("sans-serif-medium",android.graphics.Typeface.NORMAL));
-        Button bookmarks=button("☆",controls,()->openLibrary(true));bookmarks.setContentDescription("收藏夹");bookmarks.setTextSize(24);
-        cancelButton=new Button(this);cancelButton.setVisibility(View.GONE);setContentView(root);root.setFocusableInTouchMode(true);root.requestFocus();
+        status=new Ui.StatusText(this);status.setGravity(Gravity.CENTER_VERTICAL);status.setTextSize(11);status.setTextColor(Ui.MUTED);status.setSingleLine(true);status.setEllipsize(android.text.TextUtils.TruncateAt.END);status.setText("打开网页，自由浏览");status.setContentDescription("翻译状态，点击查看完整详情");status.setOnClickListener(v->new AlertDialog.Builder(this).setTitle("浏览与翻译状态").setMessage(status.getText()).setPositiveButton("继续浏览",null).show());
+        setContentView(root);root.setFocusableInTouchMode(true);root.requestFocus();
         WebSettings s=web.getSettings();s.setJavaScriptEnabled(true);s.setDomStorageEnabled(true);s.setUseWideViewPort(true);s.setLoadWithOverviewMode(true);s.setSupportZoom(true);s.setBuiltInZoomControls(true);s.setDisplayZoomControls(false);
         s.setAllowFileAccess(false);s.setAllowContentAccess(false);s.setAllowFileAccessFromFileURLs(false);s.setAllowUniversalAccessFromFileURLs(false);
         s.setSafeBrowsingEnabled(true);s.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);s.setSupportMultipleWindows(false);s.setJavaScriptCanOpenWindowsAutomatically(false);
@@ -149,7 +140,6 @@ public final class BrowserActivity extends ShellActivity {
                             case "/search":search.open();break;case "/bookmarks":openLibrary(true);break;case "/history":openLibrary(false);break;
                             case "/shortcut-add":editHomeSite(null);break;
                             case "/shortcut-edit":String key=request.getUrl().getQueryParameter("site");BrowserLibrary.sites(BrowserActivity.this,(sites,error)->{if(sites!=null)for(int i=0;i<sites.length();i++){JSONObject site=sites.optJSONObject(i);if(site!=null&&site.optString("key").equals(key)){homeSiteMenu(site);break;}}});break;
-                            case "/translate":startActivity(new Intent(BrowserActivity.this,MainActivity.class));break;
                             case "/projects":startActivity(new Intent(BrowserActivity.this,ProjectListActivity.class));break;
                             case "/local":startActivity(new Intent(BrowserActivity.this,LocalLibraryActivity.class));break;
                             case "/settings":startActivity(new Intent(BrowserActivity.this,SettingsActivity.class));break;
@@ -171,17 +161,16 @@ public final class BrowserActivity extends ShellActivity {
                 mainFrameFailed=false;
                 cancelWork();queue.clear();pageOutcomes.clear();failedPages.clear();recentPageDetails.clear();documentId=UUID.randomUUID().toString();showTranslated=true;
                 if(url.startsWith("http://")||url.startsWith("https://"))showAddress(url);
-                boolean home=isHome(url);loadingPage=true;go.setText(address.hasFocus()?"→":"✕");refreshTask();
+                boolean home=isHome(url);loadingPage=true;updateGo();refreshTask();
                 status.setText(home?"首页":"正在加载网页…");
                 if(!home)view.evaluateJavascript(captureScript,null);
             }
             @Override public void onPageFinished(WebView view,String url){
                 search.navigation(url);
-                if(destroyed)return;loadingPage=false;go.setText(address.hasFocus()?"→":"↻");refreshTask();
+                if(destroyed)return;loadingPage=false;updateGo();refreshTask();
                 if(!isHome(url)){view.evaluateJavascript(captureScript,null);view.evaluateJavascript(searchScript,null);}
                 if(!isHome(url)&&!mainFrameFailed&&BrowserLibrary.isWebUrl(url)&&Objects.equals(url,view.getUrl()))BrowserLibrary.recordVisit(BrowserActivity.this,view.getTitle(),url);
                 if(!isHome(url)&&(url.startsWith("http://")||url.startsWith("https://"))){getSharedPreferences("browser",MODE_PRIVATE).edit().putString("lastUrl",url).apply();showAddress(url);}
-                backButton.setEnabled(view.canGoBack());forwardButton.setEnabled(view.canGoForward());
                 if(isHome(url)){showAddress(url);refreshHome();}
                 else if(!busy&&!mainFrameFailed)status.setText("网页已载入 · 需要翻译时，点「开始翻译」");
             }
@@ -194,40 +183,34 @@ public final class BrowserActivity extends ShellActivity {
             }
         });
     }
+    private void updateGo(){Icons.change(go,address.hasFocus()?R.drawable.ic_arrow_forward:loadingPage?R.drawable.ic_close:R.drawable.ic_refresh,address.hasFocus()?"前往网址或搜索":loadingPage?"停止加载":"刷新网页");}
     private void showMenu(View anchor){
-        PopupMenu menu=new PopupMenu(this,anchor);
-        // Grouped by task (dividers between groups): this chapter → records → library → tools.
-        boolean onPage=web!=null&&!isHome(web.getUrl());
-        menu.getMenu().add(0,12,0,"首页");
-        menu.getMenu().add(0,17,1,"前进").setEnabled(web!=null&&web.canGoForward()); menu.getMenu().add(0,18,2,"在外部浏览器打开").setEnabled(onPage);
-        menu.getMenu().add(0,15,1,"汉化与导出本章…").setEnabled(onPage);
-        menu.getMenu().add(1,3,2,showTranslated?"查看原图":"查看译图").setEnabled(!busy&&onPage);
-        menu.getMenu().add(1,10,3,"重试未完成部分").setEnabled((!busy||autoRunning)&&onPage);
-        menu.getMenu().add(1,5,4,"手选网页图片").setEnabled(!busy&&onPage);
-        menu.getMenu().add(1,4,5,"翻译当前画面").setEnabled(!busy&&onPage);
-        menu.getMenu().add(2,6,6,"处理详情").setEnabled(!recentPageDetails.isEmpty());
-        menu.getMenu().add(2,13,7,"识读原文 / 译文").setEnabled(!recentPageDetails.isEmpty());
-        menu.getMenu().add(2,11,8,"查看／导出翻译日志");
-        menu.getMenu().add(3,7,9,bookmarked?"取消收藏":"收藏当前页面").setEnabled(onPage&&BrowserLibrary.isWebUrl(web.getUrl()));
-        menu.getMenu().add(3,8,10,"收藏夹");menu.getMenu().add(3,9,11,"历史记录");
-        menu.getMenu().add(4,14,12,"本地漫画文件夹");menu.getMenu().add(4,16,13,"我的汉化工程");menu.getMenu().add(4,2,14,"单页翻译");menu.getMenu().add(4,1,15,"设置");
-        menu.getMenu().setGroupDividerEnabled(true);
-        menu.setOnMenuItemClickListener(item->{switch(item.getItemId()){
-            case 17:if(web.canGoForward())web.goForward();break; case 18:try{startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(web.getUrl())));}catch(Exception e){Toast.makeText(this,"没有可用浏览器",0).show();}break;
-            case 12:navigate(BrowserAddress.HOME);break;
-            case 13:showTranscripts();break;
-            case 14:startActivity(new Intent(this,LocalLibraryActivity.class));break;
-            case 15:exportChapter();break;
-            case 16:startActivity(new Intent(this,ProjectListActivity.class));break;
-            case 1:startActivity(new Intent(this,SettingsActivity.class));break;
-            case 2:startActivity(new Intent(this,MainActivity.class));break;
-            case 3:toggleImages();break;case 4:snapshot();break;case 5:scanImages();break;case 6:showOutcomes();break;
-            case 10:retryIncomplete();break;
-            case 11:startActivity(new Intent(this,LogsActivity.class));break;
-            case 7:if(web!=null){BrowserLibrary.Callback callback=error->{if(error==null)bookmarked=!bookmarked;Toast.makeText(this,error==null?(bookmarked?"已收藏":"已取消收藏"):error,Toast.LENGTH_SHORT).show();};if(bookmarked)BrowserLibrary.remove(this,web.getUrl(),true,callback);else BrowserLibrary.addBookmark(this,web.getTitle(),web.getUrl(),callback);}break;
-            case 8:case 9:startActivityForResult(new Intent(this,LibraryActivity.class).putExtra("bookmarks",item.getItemId()==8),REQUEST_LIBRARY);break;
-        }return true;});menu.show();
+        Ui.Sheet menu=Ui.sheet(this,"浏览器菜单");boolean onPage=web!=null&&!isHome(web.getUrl());
+        LinearLayout shortcuts=new LinearLayout(this);
+        menuShortcut(menu,shortcuts,R.drawable.ic_arrow_forward,"前进",web!=null&&web.canGoForward(),()->web.goForward());
+        menuShortcut(menu,shortcuts,bookmarked?R.drawable.ic_star_fill:R.drawable.ic_star,bookmarked?"取消收藏":"收藏",onPage,this::toggleBookmark);
+        menuShortcut(menu,shortcuts,R.drawable.ic_share,"分享链接",onPage,()->{Intent send=new Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT,web.getUrl());startActivity(Intent.createChooser(send,"分享链接"));});
+        menuShortcut(menu,shortcuts,R.drawable.ic_open_in_new,"外部打开",onPage,()->{try{startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(web.getUrl())));}catch(Exception e){Toast.makeText(this,"没有可用浏览器",0).show();}});menu.body.addView(shortcuts);
+        String reason=!onPage?"先打开网页":busy?"任务处理中":null;
+        menu.group("本章翻译");
+        menu.item(R.drawable.ic_edit_note,"汉化与导出本章",onPage?null:reason,onPage,this::exportChapter);
+        menu.item(R.drawable.ic_compare,showTranslated?"查看原图":"查看译图",reason,onPage&&!busy,this::toggleImages);
+        menu.item(R.drawable.ic_restart,"重试未完成部分",reason,onPage&&(!busy||autoRunning),this::retryIncomplete);
+        menu.item(R.drawable.ic_select_image,"手选网页图片",reason,onPage&&!busy,this::scanImages);
+        menu.item(R.drawable.ic_capture_translate,"翻译当前画面",reason,onPage&&!busy,this::snapshot);
+        menu.group("记录");menu.item(R.drawable.ic_star_list,"收藏夹",()->openLibrary(true));menu.item(R.drawable.ic_history,"历史记录",()->openLibrary(false));
+        menu.item(R.drawable.ic_fact_check,"处理详情",recentPageDetails.isEmpty()?"暂无记录":null,!recentPageDetails.isEmpty(),this::showOutcomes);
+        menu.item(R.drawable.ic_subtitles,"识读原文 / 译文",recentPageDetails.isEmpty()?"暂无记录":null,!recentPageDetails.isEmpty(),this::showTranscripts);
+        menu.item(R.drawable.ic_receipt_long,"翻译日志",()->startActivity(new Intent(this,LogsActivity.class)));
+        menu.group("设置");menu.item(R.drawable.ic_settings,"设置",()->startActivity(new Intent(this,SettingsActivity.class)));menu.show();
     }
+    private void menuShortcut(Ui.Sheet sheet,LinearLayout parent,int icon,String title,boolean enabled,Runnable action){
+        LinearLayout cell=new LinearLayout(this);cell.setOrientation(LinearLayout.VERTICAL);cell.setGravity(Gravity.CENTER);
+        ImageButton button=Icons.iconButton(this,icon,title+(enabled?"":"，当前不可用"),v->{sheet.dismiss();action.run();});button.setEnabled(enabled);button.setAlpha(enabled?1:.4f);cell.addView(button,new LinearLayout.LayoutParams(dp(48),dp(48)));
+        TextView label=Ui.text(this,title,11,Ui.MUTED);label.setGravity(Gravity.CENTER);cell.addView(label);parent.addView(cell,new LinearLayout.LayoutParams(0,-2,1));
+    }
+    private void toggleBookmark(){if(web==null)return;BrowserLibrary.Callback callback=error->{if(error==null)bookmarked=!bookmarked;Toast.makeText(this,error==null?(bookmarked?"已收藏":"已取消收藏"):error,Toast.LENGTH_SHORT).show();};if(bookmarked)BrowserLibrary.remove(this,web.getUrl(),true,callback);else BrowserLibrary.addBookmark(this,web.getTitle(),web.getUrl(),callback);}
+    @Override protected void showFailedPages(){showOutcomes();}
     private static boolean isHome(String url){return BrowserAddress.HOME.equals(url);}
     private android.graphics.drawable.GradientDrawable rounded(int color,int radius){android.graphics.drawable.GradientDrawable d=new android.graphics.drawable.GradientDrawable();d.setColor(color);d.setCornerRadius(dp(radius));return d;}
     private void openLibrary(boolean bookmarks){startActivityForResult(new Intent(this,LibraryActivity.class).putExtra("bookmarks",bookmarks),REQUEST_LIBRARY);}
@@ -240,11 +223,10 @@ public final class BrowserActivity extends ShellActivity {
         });
     }
     private void homeSiteMenu(JSONObject site){
-        if(destroyed||!isHome(web.getUrl()))return;
-        boolean pinned=site.optBoolean("pinned");new AlertDialog.Builder(this).setTitle(site.optString("title")).setItems(new String[]{"编辑名称和网址",pinned?"取消固定":"固定到前面","移除此网站"},(d,which)->{
-            if(which==0){editHomeSite(site);return;}
-            BrowserLibrary.editSite(this,site.optString("key"),site.optString("title"),site.optString("url"),!pinned,which==2,error->{if(error!=null)Toast.makeText(this,error,Toast.LENGTH_LONG).show();refreshHome();});
-        }).show();
+        if(destroyed||!isHome(web.getUrl()))return;boolean pinned=site.optBoolean("pinned");Ui.Sheet sheet=Ui.sheet(this,site.optString("title"));
+        sheet.item(R.drawable.ic_edit,"编辑名称和网址",()->editHomeSite(site));
+        sheet.item(R.drawable.ic_keep,pinned?"取消固定":"固定到前面",()->BrowserLibrary.editSite(this,site.optString("key"),site.optString("title"),site.optString("url"),!pinned,false,error->{if(error!=null)Toast.makeText(this,error,1).show();refreshHome();}));
+        sheet.item(R.drawable.ic_delete,"移除此网站",()->BrowserLibrary.editSite(this,site.optString("key"),site.optString("title"),site.optString("url"),pinned,true,error->{if(error!=null)Toast.makeText(this,error,1).show();refreshHome();}));sheet.show();
     }
     private void editHomeSite(JSONObject site){
         LinearLayout fields=new LinearLayout(this);fields.setOrientation(LinearLayout.VERTICAL);fields.setPadding(dp(24),dp(8),dp(24),0);
@@ -285,7 +267,7 @@ public final class BrowserActivity extends ShellActivity {
         queue.requestedOnly(requestedOnly);
         retryOnScan.clear();retryScanRequested=!requestedOnly;
         if(!requestedOnly){queue.restartUnfinished();retryOnScan.addAll(failedPages);for(Map.Entry<String,PageOutcome> entry:pageOutcomes.entrySet())if(entry.getValue().incomplete())retryOnScan.add(entry.getKey());}
-        final int token=begin("正在寻找漫画图片…");autoRunning=true;queue.resume(SystemClock.elapsedRealtime());autoError="";autoButton.setEnabled(true);autoButton.setText("停止翻译");
+        final int token=begin("正在寻找漫画图片…");autoRunning=true;queue.resume(SystemClock.elapsedRealtime());autoError="";refreshTask();
         work=submitBrowser(worker,()->{try{pageBridge.js(bridge,token);pageBridge.js("window.__mangaBrowserV1.toggleTranslations(true)",token);
             main.post(()->{if(valid(token)&&autoRunning){showTranslated=true;main.post(autoTick);}});
         }catch(Exception|OutOfMemoryError e){main.post(()->{if(valid(token)){cancelWork();status.setText("启动失败："+message(e));}});}});
@@ -671,22 +653,10 @@ public final class BrowserActivity extends ShellActivity {
         activeWorkers.incrementAndGet();try{if(valid(token))job.run();}finally{activeWorkers.decrementAndGet();CacheStorage.endUse();main.post(this::settleTask);}
     });}
     private void settleTask(){if(settlingSummary!=null&&activeWorkers.get()==0){String summary=settlingSummary;settlingSummary=null;TranslationTaskManager.done("browser",summary);}}
-    private int begin(String text){settlingSummary=null;main.removeCallbacks(recoveryTick);cancelled=new AtomicBoolean();busy=true;int token=++generation;status.setText(text);Ui.reveal(progress,true,View.INVISIBLE);progress.setIndeterminate(true);autoButton.setText("取消任务");autoButton.setEnabled(true);paintAuto(true);return token;}
-    private void finishTask(String text){settlingSummary=text;settleTask();busy=false;status.setText(text);Ui.reveal(progress,false,View.INVISIBLE);cancelButton.setVisibility(View.GONE);autoButton.setEnabled(true);autoButton.setText("开始翻译");paintAuto(false);main.removeCallbacks(recoveryTick);if(foreground)main.postDelayed(recoveryTick,1500);}
-    /** Start/stop pill: blue when idle, softly breathing red while a task can be stopped. */
-    private void paintAuto(boolean running){
-        if(autoButton==null||autoBackground==null)return;
-        if(autoPulse!=null){autoPulse.cancel();autoPulse=null;}
-        autoBackground.setAlpha(255);
-        Ui.tint(autoButton,autoBackground,running?0xffFCE8E6:0xffD3E3FD);
-        autoButton.setTextColor(running?0xffB3261E:0xff185ABC);
-        if(!running||destroyed||!Ui.motion())return;
-        autoPulse=android.animation.ValueAnimator.ofInt(255,175);autoPulse.setDuration(900);autoPulse.setStartDelay(300);
-        autoPulse.setRepeatCount(android.animation.ValueAnimator.INFINITE);autoPulse.setRepeatMode(android.animation.ValueAnimator.REVERSE);autoPulse.setInterpolator(Ui.STANDARD);
-        final android.graphics.drawable.GradientDrawable shape=autoBackground;autoPulse.addUpdateListener(a->shape.setAlpha((Integer)a.getAnimatedValue()));autoPulse.start();
-    }
+    private int begin(String text){settlingSummary=null;main.removeCallbacks(recoveryTick);cancelled=new AtomicBoolean();busy=true;int token=++generation;status.setText(text);Ui.reveal(progress,true,View.INVISIBLE);progress.setIndeterminate(true);refreshTask();return token;}
+    private void finishTask(String text){settlingSummary=text;settleTask();busy=false;status.setText(text);Ui.reveal(progress,false,View.INVISIBLE);refreshTask();main.removeCallbacks(recoveryTick);if(foreground)main.postDelayed(recoveryTick,1500);}
     private android.graphics.drawable.Drawable addressBackground(){
-        android.graphics.drawable.GradientDrawable idle=rounded(0xffE8EEF8,28),focused=rounded(0xffFFFFFF,28);focused.setStroke(dp(2),0xff4285F4);
+        android.graphics.drawable.GradientDrawable idle=rounded(Ui.INFO_SOFT,28),focused=rounded(Ui.SURFACE,28);focused.setStroke(dp(2),Ui.ACCENT);
         android.graphics.drawable.StateListDrawable states=new android.graphics.drawable.StateListDrawable();states.setEnterFadeDuration(180);states.setExitFadeDuration(180);
         states.addState(new int[]{android.R.attr.state_focused},focused);states.addState(new int[]{},idle);return states;
     }
@@ -705,7 +675,6 @@ public final class BrowserActivity extends ShellActivity {
     private void fail(int token,Throwable error){main.post(()->{if(valid(token))finishTask("操作未完成："+message(error));});}
     private String message(Throwable e){if(e instanceof OutOfMemoryError)return "图片过大，手机内存不足，请减少选图或使用当前画面";String m=e.getMessage();if(m==null)m="请重试";String key=AppSettings.load(this).apiKey;if(!key.isEmpty())m=m.replace(key,"[隐藏]");return m.length()>180?m.substring(0,180):m;}
     private void settingsNeeded(String message){new AlertDialog.Builder(this).setMessage(message).setPositiveButton("设置接口",(d,w)->startActivity(new Intent(this,SettingsActivity.class))).setNegativeButton("继续浏览",null).show();}
-    private Button button(String title,LinearLayout row,Runnable action){Button b=new Button(this);b.setText(title);b.setTextSize(14);b.setTextColor(0xff53647B);b.setAllCaps(false);android.util.TypedValue ripple=new android.util.TypedValue();getTheme().resolveAttribute(android.R.attr.selectableItemBackgroundBorderless,ripple,true);b.setBackgroundResource(ripple.resourceId);b.setBackgroundTintList(null);b.setPadding(dp(4),0,dp(4),0);b.setMinWidth(dp(48));b.setMinimumWidth(dp(48));b.setMinHeight(dp(48));b.setMinimumHeight(dp(48));Ui.pressable(b);row.addView(b,new LinearLayout.LayoutParams(dp(48),dp(48)));b.setOnClickListener(v->action.run());return b;}
     private int dp(float n){return Math.round(n*getResources().getDisplayMetrics().density);}
     private long lastBack;
     @Override public void onBackPressed(){if(search!=null&&search.close())return;if(web!=null&&web.canGoBack())web.goBack();else if(web!=null&&!isHome(web.getUrl()))navigate(BrowserAddress.HOME);else if(SystemClock.elapsedRealtime()-lastBack<2000)moveTaskToBack(true);else{lastBack=SystemClock.elapsedRealtime();Toast.makeText(this,"再按一次退出",0).show();}}
