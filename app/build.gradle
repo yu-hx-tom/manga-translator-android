@@ -1,0 +1,29 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'cn.local.manga'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'cn.local.manga'
+        minSdk 29
+        targetSdk 35
+        versionCode 35
+        versionName '1.0.9'
+        testInstrumentationRunner 'cn.local.manga.ChecksInstrumentation'
+        ndk { abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64' }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    androidResources { noCompress += 'onnx' }
+}
+tasks.register('verifyBundledModels') {
+    doLast {
+        def bundled = fileTree('src/main/assets') { include '**/*.onnx' }.files
+        if (bundled.size() != 1 || bundled.first().canonicalFile != file('src/main/assets/detector.onnx').canonicalFile)
+            throw new GradleException('Only PP-OCR detector.onnx may be bundled; move other models outside assets.')
+    }
+}
+tasks.named('preBuild').configure { dependsOn 'verifyBundledModels' }
+dependencies {
+    implementation 'com.microsoft.onnxruntime:onnxruntime-android:1.22.0'
+    implementation 'androidx.webkit:webkit:1.12.1'
+}
+
