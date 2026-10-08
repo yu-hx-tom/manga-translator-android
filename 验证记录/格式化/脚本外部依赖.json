@@ -1,0 +1,530 @@
+[
+  {
+    "file": "tests/browser-real-search.cjs",
+    "line": 1,
+    "reference": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/browser-real-search.cjs",
+    "line": 4,
+    "reference": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/browser-real-search.cjs",
+    "line": 10,
+    "reference": "s://www.wikipedia.org/",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/browser-real-search.cjs",
+    "line": 10,
+    "reference": "s://www.google.com/",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/browser-search-checks.cjs",
+    "line": 1,
+    "reference": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/browser-search-checks.cjs",
+    "line": 6,
+    "reference": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/browser-search-checks.cjs",
+    "line": 10,
+    "reference": "s://search.test/**",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/browser-search-checks.cjs",
+    "line": 12,
+    "reference": "s://search.test/",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/browser-search-checks.cjs",
+    "line": 28,
+    "reference": "s://search.test/next",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/browser-search-checks.cjs",
+    "line": 31,
+    "reference": "s://manga-home.invalid/**",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/browser-search-checks.cjs",
+    "line": 31,
+    "reference": "s://manga-home.invalid/",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/browser-search-checks.cjs",
+    "line": 33,
+    "reference": "s://manga-home.invalid/search",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/browser-search-sequence.cjs",
+    "line": 1,
+    "reference": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/browser-search-sequence.cjs",
+    "line": 6,
+    "reference": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/browser-search-sequence.cjs",
+    "line": 11,
+    "reference": "s://search.test/**",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/browser-search-sequence.cjs",
+    "line": 12,
+    "reference": "s://search.test/",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/compile_format_host.py",
+    "line": 10,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/jdk-17.0.20+8/bin",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/compile_format_host.py",
+    "line": 12,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/platforms/android-36/android.jar",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/compile_format_host.py",
+    "line": 13,
+    "reference": "D:/claude-code-space/.toolchains/android/gradle-home/caches",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/home-sites-checks.cjs",
+    "line": 1,
+    "reference": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/home-sites-checks.cjs",
+    "line": 3,
+    "reference": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/home-sites-checks.cjs",
+    "line": 5,
+    "reference": "s://manga-home.invalid/",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/home-sites-checks.cjs",
+    "line": 6,
+    "reference": "s://manga-home.invalid/",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/home-sites-checks.cjs",
+    "line": 7,
+    "reference": "s://site",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/home-sites-checks.cjs",
+    "line": 15,
+    "reference": "s://site0.example",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/home-sites-checks.cjs",
+    "line": 16,
+    "reference": "s://site0.example/",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/home-sites-checks.cjs",
+    "line": 17,
+    "reference": "s://manga-home.invalid/shortcut-add",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/v110-home-sites-checks.cjs",
+    "line": 1,
+    "reference": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/v110-home-sites-checks.cjs",
+    "line": 3,
+    "reference": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/v110-home-sites-checks.cjs",
+    "line": 5,
+    "reference": "s://manga-home.invalid/",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/v110-home-sites-checks.cjs",
+    "line": 6,
+    "reference": "s://manga-home.invalid/",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/v110-home-sites-checks.cjs",
+    "line": 7,
+    "reference": "s://site",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/v110-home-sites-checks.cjs",
+    "line": 15,
+    "reference": "s://site0.example",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/v110-home-sites-checks.cjs",
+    "line": 16,
+    "reference": "s://site0.example/",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/v110-home-sites-checks.cjs",
+    "line": 17,
+    "reference": "s://manga-home.invalid/shortcut-add",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/v110-icon-preview.cjs",
+    "line": 1,
+    "reference": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/v110-icon-preview.cjs",
+    "line": 4,
+    "reference": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/v110-icon-preview.cjs",
+    "line": 5,
+    "reference": "E:/claudeworkspace/漫画翻译_图标设计/preview.html",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/v110_delivery.py",
+    "line": 6,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/v110_delivery.py",
+    "line": 7,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/jdk-17.0.20+8/bin/java.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/v110_finalize.py",
+    "line": 19,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/build-tools/36.0.0/aapt.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/字节码比对.ps1",
+    "line": 7,
+    "reference": "D:/claude-code-space/.toolchains/android",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/打包验证1.1.1-alpha1.1.ps1",
+    "line": 7,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/build-tools/36.0.0",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/打包验证1.1.1-alpha1.1.ps1",
+    "line": 8,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/java.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/打包验证1.1.1-alpha1.2.ps1",
+    "line": 7,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/build-tools/36.0.0",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/打包验证1.1.1-alpha1.2.ps1",
+    "line": 8,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/java.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/打包验证1.1.1-alpha1.2.ps1",
+    "line": 44,
+    "reference": "a:\\(I\\)V",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/打包验证1.1.1-alpha1.2.ps1",
+    "line": 44,
+    "reference": "a:\\(F\\)V",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/打包验证1.1.1-alpha1.ps1",
+    "line": 7,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/build-tools/36.0.0",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/打包验证1.1.1-alpha1.ps1",
+    "line": 8,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/java.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/打包验证1.1.2.ps1",
+    "line": 6,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/build-tools/36.0.0",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/打包验证1.1.2.ps1",
+    "line": 7,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/java.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/打包验证1.1.2.ps1",
+    "line": 53,
+    "reference": "a:\\(I\\)V",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/打包验证1.1.2.ps1",
+    "line": 53,
+    "reference": "a:\\(F\\)V",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/打包验证1.1.6.ps1",
+    "line": 7,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/build-tools/36.0.0",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/打包验证1.1.6.ps1",
+    "line": 8,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/核对alpha1源码.cjs",
+    "line": 12,
+    "reference": "E:/codexwork/漫画",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证1.1.1-alpha1.ps1",
+    "line": 7,
+    "reference": "D:/claude-code-space/.toolchains/android",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证1.1.2存储.ps1",
+    "line": 7,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/javac.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/验证1.1.2存储.ps1",
+    "line": 9,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/platforms/android-36/android.jar",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证1.1.2存储.ps1",
+    "line": 10,
+    "reference": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证1.1.2配套回归.ps1",
+    "line": 7,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/javac.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/验证1.1.2配套回归.ps1",
+    "line": 9,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/platforms/android-36/android.jar",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证1.1.2配套回归.ps1",
+    "line": 34,
+    "reference": "D:/WeGameApps/node/node.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证1.1.6.ps1",
+    "line": 7,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/javac.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/验证1.1.6.ps1",
+    "line": 9,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/platforms/android-36/android.jar",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证1.1.6.ps1",
+    "line": 10,
+    "reference": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证UI重构.ps1",
+    "line": 3,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/javac.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/验证UI重构.ps1",
+    "line": 5,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/platforms/android-36/android.jar",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证导入复制.ps1",
+    "line": 3,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/javac.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/验证导入复制.ps1",
+    "line": 5,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/platforms/android-36/android.jar",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证常用网站.ps1",
+    "line": 5,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/javac.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/验证常用网站.ps1",
+    "line": 12,
+    "reference": "D:/WeGameApps/node/node.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证当前调用.ps1",
+    "line": 5,
+    "reference": "D:\\claude-code-space\\.toolchains\\android",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证搜索记录.ps1",
+    "line": 3,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/javac.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/验证搜索记录.ps1",
+    "line": 11,
+    "reference": "D:/WeGameApps/node/node.exe",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证算法.ps1",
+    "line": 3,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/javac.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/验证算法.ps1",
+    "line": 10,
+    "reference": "D:/claude-code-space/.toolchains/android/android-sdk/platforms/android-36/android.jar",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/验证缓存清理.ps1",
+    "line": 3,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/javac.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/验证队列重试.ps1",
+    "line": 3,
+    "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/javac.exe",
+    "existsLiteral": null
+  },
+  {
+    "file": "tests/mock-api/check.cjs",
+    "line": 9,
+    "reference": "p://127.0.0.1:",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/mock-api/check.cjs",
+    "line": 16,
+    "reference": "p://127.0.0.1:",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/mock-api/check.cjs",
+    "line": 17,
+    "reference": "p://127.0.0.1:",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/mock-api/check.cjs",
+    "line": 18,
+    "reference": "p://127.0.0.1:",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/mock-api/check.cjs",
+    "line": 19,
+    "reference": "p://127.0.0.1:",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/mock-api/server.cjs",
+    "line": 5,
+    "reference": "E:/codexwork/漫画",
+    "existsLiteral": true
+  },
+  {
+    "file": "tests/mock-api/server.cjs",
+    "line": 11,
+    "reference": "p://localhost",
+    "existsLiteral": false
+  },
+  {
+    "file": "tests/mock-api/server.cjs",
+    "line": 27,
+    "reference": "p://${nic.address}:${server.address().port}/v1  网页 http://${nic.address}:${server.address().port}/`)",
+    "existsLiteral": null
+  }
+]
