@@ -1,0 +1,21 @@
+const {chromium}=require('C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs=require('fs'),path=require('path'),assert=require('assert');const root=path.resolve(__dirname,'..'),out=path.join(root,'验证记录/1.1.0浏览器');
+(async()=>{const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});try{
+const ctx=await browser.newContext({viewport:{width:390,height:700},isMobile:true,hasTouch:true,deviceScaleFactor:1});const page=await ctx.newPage();let actions=[];
+await page.route('**/*',route=>{const u=route.request().url();if(u==='https://manga-home.invalid/')return route.fulfill({contentType:'text/html',body:fs.readFileSync(path.join(root,'app/src/main/assets/browser_home.html'),'utf8')});actions.push(u);return route.fulfill({status:204,body:''});});
+await page.goto('https://manga-home.invalid/');
+const tiles=['Google','维基百科','漫画书架这是一个非常非常长的网站名称请不要撑开卡片','技术文档','新闻网站','我的收藏站','旅行笔记','<b>测试名称</b>'].map((title,i)=>({key:'site'+i+'.example',title,url:'https://site'+i+'.example/',pinned:i===0}));
+await page.evaluate(items=>updateSites(items),tiles);await page.waitForTimeout(650);let checks=0;const check=(ok,msg)=>{assert(ok,msg);checks++};
+check(await page.locator('#sites [data-site]').count()===8,'eight distinct sites');check(await page.locator('#sites').evaluate(e=>e.scrollWidth>e.clientWidth),'horizontal overflow');check(await page.locator('#sites b').count()===0,'names rendered as text');check(await page.locator('#sites [data-site]').nth(2).evaluate(e=>{const t=e.lastElementChild,s=getComputedStyle(t);return e.clientWidth===64&&t.scrollWidth>t.clientWidth&&s.textOverflow==='ellipsis'&&s.whiteSpace==='nowrap'&&t.clientHeight===18}),'long site title stays one line with ellipsis');check((await page.locator('#sites').boundingBox()).height<=90,'compact shortcut row');
+const box=await page.locator('#sites').boundingBox(),y=box.y+box.height/2,cdp=await ctx.newCDPSession(page);
+await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:340,y}]});for(let x=300;x>=60;x-=30)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x,y}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await page.waitForTimeout(700);
+check(await page.locator('#sites').evaluate(e=>e.scrollLeft>0),'touch drag scrolls');check(actions.length===0,'drag neither opens nor edits');
+await page.locator('#sites').evaluate(e=>e.scrollLeft=0);await page.waitForTimeout(150);
+const first=await page.locator('#sites [data-site]').first().boundingBox();await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:first.x+30,y:first.y+25}]});await page.waitForTimeout(650);await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await page.waitForTimeout(150);
+check(actions.filter(a=>a.includes('/shortcut-edit?site=site0.example')).length===1,'long press edits exactly once');check(!actions.some(a=>a.startsWith('https://site0.example')),'long press does not navigate website');
+await page.waitForTimeout(850);await page.locator('#sites [data-site]').first().tap();await page.waitForTimeout(100);check(actions.some(a=>a==='https://site0.example/'),'tap opens site');
+await page.locator('#sites').evaluate(e=>e.scrollLeft=e.scrollWidth);await page.waitForTimeout(150);await page.locator('a[href="https://manga-home.invalid/shortcut-add"]').tap();await page.waitForTimeout(100);check(actions.some(a=>a.endsWith('/shortcut-add')),'add entry works');
+for(const width of [320,390]){await page.setViewportSize({width,height:700});await page.locator('#sites').evaluate(e=>e.scrollLeft=0);await page.waitForTimeout(150);check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'page fits '+width);await page.screenshot({path:path.join(out,'常用网站-'+width+'.png'),fullPage:true});}
+fs.writeFileSync(path.join(out,'主页交互检查.json'),JSON.stringify({checks,scope:'Desktop Chromium mobile viewport and touch. Native dialogs unverified.'},null,2));console.log('PASS '+checks+' homepage touch/layout checks');
+}finally{await browser.close();}})().catch(e=>{console.error(e);process.exit(1)});
+

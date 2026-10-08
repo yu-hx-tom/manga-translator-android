@@ -1,0 +1,10 @@
+{
+  "androidRuntimeVerified": false,
+  "passed": true,
+  "suites": [
+    "Release116Checks",
+    "Storage115Checks",
+    "Storage112Checks",
+    "ApiPresetChecks"
+  ]
+}

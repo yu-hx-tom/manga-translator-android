@@ -1,0 +1,20 @@
+漫画翻译助手 1.0.0（versionCode 26）
+
+安装：使用“交付/漫画翻译助手-1.0.0.apk”覆盖安装。包名及调试签名与 0.9.6 相同，保留应用数据；不要先卸载。测试 APK 仅供开发测试，无需日常安装。
+
+更新：在 0.9.6 基础上新增汉化工作台（逐页逐段改字、调字号、横竖排、颜色、隐藏、撤销重做、已校对标记、查找替换）与导出（新建/已有文件夹、ZIP、CBZ、相册，可附翻译稿）；新增各入口；设置页按使用顺序重排并加入未保存提示；浏览器菜单分组。翻译时只额外保存可编辑草稿（文件改名 + 小 JSON），翻译速度与译图效果不变。详见“交付/更新说明.txt”和“使用说明.md”。
+
+验证：离线构建两份 APK 成功，签名与 0.9.6 一致；主机检查 585 项（调用 287 + 算法 298）全部通过，数量与 0.9.6 一致。新增设备端 WorkbenchChecks 已编译、未运行（无设备）。
+限制：没有连接安卓设备，未验证真机 UI、工作台交互速度、导出到不同存储位置及草稿重排的逐像素等价。
+
+完整项目：包含全部应用源码、Android 测试源码、离线模型资源、Gradle 配置和主机检查脚本。0.9.6 项目目录保持不变。
+本机构建（PowerShell，在此目录执行）：
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\构建.ps1
+主机检查：
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\验证当前调用.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\验证算法.ps1
+设备检查（连接手机后）：
+adb shell am instrument -w -e suite workbench cn.local.manga.test/cn.local.manga.ChecksInstrumentation
+
+工具链：复用 D:\claude-code-space\.toolchains\android（JDK 17、Gradle 9.4.1、SDK 36、Build Tools 36.0.0），构建脚本调用 D:\codex-home\skills\android-dev\scripts\android.ps1。
+覆盖安装签名依赖本机已有 C:\Users\Administrator\.android\debug.keystore。

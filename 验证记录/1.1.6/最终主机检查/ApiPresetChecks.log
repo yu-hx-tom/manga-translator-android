@@ -1,0 +1,1 @@
+ApiPresetChecks: 182 checks passed (production CRUD/AES-GCM; atomic SharedPreferences adapter, no Android Keystore or UI runtime)

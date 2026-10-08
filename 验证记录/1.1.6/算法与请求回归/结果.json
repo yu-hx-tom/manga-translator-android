@@ -1,0 +1,14 @@
+{
+  "evidence": "Host synthetic fixtures with actual release classes; Android UI/Bitmap/ONNX runtime NOT verified",
+  "passed": true,
+  "checks": {
+    "PerformanceDiagnosticsHostChecks": 10,
+    "PartialRetryChecks": 34,
+    "RenderedPageCacheChecks": 11,
+    "CleanupPlanChecks": 79,
+    "CropTextLayoutChecks": 248,
+    "LocalOverlayChecks": 8,
+    "TargetedBubbleChecks": 208
+  },
+  "total": 598.0
+}

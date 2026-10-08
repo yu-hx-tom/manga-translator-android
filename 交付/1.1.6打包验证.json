@@ -1,0 +1,18 @@
+{
+  "bytes": 32302337,
+  "debuggable": false,
+  "versionCode": 45,
+  "abi": "arm64-v8a",
+  "verifiedUtc": "2026-10-08T03:26:29.7760164Z",
+  "minSdk": 29,
+  "models": [
+    "assets/detector.onnx"
+  ],
+  "sha256": "24525d85a9bee84ad96747e19a7a98a64907df518d1437bf274d703a3c92d3c1",
+  "package": "cn.local.manga",
+  "certificateSha256": "e61c186c4c5ea35320d6fa07fea40e26fe409cc5a0662aef752e318d8f27fe60",
+  "signatureVerified": true,
+  "deviceVerified": false,
+  "targetSdk": 35,
+  "versionName": "1.1.6"
+}

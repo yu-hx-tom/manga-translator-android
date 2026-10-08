@@ -1,0 +1,10 @@
+# 历史导入保留原始字节：已核实存在 LF、CRLF 和混合换行。
+# -text 仅关闭换行转换，文本 diff 仍可用；不把历史快照改写成统一换行。
+* -text
+*.onnx binary
+*.jar binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.zip binary

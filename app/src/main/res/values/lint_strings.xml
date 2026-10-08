@@ -1,0 +1,30 @@
+<resources>
+    <string name="browser_activity_message_1">启动失败：%1$s</string>
+    <string name="browser_activity_message_2">已处理 %1$d 张 · 部分未完成 %2$d 张 · 请求中 %3$d 张 · 待翻译 %4$d 张 · 处理中 %5$d 张\n前方就绪 %6$d 张 · %7$s%8$s%9$s%10$s</string>
+    <string name="browser_activity_message_3">找到 %1$d 张已翻译图片%2$s</string>
+    <string name="browser_activity_message_4">无法收集本章图片：%1$s</string>
+    <string name="browser_activity_message_5">选择漫画图片后翻译；会调用当前配置的接口。%1$s%2$s</string>
+    <string name="export_flow_message_6">%1$d 页 · %2$s（粗略估计）</string>
+    <string name="export_flow_message_7">质量：%1$d</string>
+    <string name="library_activity_message_8">%1$s\n%2$s</string>
+    <string name="local_folder_activity_message_9">共 %1$d 页 · 已完成 %2$d%3$s</string>
+    <string name="local_folder_activity_message_10">%1$d · %2$s</string>
+    <string name="local_reader_activity_message_11">%1$d / %2$d</string>
+    <string name="main_activity_message_12">已载入 %1$d × %2$d 像素 · 双指缩放查看</string>
+    <string name="page_grid_message_13">第 %1$d 页</string>
+    <string name="project_launcher_message_14">正在保存页面副本 %1$d / %2$d…</string>
+    <string name="project_reader_activity_message_15">%1$d / %2$d</string>
+    <string name="project_reader_activity_message_16">%1$d 页 · 已翻 %2$d</string>
+    <string name="project_reader_activity_message_17">%1$s · 图片读取失败</string>
+    <string name="settings_activity_message_18">%1$s并发 %2$s · 超时 %3$s 秒 · 重试 %4$d 次 · 提示词</string>
+    <string name="settings_activity_message_19">可管理缓存 %1$s · 汉化工程 %2$s（单独保留，不随缓存删除；网页资源缓存由浏览器管理）</string>
+    <string name="settings_activity_message_23">已读取 %1$d 个可访问模型。请分别选择文字、图像模型，再保存；当前选择未自动更换。</string>
+    <string name="settings_activity_message_24">%1$s\n原模型设置未改变。</string>
+    <string name="shell_activity_message_25">%1$s%2$s</string>
+    <string name="style_panel_message_26">每次移动 10px</string>
+    <string name="transcript_dialog_message_27">原文是模型识读结果，可能有误。查看或复制不会请求翻译。\n段落位置对应处理时的原图。%1$s</string>
+    <string name="transcript_dialog_message_28">%1$d / %2$d · 共%3$d段</string>
+    <string name="workbench_activity_message_29">%1$d/%2$d</string>
+    <string name="workbench_activity_message_30">字号 %1$d</string>
+    <string name="workbench_activity_message_31">本页 %1$d 段%2$s</string>
+</resources>

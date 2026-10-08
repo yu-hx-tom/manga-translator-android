@@ -1,0 +1,21 @@
+.gradle/
+**/build/
+local.properties
+*.jks
+
+# 工程规范化：中间产物不进入历史
+*.apk
+*.aab
+*.keystore
+*.class
+*.pyc
+*.idx
+*.db
+*.db-wal
+*.db-shm
+__pycache__/
+**/classes/
+**/classes-*/
+hs_err_pid*.log
+replay_pid*.log
+
