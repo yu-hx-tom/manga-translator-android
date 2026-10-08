@@ -6,6 +6,10 @@ function Invoke-RepositoryGit {
     if($LASTEXITCODE -ne 0){throw 'Git 查询失败'}
     return $value
 }
+# 检查先于 dirty 门禁，以便指出具体排版问题。
+$formatClock=[Diagnostics.Stopwatch]::StartNew()
+& (Join-Path $project '工具/格式化.ps1') -Check
+$formatClock.Stop()
 $commit=Invoke-RepositoryGit @('rev-parse','HEAD')
 $state=@(Invoke-RepositoryGit @('status','--porcelain','--untracked-files=all'))
 $dirty=$state.Count -gt 0
@@ -17,7 +21,7 @@ if($gradle -notmatch "versionName\s+'([^']+)'"){throw '版本名缺失'}
 $versionName=$Matches[1]
 if($gradle -notmatch 'versionCode\s+(\d+)'){throw '版本码缺失'}
 $versionCode=[int]$Matches[1]
-$record=[ordered]@{commit=$commit;dirty=$dirty;allowDirty=[bool]$AllowDirty;deliverable=(!$dirty -and !$AllowDirty);status='running';versionName=$versionName;versionCode=$versionCode;startedUtc=(Get-Date).ToUniversalTime().ToString('o');workingTree=$state;sourceHashes=@{}}
+$record=[ordered]@{commit=$commit;dirty=$dirty;allowDirty=[bool]$AllowDirty;deliverable=(!$dirty -and !$AllowDirty);status='running';formatCheckSeconds=$formatClock.Elapsed.TotalSeconds;versionName=$versionName;versionCode=$versionCode;startedUtc=(Get-Date).ToUniversalTime().ToString('o');workingTree=$state;sourceHashes=@{}}
 $tracked=@(Invoke-RepositoryGit @('ls-files'))
 foreach($file in $tracked){$path=Join-Path $project $file;if(Test-Path -LiteralPath $path -PathType Leaf){$record.sourceHashes[$file]=(Get-FileHash -LiteralPath $path).Hash.ToLowerInvariant()}}
 $recordPath=Join-Path $dir '构建.json'
