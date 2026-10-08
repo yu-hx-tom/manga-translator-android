@@ -1,0 +1,7 @@
+E:\codexwork\漫画翻译助手\tests\RtDetrSessionChecks.java:12: 警告: Unsafe是内部专用 API, 可能会在未来发行版中删除
+    static TranslationEngine engine()throws Exception{Field f=sun.misc.Unsafe.class.getDeclaredField("theUnsafe");f.setAccessible(true);return(TranslationEngine)((sun.misc.Unsafe)f.get(null)).allocateInstance(TranslationEngine.class);}
+                                                                      ^
+E:\codexwork\漫画翻译助手\tests\RtDetrSessionChecks.java:12: 警告: Unsafe是内部专用 API, 可能会在未来发行版中删除
+    static TranslationEngine engine()throws Exception{Field f=sun.misc.Unsafe.class.getDeclaredField("theUnsafe");f.setAccessible(true);return(TranslationEngine)((sun.misc.Unsafe)f.get(null)).allocateInstance(TranslationEngine.class);}
+                                                                                                                                                                           ^
+2 个警告

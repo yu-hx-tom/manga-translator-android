@@ -1,0 +1,6 @@
+Java 格式检查通过：237 个文件，3.13 秒
+Exception: E:\codexwork\漫画翻译助手\构建.ps1:16
+Line |
+  16 |  … y -and -not $AllowDirty){throw '交付构建要求工作区干净，请先提交；开发验证使用 -AllowDirty'}
+     |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | 交付构建要求工作区干净，请先提交；开发验证使用 -AllowDirty

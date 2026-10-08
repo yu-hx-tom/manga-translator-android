@@ -1,0 +1,14 @@
+{
+  "versionName": "1.1.7",
+  "versionCode": 46,
+  "package": "cn.local.manga",
+  "sha256": "22af5fb24f9e1cbc8780eb55fb0856a7e9ee45b0dd82d2efbaf3e31ac46f37b5",
+  "bytes": 32318721,
+  "certificateSha256": "e61c186c4c5ea35320d6fa07fea40e26fe409cc5a0662aef752e318d8f27fe60",
+  "signatureVerified": true,
+  "commit": "e6f7cc19da5f1fb054049f2924a42b4ea19cb297",
+  "dirty": false,
+  "allowDirty": false,
+  "deliverable": true,
+  "buildRecord": "E:\\codexwork\\漫画翻译助手\\build\\构建记录\\20261008-024715-dc9f0661\\构建.json"
+}

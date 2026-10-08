@@ -1,0 +1,14 @@
+{
+  "beforeClasses": 707,
+  "afterClasses": 707,
+  "added": [],
+  "removed": [],
+  "different": [],
+  "identicalClasses": 707,
+  "javapIdentical": true,
+  "ignoredAttributes": [
+    "Code.LineNumberTable"
+  ],
+  "preserved": "All remaining bytes including constant pool, annotations, access flags, bootstrap methods, exception tables and local-variable metadata",
+  "passed": true
+}

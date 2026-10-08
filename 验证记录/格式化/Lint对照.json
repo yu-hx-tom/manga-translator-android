@@ -1,0 +1,30 @@
+{
+  "基线1.1.7": {
+    "release": [
+      {
+        "id": "SetWorldWritable",
+        "severity": "Warning"
+      }
+    ],
+    "debug": [
+      {
+        "id": "SetWorldWritable",
+        "severity": "Warning"
+      }
+    ]
+  },
+  "格式化后": {
+    "release": [
+      {
+        "id": "SetWorldWritable",
+        "severity": "Warning"
+      }
+    ],
+    "debug": [
+      {
+        "id": "SetWorldWritable",
+        "severity": "Warning"
+      }
+    ]
+  }
+}

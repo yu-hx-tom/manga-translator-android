@@ -1,0 +1,40 @@
+**********************
+PowerShell transcript start
+Start time: 20261008024716
+Username: PC-20220617PYMJ\Administrator
+RunAs User: PC-20220617PYMJ\Administrator
+Configuration Name: 
+Machine: PC-20220617PYMJ (Microsoft Windows NT 10.0.19044.0)
+Host Application: C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+@'
+from pathlib import Path
+import re,json
+r=Path('E:/codexwork/漫画翻译助手');external=[]
+for p in (r/'tests').rglob('*'):
+ if p.suffix not in {'.ps1','.py','.cjs'}:continue
+ for n,line in enumerate(p.read_text(encoding='utf-8-sig').splitlines(),1):
+  for m in re.findall(r'''(?<![A-Za-z])[A-Za-z]:[/\\][^'"\r\n;]+''',line):
+   external.append({'file':p.relative_to(r).as_posix(),'line':n,'reference':m,'existsLiteral':Path(m).exists() if not any(c in m for c in '*$<>') else None})
+(r/'验证记录/格式化/脚本外部依赖.json').write_text(json.dumps(external,ensure_ascii=False,indent=2),encoding='utf-8')
+print('EXTERNAL_PATH_REFS',len(external),'MISSING_LITERAL',sum(x['existsLiteral'] is False for x in external))
+'@ | py -3 -
+git -C 'E:\codexwork\漫画翻译助手' add -- 工具/格式化.ps1 工具/格式化工具说明.md 验证记录/格式化/脚本外部依赖.json
+git -C 'E:\codexwork\漫画翻译助手' commit -m '构建：确认格式化输出稳定并核准外部依赖清单'
+& 'E:\codexwork\漫画翻译助手\构建.ps1' *> 'E:\codexwork\漫画翻译_工程规范化工作\delivery-build.log'
+Process ID: 4484
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.19044
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+构建提交：e6f7cc19da5f1fb054049f2924a42b4ea19cb297；dirty=False；AllowDirty=False
+打包来源验证通过：1.1.7 / 46 / e6f7cc19da5f1fb054049f2924a42b4ea19cb297，可交付=True
+**********************
+PowerShell transcript end
+End time: 20261008024725
+**********************

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 9.2.0">
+
+    <issue
+        id="SetWorldWritable"
+        severity="Warning"
+        message="Setting file permissions to world-writable can be risky, review carefully"
+        category="Security"
+        priority="6"
+        summary="`File.setWritable()` used to make file world-writable"
+        explanation="Setting files world-writable is very dangerous, and likely to cause security holes in applications. It is strongly discouraged; instead, applications should use more formal mechanisms for interactions such as `ContentProvider`, `BroadcastReceiver`, and `Service`."
+        url="https://goo.gle/SetWorldWritable"
+        urls="https://goo.gle/SetWorldWritable"
+        errorLine1="            File file=file(hash);long bytes=file.length();if(file.exists())file.setWritable(true,false);if(!file.exists()||file.delete()){if(file.getParentFile().isDirectory())StorageFiles.syncDirectory(file.getParentFile());store.db.execSQL(&quot;DELETE FROM blob_gc WHERE hash=?&quot;,new Object[]{hash});freed+=bytes;}}"
+        errorLine2="                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="E:\codexwork\漫画翻译助手_1.1.7_完整项目\app\src\main\java\cn\local\manga\BlobStore.java"
+            line="88"
+            column="76"/>
+    </issue>
+
+</issues>

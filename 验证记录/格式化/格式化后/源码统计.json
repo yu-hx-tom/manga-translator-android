@@ -1,0 +1,2221 @@
+{
+  "app/src/main/java": {
+    "counts": {
+      "files": 101,
+      "lines": 37635,
+      "over100": 128,
+      "over120": 37,
+      "over200": 1,
+      "over300": 0
+    },
+    "longest": {
+      "file": "app/src/main/java/cn/local/manga/AppSettings.java",
+      "line": 29,
+      "length": 201,
+      "text": "            \"将输入漫画裁切中的文字替换成自然简洁的简体中文。自行判断原文语言和阅读顺序，完整理解同一段的文字，再在原文字位置嵌入中文。只去除原文字笔画及其注音；白底气泡直接沿用原白底，禁止修复或重画整个气泡。文字在画面上时，只补全原字笔画遮挡的小块背景，不重画人物、线条、网点或边框。不加矩形底板、不扩图、不裁图，严格保持原画面比例和位置。返回完整的同一张裁切译图，不要多张图或解释。\";"
+    },
+    "longLines": [
+      {
+        "file": "app/src/main/java/cn/local/manga/AppSettings.java",
+        "line": 26,
+        "length": 136,
+        "text": "            \"将图片中的文字翻译成自然、简洁的简体中文，适合原位置嵌字。自行判断原文语言和阅读顺序，完整理解每个裁切中的一段文字；注音只辅助阅读，不重复翻译。正文、旁白和拟声词均可翻译，保持人名一致。不根据画面猜剧情或编造原文；非文字、页码或确实看不清时标记\""
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/AppSettings.java",
+        "line": 29,
+        "length": 201,
+        "text": "            \"将输入漫画裁切中的文字替换成自然简洁的简体中文。自行判断原文语言和阅读顺序，完整理解同一段的文字，再在原文字位置嵌入中文。只去除原文字笔画及其注音；白底气泡直接沿用原白底，禁止修复或重画整个气泡。文字在画面上时，只补全原字笔画遮挡的小块背景，不重画人物、线条、网点或边框。不加矩形底板、不扩图、不裁图，严格保持原画面比例和位置。返回完整的同一张裁切译图，不要多张图或解释。\";"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/AppSettings.java",
+        "line": 52,
+        "length": 149,
+        "text": "        return \"你是漫画日译中译者。将裁切中的日文翻译成自然、简洁的简体中文，适合原位置嵌字。保持人名统一，竖排按从右到左阅读。每个裁切已经是一段文字，不能把一句话分成多个返回项。正文、旁白和拟声词均可翻译；页码、背景线条、注音重复或无法辨认的内容标记 skip。禁止凭画面编造。\""
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/AppSettings.java",
+        "line": 54,
+        "length": 167,
+        "text": "                        || \"将日文漫画文字译成简洁自然的简体中文，适合原位置嵌字。先看清全部原字；竖排从右到左阅读，小假名注音只辅助阅读，不重复翻译。每个裁切是一段，完整翻译正文、旁白或拟声词，保持人名一致。不要根据人物画面猜剧情或编造原文；非文字、页码或确实看不清时标记 skip。只给译文，不附解释。\""
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/AppSettings.java",
+        "line": 61,
+        "length": 190,
+        "text": "        return \"将输入漫画裁切中的日文替换成自然简洁的简体中文。先完整理解同一段的文字，再在原文字位置嵌入中文。只去除原文字笔画及其注音；白底气泡直接沿用原白底，禁止修复或重画整个气泡。文字在画面上时，只补全原字笔画遮挡的小块背景，不重画人物、线条、网点或边框。不加矩形底板、不扩图、不裁图，严格保持原画面比例和位置。返回完整的同一张裁切译图，不要多张图或解释。\""
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 1919,
+        "length": 128,
+        "text": "                                                                    + \"重新翻译会将这一页加入当前请求队列，跳过旧译文缓存；其他页面继续处理。补试复用已有有效译文，只请求缺失部分。\\n\""
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 1983,
+        "length": 128,
+        "text": "                    \"window.__mangaBrowserV1&&window.__mangaBrowserV1.setRequestState&&window.__mangaBrowserV1.setRequestState(\""
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2506,
+        "length": 122,
+        "text": "                                                                                                                out.image,"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2507,
+        "length": 122,
+        "text": "                                                                                                                \"漫画网页译图\");"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2511,
+        "length": 125,
+        "text": "                                                                                                                        Toast"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2512,
+        "length": 138,
+        "text": "                                                                                                                                .makeText("
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2513,
+        "length": 141,
+        "text": "                                                                                                                                        this,"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2514,
+        "length": 145,
+        "text": "                                                                                                                                        \"已保存到相册\","
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2515,
+        "length": 141,
+        "text": "                                                                                                                                        Toast"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2516,
+        "length": 158,
+        "text": "                                                                                                                                                .LENGTH_SHORT)"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2517,
+        "length": 137,
+        "text": "                                                                                                                                .show());"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2524,
+        "length": 125,
+        "text": "                                                                                                                        Toast"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2525,
+        "length": 138,
+        "text": "                                                                                                                                .makeText("
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2526,
+        "length": 141,
+        "text": "                                                                                                                                        this,"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2527,
+        "length": 143,
+        "text": "                                                                                                                                        \"保存失败\","
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2528,
+        "length": 141,
+        "text": "                                                                                                                                        Toast"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2529,
+        "length": 158,
+        "text": "                                                                                                                                                .LENGTH_SHORT)"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2530,
+        "length": 137,
+        "text": "                                                                                                                                .show());"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/BrowserActivity.java",
+        "line": 2632,
+        "length": 136,
+        "text": "                    \"window.__mangaBrowserV1&&window.__mangaBrowserV1.clearRequestStates&&window.__mangaBrowserV1.clearRequestStates()\","
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/DatabaseLibrary.java",
+        "line": 191,
+        "length": 124,
+        "text": "                            + \" history_entry(url,title,bookmark_title,visited_at,bookmarked_at,visits,position,extra_json)\""
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/PerformanceDiagnostics.java",
+        "line": 642,
+        "length": 169,
+        "text": "                                        \"(?:pool-.*|manga-.*|project-.*|local-.*|browser-.*|api-.*|image-.*|translation-.*|page-draft-.*|comic-.*|export-.*|rtdetr-.*)\"))"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/ProjectLauncher.java",
+        "line": 203,
+        "length": 129,
+        "text": "                                                                                                    .project_launcher_message_14,"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/ProjectListActivity.java",
+        "line": 352,
+        "length": 126,
+        "text": "                                                                                                                .getMessage(),"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/StorageTools.java",
+        "line": 165,
+        "length": 149,
+        "text": "                                                                                                                            .getApplicationContext(),"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/StorageTools.java",
+        "line": 166,
+        "length": 122,
+        "text": "                                                                                                                    names["
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/StorageTools.java",
+        "line": 167,
+        "length": 132,
+        "text": "                                                                                                                            index]);"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/StorageTools.java",
+        "line": 168,
+        "length": 135,
+        "text": "                                                                                                    return \"数据库已恢复。请重新打开相关页面；原数据库已保留。\";"
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/StorageTools.java",
+        "line": 222,
+        "length": 124,
+        "text": "                                                            \"可再生缓存清理包含旧版的图片、译文和检测缓存。工程、收藏历史、授权和本地输出不在此清理。旧格式且迁移失败的会话继续保留。\\n\""
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/StorageTools.java",
+        "line": 261,
+        "length": 127,
+        "text": "                                                                                                    ? \"清理会话后，未导入工程的会话将无法再导入。\\n\""
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/StorageTools.java",
+        "line": 264,
+        "length": 128,
+        "text": "                                                                                                    ? \"只删除已逐项核对通过、之后没有变化的旧数据。\\n\""
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/TranslationEngine.java",
+        "line": 604,
+        "length": 184,
+        "text": "                                                + \" Markdown：{\\\"translations\\\":[{\\\"id\\\":\\\"给定编号\\\",\\\"originalText\\\":\\\"按原语言和阅读顺序逐字识读的正文\\\",\\\"zh\\\":\\\"完整中文译文\\\",\\\"skip\\\":false}]}。originalText\""
+      },
+      {
+        "file": "app/src/main/java/cn/local/manga/WebPageBridge.java",
+        "line": 304,
+        "length": 125,
+        "text": "                                                    ? \"if(window.__mangaBrowserV1)window.__mangaBrowserV1.cancelReplacement(\""
+      }
+    ]
+  },
+  "app/src/androidTest/java": {
+    "counts": {
+      "files": 11,
+      "lines": 2004,
+      "over100": 0,
+      "over120": 0,
+      "over200": 0,
+      "over300": 0
+    },
+    "longest": {
+      "file": "app/src/androidTest/java/cn/local/manga/ChecksInstrumentation.java",
+      "line": 7,
+      "length": 100,
+      "text": "/** Run with: adb shell am instrument -w cn.local.manga.test/cn.local.manga.ChecksInstrumentation */"
+    },
+    "longLines": []
+  },
+  "tests": {
+    "counts": {
+      "files": 132,
+      "lines": 27088,
+      "over100": 457,
+      "over120": 324,
+      "over200": 110,
+      "over300": 26
+    },
+    "longest": {
+      "file": "tests/V090PlainRenderingChecks.java",
+      "line": 42,
+      "length": 656,
+      "text": "                    for(int i=0;i<plan.cells.length;i++){int[] cell=plan.cells[i];String glyph=new String(Character.toChars(plan.codepoints[i]));Font selected=primary.canDisplay(plan.codepoints[i])?primary:symbols;if(!selected.canDisplay(plan.codepoints[i]))throw new AssertionError(\"Desktop preview font missing U+\"+Integer.toHexString(plan.codepoints[i]));g.setFont(selected);FontMetrics metrics=g.getFontMetrics();Shape clip=g.getClip();g.clipRect(cell[0],cell[1],cell[2]-cell[0],cell[3]-cell[1]);g.drawString(glyph,(cell[0]+cell[2]-metrics.stringWidth(glyph))/2,(cell[1]+cell[3]-metrics.getHeight())/2+metrics.getAscent());g.setClip(clip);}g.dispose();"
+    },
+    "longLines": [
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 15,
+        "length": 123,
+        "text": "    static JSONObject read(Path p)throws Exception{return new JSONObject(Files.readString(p).replaceFirst(\"^\\\\ufeff\",\"\"));}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 17,
+        "length": 136,
+        "text": "    static int[][] boxes(JSONArray a){int[][] r=new int[a.length()][];for(int i=0;i<r.length;i++)r[i]=ints(a.getJSONArray(i));return r;}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 18,
+        "length": 147,
+        "text": "    static String sha(Path p)throws Exception{return HexFormat.of().formatHex(MessageDigest.getInstance(\"SHA-256\").digest(Files.readAllBytes(p)));}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 19,
+        "length": 153,
+        "text": "    static BufferedImage image(int[] p,int w,int h){BufferedImage b=new BufferedImage(w,h,BufferedImage.TYPE_INT_ARGB);b.setRGB(0,0,w,h,p,0,w);return b;}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 20,
+        "length": 150,
+        "text": "    static BufferedImage copy(BufferedImage b){return image(b.getRGB(0,0,b.getWidth(),b.getHeight(),null,0,b.getWidth()),b.getWidth(),b.getHeight());}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 22,
+        "length": 190,
+        "text": "        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 23,
+        "length": 145,
+        "text": "        Font primary=new Font(\"Microsoft YaHei\",Font.PLAIN,1).deriveFont(size),symbols=new Font(\"Segoe UI Symbol\",Font.PLAIN,1).deriveFont(size);"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 24,
+        "length": 389,
+        "text": "        for(int i=0;i<points.length;i++){Graphics2D cell=(Graphics2D)g.create();Font font=primary.canDisplay(points[i])?primary:symbols;if(!font.canDisplay(points[i]))throw new AssertionError(\"Missing preview glyph U+\"+Integer.toHexString(points[i]));cell.setFont(font);FontMetrics fm=cell.getFontMetrics();float x=cells[i][0],y=cells[i][1];cell.clip(new Rectangle2D.Float(x,y,step,step));"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 25,
+        "length": 189,
+        "text": "            String glyph=new String(Character.toChars(points[i]));float scale=outlined?Math.min(1f,step*.78f/Math.max(1f,Math.max(fm.stringWidth(glyph),fm.getAscent()+fm.getDescent()))):1f;"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 26,
+        "length": 121,
+        "text": "            cell.translate(x+step/2,y+step/2);cell.scale(scale,scale);float baseline=(fm.getAscent()-fm.getDescent())/2f;"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 27,
+        "length": 141,
+        "text": "            Shape outline=cell.getFont().createGlyphVector(cell.getFontRenderContext(),glyph).getOutline(-fm.stringWidth(glyph)/2f,baseline);"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 28,
+        "length": 174,
+        "text": "            if(outlined){cell.setColor(Color.WHITE);cell.setStroke(new BasicStroke(Math.max(.1f,size*.14f),BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND));cell.draw(outline);}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 31,
+        "length": 172,
+        "text": "    static float[][] cells(BubbleLayout.Plan p){float[][] r=new float[p.cells.length][2];for(int i=0;i<r.length;i++){r[i][0]=p.cells[i][0];r[i][1]=p.cells[i][1];}return r;}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 32,
+        "length": 178,
+        "text": "    static float[][] cells(BeforeBubbleLayout.Plan p){float[][] r=new float[p.cells.length][2];for(int i=0;i<r.length;i++){r[i][0]=p.cells[i][0];r[i][1]=p.cells[i][1];}return r;}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 33,
+        "length": 176,
+        "text": "    static float[][] cells(NearbyTextLayout.Plan p){float[][] r=new float[p.points.length][2];for(int i=0;i<r.length;i++){r[i][0]=p.cellLeft(i);r[i][1]=p.cellTop(i);}return r;}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 34,
+        "length": 182,
+        "text": "    static float[][] cells(BeforeNearbyTextLayout.Plan p){float[][] r=new float[p.points.length][2];for(int i=0;i<r.length;i++){r[i][0]=p.cellLeft(i);r[i][1]=p.cellTop(i);}return r;}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 35,
+        "length": 225,
+        "text": "    static void drawMixed(Graphics2D g,NearbyTextLayout.Plan p,Color color){for(int i=0;i<p.points.length;i++)draw(g,p.cellFont(i),p.cellStep(i),new int[]{p.points[i]},new float[][]{{p.cellLeft(i),p.cellTop(i)}},true,color);}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 37,
+        "length": 285,
+        "text": "        for(int i=0;i<p.codepoints.length;i++){float size=p.cellFont(i);int[] c=p.cells[i];Font primary=new Font(\"Microsoft YaHei\",Font.PLAIN,1).deriveFont(size),symbols=new Font(\"Segoe UI Symbol\",Font.PLAIN,1).deriveFont(size),font=primary.canDisplay(p.codepoints[i])?primary:symbols;"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 38,
+        "length": 473,
+        "text": "            Graphics2D cell=(Graphics2D)g.create();cell.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);java.awt.font.GlyphVector glyph=font.createGlyphVector(cell.getFontRenderContext(),new String(Character.toChars(p.codepoints[i])));Rectangle2D bounds=glyph.getVisualBounds();float step=p.cellStep(i),scale=(float)Math.min(1,Math.min(Math.max(1,step-2)/Math.max(1,bounds.getWidth()),Math.max(1,step-2)/Math.max(1,bounds.getHeight())));"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 39,
+        "length": 254,
+        "text": "            cell.clipRect(c[0],c[1],c[2]-c[0],c[3]-c[1]);cell.translate((c[0]+c[2])/2.0,(c[1]+c[3])/2.0);cell.scale(scale,scale);cell.translate(-bounds.getCenterX(),-bounds.getCenterY());cell.setColor(color);cell.fill(glyph.getOutline());cell.dispose();}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 41,
+        "length": 226,
+        "text": "    static List<int[]> foreign(JSONObject page,String id,int left,int top){List<int[]> lines=new ArrayList<>();for(Object raw:page.getJSONArray(\"regions\")){JSONObject r=(JSONObject)raw;if(r.getString(\"id\").equals(id))continue;"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 42,
+        "length": 215,
+        "text": "        int[][] bs=r.getJSONArray(\"lines\").isEmpty()?new int[][]{ints(r.getJSONArray(\"box\"))}:boxes(r.getJSONArray(\"lines\"));for(int[] b:bs)lines.add(new int[]{b[0]-left,b[1]-top,b[2]-left,b[3]-top});}return lines;}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 43,
+        "length": 142,
+        "text": "    static void write(Path p,JSONObject value)throws Exception{Files.createDirectories(p.getParent());Files.writeString(p,value.toString(2));}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 46,
+        "length": 206,
+        "text": "        Map<String,JSONObject> manifest=new HashMap<>();for(Object raw:read(source.resolve(\"cleanup_manifest.json\")).getJSONArray(\"regions\")){JSONObject r=(JSONObject)raw;manifest.put(r.getString(\"id\"),r);}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 47,
+        "length": 187,
+        "text": "        Set<String> samples=new LinkedHashSet<>(Arrays.asList(\"P06_rt_1\",\"P07_rt_11\",\"P07_rt_13\",\"P13_rt_8\",\"P14_rt_4\",\"P14_rt_6\",\"P15_rt_4\",\"P15_rt_6\",\"P15_rt_7\",\"P16_rt_2\",\"P16_rt_4\"));"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 49,
+        "length": 160,
+        "text": "        for(Object pageRaw:read(source.resolve(\"translation_plan.json\")).getJSONArray(\"pages\")){JSONObject page=(JSONObject)pageRaw;BufferedImage original=null;"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 50,
+        "length": 248,
+        "text": "            for(Object rowRaw:page.getJSONArray(\"regions\")){JSONObject row=(JSONObject)rowRaw;String id=row.getString(\"id\");if(!samples.contains(id))continue;if(original==null)original=ImageIO.read(Paths.get(page.getString(\"sourcePage\")).toFile());"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 51,
+        "length": 165,
+        "text": "                String text=row.getString(\"zh\");boolean local=row.getString(\"route\").equals(\"local_white\"),red=id.equals(\"P15_rt_7\");JSONObject api=manifest.get(id);"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 52,
+        "length": 134,
+        "text": "                int[] crop=ints((local?row:api).getJSONArray(local?\"renderRoi\":\"sourceCrop\"));int w=crop[2]-crop[0],h=crop[3]-crop[1];"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 54,
+        "length": 193,
+        "text": "                float oldFont,newFont,oldStep,newStep;float[][] oldCells,newCells;int[] points;boolean[] safe=null;NearbyTextLayout.Plan currentNearby=null;BubbleLayout.Plan currentBubble=null;"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 55,
+        "length": 211,
+        "text": "                if(local){int[][] lines=boxes(row.getJSONArray(\"clippedLines\"));int estimate=row.getInt(\"estimate\");BeforeWhiteBubbleCleaner.Mask mask=BeforeWhiteBubbleCleaner.forText(pixels,w,h,lines,estimate);"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 56,
+        "length": 161,
+        "text": "                    int[][] others=foreign(page,id,crop[0],crop[1]).toArray(new int[0][]);safe=BeforeWhiteBubbleCleaner.excludeForeign(mask.interior,w,h,others);"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 57,
+        "length": 126,
+        "text": "                    boolean[] erase=BeforeWhiteBubbleCleaner.excludeForeign(mask.erase,w,h,others);int[] fill=mask.fillColors;"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 58,
+        "length": 279,
+        "text": "                    if(id.startsWith(\"P16_\")){int[] paragraph=ints(row.getJSONArray(\"box\"));paragraph[0]-=crop[0];paragraph[2]-=crop[0];paragraph[1]-=crop[1];paragraph[3]-=crop[1];WhiteBubbleCleaner.Mask production=WhiteBubbleCleaner.forText(pixels,w,h,lines,estimate,paragraph);"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 59,
+        "length": 192,
+        "text": "                        safe=WhiteBubbleCleaner.excludeForeign(production.interior,w,h,others);erase=WhiteBubbleCleaner.excludeForeign(production.erase,w,h,others);fill=production.fillColors;}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 60,
+        "length": 152,
+        "text": "                    int[] clean=pixels.clone();for(int p=0;p<clean.length;p++)if(erase[p])clean[p]=fill==null?0xffffffff:fill[p];basis=image(clean,w,h);"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 61,
+        "length": 230,
+        "text": "                    BeforeBubbleLayout.Plan old=BeforeBubbleLayout.plan(text,safe,w,h,row.getBoolean(\"vertical\"),estimate,lines);BubbleLayout.Plan current=BubbleLayout.plan(text,safe,w,h,row.getBoolean(\"vertical\"),estimate,lines);"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 62,
+        "length": 188,
+        "text": "                    currentBubble=current;oldFont=old.font;newFont=current.font;oldStep=old.step;newStep=current.step;oldCells=cells(old);newCells=cells(current);points=current.codepoints;"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 63,
+        "length": 334,
+        "text": "                    if(id.equals(\"P16_rt_4\")){if(points[0]!='啊'||points[1]!='，'||current.cells[0][1]>=133||current.cells[1][1]>=133)throw new AssertionError(id+\" lost opening utterance in upper lobe\");for(int i=2;i<points.length;i++)if(current.cells[i][1]<133)throw new AssertionError(id+\" placed sentence ending above its opening\");}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 64,
+        "length": 337,
+        "text": "                    if(id.equals(\"P16_rt_2\")){boolean lowerStarted=false;for(int[] cell:current.cells){if(cell[1]>=180)lowerStarted=true;else if(lowerStarted)throw new AssertionError(id+\" reversed stacked source groups\");}if(!lowerStarted||current.cells[0][1]>=180)throw new AssertionError(id+\" missing expected stacked reading order\");}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 65,
+        "length": 174,
+        "text": "                    for(int[] c:current.cells)for(int yy=c[1];yy<c[3];yy++)for(int xx=c[0];xx<c[2];xx++)if(!safe[yy*w+xx])throw new AssertionError(id+\" escaped safe bubble\");"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 66,
+        "length": 122,
+        "text": "                }else{basis=red?copy(before):ImageIO.read(source.resolve(\"requests/\"+id+\"/合成审查/生产保护合成_仅去字.png\").toFile());"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 67,
+        "length": 205,
+        "text": "                    BeforeNearbyTextLayout.Plan old=BeforeNearbyTextLayout.forCrop(page.getInt(\"width\"),page.getInt(\"height\"),ints(row.getJSONArray(\"box\")),crop[0],crop[1],row.getBoolean(\"vertical\"),text);"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 68,
+        "length": 230,
+        "text": "                    NearbyTextLayout.Plan current=NearbyTextLayout.forCrop(page.getInt(\"width\"),page.getInt(\"height\"),ints(row.getJSONArray(\"box\")),crop[0],crop[1],row.getBoolean(\"vertical\"),text,boxes(row.getJSONArray(\"lines\")));"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 70,
+        "length": 162,
+        "text": "                    oldFont=old.font;newFont=current.font;oldStep=old.step;newStep=current.step;oldCells=cells(old);newCells=cells(current);points=current.points;"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 71,
+        "length": 294,
+        "text": "                    for(int i=0;i<points.length;i++)if(newCells[i][0]<current.box[0]-.001||newCells[i][1]<current.box[1]-.001||newCells[i][0]+current.cellStep(i)>current.box[2]+.001||newCells[i][1]+current.cellStep(i)>current.box[3]+.001)throw new AssertionError(id+\" escaped original target\");"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 73,
+        "length": 141,
+        "text": "                BufferedImage oldImage=copy(basis),newImage=copy(basis);Graphics2D og=oldImage.createGraphics(),ng=newImage.createGraphics();"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 74,
+        "length": 307,
+        "text": "                if(!local){int[] b=ints(row.getJSONArray(\"box\"));Area clip=new Area(new Rectangle(b[0]-crop[0],b[1]-crop[1],b[2]-b[0],b[3]-b[1]));for(int[] p:boxes(api.getJSONArray(\"protectedBoxes\")))clip.subtract(new Area(new Rectangle(p[0]-2,p[1]-2,p[2]-p[0]+4,p[3]-p[1]+4)));og.clip(clip);ng.clip(clip);}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 75,
+        "length": 266,
+        "text": "                draw(og,oldFont,oldStep,points,oldCells,!local,red?Color.RED:Color.BLACK);if(currentNearby!=null)drawMixed(ng,currentNearby,red?Color.RED:Color.BLACK);else drawMixed(ng,currentBubble,Color.BLACK);og.dispose();ng.dispose();cellsChecked+=points.length;"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 76,
+        "length": 351,
+        "text": "                int outside=0;int[] b=ints(row.getJSONArray(\"box\"));for(int y=0;y<h;y++)for(int x=0;x<w;x++){boolean allowed=local?safe[y*w+x]:x+crop[0]>=b[0]&&x+crop[0]<b[2]&&y+crop[1]>=b[1]&&y+crop[1]<b[3];if(!allowed&&newImage.getRGB(x,y)!=basis.getRGB(x,y))outside++;}if(outside!=0)throw new AssertionError(id+\" changed outside text safety area\");"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 77,
+        "length": 186,
+        "text": "                int viewL=Math.max(0,b[0]-crop[0]-35),viewT=Math.max(0,b[1]-crop[1]-35),viewR=Math.min(w,b[2]-crop[0]+35),viewB=Math.min(h,b[3]-crop[1]+35),vw=viewR-viewL,vh=viewB-viewT;"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 78,
+        "length": 278,
+        "text": "                BufferedImage montage=new BufferedImage(vw*3,Math.max(80,vh+46),BufferedImage.TYPE_INT_RGB);Graphics2D g=montage.createGraphics();g.setColor(Color.WHITE);g.fillRect(0,0,montage.getWidth(),montage.getHeight());g.setFont(new Font(\"Microsoft YaHei\",Font.PLAIN,15));"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 79,
+        "length": 199,
+        "text": "                BufferedImage[] imgs={before,oldImage,newImage};String[] titles={id+\" 原图\",\"原排版 \"+String.format(Locale.ROOT,\"%.1f\",oldFont)+\"px\",\"自适应 \"+String.format(Locale.ROOT,\"%.1f\",newFont)+\"px\"};"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 80,
+        "length": 181,
+        "text": "                for(int i=0;i<3;i++){g.setColor(Color.BLACK);g.drawString(titles[i],i*vw+5,25);g.drawImage(imgs[i],i*vw,46,(i+1)*vw,46+vh,viewL,viewT,viewR,viewB,null);}g.dispose();"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 81,
+        "length": 205,
+        "text": "                Path dir=out.resolve(id);Files.createDirectories(dir);ImageIO.write(montage,\"png\",dir.resolve(\"原图_旧字号_自适应字号.png\").toFile());ImageIO.write(newImage,\"png\",dir.resolve(\"新排版ROI.png\").toFile());"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 82,
+        "length": 581,
+        "text": "                JSONObject entry=new JSONObject().put(\"id\",id).put(\"oldFont\",oldFont).put(\"newFont\",newFont).put(\"sourceEstimate\",row.optInt(\"estimate\")).put(\"characters\",points.length).put(\"cells\",new JSONArray(newCells)).put(\"allCellsSafe\",true).put(\"outsideSafetyChangedPixels\",outside).put(\"color\",red?\"red_fallback\":\"black\").put(\"sameFrozenCleanupBasis\",true).put(\"cleanupSource\",local?\"pre_v092_local_cleanup\":\"v091_actual_api_composite_or_preserved_original\").put(\"comparisonFile\",id+\"/原图_旧字号_自适应字号.png\").put(\"sourcePageSha256\",sha(Paths.get(page.getString(\"sourcePage\"))));"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 84,
+        "length": 223,
+        "text": "                if(currentNearby!=null){JSONArray fonts=new JSONArray();for(int i=0;i<points.length;i++)fonts.put(currentNearby.cellFont(i));entry.put(\"fontsByGlyph\",fonts).put(\"sourceGrouped\",currentNearby.sourceGrouped);}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 85,
+        "length": 261,
+        "text": "                if(currentBubble!=null){JSONArray fonts=new JSONArray(),steps=new JSONArray();for(int i=0;i<points.length;i++){fonts.put(currentBubble.cellFont(i));steps.put(currentBubble.cellStep(i));}entry.put(\"fontsByGlyph\",fonts).put(\"stepsByGlyph\",steps);}"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 89,
+        "length": 285,
+        "text": "        if(rows.length()!=samples.size())throw new AssertionError(\"Missing real feedback sample\");JSONObject hashes=new JSONObject();for(String name:new String[]{\"BubbleLayout\",\"NearbyTextLayout\"})hashes.put(name,sha(project.resolve(\"app/src/main/java/cn/local/manga/\"+name+\".java\")));"
+      },
+      {
+        "file": "tests/AdaptiveTypographyReview.java",
+        "line": 90,
+        "length": 417,
+        "text": "        write(out.resolve(\"真实反馈字体对照.json\"),new JSONObject().put(\"samples\",rows).put(\"sampleCount\",rows.length()).put(\"cellsChecked\",cellsChecked).put(\"allCellsSafe\",true).put(\"networkCalls\",0).put(\"androidCanvasVerified\",false).put(\"productionSourceSha256\",hashes).put(\"scope\",\"Production layout with desktop glyph rendering; identical frozen cleanup basis isolates typography from the separately repaired erasure\"));"
+      },
+      {
+        "file": "tests/BackgroundTextRunner.java",
+        "line": 232,
+        "length": 140,
+        "text": "                        \"(?s).*(content.policy|policy.violation|content.filter|safety.violation|unsupported|not supported|不支持|内容拒绝|违反政策).* \""
+      },
+      {
+        "file": "tests/BaselineMangaReview.java",
+        "line": 326,
+        "length": 239,
+        "text": "                            + \" charset='utf-8'><title>十页真实翻译与透明图层回填</title><style>body{font-family:system-ui;background:#eee}section{display:flex;gap:10px}img{width:32%;object-fit:contain}.checker{background:repeating-conic-gradient(#ddd\""
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 32,
+        "length": 140,
+        "text": "            t=System.nanoTime();result=cache.read(hash,DetectorModels.PP_ID,image.getWidth(),image.getHeight(),()->false);readMs=elapsed(t);"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 35,
+        "length": 148,
+        "text": "                t=System.nanoTime();cache.write(hash,DetectorModels.PP_ID,image.getWidth(),image.getHeight(),result,()->false);writeMs=elapsed(t); }"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 42,
+        "length": 141,
+        "text": "    static void write(BufferedWriter writer,JSONObject row)throws Exception { writer.write(row.toString());writer.newLine();writer.flush(); }"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 46,
+        "length": 151,
+        "text": "        try(var paths=Files.list(input)){pages=paths.filter(Files::isDirectory).filter(p->Files.isRegularFile(p.resolve(\"原图.png\"))).sorted().toList();}"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 48,
+        "length": 166,
+        "text": "        if(limit>0&&limit<pages.size()){List<Path> picked=new ArrayList<>();for(int i=0;i<limit;i++)picked.add(pages.get(i*(pages.size()-1)/(limit-1)));pages=picked;}"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 49,
+        "length": 122,
+        "text": "        JSONObject metadata=new JSONObject().put(\"pages\",pages.size()).put(\"rounds\",rounds).put(\"warmupPagesPerVersion\",3)"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 51,
+        "length": 139,
+        "text": "                .put(\"availableProcessors\",Runtime.getRuntime().availableProcessors()).put(\"maxHeapBytes\",Runtime.getRuntime().maxMemory())"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 52,
+        "length": 264,
+        "text": "                .put(\"scope\",\"Unmodified production Detector.java + real Windows ONNX CPU runtime, 4 intra-op threads; production DetectionCache includes ARGB contentHash. Desktop AWT replaces Android Bitmap/Canvas. No HTTP/API/WebView/end-to-end Android timing.\")"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 53,
+        "length": 138,
+        "text": "                .put(\"diskColdDefinition\",\"New empty application cache directory per page and round. OS filesystem cache is not flushed.\")"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 54,
+        "length": 143,
+        "text": "                .put(\"modelColdDefinition\",\"Model initialization is recorded separately; 3 pages warm up each model before measured samples.\");"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 55,
+        "length": 133,
+        "text": "        long t=System.nanoTime();Detector old=new Detector(new Context(new File(args[2])));metadata.put(\"modelInit072Ms\",elapsed(t));"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 56,
+        "length": 132,
+        "text": "        t=System.nanoTime();Detector current=new Detector(new Context(new File(args[2])));metadata.put(\"modelInit073Ms\",elapsed(t));"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 63,
+        "length": 161,
+        "text": "                Path page=pages.get(index);t=System.nanoTime();Bitmap image=new Bitmap(ImageIO.read(page.resolve(\"原图.png\").toFile()));double decodeMs=elapsed(t);"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 70,
+        "length": 124,
+        "text": "                if(!expected.equals(after.getString(\"resultCanonical\")))throw new AssertionError(\"Detector mismatch \"+page);"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 72,
+        "length": 144,
+        "text": "                    row.remove(\"resultCanonical\");row.put(\"scenario\",\"first_visit\").put(\"round\",round).put(\"page\",page.getFileName().toString())"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 73,
+        "length": 185,
+        "text": "                        .put(\"width\",image.getWidth()).put(\"height\",image.getHeight()).put(\"sourceDecodeMsExcluded\",decodeMs).put(\"newVersionRanFirst\",reverse).put(\"equalRegions\",true);"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 76,
+        "length": 125,
+        "text": "                // The already executed 0.7.2 detector run is also its repeat-visit detector path: it has no detection cache."
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 79,
+        "length": 152,
+        "text": "                    if(!hit.getBoolean(\"cacheHit\")||!expected.equals(hit.getString(\"resultCanonical\")))throw new AssertionError(\"Cache mismatch \"+page);"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 80,
+        "length": 124,
+        "text": "                    hit.remove(\"resultCanonical\");hit.put(\"scenario\",\"repeat_visit\").put(\"round\",round).put(\"repeat\",repeat)"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 81,
+        "length": 169,
+        "text": "                        .put(\"page\",page.getFileName().toString()).put(\"width\",image.getWidth()).put(\"height\",image.getHeight()).put(\"equalRegions\",true);write(raw,hit);"
+      },
+      {
+        "file": "tests/CacheBenchmark.java",
+        "line": 83,
+        "length": 246,
+        "text": "                image.recycle();System.out.println(\"page \"+(++count)+\"/\"+(rounds*pages.size())+\" old=\"+String.format(Locale.ROOT,\"%.1f\",before.getDouble(\"totalMs\"))+\"ms newMiss=\"+String.format(Locale.ROOT,\"%.1f\",after.getDouble(\"totalMs\"))+\"ms\");"
+      },
+      {
+        "file": "tests/CrossRegionChecks.java",
+        "line": 77,
+        "length": 211,
+        "text": "                        + \",\\\"guardRejectedForeignInk\\\":true,\\\"sameRegionAllowed\\\":true,\\\"guardRejectedForeignLayout\\\":true,\\\"guardsAreNonMutating\\\":true,\\\"previousSuccessProtected\\\":true,\\\"scope\\\":\\\"Production\""
+      },
+      {
+        "file": "tests/FrequentSitesChecks.java",
+        "line": 92,
+        "length": 163,
+        "text": "                \"{\\\"version\\\":1,\\\"entries\\\":[{\\\"url\\\":\\\"https://old.test/page\\\",\\\"title\\\":\\\"旧页面\\\",\\\"bookmarkTitle\\\":\\\"收藏\\\",\\\"visitedAt\\\":1,\\\"bookmarkedAt\\\":2}]}\");"
+      },
+      {
+        "file": "tests/GrayCaptionChecks.java",
+        "line": 161,
+        "length": 147,
+        "text": "                        + \",\\\"openGrayRejected\\\":true,\\\"coloredAnnotationPreserved\\\":true,\\\"texturedCaptionPreserved\\\":true,\\\"scope\\\":\\\"Production\""
+      },
+      {
+        "file": "tests/ImageEditServiceTierChecks.java",
+        "line": 40,
+        "length": 127,
+        "text": "                                \"{\\\"error\\\":{\\\"param\\\":\\\"service_tier\\\",\\\"message\\\":\\\"selected tier unsupported by fixture\\\"}}\""
+      },
+      {
+        "file": "tests/OpenCodeProtocolChecks.java",
+        "line": 212,
+        "length": 160,
+        "text": "                \"{\\\"status\\\":\\\"completed\\\",\\\"output\\\":[{\\\"type\\\":\\\"message\\\",\\\"role\\\":\\\"assistant\\\",\\\"content\\\":[{\\\"type\\\":\\\"refusal\\\",\\\"refusal\\\":\\\"no\\\"}]}]}\";"
+      },
+      {
+        "file": "tests/PageOutcomeChecks.java",
+        "line": 87,
+        "length": 270,
+        "text": "                        + \"\\\",\\\"partialCacheRoundTrip\\\":true,\\\"skippedIsIncomplete\\\":true,\\\"overlayOnlyIsIncomplete\\\":false,\\\"missingMetadataIsUnknown\\\":true,\\\"rejectionReasonPreserved\\\":true,\\\"paidApiUsed\\\":false,\\\"androidRuntimeVerified\\\":false,\\\"scope\\\":\\\"Production\""
+      },
+      {
+        "file": "tests/PartialRetryChecks.java",
+        "line": 133,
+        "length": 127,
+        "text": "                                                                                                                .toString()))))"
+      },
+      {
+        "file": "tests/PartialRetryChecks.java",
+        "line": 174,
+        "length": 126,
+        "text": "                                                                                                                \"output_text\")"
+      },
+      {
+        "file": "tests/PartialRetryChecks.java",
+        "line": 178,
+        "length": 136,
+        "text": "                                                                                                                        .toString())))))"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 23,
+        "length": 174,
+        "text": "    static JSONObject translation(boolean skip)throws Exception{return new JSONObject().put(\"id\",\"one\").put(\"originalText\",\"原文\").put(\"zh\",skip?\"\":\"完整中文译文\").put(\"skip\",skip);}"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 26,
+        "length": 127,
+        "text": "        ByteArrayOutputStream output=new ByteArrayOutputStream();ImageIO.write(image,\"png\",output);return output.toByteArray();"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 28,
+        "length": 122,
+        "text": "    static TranslationEngine.PreparedText job(Path root,AppSettings settings,byte[] png,JSONObject value)throws Exception{"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 29,
+        "length": 129,
+        "text": "        Path directory=Files.createTempDirectory(root,\"job-\");Region region=new Region(\"one\",new Rect(4,4,12,20),List.of(),true);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 30,
+        "length": 173,
+        "text": "        TranslationEngine.PreparedText job=new TranslationEngine.PreparedText(directory.toFile(),List.of(region),List.of(region));job.settings=settings;job.pagePixels=16*24;"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 32,
+        "length": 191,
+        "text": "        File input=directory.resolve(\"input.png\").toFile(),result=directory.resolve(\"result.image\").toFile(),cached=directory.resolve(\"cached.image\").toFile();Files.write(input.toPath(),png);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 34,
+        "length": 181,
+        "text": "        Constructor<?> constructor=type.getDeclaredConstructor(Region.class,Rect.class,int[][].class,int[][].class,File.class,File.class,File.class);constructor.setAccessible(true);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 35,
+        "length": 143,
+        "text": "        Object repair=constructor.newInstance(region,new Rect(0,0,16,24),new int[][]{{4,4,12,20}},new int[][]{{0,0,2,24}},input,result,cached);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 37,
+        "length": 125,
+        "text": "        @SuppressWarnings(\"unchecked\") Map<String,Object> map=(Map<String,Object>)repairs.get(job);map.put(region.id,repair);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 42,
+        "length": 163,
+        "text": "        try{future.get(3,TimeUnit.SECONDS);throw new AssertionError(reason);}catch(ExecutionException e){ok(e.getCause() instanceof CancellationException,reason);}"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 45,
+        "length": 202,
+        "text": "        byte[] image=png(),reply=new JSONObject().put(\"data\",new JSONArray().put(new JSONObject().put(\"b64_json\",Base64.getEncoder().encodeToString(image)))).toString().getBytes(StandardCharsets.UTF_8);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 46,
+        "length": 140,
+        "text": "        AtomicInteger mode=new AtomicInteger(),requests=new AtomicInteger();AtomicReference<Throwable> handlerError=new AtomicReference<>();"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 47,
+        "length": 166,
+        "text": "        AtomicReference<CountDownLatch> delayedStarted=new AtomicReference<>(),delayedRelease=new AtomicReference<>();List<String> paths=new CopyOnWriteArrayList<>();"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 48,
+        "length": 213,
+        "text": "        ExecutorService handlers=Executors.newCachedThreadPool(),worker=Executors.newSingleThreadExecutor();HttpServer server=HttpServer.create(new InetSocketAddress(\"127.0.0.1\",0),0);server.setExecutor(handlers);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 50,
+        "length": 147,
+        "text": "            paths.add(exchange.getRequestURI().getPath());exchange.getRequestBody().readAllBytes();requests.incrementAndGet();int state=mode.get();"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 52,
+        "length": 167,
+        "text": "            int status=state==1?408:state==2?429:200;byte[] body=status==200?reply:\"{\\\"error\\\":{\\\"message\\\":\\\"controlled failure\\\"}}\".getBytes(StandardCharsets.UTF_8);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 56,
+        "length": 287,
+        "text": "        AppSettings settings=new AppSettings();settings.baseUrl=\"http://127.0.0.1:\"+server.getAddress().getPort()+\"/v1\";settings.apiKey=\"local-cleanup-flow-fixture\";settings.imageModel=\"fixture-image\";settings.maxRetries=0;settings.retryIntervalSeconds=1;settings.rateLimitWaitSeconds=1;"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 59,
+        "length": 244,
+        "text": "                engine.requestTextPage(job,settings,()->false);ok(requests.get()==0,\"no valid translation does not request image cleanup\");ok(!Files.exists(result(job))&&job.values.isEmpty(),\"missing translation cannot become cleanup success\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 62,
+        "length": 219,
+        "text": "                engine.requestTextPage(job,settings,()->false);ok(requests.get()==0,\"model skip does not request image cleanup\");ok(!Files.exists(result(job))&&job.repaired.isEmpty(),\"skip is not recorded as a repair\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 65,
+        "length": 371,
+        "text": "                Files.write(result(job),image);engine.requestTextPage(job,settings,()->false);ok(requests.get()==0,\"existing prepared cleanup result is reused without billing\");ok(Arrays.equals(Files.readAllBytes(result(job)),image),\"reuse preserves the exact prepared response\");ok(job.repaired.isEmpty(),\"reused response awaits pixel validation before repair success\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 68,
+        "length": 291,
+        "text": "                JSONObject value=job.values.get(\"one\");engine.requestTextPage(job,settings,()->false);ok(requests.get()==1,\"valid translation invokes actual image endpoint exactly once\");ok(paths.equals(List.of(\"/v1/images/edits\")),\"cleanup never sends a second translation or OCR request\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 69,
+        "length": 255,
+        "text": "                ok(Arrays.equals(Files.readAllBytes(result(job)),image),\"production engine saves returned image for pixel phase\");ok(job.values.get(\"one\")==value&&value.getString(\"zh\").equals(\"完整中文译文\"),\"cleanup retains original valid translation object\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 70,
+        "length": 194,
+        "text": "                ok(job.repaired.isEmpty()&&!Files.exists(job.directory.toPath().resolve(\"cached.image\")),\"network success neither marks rendered success nor persists unvalidated cleanup cache\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 74,
+        "length": 189,
+        "text": "                JSONObject value=job.values.get(\"one\");engine.requestTextPage(job,settings,()->false);ok(requests.get()==before+1,\"maxRetries zero makes one request on retryable HTTP 408\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 75,
+        "length": 371,
+        "text": "                ok(job.values.get(\"one\")==value&&!job.failures.containsKey(\"one\"),\"image failure does not lose or invalidate translated text\");ok(job.cleanupFailed.contains(\"one\")&&!Files.exists(result(job))&&job.repaired.isEmpty(),\"failed image response remains failed with no image artifact\");ok(!job.errors.isEmpty(),\"cleanup failure has visible diagnostic evidence\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 79,
+        "length": 315,
+        "text": "                engine.requestTextPage(job,settings,()->false);ok(requests.get()==before+1&&job.throttleFailure!=null,\"throttled cleanup exposes the existing scheduler failure signal\");ok(job.cleanupFailed.contains(\"one\")&&job.values.containsKey(\"one\"),\"throttle keeps valid text while marking cleanup incomplete\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 83,
+        "length": 141,
+        "text": "                boolean stopped=false;try{engine.requestTextPage(job,settings,()->true);}catch(CancellationException expected){stopped=true;}"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 84,
+        "length": 252,
+        "text": "                ok(stopped&&requests.get()==before,\"pre-cancelled job makes no cleanup connection\");ok(job.values.containsKey(\"one\")&&job.repaired.isEmpty()&&!Files.exists(result(job)),\"pre-cancel preserves text without manufacturing cleanup success\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 86,
+        "length": 169,
+        "text": "            mode.set(3);before=requests.get();delayedStarted.set(new CountDownLatch(1));delayedRelease.set(new CountDownLatch(1));AtomicBoolean stop=new AtomicBoolean();"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 89,
+        "length": 200,
+        "text": "                try{ok(delayedStarted.get().await(2,TimeUnit.SECONDS),\"live request reached controlled endpoint\");stop.set(true);cancelled(call,\"live engine cancellation propagates as cancellation\");}"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 91,
+        "length": 260,
+        "text": "                ok(requests.get()==before+1,\"cancelled request is not automatically repeated\");ok(job.values.containsKey(\"one\")&&job.repaired.isEmpty()&&!Files.exists(result(job)),\"live cancellation retains translation and creates no successful cleanup file\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 92,
+        "length": 137,
+        "text": "                ok(!job.cleanupFailed.contains(\"one\")&&job.errors.isEmpty(),\"cancellation is not swallowed as ordinary cleanup failure\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 95,
+        "length": 158,
+        "text": "        }finally{CountDownLatch release=delayedRelease.get();if(release!=null)release.countDown();server.stop(0);handlers.shutdownNow();worker.shutdownNow();}"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 98,
+        "length": 152,
+        "text": "        PageOutcome partial=new PageOutcome(1,1,0,0,1,\"已原位红字兜底\",TranslationTranscript.unavailable(),true),restored=PageOutcome.decode(partial.encode());"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 99,
+        "length": 175,
+        "text": "        ok(partial.incomplete()&&restored.known&&restored.incomplete()&&restored.needsCleanupRetry,\"cleanup retry flag survives PageOutcome roundtrip and remains incomplete\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 100,
+        "length": 172,
+        "text": "        ok(restored.succeeded==1&&restored.failed==0&&restored.preservedOriginal==1,\"cleanup retry does not misreport a valid translated paragraph as translation failure\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 103,
+        "length": 151,
+        "text": "        RenderedPageCache cache=new RenderedPageCache(root.toFile());String key=RenderedPageCache.key(\"same-image\",\"same-settings\");byte[] image=png();"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 105,
+        "length": 150,
+        "text": "        cache.write(key,image,restored);ok(cache.read(key)==null,\"cleanup-incomplete attempt invalidates a previously complete rendered cache entry\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 106,
+        "length": 193,
+        "text": "        String fresh=RenderedPageCache.key(\"new-image\",\"same-settings\");cache.write(fresh,image,partial);ok(cache.read(fresh)==null,\"fallback-only output cannot be cached as a completed page\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 109,
+        "length": 134,
+        "text": "        TranslationStages stages=new TranslationStages(2,256*MIB,()->256*MIB);ExecutorService workers=Executors.newFixedThreadPool(2);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 110,
+        "length": 260,
+        "text": "        CountDownLatch firstEntered=new CountDownLatch(1),release=new CountDownLatch(1),secondEntered=new CountDownLatch(1);AtomicInteger active=new AtomicInteger(),peak=new AtomicInteger();AtomicLong firstBudget=new AtomicLong(),secondBudget=new AtomicLong();"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 112,
+        "length": 335,
+        "text": "            Future<Integer> first=workers.submit(()->stages.withRequests(()->TranslationStages.withImageRequest(()->{firstBudget.set(stages.reservedBytes());peak.accumulateAndGet(active.incrementAndGet(),Math::max);firstEntered.countDown();try{release.await();return 1;}finally{active.decrementAndGet();}},()->false),()->false,()->2));"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 113,
+        "length": 230,
+        "text": "            ok(firstEntered.await(2,TimeUnit.SECONDS),\"first image request enters admitted action\");ok(firstBudget.get()==96*MIB&&stages.reservedBytes()==96*MIB,\"image envelope owns exactly 96 MiB inside the shared pixel budget\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 114,
+        "length": 308,
+        "text": "            Future<Integer> second=workers.submit(()->stages.withRequests(()->TranslationStages.withImageRequest(()->{secondBudget.set(stages.reservedBytes());peak.accumulateAndGet(active.incrementAndGet(),Math::max);secondEntered.countDown();active.decrementAndGet();return 2;},()->false),()->false,()->2));"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 115,
+        "length": 282,
+        "text": "            ok(!secondEntered.await(180,TimeUnit.MILLISECONDS),\"second image request waits while first is active\");release.countDown();ok(first.get(2,TimeUnit.SECONDS)==1&&second.get(2,TimeUnit.SECONDS)==2&&peak.get()==1,\"image actions execute serially and preserve their results\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 116,
+        "length": 138,
+        "text": "            ok(secondBudget.get()==96*MIB&&stages.reservedBytes()==0,\"second request receives its own budget and all bytes are released\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 117,
+        "length": 223,
+        "text": "            boolean failed=false;try{stages.withRequests(()->TranslationStages.withImageRequest(()->{throw new IOException(\"controlled image failure\");},()->false),()->false,()->2);}catch(IOException expected){failed=true;}"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 119,
+        "length": 207,
+        "text": "            AtomicBoolean ran=new AtomicBoolean();boolean stopped=false;try{TranslationStages.withImageRequest(()->{ran.set(true);return null;},()->true);}catch(CancellationException expected){stopped=true;}"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 122,
+        "length": 178,
+        "text": "            try{tooSmall.withRequests(()->TranslationStages.withImageRequest(()->{ran.set(true);return null;},()->false),()->false,()->2);}catch(Exception expected){failed=true;}"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 124,
+        "length": 241,
+        "text": "            AtomicBoolean stop=new AtomicBoolean();CountDownLatch waiting=new CountDownLatch(1);TranslationStages constrained=new TranslationStages(2,128*MIB,()->128*MIB);TranslationStages.Lease occupied=constrained.pixels(40*MIB,()->false);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 126,
+        "length": 209,
+        "text": "                Future<?> blocked=workers.submit(()->constrained.withRequests(()->{waiting.countDown();return TranslationStages.withImageRequest(()->{ran.set(true);return null;},stop::get);},()->false,()->2));"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 128,
+        "length": 131,
+        "text": "                boolean awaiting=false;try{blocked.get(180,TimeUnit.MILLISECONDS);}catch(TimeoutException expected){awaiting=true;}"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 129,
+        "length": 311,
+        "text": "                ok(awaiting&&!ran.get(),\"image cannot run while existing reservation leaves less than 96 MiB\");stop.set(true);cancelled(blocked,\"cancellation while awaiting pixel budget propagates\");ok(!ran.get()&&stages.reservedBytes()==40*MIB,\"cancelled waiter does not release another action's reservation\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 132,
+        "length": 227,
+        "text": "            ok(workers.submit(()->stages.withRequests(()->TranslationStages.withImageRequest(()->7,()->false),()->false,()->2)).get(2,TimeUnit.SECONDS)==7,\"semaphore and budget remain usable after exceptions and cancellation\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 137,
+        "length": 136,
+        "text": "        ok(TranslationEngine.cleanupDecodeSample(4000,4000,2000,2000)==2,\"16 MP result decodes to at most the 4 MP ROI before scaling\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 138,
+        "length": 150,
+        "text": "        ok(TranslationEngine.cleanupDecodeSample(4001,3999,2000,2000)==4,\"odd sampled dimensions use ceiling and cannot exceed ROI allocation bound\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 139,
+        "length": 133,
+        "text": "        ok(TranslationEngine.cleanupDecodeSample(6000,1,1,1)==8192,\"extremely narrow result has bounded nonzero decoded dimensions\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 141,
+        "length": 160,
+        "text": "        ok(TranslationEngine.cleanupRecoveryDecodeSample(948,1659,154,781,4)==2,\"padded tall return can recover useful strip resolution within four ROI areas\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 142,
+        "length": 154,
+        "text": "        ok(TranslationEngine.cleanupRecoveryDecodeSample(948,1659,154,781,2)==0,\"recovery refuses a second resolution step above the bounded allocation\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 143,
+        "length": 146,
+        "text": "        ok(TranslationEngine.cleanupRecoveryDecodeSample(4000,4000,2000,2000,2)==0,\"equal-aspect returns do not trigger padding decode recovery\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 144,
+        "length": 125,
+        "text": "        ok(TranslationEngine.cleanupRecoveryDecodeSample(16,24,16,24,1)==0,\"full-resolution decode cannot be retried finer\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 148,
+        "length": 219,
+        "text": "            int sample=TranslationEngine.cleanupDecodeSample(output[0],output[1],target[0],target[1]);long decoded=((output[0]+(long)sample-1)/sample)*((output[1]+(long)sample-1)/sample),limit=(long)target[0]*target[1];"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 149,
+        "length": 139,
+        "text": "            ok(sample>0&&(sample&(sample-1))==0&&decoded<=limit,\"sample is codec-compatible and upper-rounded result fits ROI allocation\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 150,
+        "length": 191,
+        "text": "            if(sample>1){int finer=sample/2;ok(((output[0]+(long)finer-1)/finer)*((output[1]+(long)finer-1)/finer)>limit,\"chosen sample retains the finest resolution allowed by ROI budget\");}"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 153,
+        "length": 165,
+        "text": "        long automatic=TranslationEngine.cleanupRenderMemoryBytes(baseline,page,roi,false),manual=TranslationEngine.cleanupRenderMemoryBytes(baseline,page,roi,true);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 154,
+        "length": 145,
+        "text": "        ok(automatic>baseline&&automatic>=16*MIB+page*4+roi*60,\"repair budget also covers the bounded finer padding decode and recovery arrays\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 156,
+        "length": 243,
+        "text": "        ok(TranslationEngine.cleanupRenderMemoryBytes(baseline,page,0,false)==baseline&&TranslationEngine.cleanupRenderMemoryBytes(baseline,page,0,true)==baseline,\"pages without an available cleanup image retain established memory admission\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 157,
+        "length": 148,
+        "text": "        ok(TranslationEngine.cleanupRenderMemoryBytes(512*MIB,page,roi,false)==512*MIB,\"repair budget cannot reduce an already larger page budget\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 160,
+        "length": 168,
+        "text": "            Files.write(result(job),png());ok(job.renderMemoryBytes(0)==16*MIB+384*68,\"prepared job budgets exact saved page and bounded response recovery dimensions\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 161,
+        "length": 124,
+        "text": "            ok(job.renderMemoryBytes(0,true)==16*MIB+384*72,\"prepared manual job includes retained source page allocation\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 165,
+        "length": 170,
+        "text": "            ok(stages.reservedBytes()==automatic,\"computed repair budget is actually admitted by shared pixel stages\");throw new IOException(\"controlled render failure\");"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 168,
+        "length": 210,
+        "text": "        boolean stopped=false;try(TranslationStages.Lease lease=stages.pixels(manual,()->false)){throw new CancellationException(\"controlled render cancel\");}catch(CancellationException expected){stopped=true;}"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 172,
+        "length": 142,
+        "text": "        Path root=Paths.get(args[0]);Files.createDirectories(root);flow(root);completion(root.resolve(\"page-cache\"));admission();memory(root);"
+      },
+      {
+        "file": "tests/ProductionCleanupFlowChecks.java",
+        "line": 173,
+        "length": 165,
+        "text": "        System.out.println(\"ProductionCleanupFlowChecks: \"+checks+\" checks passed (real engine/local HTTP/cache/admission; no paid API or Android pixel rendering)\");"
+      },
+      {
+        "file": "tests/RealMangaReview.java",
+        "line": 325,
+        "length": 239,
+        "text": "                            + \" charset='utf-8'><title>十页真实翻译与透明图层回填</title><style>body{font-family:system-ui;background:#eee}section{display:flex;gap:10px}img{width:32%;object-fit:contain}.checker{background:repeating-conic-gradient(#ddd\""
+      },
+      {
+        "file": "tests/RtDetrRegionsChecks.java",
+        "line": 383,
+        "length": 350,
+        "text": "                            + \" charset='utf-8'><title>RT-DETR段落与安全回填检查</title><style>body{font-family:sans-serif;background:#eee}section{display:flex;gap:8px}img{width:32%;object-fit:contain}p{max-width:1100px}</style><h1>三模型×十页：段落与安全回填</h1><p>使用已保存的真实模型预测、原始页，以及生产Java拆行/清字/排版。中文为固定离线测试句，不是翻译。红框是段落，蓝框是墨迹锚点；无法确认背景、布局或其他段保护时保留原图。不是手机截图或召回率评测。</p>\");"
+      },
+      {
+        "file": "tests/SelectionScopeChecks.java",
+        "line": 50,
+        "length": 159,
+        "text": "                        \"\\\"deselectedRegionProtected\\\":true,\\\"selectedOnlyRequestScope\\\":true,\\\"selectionSnapshotStable\\\":true,\\\"selectionScopeTest\\\":\\\"Actual\""
+      },
+      {
+        "file": "tests/TruncationRetryChecks.java",
+        "line": 108,
+        "length": 122,
+        "text": "                                                                                                            \"output_text\")"
+      },
+      {
+        "file": "tests/V073IntegrationChecks.java",
+        "line": 135,
+        "length": 124,
+        "text": "                                \"canvas.clipOutRect(other.box.left-2,other.box.top-2,other.box.right+2,other.box.bottom+2)\")"
+      },
+      {
+        "file": "tests/V073IntegrationChecks.java",
+        "line": 215,
+        "length": 182,
+        "text": "                                    + \" lease=stages.pixels(job.renderMemoryBytes(AutoTranslationQueue.estimateMemory(source.getWidth(),source.getHeight()),true),cancelled,()->0))\"),"
+      },
+      {
+        "file": "tests/V073SchedulerChecks.java",
+        "line": 551,
+        "length": 127,
+        "text": "                            + \",\\\"retryOrder\\\":\\\"retry1,fast,retry2\\\",\\\"paidApiUsed\\\":false,\\\"androidRuntimeVerified\\\":false}\";"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 15,
+        "length": 127,
+        "text": "    static int checks;static void ok(boolean condition,String reason){if(!condition)throw new AssertionError(reason);checks++;}"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 18,
+        "length": 145,
+        "text": "        JSONArray raw=input.getJSONArray(\"boxes\"),types=input.getJSONArray(\"box_types\"),conf=input.getJSONArray(\"scores\");int count=raw.length();"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 20,
+        "length": 250,
+        "text": "        for(int i=0;i<count;i++){String type=types.getString(i);labels[i]=type.equals(\"bubble\")?0:type.equals(\"text_bubble\")?1:type.equals(\"text_free\")?2:-1;scores[i]=conf.getFloat(i);for(int k=0;k<4;k++)bounds[i][k]=raw.getJSONArray(i).getFloat(k);}"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 22,
+        "length": 148,
+        "text": "        return before?BeforeRtDetrRegions.fromPredictions(w,h,rgb,labels,bounds,scores):RtDetrRegions.fromPredictions(w,h,rgb,labels,bounds,scores);"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 24,
+        "length": 145,
+        "text": "    static boolean inside(List<Rect> lines,int x,int y){for(Rect r:lines)if(x>=r.left&&x<r.right&&y>=r.top&&y<r.bottom)return true;return false;}"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 25,
+        "length": 185,
+        "text": "    static double coverage(BufferedImage image,List<Rect> lines,int[][] regions){int dark=0,covered=0;for(int[] box:regions)for(int y=box[1];y<box[3];y++)for(int x=box[0];x<box[2];x++){"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 26,
+        "length": 140,
+        "text": "        int c=image.getRGB(x,y),v=(((c>>>16)&255)*299+((c>>>8)&255)*587+(c&255)*114)/1000;if(v<160){dark++;if(inside(lines,x,y))covered++;}}"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 33,
+        "length": 132,
+        "text": "        result.put(\"P14_rt_4\",new int[][]{{110,484,129,576}});result.put(\"P18_rt_2\",new int[][]{{423,54,442,117},{392,53,412,207}});"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 34,
+        "length": 137,
+        "text": "        result.put(\"P18_rt_14\",new int[][]{{102,1313,125,1388},{72,1314,94,1468}});result.put(\"P19_rt_2\",new int[][]{{100,499,134,572}});"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 40,
+        "length": 190,
+        "text": "        BufferedImage image=new BufferedImage(120,230,BufferedImage.TYPE_INT_RGB);Graphics2D g=image.createGraphics();g.setColor(Color.WHITE);g.fillRect(0,0,120,230);g.setColor(Color.BLACK);"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 43,
+        "length": 211,
+        "text": "        JSONObject prediction=new JSONObject().put(\"boxes\",new JSONArray().put(new JSONArray(new int[]{30,20,90,218}))).put(\"box_types\",new JSONArray().put(\"text_bubble\")).put(\"scores\",new JSONArray().put(.95));"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 47,
+        "length": 127,
+        "text": "        ok(coverage(image,after.get(0).lines,glyphs)>.98,\"many punctuation components do not suppress fragmented body column\");"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 48,
+        "length": 122,
+        "text": "        ok(coverage(image,before.get(0).lines,glyphs)<.5,\"synthetic fragmented-column test exposes the original failure\");"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 50,
+        "length": 122,
+        "text": "    static void visual(Path out,String key,BufferedImage image,Region before,Region after,int[][] bodies)throws Exception{"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 51,
+        "length": 198,
+        "text": "        Rect b=after.box;int left=Math.max(0,b.left-15),top=Math.max(0,b.top-15),right=Math.min(image.getWidth(),b.right+15),bottom=Math.min(image.getHeight(),b.bottom+15),w=right-left,h=bottom-top;"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 55,
+        "length": 131,
+        "text": "        g.setColor(new Color(0,180,70));for(Rect r:after.lines)g.drawRect(w*2+r.left-left,r.top-top,r.right-r.left,r.bottom-r.top);"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 59,
+        "length": 132,
+        "text": "        Path root=Paths.get(args[0]),out=Paths.get(args[1]);String sourceHash=args.length>2?hash(Paths.get(args[2])):\"not_recorded\";"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 60,
+        "length": 204,
+        "text": "        Files.createDirectories(out);synthetic();Map<String,int[][]> reference=reference();JSONArray records=new JSONArray(),restored=new JSONArray();int paragraphs=0,changed=0,emptyBefore=0,emptyAfter=0;"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 62,
+        "length": 217,
+        "text": "            Path folder=root.resolve(String.format(\"逐页/第%02d页\",page));BufferedImage image=ImageIO.read(folder.resolve(\"原图.png\").toFile());JSONObject raw=new JSONObject(Files.readString(folder.resolve(\"检测原始结果.json\")));"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 63,
+        "length": 178,
+        "text": "            List<Region> before=predict(image,raw,true),after=predict(image,raw,false);ok(before.size()==after.size(),\"saved prediction paragraph count unchanged on page \"+page);"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 66,
+        "length": 207,
+        "text": "                ok(a.id.equals(b.id)&&boxes(List.of(a.box)).toString().equals(boxes(List.of(b.box)).toString())&&a.vertical==b.vertical,\"detected paragraph coordinates and reading direction unchanged \"+key);"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 67,
+        "length": 196,
+        "text": "                ok(Objects.equals(a.contextBox==null?null:boxes(List.of(a.contextBox)).toString(),b.contextBox==null?null:boxes(List.of(b.contextBox)).toString()),\"bubble context unchanged \"+key);"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 71,
+        "length": 218,
+        "text": "                for(Rect line:b.lines)ok(line.left>=0&&line.top>=0&&line.right<=image.getWidth()&&line.bottom<=image.getHeight()&&line.right>line.left&&line.bottom>line.top,\"anchor is a valid bounded pixel area \"+key);"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 72,
+        "length": 163,
+        "text": "                JSONObject item=new JSONObject().put(\"id\",key).put(\"target\",boxes(List.of(b.box)).get(0)).put(\"before\",boxes(a.lines)).put(\"after\",boxes(b.lines));"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 74,
+        "length": 147,
+        "text": "                    int[][] bodies=reference.get(key);double oldCoverage=coverage(image,a.lines,bodies),newCoverage=coverage(image,b.lines,bodies);"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 75,
+        "length": 173,
+        "text": "                    ok(newCoverage>=.95,\"manually inspected body ink restored \"+key);ok(newCoverage>oldCoverage+.25,\"real-case anchor regression exposes old omission \"+key);"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 76,
+        "length": 200,
+        "text": "                    item.put(\"manualBodyReference\",new JSONArray(bodies)).put(\"bodyCoverageBefore\",oldCoverage).put(\"bodyCoverageAfter\",newCoverage);restored.put(key);visual(out,key,image,a,b,bodies);"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 80,
+        "length": 176,
+        "text": "                    ok(coverage(image,b.lines,protect)==0,\"side balloon border does not become a body anchor \"+key);item.put(\"protectedBorderReference\",new JSONArray(protect));"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 86,
+        "length": 128,
+        "text": "        if(args.length>2)ok(sourceHash.equals(hash(Paths.get(args[2]))),\"production anchor source unchanged during regression\");"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 87,
+        "length": 253,
+        "text": "        JSONObject result=new JSONObject().put(\"passed\",true).put(\"checks\",checks).put(\"pages\",30).put(\"paragraphs\",paragraphs).put(\"changedAnchors\",changed).put(\"emptyBefore\",emptyBefore).put(\"emptyAfter\",emptyAfter).put(\"restoredManualCases\",restored)"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 88,
+        "length": 345,
+        "text": "            .put(\"productionSourceSha256\",sourceHash).put(\"paidApiUsed\",false).put(\"modelInferencePerformed\",false).put(\"segmentationGroundTruth\",false).put(\"scope\",\"Saved real model boxes; production anchor extraction. Body interior reference areas manually reviewed; not full OCR recall or erasure-quality acceptance.\").put(\"regions\",records);"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 89,
+        "length": 213,
+        "text": "        Files.writeString(out.resolve(\"锚框回归.json\"),result.toString(2));System.out.println(\"V090AnchorChecks: \"+checks+\" checks passed; paragraphs=\"+paragraphs+\", changed=\"+changed+\", restored=\"+restored.length());"
+      },
+      {
+        "file": "tests/V090AnchorChecks.java",
+        "line": 91,
+        "length": 154,
+        "text": "    static String hash(Path file)throws Exception{return HexFormat.of().formatHex(MessageDigest.getInstance(\"SHA-256\").digest(Files.readAllBytes(file)));}"
+      },
+      {
+        "file": "tests/V090AnchorDiagnostic.java",
+        "line": 55,
+        "length": 189,
+        "text": "                                \"P03_rt_6 P04_rt_5 P05_rt_8 P07_rt_8 P11_rt_12 P12_rt_4 P13_rt_4 P14_rt_4 P17_rt_3 P18_rt_2 P18_rt_14 P19_rt_2 P19_rt_11 P20_rt_8 P24_rt_1 P25_rt_7 P28_rt_1\""
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 14,
+        "length": 134,
+        "text": "    static Rect rect(JSONObject b){int x=b.getInt(\"x\"),y=b.getInt(\"y\");return new Rect(x,y,x+b.getInt(\"width\"),y+b.getInt(\"height\"));}"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 16,
+        "length": 139,
+        "text": "    static boolean neutral(int c){int r=(c>>>16)&255,g=(c>>>8)&255,b=c&255;return Math.max(r,Math.max(g,b))-Math.min(r,Math.min(g,b))<=20;}"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 18,
+        "length": 131,
+        "text": "        boolean[] scope=new boolean[pixels.length];int count=0,dark160=0,dark225=0,white225=0,white245=0,colored=0,pairs=0,edges=0;"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 19,
+        "length": 127,
+        "text": "        for(int[] r:lines)for(int y=Math.max(0,r[1]);y<Math.min(h,r[3]);y++)for(int x=Math.max(0,r[0]);x<Math.min(w,r[2]);x++){"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 21,
+        "length": 125,
+        "text": "            if(v<160)dark160++;if(v<225)dark225++;if(v>=225)white225++;if(v>=245)white245++;if(!neutral(pixels[p]))colored++;"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 24,
+        "length": 142,
+        "text": "            for(int q:new int[]{p+1,p+w})if(scope[q]&&gray(pixels[q])>=160){pairs++;if(Math.abs(gray(pixels[p])-gray(pixels[q]))>18)edges++;}}"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 25,
+        "length": 158,
+        "text": "        return new JSONObject().put(\"scopePixels\",count).put(\"white225\",(double)white225/Math.max(1,count)).put(\"white245\",(double)white245/Math.max(1,count))"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 26,
+        "length": 162,
+        "text": "            .put(\"dark160\",dark160).put(\"dark225\",dark225).put(\"colored\",(double)colored/Math.max(1,count)).put(\"paperEdgeRatio\",(double)edges/Math.max(1,pairs));"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 28,
+        "length": 152,
+        "text": "    static BufferedImage image(int[] p,int w,int h){BufferedImage b=new BufferedImage(w,h,BufferedImage.TYPE_INT_RGB);b.setRGB(0,0,w,h,p,0,w);return b;}"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 30,
+        "length": 143,
+        "text": "        JSONArray raw=prediction.getJSONArray(\"boxes\"),types=prediction.getJSONArray(\"box_types\"),confidence=prediction.getJSONArray(\"scores\");"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 31,
+        "length": 127,
+        "text": "        long[] labels=new long[raw.length()];float[][] boxes=new float[raw.length()][4];float[] scores=new float[raw.length()];"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 32,
+        "length": 262,
+        "text": "        for(int i=0;i<raw.length();i++){String type=types.getString(i);labels[i]=type.equals(\"bubble\")?0:type.equals(\"text_bubble\")?1:type.equals(\"text_free\")?2:-1;scores[i]=confidence.getFloat(i);for(int k=0;k<4;k++)boxes[i][k]=raw.getJSONArray(i).getFloat(k);}"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 33,
+        "length": 144,
+        "text": "        int w=image.getWidth(),h=image.getHeight();return RtDetrRegions.fromPredictions(w,h,image.getRGB(0,0,w,h,null,0,w),labels,boxes,scores);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 35,
+        "length": 316,
+        "text": "    static JSONObject optionalKind(WhiteBubbleCleaner.Mask mask){JSONObject result=new JSONObject();for(String name:new String[]{\"backgroundKind\",\"evidence\"})try{var f=mask.getClass().getDeclaredField(name);f.setAccessible(true);result.put(name,String.valueOf(f.get(mask)));}catch(Exception ignored){}return result;}"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 36,
+        "length": 127,
+        "text": "    static JSONArray recovery(int[] pixels,int w,int h,int[][] lines,WhiteBubbleCleaner.Mask mask){JSONArray a=new JSONArray();"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 38,
+        "length": 199,
+        "text": "            for(int y=Math.max(0,r[1]+ih);y<Math.min(h,r[3]-ih);y++)for(int x=Math.max(0,r[0]+iw);x<Math.min(w,r[2]-iw);x++){int p=y*w+x;if(bright(pixels[p])<160){dark++;if(mask.erase[p])removed++;}}"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 41,
+        "length": 170,
+        "text": "    static void writeVisual(Path out,String key,int[] pixels,int w,int h,int[][] lines,WhiteBubbleCleaner.Mask mask,BeforeWhiteBubbleCleaner.Mask before)throws Exception{"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 42,
+        "length": 167,
+        "text": "        BufferedImage original=image(pixels,w,h),annotated=image(pixels,w,h),overlay=image(pixels,w,h);int[] clean=pixels.clone();WhiteBubbleCleaner.apply(clean,mask);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 43,
+        "length": 176,
+        "text": "        Graphics2D a=annotated.createGraphics();a.setColor(Color.GREEN);a.setStroke(new BasicStroke(1));for(int[] r:lines)a.drawRect(r[0],r[1],r[2]-r[0],r[3]-r[1]);a.dispose();"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 44,
+        "length": 151,
+        "text": "        for(int p=0;p<pixels.length;p++)if(mask.erase[p])overlay.setRGB(p%w,p/w,0xffee3344);else if(before.erase[p])overlay.setRGB(p%w,p/w,0xffffcc33);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 45,
+        "length": 192,
+        "text": "        Files.createDirectories(out.resolve(key));ImageIO.write(original,\"png\",out.resolve(key+\"/before.png\").toFile());ImageIO.write(annotated,\"png\",out.resolve(key+\"/anchors.png\").toFile());"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 46,
+        "length": 152,
+        "text": "        ImageIO.write(overlay,\"png\",out.resolve(key+\"/mask.png\").toFile());ImageIO.write(image(clean,w,h),\"png\",out.resolve(key+\"/after.png\").toFile());"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 49,
+        "length": 148,
+        "text": "        Path input=Paths.get(args[0]),out=Paths.get(args[1]);Files.createDirectories(out);Path cuts=out.resolve(\"裁切\");Files.createDirectories(cuts);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 51,
+        "length": 253,
+        "text": "        for(Object raw:new JSONArray(Files.readString(input.resolve(\"兜底位置清单.json\")))){JSONObject f=(JSONObject)raw;String key=String.format(\"p%02d_\",f.getInt(\"page\"))+f.getString(\"id\");fallback.add(key);oldFailure.put(key,f.optString(\"normalFailure\"));}"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 52,
+        "length": 142,
+        "text": "        JSONArray records=new JSONArray();int total=0,baselineValid=0,newValid=0,gained=0,lost=0,foreignHits=0;long started=System.nanoTime();"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 53,
+        "length": 180,
+        "text": "        var strict=BeforeWhiteBubbleCleaner.class.getDeclaredMethod(\"findAtThreshold\",int[].class,int.class,int.class,int[][].class,int.class,int.class);strict.setAccessible(true);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 54,
+        "length": 207,
+        "text": "        var local=BeforeWhiteBubbleCleaner.class.getDeclaredMethod(\"findLocalWhiteText\",int[].class,int.class,int.class,int[][].class,int.class,BeforeWhiteBubbleCleaner.Mask.class);local.setAccessible(true);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 55,
+        "length": 298,
+        "text": "        StringBuilder html=new StringBuilder(\"<!doctype html><meta charset='utf-8'><title>0.9 去字审查</title><style>body{font:16px sans-serif}section{display:flex;gap:5px}img{max-width:31%;image-rendering:auto;object-fit:contain;max-height:600px;border:1px solid #bbb}</style><h1>原图与锚框／掩膜／去字结果</h1>\");"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 57,
+        "length": 184,
+        "text": "            Path dir=input.resolve(\"逐页\").resolve(String.format(\"第%02d页\",page));BufferedImage source=ImageIO.read(dir.resolve(\"原图.png\").toFile());List<Region> regions=new ArrayList<>();"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 59,
+        "length": 154,
+        "text": "                JSONObject r=(JSONObject)raw;List<Rect> lines=new ArrayList<>();for(Object item:r.getJSONArray(\"lines\"))lines.add(rect((JSONObject)item));"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 60,
+        "length": 180,
+        "text": "                regions.add(new Region(r.getString(\"id\"),rect(r.getJSONObject(\"box\")),lines,r.optBoolean(\"vertical\"),r.has(\"contextBox\")?rect(r.getJSONObject(\"contextBox\")):null));"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 62,
+        "length": 141,
+        "text": "            if(args.length>2&&args[2].equals(\"predict\"))regions=predict(source,new JSONObject(Files.readString(dir.resolve(\"检测原始结果.json\"))));"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 64,
+        "length": 253,
+        "text": "                String key=String.format(\"p%02d_\",page)+region.id;JSONObject record=new JSONObject().put(\"key\",key).put(\"page\",page).put(\"id\",region.id).put(\"wasFallback\",fallback.contains(key)).put(\"oldFailure\",oldFailure.getOrDefault(key,\"\"));total++;"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 66,
+        "length": 248,
+        "text": "                if(bw>0&&bh>0){WhiteBubbleCleaner.Mask surface=WhiteBubbleCleaner.classifyOnly(source.getRGB(region.box.left,region.box.top,bw,bh,null,0,bw),bw,bh,new int[][]{{0,0,bw,bh}});record.put(\"surfaceClassification\",optionalKind(surface));}"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 68,
+        "length": 223,
+        "text": "                Rect roi=RtDetrRegions.renderBounds(region,source.getWidth(),source.getHeight());int w=roi.right-roi.left,h=roi.bottom-roi.top;int[][] lines=new int[region.lines.size()][4];int[] sizes=new int[lines.length];"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 69,
+        "length": 263,
+        "text": "                for(int i=0;i<lines.length;i++){Rect b=region.lines.get(i);lines[i]=new int[]{b.left-roi.left,b.top-roi.top,b.right-roi.left,b.bottom-roi.top};sizes[i]=Math.min(b.right-b.left,b.bottom-b.top);}Arrays.sort(sizes);int estimate=sizes[sizes.length/2];"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 70,
+        "length": 171,
+        "text": "                int[] pixels=source.getRGB(roi.left,roi.top,w,h,null,0,w);BeforeWhiteBubbleCleaner.Mask before=BeforeWhiteBubbleCleaner.forText(pixels,w,h,lines,estimate);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 71,
+        "length": 178,
+        "text": "                WhiteBubbleCleaner.Mask mask=WhiteBubbleCleaner.forText(pixels,w,h,lines,estimate);int[][] foreign=RtDetrRegions.foreignLines(regions,region.id,roi.left,roi.top);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 73,
+        "length": 173,
+        "text": "                boolean[] protectedErase=WhiteBubbleCleaner.excludeForeign(mask.erase,w,h,foreign);int protectedPixels=0;for(boolean p:protectedErase)if(p)protectedPixels++;"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 74,
+        "length": 243,
+        "text": "                WhiteBubbleCleaner.Mask protectedMask=new WhiteBubbleCleaner.Mask(protectedErase,mask.interior,mask.whiteBackground,protectedPixels,mask.fillColors,mask.texturedBackground,mask.glyphCandidate,mask.backgroundKind,mask.evidence);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 76,
+        "length": 207,
+        "text": "                if(before.whiteBackground)baselineValid++;if(mask.whiteBackground)newValid++;if(!before.whiteBackground&&mask.whiteBackground)gained++;if(before.whiteBackground&&!mask.whiteBackground)lost++;"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 77,
+        "length": 175,
+        "text": "                record.put(\"roi\",new JSONObject().put(\"x\",roi.left).put(\"y\",roi.top).put(\"width\",w).put(\"height\",h)).put(\"estimate\",estimate).put(\"lines\",new JSONArray(lines))"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 78,
+        "length": 194,
+        "text": "                    .put(\"beforeValid\",before.whiteBackground).put(\"beforeTextured\",before.texturedBackground).put(\"afterValid\",mask.whiteBackground).put(\"afterTextured\",mask.texturedBackground)"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 79,
+        "length": 206,
+        "text": "                    .put(\"beforePixels\",before.pixels).put(\"afterPixels\",mask.pixels).put(\"touchesForeign\",touches).put(\"protectedMaskPixels\",protectedPixels).put(\"protectedTouchesForeign\",protectedTouches)"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 80,
+        "length": 179,
+        "text": "                    .put(\"integratedLocalCandidate\",mask.whiteBackground&&mask.backgroundKind==WhiteBubbleCleaner.BackgroundKind.PLAIN_PAPER&&protectedPixels>0&&!protectedTouches)"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 81,
+        "length": 154,
+        "text": "                    .put(\"metrics\",statistics(pixels,w,h,lines)).put(\"classification\",optionalKind(mask)).put(\"recovery\",recovery(pixels,w,h,lines,mask));"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 83,
+        "length": 137,
+        "text": "                    BeforeWhiteBubbleCleaner.Mask white=(BeforeWhiteBubbleCleaner.Mask)strict.invoke(null,pixels,w,h,lines,estimate,225);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 87,
+        "length": 136,
+        "text": "                    BeforeWhiteBubbleCleaner.Mask open=(BeforeWhiteBubbleCleaner.Mask)local.invoke(null,pixels,w,h,lines,estimate,gray);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 89,
+        "length": 189,
+        "text": "                    record.put(\"strictWhite\",white.whiteBackground).put(\"paperPass\",gray.whiteBackground).put(\"paperTextured\",gray.texturedBackground).put(\"openWhite\",open.whiteBackground);"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 92,
+        "length": 410,
+        "text": "                    writeVisual(cuts,key,pixels,w,h,lines,mask,before);html.append(\"<h2>\").append(key).append(\" — \").append(before.whiteBackground).append(\" → \").append(mask.whiteBackground).append(\" \").append(optionalKind(mask)).append(\"</h2><section><img src='裁切/\").append(key).append(\"/anchors.png'><img src='裁切/\").append(key).append(\"/mask.png'><img src='裁切/\").append(key).append(\"/after.png'></section>\");"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 98,
+        "length": 193,
+        "text": "        JSONObject result=new JSONObject().put(\"total\",total).put(\"baselineValid\",baselineValid).put(\"newValid\",newValid).put(\"gained\",gained).put(\"lost\",lost).put(\"foreignInkHits\",foreignHits)"
+      },
+      {
+        "file": "tests/V090MaskAudit.java",
+        "line": 100,
+        "length": 219,
+        "text": "        Files.writeString(out.resolve(\"结果.json\"),result.toString(2));Files.writeString(out.resolve(\"对照.html\"),html.toString());System.out.println(result.toString().substring(0,Math.min(300,result.toString().length())));"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 15,
+        "length": 123,
+        "text": "    static JSONObject render(BufferedImage source,List<Region> regions,Region region,String text,Path out)throws Exception{"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 16,
+        "length": 177,
+        "text": "        JSONObject result=new JSONObject().put(\"id\",region.id).put(\"zh\",text).put(\"glyphCount\",text.replaceAll(\"\\\\s+\",\"\").codePointCount(0,text.replaceAll(\"\\\\s+\",\"\").length()));"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 17,
+        "length": 135,
+        "text": "        Rect roi=RtDetrRegions.renderBounds(region,source.getWidth(),source.getHeight());int w=roi.right-roi.left,h=roi.bottom-roi.top;"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 18,
+        "length": 229,
+        "text": "        int[] original=source.getRGB(roi.left,roi.top,w,h,null,0,w),cleaned=original.clone();BufferedImage before=V090MaskAudit.image(original,w,h),after=V090MaskAudit.image(original,w,h),filled=V090MaskAudit.image(original,w,h);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 24,
+        "length": 259,
+        "text": "            for(int i=0;i<lines.length;i++){Rect b=region.lines.get(i);lines[i]=new int[]{b.left-roi.left,b.top-roi.top,b.right-roi.left,b.bottom-roi.top};sizes[i]=Math.min(b.right-b.left,b.bottom-b.top);}Arrays.sort(sizes);int estimate=sizes[sizes.length/2];"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 25,
+        "length": 152,
+        "text": "            mask=WhiteBubbleCleaner.forText(original,w,h,lines,estimate);int[][] foreign=RtDetrRegions.foreignLines(regions,region.id,roi.left,roi.top);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 26,
+        "length": 133,
+        "text": "            boolean[] erase=WhiteBubbleCleaner.excludeForeign(mask.erase,w,h,foreign);int erased=0;for(boolean p:erase)if(p)erased++;"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 27,
+        "length": 305,
+        "text": "            result.put(\"maskValidBeforeForeignExclusion\",mask.whiteBackground).put(\"maskPixelsBeforeForeignExclusion\",mask.pixels).put(\"maskPixelsAfterForeignExclusion\",erased).put(\"kind\",mask.backgroundKind.name()).put(\"evidence\",mask.evidence).put(\"lines\",new JSONArray(lines)).put(\"estimate\",estimate);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 28,
+        "length": 188,
+        "text": "            mask=new WhiteBubbleCleaner.Mask(erase,mask.interior,mask.whiteBackground,erased,mask.fillColors,mask.texturedBackground,mask.glyphCandidate,mask.backgroundKind,mask.evidence);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 30,
+        "length": 146,
+        "text": "            else if(!mask.whiteBackground||mask.backgroundKind!=WhiteBubbleCleaner.BackgroundKind.PLAIN_PAPER)failure=\"unconfirmed_plain_cleanup\";"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 37,
+        "length": 136,
+        "text": "                    if(BubbleLayout.touchesForeignLines(plan,foreign))throw new AssertionError(\"Foreign paragraph touched: \"+region.id);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 38,
+        "length": 183,
+        "text": "                    for(int[] cell:plan.cells)for(int y=cell[1];y<cell[3];y++)for(int x=cell[0];x<cell[2];x++)if(!safe[y*w+x])throw new AssertionError(\"Layout escaped safe interior\");"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 39,
+        "length": 138,
+        "text": "                    WhiteBubbleCleaner.apply(cleaned,mask);after=V090MaskAudit.image(cleaned,w,h);filled=V090MaskAudit.image(cleaned,w,h);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 40,
+        "length": 152,
+        "text": "                    for(int p=0;p<original.length;p++)if(cleaned[p]!=original[p]&&!mask.erase[p])throw new AssertionError(\"Cleanup escaped glyph mask\");"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 41,
+        "length": 296,
+        "text": "                    Graphics2D g=filled.createGraphics();Font primary=new Font(\"Microsoft YaHei\",Font.PLAIN,plan.font),symbols=new Font(\"Segoe UI Symbol\",Font.PLAIN,plan.font);g.setColor(Color.BLACK);g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 42,
+        "length": 656,
+        "text": "                    for(int i=0;i<plan.cells.length;i++){int[] cell=plan.cells[i];String glyph=new String(Character.toChars(plan.codepoints[i]));Font selected=primary.canDisplay(plan.codepoints[i])?primary:symbols;if(!selected.canDisplay(plan.codepoints[i]))throw new AssertionError(\"Desktop preview font missing U+\"+Integer.toHexString(plan.codepoints[i]));g.setFont(selected);FontMetrics metrics=g.getFontMetrics();Shape clip=g.getClip();g.clipRect(cell[0],cell[1],cell[2]-cell[0],cell[3]-cell[1]);g.drawString(glyph,(cell[0]+cell[2]-metrics.stringWidth(glyph))/2,(cell[1]+cell[3]-metrics.getHeight())/2+metrics.getAscent());g.setClip(clip);}g.dispose();"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 43,
+        "length": 182,
+        "text": "                    result.put(\"font\",plan.font).put(\"vertical\",region.vertical).put(\"cells\",new JSONArray(plan.cells)).put(\"safeCells\",true).put(\"foreignInkAndCellsProtected\",true);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 48,
+        "length": 221,
+        "text": "        Files.createDirectories(out);ImageIO.write(before,\"png\",out.resolve(\"原图.png\").toFile());ImageIO.write(after,\"png\",out.resolve(\"仅去字.png\").toFile());ImageIO.write(filled,\"png\",out.resolve(\"黑字回填_桌面预览.png\").toFile());"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 49,
+        "length": 358,
+        "text": "        BufferedImage panel=new BufferedImage(w*3+12,h,BufferedImage.TYPE_INT_RGB);Graphics2D g=panel.createGraphics();g.setColor(new Color(220,220,220));g.fillRect(0,0,panel.getWidth(),h);g.drawImage(before,0,0,null);g.drawImage(after,w+6,0,null);g.drawImage(filled,w*2+12,0,null);g.dispose();ImageIO.write(panel,\"png\",out.resolve(\"原图_去字_回填.png\").toFile());"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 53,
+        "length": 143,
+        "text": "        Path input=Paths.get(args[0]),labels=Paths.get(args[1]),out=Paths.get(args[2]),project=Paths.get(args[3]);Files.createDirectories(out);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 54,
+        "length": 399,
+        "text": "        JSONArray samples=new JSONArray(),failures=new JSONArray();int passed=0,total=0;StringBuilder html=new StringBuilder(\"<!doctype html><meta charset='utf-8'><title>普通白底真实译文回填</title><style>body{font:16px system-ui;background:#eee}img{max-width:100%;border:1px solid #aaa}</style><h1>普通白底真实译文回填</h1><p>从左到右：原图、仅去字、黑字回填。使用已有真实缓存译文和生产几何算法；字形由 Windows Microsoft YaHei 绘制，未验证 Android Canvas。</p>\");"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 55,
+        "length": 168,
+        "text": "        for(Object raw:new JSONArray(Files.readString(labels))){JSONObject label=(JSONObject)raw;if(!label.getString(\"category\").equals(\"plain_white\"))continue;total++;"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 56,
+        "length": 472,
+        "text": "            String key=label.getString(\"id\"),id=key.substring(key.indexOf('_')+1);Path dir=Paths.get(label.getString(\"source\")).getParent();BufferedImage image=ImageIO.read(dir.resolve(\"原图.png\").toFile());List<Region> regions=V090MaskAudit.predict(image,new JSONObject(Files.readString(dir.resolve(\"检测原始结果.json\"))));Region region=null;for(Region candidate:regions)if(candidate.id.equals(id))region=candidate;if(region==null)throw new AssertionError(\"Missing region \"+key);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 57,
+        "length": 333,
+        "text": "            JSONObject translation=null;for(Object item:new JSONObject(Files.readString(dir.resolve(\"真实译文.json\"))).getJSONArray(\"translations\"))if(((JSONObject)item).getString(\"id\").equals(id))translation=(JSONObject)item;if(translation==null||translation.optBoolean(\"skip\"))throw new AssertionError(\"Missing real translation \"+key);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 58,
+        "length": 225,
+        "text": "            JSONObject result=render(image,regions,region,translation.getString(\"zh\"),out.resolve(key)).put(\"sample\",key).put(\"source\",dir.resolve(\"原图.png\").toString()).put(\"visualCategory\",\"plain_white\");samples.put(result);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 59,
+        "length": 167,
+        "text": "            if(result.getString(\"status\").equals(\"cleaned_layout\"))passed++;else failures.put(new JSONObject().put(\"id\",key).put(\"status\",result.getString(\"status\")));"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 60,
+        "length": 171,
+        "text": "            html.append(\"<h2>\").append(key).append(\" — \").append(result.getString(\"status\")).append(\"</h2><img src='\").append(key).append(\"/原图_去字_回填.png'>\");image.flush();"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 62,
+        "length": 299,
+        "text": "        JSONObject hashes=new JSONObject();for(String name:new String[]{\"WhiteBubbleCleaner\",\"RtDetrRegions\",\"BubbleLayout\"})hashes.put(name,HexFormat.of().formatHex(MessageDigest.getInstance(\"SHA-256\").digest(Files.readAllBytes(project.resolve(\"app/src/main/java/cn/local/manga/\"+name+\".java\")))));"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 63,
+        "length": 361,
+        "text": "        JSONObject report=new JSONObject().put(\"total\",total).put(\"accepted\",passed).put(\"failed\",total-passed).put(\"failures\",failures).put(\"cachedRealTranslations\",true).put(\"paidApiUsed\",false).put(\"productionMaskAndLayout\",true).put(\"engineForeignExclusionMirrored\",true).put(\"androidCanvasVerified\",false).put(\"sourceSha256\",hashes).put(\"samples\",samples);"
+      },
+      {
+        "file": "tests/V090PlainRenderingChecks.java",
+        "line": 64,
+        "length": 209,
+        "text": "        Files.writeString(out.resolve(\"结果.json\"),report.toString(2));Files.writeString(out.resolve(\"对照.html\"),html.toString());System.out.println(\"PLAIN REAL RENDER: \"+passed+\"/\"+total+\"; failures=\"+failures);"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 17,
+        "length": 352,
+        "text": "    static BufferedImage fixture(Color background){BufferedImage image=new BufferedImage(160,220,BufferedImage.TYPE_INT_RGB);Graphics2D g=image.createGraphics();g.setColor(background);g.fillRect(0,0,160,220);g.setColor(Color.WHITE);g.setFont(new Font(\"Dialog\",Font.BOLD,18));for(int y=35;y<200;y+=32)g.drawString(\"TEXT\",30,y);g.dispose();return image;}"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 18,
+        "length": 236,
+        "text": "    static WhiteBubbleCleaner.Mask classify(BufferedImage b){return WhiteBubbleCleaner.classifyOnly(b.getRGB(0,0,b.getWidth(),b.getHeight(),null,0,b.getWidth()),b.getWidth(),b.getHeight(),new int[][]{{0,0,b.getWidth(),b.getHeight()}});}"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 21,
+        "length": 155,
+        "text": "        check(dark.backgroundKind==WhiteBubbleCleaner.BackgroundKind.TEXTURED_ART,\"white text on black receives an affirmative background classification\");"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 23,
+        "length": 140,
+        "text": "        check(!dark.whiteBackground&&dark.pixels==0&&Arrays.equals(before,after),\"classification-only never authorizes or changes a pixel\");"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 24,
+        "length": 181,
+        "text": "        check(classify(fixture(new Color(40,85,160))).backgroundKind==WhiteBubbleCleaner.BackgroundKind.TEXTURED_ART,\"colored image background is recognized from target text area\");"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 25,
+        "length": 157,
+        "text": "        BufferedImage mixed=fixture(new Color(100,100,100));Graphics2D g=mixed.createGraphics();g.setColor(Color.WHITE);g.fillOval(85,25,65,115);g.dispose();"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 26,
+        "length": 174,
+        "text": "        check(classify(mixed).backgroundKind==WhiteBubbleCleaner.BackgroundKind.UNCERTAIN,\"paragraph containing a large white compartment and dark background remains mixed\");"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 27,
+        "length": 169,
+        "text": "        int[] white=new int[160*220];Arrays.fill(white,0xffffffff);for(int y=15;y<205;y++)for(int x=15;x<145;x++)if(x<17||x>=143||y<17||y>=203)white[y*160+x]=0xff000000;"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 28,
+        "length": 139,
+        "text": "        for(int y=45;y<185;y+=30)for(int yy=y;yy<y+14;yy++)for(int x=65;x<80;x++)if(x<68||x>77||yy<y+3||yy>y+11)white[yy*160+x]=0xff000000;"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 30,
+        "length": 171,
+        "text": "        check(paper.whiteBackground&&paper.backgroundKind==WhiteBubbleCleaner.BackgroundKind.PLAIN_PAPER,\"closed white paper plus confirmed glyphs permits local cleanup\");"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 33,
+        "length": 133,
+        "text": "        check(adjacent.whiteBackground,\"a separate unrecognized mark inside the balloon does not prevent cleanup of confirmed text\");"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 34,
+        "length": 160,
+        "text": "        for(int y=55;y<80;y++)for(int x=115;x<124;x++)if(adjacent.erase[y*160+x])throw new AssertionError(\"undetected neighboring lettering or art was erased\");"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 40,
+        "length": 143,
+        "text": "        check(!incomplete.whiteBackground&&incomplete.pixels==0,\"a removable tiny fragment must not hide the unremoved connected main stroke\");"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 41,
+        "length": 153,
+        "text": "        int[] noInk=new int[20*20];Arrays.fill(noInk,0xffffffff);WhiteBubbleCleaner.Mask blank=WhiteBubbleCleaner.classifyOnly(noInk,20,20,new int[0][]);"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 42,
+        "length": 135,
+        "text": "        check(blank.backgroundKind==WhiteBubbleCleaner.BackgroundKind.UNCERTAIN&&blank.pixels==0,\"empty target scope stays uncertain\");"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 43,
+        "length": 154,
+        "text": "        boolean invalid=false;try{WhiteBubbleCleaner.classifyOnly(new int[1],2,2,new int[][]{{0,0,2,2}});}catch(IllegalArgumentException e){invalid=true;}"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 47,
+        "length": 140,
+        "text": "        Path benchmark=Paths.get(args[0]),out=Paths.get(args[1]);Files.createDirectories(out);synthetic();JSONArray results=new JSONArray();"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 50,
+        "length": 209,
+        "text": "            JSONObject item=(JSONObject)raw;BufferedImage image=ImageIO.read(Paths.get(item.getString(\"source\")).toFile());String id=item.getString(\"id\"),regionId=item.getString(\"regionId\");Region region=null;"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 52,
+        "length": 146,
+        "text": "                :Paths.get(\"E:/codexwork/漫画检测模型评测_20260929/results/rtdetr_legacy_r50_int8_t4\",String.format(\"page%02d.json\",item.getInt(\"page\")));"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 53,
+        "length": 200,
+        "text": "            if(Files.isRegularFile(prediction))for(Region candidate:V090MaskAudit.predict(image,new JSONObject(Files.readString(prediction))))if(candidate.id.equals(regionId)){region=candidate;break;}"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 54,
+        "length": 281,
+        "text": "            if(region==null){List<Rect> lines=new ArrayList<>();for(Object line:item.getJSONArray(\"lines\"))lines.add(rect((JSONArray)line));Rect target=rect(item.getJSONArray(\"targetBox\"));region=new Region(regionId,target,lines,target.bottom-target.top>target.right-target.left);}"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 55,
+        "length": 233,
+        "text": "            Rect box=region.box;int bw=box.right-box.left,bh=box.bottom-box.top;WhiteBubbleCleaner.Mask surface=WhiteBubbleCleaner.classifyOnly(image.getRGB(box.left,box.top,bw,bh,null,0,bw),bw,bh,new int[][]{{0,0,bw,bh}}),mask=null;"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 57,
+        "length": 221,
+        "text": "                Rect roi=RtDetrRegions.renderBounds(region,image.getWidth(),image.getHeight());int w=roi.right-roi.left,h=roi.bottom-roi.top;int[][] lines=new int[region.lines.size()][4];int[] sizes=new int[lines.length];"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 58,
+        "length": 255,
+        "text": "                for(int i=0;i<lines.length;i++){Rect line=region.lines.get(i);lines[i]=new int[]{line.left-roi.left,line.top-roi.top,line.right-roi.left,line.bottom-roi.top};sizes[i]=Math.min(line.right-line.left,line.bottom-line.top);}Arrays.sort(sizes);"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 59,
+        "length": 125,
+        "text": "                mask=WhiteBubbleCleaner.forText(image.getRGB(roi.left,roi.top,w,h,null,0,w),w,h,lines,sizes[sizes.length/2]);"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 61,
+        "length": 135,
+        "text": "            WhiteBubbleCleaner.Mask selected=mask!=null&&mask.backgroundKind!=WhiteBubbleCleaner.BackgroundKind.UNCERTAIN?mask:surface;"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 62,
+        "length": 227,
+        "text": "            String category=item.getString(\"category\");if(category.equals(\"plain_white\")){plainTotal++;if(selected.backgroundKind==WhiteBubbleCleaner.BackgroundKind.PLAIN_PAPER&&mask!=null&&mask.whiteBackground)plainCorrect++;}"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 63,
+        "length": 300,
+        "text": "            else if(category.equals(\"background_text\")){backgroundTotal++;if(selected.backgroundKind==WhiteBubbleCleaner.BackgroundKind.TEXTURED_ART)backgroundCorrect++;check(selected.backgroundKind!=WhiteBubbleCleaner.BackgroundKind.PLAIN_PAPER,id+\" background text must never become plain paper\");}"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 64,
+        "length": 231,
+        "text": "            else{mixedTotal++;if(selected.backgroundKind==WhiteBubbleCleaner.BackgroundKind.UNCERTAIN||(selected.backgroundKind==WhiteBubbleCleaner.BackgroundKind.PLAIN_PAPER&&mask!=null&&mask.whiteBackground))mixedConservative++;}"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 66,
+        "length": 161,
+        "text": "            results.put(new JSONObject().put(\"id\",id).put(\"visualCategory\",category).put(\"kind\",selected.backgroundKind.name()).put(\"evidence\",selected.evidence)"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 67,
+        "length": 162,
+        "text": "                .put(\"maskValid\",mask!=null&&mask.whiteBackground).put(\"maskPixels\",mask==null?0:mask.pixels).put(\"surfaceOnlyKind\",surface.backgroundKind.name())"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 68,
+        "length": 212,
+        "text": "                .put(\"mixedLabelMeaning\",\"Whole paragraph context can be mixed while an independently verified glyph mask stays inside white paper; mixed labels alone are not pixel-level failure ground truth.\"));"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 71,
+        "length": 214,
+        "text": "        JSONObject report=new JSONObject().put(\"checksPassed\",checks).put(\"plainLocal\",plainCorrect).put(\"plainTotal\",plainTotal).put(\"backgroundIdentified\",backgroundCorrect).put(\"backgroundTotal\",backgroundTotal)"
+      },
+      {
+        "file": "tests/V090SurfaceChecks.java",
+        "line": 72,
+        "length": 234,
+        "text": "            .put(\"mixedConservativeOrVerifiedLocal\",mixedConservative).put(\"mixedTotal\",mixedTotal).put(\"classificationVisualGroundTruth\",true).put(\"pixelSegmentationGroundTruth\",false).put(\"paidApiUsed\",false).put(\"samples\",results);"
+      },
+      {
+        "file": "tests/WebsiteMangaInput.java",
+        "line": 435,
+        "length": 181,
+        "text": "                            + \" 0}figure{display:inline-block;width:48%;margin:0;vertical-align:top}img{max-width:100%}code{font-size:12px}</style><h1>新素材真实检测审查</h1><p>每页左为新原图，右为真实\""
+      }
+    ]
+  }
+}

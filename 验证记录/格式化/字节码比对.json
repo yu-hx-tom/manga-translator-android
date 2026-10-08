@@ -1,0 +1,2844 @@
+{
+  "beforeClasses": 707,
+  "afterClasses": 707,
+  "added": [],
+  "removed": [],
+  "different": [],
+  "identicalClasses": 707,
+  "javapIdentical": true,
+  "ignoredAttributes": [
+    "Code.LineNumberTable"
+  ],
+  "preserved": "All remaining bytes including constant pool, annotations, access flags, bootstrap methods, exception tables and local-variable metadata",
+  "classHashes": {
+    "algorithm/android/content/Context.class": {
+      "before": "375e84160474d7fb18aafaa741beb1bc1e82ff58ca3cd1e7d54486c7545da5bd",
+      "after": "375e84160474d7fb18aafaa741beb1bc1e82ff58ca3cd1e7d54486c7545da5bd"
+    },
+    "algorithm/android/graphics/Bitmap$CompressFormat.class": {
+      "before": "fdcb88297056b805e60b030a31475592d718716d237a8311803e4bf47abbd2c0",
+      "after": "fdcb88297056b805e60b030a31475592d718716d237a8311803e4bf47abbd2c0"
+    },
+    "algorithm/android/graphics/Bitmap$Config.class": {
+      "before": "db3a13d0c47d20e24e1a714d1f1975af690daeb85f22292b4e7c99c7a8240542",
+      "after": "db3a13d0c47d20e24e1a714d1f1975af690daeb85f22292b4e7c99c7a8240542"
+    },
+    "algorithm/android/graphics/Bitmap.class": {
+      "before": "8e58c4d778eac47e4de781adb50aacd6b4e3d450330a525e648a6e70fbb15ce3",
+      "after": "8e58c4d778eac47e4de781adb50aacd6b4e3d450330a525e648a6e70fbb15ce3"
+    },
+    "algorithm/android/graphics/BitmapFactory$Options.class": {
+      "before": "bb3dde7c23423230555a38fcd10c4a10ea1cd5158f99bb66fa3cd55907880d14",
+      "after": "bb3dde7c23423230555a38fcd10c4a10ea1cd5158f99bb66fa3cd55907880d14"
+    },
+    "algorithm/android/graphics/BitmapFactory.class": {
+      "before": "d597293add9f2babe0c781adf7c36c995c582ebf0a08374cb998f2a628cf159e",
+      "after": "d597293add9f2babe0c781adf7c36c995c582ebf0a08374cb998f2a628cf159e"
+    },
+    "algorithm/android/graphics/Rect.class": {
+      "before": "fca87a7583788cd47cfdc4863e5e684dc04cc5d3d50816fd806ca088cad4f038",
+      "after": "fca87a7583788cd47cfdc4863e5e684dc04cc5d3d50816fd806ca088cad4f038"
+    },
+    "algorithm/android/os/SystemClock.class": {
+      "before": "fee112e8f21fe51c9bbab84ca9165518fb22f0e145ca2d9f535c789f3e68cade",
+      "after": "fee112e8f21fe51c9bbab84ca9165518fb22f0e145ca2d9f535c789f3e68cade"
+    },
+    "algorithm/android/system/ErrnoException.class": {
+      "before": "a4b9199069ff8054461d15f9e3043962defaeb56d4a67118a1c111016d3b48ab",
+      "after": "a4b9199069ff8054461d15f9e3043962defaeb56d4a67118a1c111016d3b48ab"
+    },
+    "algorithm/android/system/Os.class": {
+      "before": "0ba6f9a78fa7f60cb5db24b6a7d1ce31891b6068585a4a0c23fa8cfb1fe02656",
+      "after": "0ba6f9a78fa7f60cb5db24b6a7d1ce31891b6068585a4a0c23fa8cfb1fe02656"
+    },
+    "algorithm/android/system/OsConstants.class": {
+      "before": "0b72f75198dfabe4c99ed8faa69cdc7a6e5380ce5d12b3feeba35a2513b00cb7",
+      "after": "0b72f75198dfabe4c99ed8faa69cdc7a6e5380ce5d12b3feeba35a2513b00cb7"
+    },
+    "algorithm/android/system/StructStat.class": {
+      "before": "3bc474987c168ea8e566277db1e4518a8f700bfd621e76a22a71ec1c93a352be",
+      "after": "3bc474987c168ea8e566277db1e4518a8f700bfd621e76a22a71ec1c93a352be"
+    },
+    "algorithm/android/util/Base64.class": {
+      "before": "d08e59ffb67b6111efd0dfc031ec1fc69e4b4ff08a4f45d7b97c7ee366e0b2a1",
+      "after": "d08e59ffb67b6111efd0dfc031ec1fc69e4b4ff08a4f45d7b97c7ee366e0b2a1"
+    },
+    "algorithm/cn/local/manga/CleanupPlanChecks.class": {
+      "before": "b02fb75ad72a7887de4f60493c6c517ab333d34efe8dbca9ee27bd6b7e61d583",
+      "after": "b02fb75ad72a7887de4f60493c6c517ab333d34efe8dbca9ee27bd6b7e61d583"
+    },
+    "algorithm/cn/local/manga/CropTextLayoutChecks.class": {
+      "before": "2be868fc32a8d7dde1b32312d46183d9849592ddf609fb1f5b211541f3a29191",
+      "after": "2be868fc32a8d7dde1b32312d46183d9849592ddf609fb1f5b211541f3a29191"
+    },
+    "algorithm/cn/local/manga/Detector.class": {
+      "before": "e529ef72c70818c130ae35e5a43fcada4837cd45056c20a38e8469e09bad60ab",
+      "after": "e529ef72c70818c130ae35e5a43fcada4837cd45056c20a38e8469e09bad60ab"
+    },
+    "algorithm/cn/local/manga/LocalOverlayChecks.class": {
+      "before": "c59879445a410d22aeccd6fafb4dc8ee690e7d8ff009195a26dd832440f16771",
+      "after": "c59879445a410d22aeccd6fafb4dc8ee690e7d8ff009195a26dd832440f16771"
+    },
+    "algorithm/cn/local/manga/PartialRetryChecks$1.class": {
+      "before": "d84d5bfa3fc14941805c2903fe5699dc7b4fad2bf208f0fd0f2178a5903b42e7",
+      "after": "d84d5bfa3fc14941805c2903fe5699dc7b4fad2bf208f0fd0f2178a5903b42e7"
+    },
+    "algorithm/cn/local/manga/PartialRetryChecks.class": {
+      "before": "37c3824b563de645f6b2c672b1ee7a737dec0269945b713d84c371a1399ef293",
+      "after": "37c3824b563de645f6b2c672b1ee7a737dec0269945b713d84c371a1399ef293"
+    },
+    "algorithm/cn/local/manga/PerformanceDiagnosticsHostChecks.class": {
+      "before": "5f63330eb59eb5d4b9a8b889ea25a9ec485e7fffd6fac919b0dd6ddfe68a531c",
+      "after": "5f63330eb59eb5d4b9a8b889ea25a9ec485e7fffd6fac919b0dd6ddfe68a531c"
+    },
+    "algorithm/cn/local/manga/RenderedPageCacheChecks.class": {
+      "before": "3f07926cc9aad85f175ee02a38abf548ee796b8eff2b64e58a6916d55efe05ac",
+      "after": "3f07926cc9aad85f175ee02a38abf548ee796b8eff2b64e58a6916d55efe05ac"
+    },
+    "algorithm/cn/local/manga/RtDetrDetector.class": {
+      "before": "1f513d75786f92da09dc9411f0cc690bf79fa3042c3b36e01b2ea6b8f2a94368",
+      "after": "1f513d75786f92da09dc9411f0cc690bf79fa3042c3b36e01b2ea6b8f2a94368"
+    },
+    "algorithm/cn/local/manga/TargetedBubbleChecks.class": {
+      "before": "9caf548932f00d57eb3105a6ac1c7a6b40952cbd6d4f3106cf54d00580d3e45e",
+      "after": "9caf548932f00d57eb3105a6ac1c7a6b40952cbd6d4f3106cf54d00580d3e45e"
+    },
+    "all-host/classes/IconGlyphChecks.class": {
+      "before": "57fd290997dfb2dab854b1fef1cfec7869f5fcac6fb15dc27a480f37dce28811",
+      "after": "57fd290997dfb2dab854b1fef1cfec7869f5fcac6fb15dc27a480f37dce28811"
+    },
+    "all-host/classes/Ui110SourceChecks$1.class": {
+      "before": "b9aa766bdc4335f5a32c1d83fa10ecc045112fe42c6ae5f8ef4e64457a31e991",
+      "after": "b9aa766bdc4335f5a32c1d83fa10ecc045112fe42c6ae5f8ef4e64457a31e991"
+    },
+    "all-host/classes/Ui110SourceChecks.class": {
+      "before": "5e0056f9c39c3b13d5aba46a860e889a4d0ef53806020995159efd07471dc073",
+      "after": "5e0056f9c39c3b13d5aba46a860e889a4d0ef53806020995159efd07471dc073"
+    },
+    "all-host/classes/android/content/Context.class": {
+      "before": "b8157d52a1c366dbcdce49e34e3bb81b521e81fbea73438a8fac98a2fd67ad06",
+      "after": "b8157d52a1c366dbcdce49e34e3bb81b521e81fbea73438a8fac98a2fd67ad06"
+    },
+    "all-host/classes/android/database/Cursor.class": {
+      "before": "2e693d8f0c69c5bc96507c4a892169824bf8e04a8eb76b2883fa05f5beaeeb89",
+      "after": "2e693d8f0c69c5bc96507c4a892169824bf8e04a8eb76b2883fa05f5beaeeb89"
+    },
+    "all-host/classes/android/database/DatabaseErrorHandler.class": {
+      "before": "67a6f0ca4597018bc319efc77b2143d5325f4d571ceee519350cfc392facb9bc",
+      "after": "67a6f0ca4597018bc319efc77b2143d5325f4d571ceee519350cfc392facb9bc"
+    },
+    "all-host/classes/android/database/sqlite/SQLiteDatabase$1.class": {
+      "before": "5712f6d178bd3633e93eca328e75a3f8e9f39e595c4904146b0923457831b612",
+      "after": "5712f6d178bd3633e93eca328e75a3f8e9f39e595c4904146b0923457831b612"
+    },
+    "all-host/classes/android/database/sqlite/SQLiteDatabase$CursorFactory.class": {
+      "before": "6ccd790fa3a5125cd76b14ad96926cb0d229f7c664a99f4e18af3720baa65311",
+      "after": "6ccd790fa3a5125cd76b14ad96926cb0d229f7c664a99f4e18af3720baa65311"
+    },
+    "all-host/classes/android/database/sqlite/SQLiteDatabase.class": {
+      "before": "2cdf7105d8e529175b245f9b9dc9453f8d3c31ceaa6a07e6e0ee13a1d2c8d090",
+      "after": "2cdf7105d8e529175b245f9b9dc9453f8d3c31ceaa6a07e6e0ee13a1d2c8d090"
+    },
+    "all-host/classes/android/graphics/Bitmap$CompressFormat.class": {
+      "before": "fdcb88297056b805e60b030a31475592d718716d237a8311803e4bf47abbd2c0",
+      "after": "fdcb88297056b805e60b030a31475592d718716d237a8311803e4bf47abbd2c0"
+    },
+    "all-host/classes/android/graphics/Bitmap$Config.class": {
+      "before": "db3a13d0c47d20e24e1a714d1f1975af690daeb85f22292b4e7c99c7a8240542",
+      "after": "db3a13d0c47d20e24e1a714d1f1975af690daeb85f22292b4e7c99c7a8240542"
+    },
+    "all-host/classes/android/graphics/Bitmap.class": {
+      "before": "8e58c4d778eac47e4de781adb50aacd6b4e3d450330a525e648a6e70fbb15ce3",
+      "after": "8e58c4d778eac47e4de781adb50aacd6b4e3d450330a525e648a6e70fbb15ce3"
+    },
+    "all-host/classes/android/graphics/BitmapFactory$Options.class": {
+      "before": "bb3dde7c23423230555a38fcd10c4a10ea1cd5158f99bb66fa3cd55907880d14",
+      "after": "bb3dde7c23423230555a38fcd10c4a10ea1cd5158f99bb66fa3cd55907880d14"
+    },
+    "all-host/classes/android/graphics/BitmapFactory.class": {
+      "before": "d597293add9f2babe0c781adf7c36c995c582ebf0a08374cb998f2a628cf159e",
+      "after": "d597293add9f2babe0c781adf7c36c995c582ebf0a08374cb998f2a628cf159e"
+    },
+    "all-host/classes/android/graphics/Rect.class": {
+      "before": "fca87a7583788cd47cfdc4863e5e684dc04cc5d3d50816fd806ca088cad4f038",
+      "after": "fca87a7583788cd47cfdc4863e5e684dc04cc5d3d50816fd806ca088cad4f038"
+    },
+    "all-host/classes/android/os/Looper.class": {
+      "before": "31845cd8ac8f7060723f3cd756f8b94ec778327388f7e4c614c52e8ce15cb4db",
+      "after": "31845cd8ac8f7060723f3cd756f8b94ec778327388f7e4c614c52e8ce15cb4db"
+    },
+    "all-host/classes/android/os/StatFs.class": {
+      "before": "b523263b977f27ba096cf08c8e04ad390647ebcc43d1bb70a99e9600414d5b01",
+      "after": "b523263b977f27ba096cf08c8e04ad390647ebcc43d1bb70a99e9600414d5b01"
+    },
+    "all-host/classes/android/os/SystemClock.class": {
+      "before": "fee112e8f21fe51c9bbab84ca9165518fb22f0e145ca2d9f535c789f3e68cade",
+      "after": "fee112e8f21fe51c9bbab84ca9165518fb22f0e145ca2d9f535c789f3e68cade"
+    },
+    "all-host/classes/android/system/ErrnoException.class": {
+      "before": "a4b9199069ff8054461d15f9e3043962defaeb56d4a67118a1c111016d3b48ab",
+      "after": "a4b9199069ff8054461d15f9e3043962defaeb56d4a67118a1c111016d3b48ab"
+    },
+    "all-host/classes/android/system/Os.class": {
+      "before": "0ba6f9a78fa7f60cb5db24b6a7d1ce31891b6068585a4a0c23fa8cfb1fe02656",
+      "after": "0ba6f9a78fa7f60cb5db24b6a7d1ce31891b6068585a4a0c23fa8cfb1fe02656"
+    },
+    "all-host/classes/android/system/OsConstants.class": {
+      "before": "0b72f75198dfabe4c99ed8faa69cdc7a6e5380ce5d12b3feeba35a2513b00cb7",
+      "after": "0b72f75198dfabe4c99ed8faa69cdc7a6e5380ce5d12b3feeba35a2513b00cb7"
+    },
+    "all-host/classes/android/system/StructStat.class": {
+      "before": "3bc474987c168ea8e566277db1e4518a8f700bfd621e76a22a71ec1c93a352be",
+      "after": "3bc474987c168ea8e566277db1e4518a8f700bfd621e76a22a71ec1c93a352be"
+    },
+    "all-host/classes/android/util/Base64.class": {
+      "before": "d08e59ffb67b6111efd0dfc031ec1fc69e4b4ff08a4f45d7b97c7ee366e0b2a1",
+      "after": "d08e59ffb67b6111efd0dfc031ec1fc69e4b4ff08a4f45d7b97c7ee366e0b2a1"
+    },
+    "all-host/classes/android/util/LruCache.class": {
+      "before": "3646e56867ce64ee8687686fa4b85540d3b32cf589d64618d01be1f9ffa8474b",
+      "after": "3646e56867ce64ee8687686fa4b85540d3b32cf589d64618d01be1f9ffa8474b"
+    },
+    "all-host/classes/android/webkit/CookieManager.class": {
+      "before": "2d569534c34d513a5b78a6bf1fee9cddfd514af1e8fe361e42f19bf8c6248bc0",
+      "after": "2d569534c34d513a5b78a6bf1fee9cddfd514af1e8fe361e42f19bf8c6248bc0"
+    },
+    "all-host/classes/cn/local/manga/AdaptiveTypographyChecks.class": {
+      "before": "15ebdca91ae918acc214b361fbaa66ff31fa228e741edf6dcb5460a9d4fc7063",
+      "after": "15ebdca91ae918acc214b361fbaa66ff31fa228e741edf6dcb5460a9d4fc7063"
+    },
+    "all-host/classes/cn/local/manga/ApiPresetChecks$Action.class": {
+      "before": "e6fa0b31a32a80f0506c823da981b1b492b858440679752a6eedb162a5e3ca24",
+      "after": "e6fa0b31a32a80f0506c823da981b1b492b858440679752a6eedb162a5e3ca24"
+    },
+    "all-host/classes/cn/local/manga/ApiPresetChecks.class": {
+      "before": "7bf5aa9063f410dd13d96a53d1d9e6b63f2bedffd074cfba363d95fcfc9de38c",
+      "after": "7bf5aa9063f410dd13d96a53d1d9e6b63f2bedffd074cfba363d95fcfc9de38c"
+    },
+    "all-host/classes/cn/local/manga/ApiRetryChecks$1.class": {
+      "before": "a2b735a44817f1b07e49744526afbd8032e5def8d9890f9af5f4021e2a31ae50",
+      "after": "a2b735a44817f1b07e49744526afbd8032e5def8d9890f9af5f4021e2a31ae50"
+    },
+    "all-host/classes/cn/local/manga/ApiRetryChecks$FakeConnection.class": {
+      "before": "efe64bbeb167c9261a07a736f2a59d5daf9006f20a15a641fac73d66cf3cf41a",
+      "after": "efe64bbeb167c9261a07a736f2a59d5daf9006f20a15a641fac73d66cf3cf41a"
+    },
+    "all-host/classes/cn/local/manga/ApiRetryChecks$Reply.class": {
+      "before": "7c07c61b6ab793b8b757c5a8e4504b57ac7f23d09b4268d082ca948c3d7ad5a0",
+      "after": "7c07c61b6ab793b8b757c5a8e4504b57ac7f23d09b4268d082ca948c3d7ad5a0"
+    },
+    "all-host/classes/cn/local/manga/ApiRetryChecks.class": {
+      "before": "4dfa4d6c60528de96a689403da6d5b6d02dba873a78a16596d75723771eb1b78",
+      "after": "4dfa4d6c60528de96a689403da6d5b6d02dba873a78a16596d75723771eb1b78"
+    },
+    "all-host/classes/cn/local/manga/ApiTransportChecks.class": {
+      "before": "7fa4405193bee7d6078c15e172aa231afb084db4f976da4d11f0e7292bfbb8a4",
+      "after": "7fa4405193bee7d6078c15e172aa231afb084db4f976da4d11f0e7292bfbb8a4"
+    },
+    "all-host/classes/cn/local/manga/AuditCacheUpgradeChecks.class": {
+      "before": "317e780931ea78af6a9801a73c1d3ea92891ae7a238f2cd8f4164e833a5db1f9",
+      "after": "317e780931ea78af6a9801a73c1d3ea92891ae7a238f2cd8f4164e833a5db1f9"
+    },
+    "all-host/classes/cn/local/manga/AutoTranslationQueueChecks.class": {
+      "before": "5ba9fa68b36dff1b8faa2ccab1171bc0ae4e9a0f40e0167613bf22870d235a8f",
+      "after": "5ba9fa68b36dff1b8faa2ccab1171bc0ae4e9a0f40e0167613bf22870d235a8f"
+    },
+    "all-host/classes/cn/local/manga/BackgroundTextRunner.class": {
+      "before": "436c3008221fb30ba9a5fa1b6d15b31b04cdff033551212c2d6d2f5c3db92386",
+      "after": "436c3008221fb30ba9a5fa1b6d15b31b04cdff033551212c2d6d2f5c3db92386"
+    },
+    "all-host/classes/cn/local/manga/BaselineMangaReview.class": {
+      "before": "02adb26f6ea8b2c1011beda35a7b21334320225553db7c8745146d1bc895976a",
+      "after": "02adb26f6ea8b2c1011beda35a7b21334320225553db7c8745146d1bc895976a"
+    },
+    "all-host/classes/cn/local/manga/BatchImageCleanupChecks.class": {
+      "before": "eeb75ce7ea7e184484d6da2fbf0d2268a2a28780b3bbc2a532d982a46df48987",
+      "after": "eeb75ce7ea7e184484d6da2fbf0d2268a2a28780b3bbc2a532d982a46df48987"
+    },
+    "all-host/classes/cn/local/manga/BatchImageCleanupConcurrencyChecks.class": {
+      "before": "778d25a17ff94161bce09180ec2da7a2ccc7d8df3a8b5f486d32307bc0d5d860",
+      "after": "778d25a17ff94161bce09180ec2da7a2ccc7d8df3a8b5f486d32307bc0d5d860"
+    },
+    "all-host/classes/cn/local/manga/BatchImageCleanupRunner$Plan.class": {
+      "before": "f98f41c7b6a6625fa4b3514991e3d73ea038a8ab1b587a7b3351fa041a718387",
+      "after": "f98f41c7b6a6625fa4b3514991e3d73ea038a8ab1b587a7b3351fa041a718387"
+    },
+    "all-host/classes/cn/local/manga/BatchImageCleanupRunner$Spec.class": {
+      "before": "ded5b7fbd833725758e868656ca6af2f370bd07923c8f5b0bc86bddd732f2e2d",
+      "after": "ded5b7fbd833725758e868656ca6af2f370bd07923c8f5b0bc86bddd732f2e2d"
+    },
+    "all-host/classes/cn/local/manga/BatchImageCleanupRunner.class": {
+      "before": "5b418694889f4a550221a51076896db056ee619660f5e836672cbfb6080badce",
+      "after": "5b418694889f4a550221a51076896db056ee619660f5e836672cbfb6080badce"
+    },
+    "all-host/classes/cn/local/manga/BatchMangaTranslationReview$Geometry.class": {
+      "before": "d3356aba891bc16cdf9fc77b5ef0e52eeb2df053695a057e63e50b5110e85800",
+      "after": "d3356aba891bc16cdf9fc77b5ef0e52eeb2df053695a057e63e50b5110e85800"
+    },
+    "all-host/classes/cn/local/manga/BatchMangaTranslationReview.class": {
+      "before": "4f4e8344e8d01fc96b26263bbd004dec0e602007182e3ba1599c1cbf3df9d603",
+      "after": "4f4e8344e8d01fc96b26263bbd004dec0e602007182e3ba1599c1cbf3df9d603"
+    },
+    "all-host/classes/cn/local/manga/BrowserThrottleChecks.class": {
+      "before": "bc3d5fa1c47e4560c19aa2e542ef523e1802a6b988fe6c667ceaed15a906195a",
+      "after": "bc3d5fa1c47e4560c19aa2e542ef523e1802a6b988fe6c667ceaed15a906195a"
+    },
+    "all-host/classes/cn/local/manga/BubbleCleanupChecks.class": {
+      "before": "c750a46df8121ce2c67100aaea2809ecbb37a9bd079b4a36efb0da6139f4a9c7",
+      "after": "c750a46df8121ce2c67100aaea2809ecbb37a9bd079b4a36efb0da6139f4a9c7"
+    },
+    "all-host/classes/cn/local/manga/BubbleLayoutChecks.class": {
+      "before": "818642fe4f43112c06753c1b19cac45862124d9c4227d30340b7c249765be9c8",
+      "after": "818642fe4f43112c06753c1b19cac45862124d9c4227d30340b7c249765be9c8"
+    },
+    "all-host/classes/cn/local/manga/BubbleSafetyChecks.class": {
+      "before": "78620ead227ec8e79adc8604c4f48536df00f73cfb51be656b93f9b4d9e4b61f",
+      "after": "78620ead227ec8e79adc8604c4f48536df00f73cfb51be656b93f9b4d9e4b61f"
+    },
+    "all-host/classes/cn/local/manga/CacheStorageChecks.class": {
+      "before": "c6aebc8aef2458b13920f1f442c09a489426020498537624cc0e21efde02508d",
+      "after": "c6aebc8aef2458b13920f1f442c09a489426020498537624cc0e21efde02508d"
+    },
+    "all-host/classes/cn/local/manga/CanvasCaptureChecks$Fixture.class": {
+      "before": "08b5e03beb3845bf0446d7279409af3496eb3a12dbabb0671d7aebda9511b006",
+      "after": "08b5e03beb3845bf0446d7279409af3496eb3a12dbabb0671d7aebda9511b006"
+    },
+    "all-host/classes/cn/local/manga/CanvasCaptureChecks.class": {
+      "before": "e34af9f4454e315b6a3677edb18e2f65087934421ebba3849ae7908a5825907d",
+      "after": "e34af9f4454e315b6a3677edb18e2f65087934421ebba3849ae7908a5825907d"
+    },
+    "all-host/classes/cn/local/manga/CleanupMaskSnapshot.class": {
+      "before": "521f9b031f6a1ade366303841691887ef334d497640c626dc860b93dc007675d",
+      "after": "521f9b031f6a1ade366303841691887ef334d497640c626dc860b93dc007675d"
+    },
+    "all-host/classes/cn/local/manga/CleanupPlanChecks.class": {
+      "before": "b02fb75ad72a7887de4f60493c6c517ab333d34efe8dbca9ee27bd6b7e61d583",
+      "after": "b02fb75ad72a7887de4f60493c6c517ab333d34efe8dbca9ee27bd6b7e61d583"
+    },
+    "all-host/classes/cn/local/manga/ColorInkCandidateChecks$Fixture.class": {
+      "before": "68c85dac124939f596bb362386efb7c25d0b2a6a819146465b2c89a22ce98702",
+      "after": "68c85dac124939f596bb362386efb7c25d0b2a6a819146465b2c89a22ce98702"
+    },
+    "all-host/classes/cn/local/manga/ColorInkCandidateChecks.class": {
+      "before": "2a6a57e5361623b27c3ab3f34a368ef227f46900dad3f8e54087ba8cfca37b01",
+      "after": "2a6a57e5361623b27c3ab3f34a368ef227f46900dad3f8e54087ba8cfca37b01"
+    },
+    "all-host/classes/cn/local/manga/ColorInkCandidateReview.class": {
+      "before": "c9d4b1f0025e35404a55e412fde3450beabdc1d49724ddafa5d2ddbf3d9e80cb",
+      "after": "c9d4b1f0025e35404a55e412fde3450beabdc1d49724ddafa5d2ddbf3d9e80cb"
+    },
+    "all-host/classes/cn/local/manga/ConcaveCoreChecks.class": {
+      "before": "a9feed1d96cbec0f48d746ffabf415de5410b3f09e53dff0d4d63590145845eb",
+      "after": "a9feed1d96cbec0f48d746ffabf415de5410b3f09e53dff0d4d63590145845eb"
+    },
+    "all-host/classes/cn/local/manga/ConnectedBubbleReview.class": {
+      "before": "cd1ff0974997de4f99455ea7bbd17d51c4a12b88881f75ccf51564c128b8bcf0",
+      "after": "cd1ff0974997de4f99455ea7bbd17d51c4a12b88881f75ccf51564c128b8bcf0"
+    },
+    "all-host/classes/cn/local/manga/ConnectedFrameInkChecks.class": {
+      "before": "409cc30ed24845c2c863621dbc74e1130da4d49a4a9d6d01aa81cde0ff8b164b",
+      "after": "409cc30ed24845c2c863621dbc74e1130da4d49a4a9d6d01aa81cde0ff8b164b"
+    },
+    "all-host/classes/cn/local/manga/CropTextLayoutChecks.class": {
+      "before": "2be868fc32a8d7dde1b32312d46183d9849592ddf609fb1f5b211541f3a29191",
+      "after": "2be868fc32a8d7dde1b32312d46183d9849592ddf609fb1f5b211541f3a29191"
+    },
+    "all-host/classes/cn/local/manga/CrossRegionChecks.class": {
+      "before": "643603482ed90974e6aa976b0145459b53df5eaa5c77ad3380a4dbb870f478bd",
+      "after": "643603482ed90974e6aa976b0145459b53df5eaa5c77ad3380a4dbb870f478bd"
+    },
+    "all-host/classes/cn/local/manga/Detector.class": {
+      "before": "e529ef72c70818c130ae35e5a43fcada4837cd45056c20a38e8469e09bad60ab",
+      "after": "e529ef72c70818c130ae35e5a43fcada4837cd45056c20a38e8469e09bad60ab"
+    },
+    "all-host/classes/cn/local/manga/DetectorSettingChecks.class": {
+      "before": "38aec6d9f6229ba2eda42f0406dd764c1e30d7d882a672b6d1128346adee86b9",
+      "after": "38aec6d9f6229ba2eda42f0406dd764c1e30d7d882a672b6d1128346adee86b9"
+    },
+    "all-host/classes/cn/local/manga/FeatherCacheKeyChecks.class": {
+      "before": "bb606e6d64a7147b9d324322cb1d86c14f99a2e7e299a12fcb3968d4c861a2a0",
+      "after": "bb606e6d64a7147b9d324322cb1d86c14f99a2e7e299a12fcb3968d4c861a2a0"
+    },
+    "all-host/classes/cn/local/manga/FrequentSitesChecks.class": {
+      "before": "e3539c9d6bd054ed02af428faf4be6555e7c8d170873cf5adadfbd46b438f996",
+      "after": "e3539c9d6bd054ed02af428faf4be6555e7c8d170873cf5adadfbd46b438f996"
+    },
+    "all-host/classes/cn/local/manga/FreshCacheChecks.class": {
+      "before": "265ad61f4acef6b9fda73d88dd60bf4b42c46538a59425361e7ed7c82b870c6f",
+      "after": "265ad61f4acef6b9fda73d88dd60bf4b42c46538a59425361e7ed7c82b870c6f"
+    },
+    "all-host/classes/cn/local/manga/FullRoiPasteCandidateReview.class": {
+      "before": "7139fc069a8ba55aa62368b7979f88564c367111668413391207546fff9676ad",
+      "after": "7139fc069a8ba55aa62368b7979f88564c367111668413391207546fff9676ad"
+    },
+    "all-host/classes/cn/local/manga/GlyphIsolationChecks.class": {
+      "before": "7954b12377d939b4c653025f6c5e2d3ce2ab20adf8cff28b089f6218e9c8b79e",
+      "after": "7954b12377d939b4c653025f6c5e2d3ce2ab20adf8cff28b089f6218e9c8b79e"
+    },
+    "all-host/classes/cn/local/manga/GrayCaptionChecks.class": {
+      "before": "dd2ed38dcb0f3edd7d488229dea2dcb229dc720573993d98a617dcd35411d9a5",
+      "after": "dd2ed38dcb0f3edd7d488229dea2dcb229dc720573993d98a617dcd35411d9a5"
+    },
+    "all-host/classes/cn/local/manga/GroupedBackgroundReview.class": {
+      "before": "4bf20e169eb498a7d65d3775df98f59f9a1aa59056b02cfa755e1ef6d78f2e70",
+      "after": "4bf20e169eb498a7d65d3775df98f59f9a1aa59056b02cfa755e1ef6d78f2e70"
+    },
+    "all-host/classes/cn/local/manga/GroupedBackgroundReviewChecks.class": {
+      "before": "ccfdc7919362eed5a5e1f9cb6e6c18f15aa44d4d49805dd9e88da432afc29d2e",
+      "after": "ccfdc7919362eed5a5e1f9cb6e6c18f15aa44d4d49805dd9e88da432afc29d2e"
+    },
+    "all-host/classes/cn/local/manga/ImageCleanupApiChecks$Attempt.class": {
+      "before": "0dae414150782352b45c01048c2ce9217feb40fbb0a31e2a8049fbe47c2233b8",
+      "after": "0dae414150782352b45c01048c2ce9217feb40fbb0a31e2a8049fbe47c2233b8"
+    },
+    "all-host/classes/cn/local/manga/ImageCleanupApiChecks$Captured.class": {
+      "before": "10f73248775c56c94285e0dcd391acc84d8527502019dc69f20cd12eeb331a63",
+      "after": "10f73248775c56c94285e0dcd391acc84d8527502019dc69f20cd12eeb331a63"
+    },
+    "all-host/classes/cn/local/manga/ImageCleanupApiChecks.class": {
+      "before": "cf06b01d6c31f7d22595df2d6439c8e04b28a0d9d39653f0737fbff90a1a74a6",
+      "after": "cf06b01d6c31f7d22595df2d6439c8e04b28a0d9d39653f0737fbff90a1a74a6"
+    },
+    "all-host/classes/cn/local/manga/ImageEditServiceTierChecks.class": {
+      "before": "29ea695c3f7d72fcd6f81899586491b901a65ba761dd4d726dcdc59dc1e2cb76",
+      "after": "29ea695c3f7d72fcd6f81899586491b901a65ba761dd4d726dcdc59dc1e2cb76"
+    },
+    "all-host/classes/cn/local/manga/ImportCopyChecks.class": {
+      "before": "a5b80079712c3098213c803cd934dc37a0715f3fea5f2a0ce0d1b98b75a41a30",
+      "after": "a5b80079712c3098213c803cd934dc37a0715f3fea5f2a0ce0d1b98b75a41a30"
+    },
+    "all-host/classes/cn/local/manga/InspectBubbleSpace.class": {
+      "before": "84567f8908aaa371f036e3988303749518141e31dfd1ca39c53bfafa5920b30e",
+      "after": "84567f8908aaa371f036e3988303749518141e31dfd1ca39c53bfafa5920b30e"
+    },
+    "all-host/classes/cn/local/manga/IrregularRectangleChecks.class": {
+      "before": "f617ad6fc991f28b9c75c6ea994311d4936bc37a54a79f01860d3cc91446f71d",
+      "after": "f617ad6fc991f28b9c75c6ea994311d4936bc37a54a79f01860d3cc91446f71d"
+    },
+    "all-host/classes/cn/local/manga/LargeHandwritingChecks.class": {
+      "before": "5bf3d2b25f6f2e0020129f2eb6e9eb3a97243703e9bdf7880fcac876193c0dac",
+      "after": "5bf3d2b25f6f2e0020129f2eb6e9eb3a97243703e9bdf7880fcac876193c0dac"
+    },
+    "all-host/classes/cn/local/manga/LiveImageCleanupProbe.class": {
+      "before": "c111bf0bd1a3ed2a1e84991136c3e8ff9b4f46ce7bd5e5c1f5a9dfe18be23dcc",
+      "after": "c111bf0bd1a3ed2a1e84991136c3e8ff9b4f46ce7bd5e5c1f5a9dfe18be23dcc"
+    },
+    "all-host/classes/cn/local/manga/LiveRepairCompositeReview.class": {
+      "before": "9a0866f506b9de9e3b93ac1c25e345dfc858095a370e09fcc1100a315abb73c4",
+      "after": "9a0866f506b9de9e3b93ac1c25e345dfc858095a370e09fcc1100a315abb73c4"
+    },
+    "all-host/classes/cn/local/manga/LocalOverlayChecks.class": {
+      "before": "c59879445a410d22aeccd6fafb4dc8ee690e7d8ff009195a26dd832440f16771",
+      "after": "c59879445a410d22aeccd6fafb4dc8ee690e7d8ff009195a26dd832440f16771"
+    },
+    "all-host/classes/cn/local/manga/ModelSelectionChecks.class": {
+      "before": "7a6e1a58a743e18e32725d3e63227c9f54b03e535badb7f249ddb613f505fb70",
+      "after": "7a6e1a58a743e18e32725d3e63227c9f54b03e535badb7f249ddb613f505fb70"
+    },
+    "all-host/classes/cn/local/manga/OffWhiteFrameChecks.class": {
+      "before": "5a26fec513cb2e633659b893e78b4996ccdde72e0e72943fc0c147d3b7fd37e2",
+      "after": "5a26fec513cb2e633659b893e78b4996ccdde72e0e72943fc0c147d3b7fd37e2"
+    },
+    "all-host/classes/cn/local/manga/OpenCodeProtocolChecks$1.class": {
+      "before": "9cc042847dc2dbc4dc0ca2429b2b2029651faf96b87bc51a0d7232c9aa742e98",
+      "after": "9cc042847dc2dbc4dc0ca2429b2b2029651faf96b87bc51a0d7232c9aa742e98"
+    },
+    "all-host/classes/cn/local/manga/OpenCodeProtocolChecks$Connection.class": {
+      "before": "58284b08716413aae301329ec5b682d3a308956584c65b413c67a57f62e9271e",
+      "after": "58284b08716413aae301329ec5b682d3a308956584c65b413c67a57f62e9271e"
+    },
+    "all-host/classes/cn/local/manga/OpenCodeProtocolChecks.class": {
+      "before": "4cdbead93235c22a066a5a023dde38409806a69e33ee4085a8d97f208214c1d1",
+      "after": "4cdbead93235c22a066a5a023dde38409806a69e33ee4085a8d97f208214c1d1"
+    },
+    "all-host/classes/cn/local/manga/OpenPaperEdgeChecks.class": {
+      "before": "e189ef876f0d3a877e45fd95e89e7d319743f0e24e55306ec591c493b8ac6772",
+      "after": "e189ef876f0d3a877e45fd95e89e7d319743f0e24e55306ec591c493b8ac6772"
+    },
+    "all-host/classes/cn/local/manga/PageOutcomeChecks.class": {
+      "before": "9a91413034d0f3b883a2fa9fb281e76d8810805134365e011302cea63efc2b51",
+      "after": "9a91413034d0f3b883a2fa9fb281e76d8810805134365e011302cea63efc2b51"
+    },
+    "all-host/classes/cn/local/manga/PartialRetryChecks$1.class": {
+      "before": "d84d5bfa3fc14941805c2903fe5699dc7b4fad2bf208f0fd0f2178a5903b42e7",
+      "after": "d84d5bfa3fc14941805c2903fe5699dc7b4fad2bf208f0fd0f2178a5903b42e7"
+    },
+    "all-host/classes/cn/local/manga/PartialRetryChecks.class": {
+      "before": "37c3824b563de645f6b2c672b1ee7a737dec0269945b713d84c371a1399ef293",
+      "after": "37c3824b563de645f6b2c672b1ee7a737dec0269945b713d84c371a1399ef293"
+    },
+    "all-host/classes/cn/local/manga/PerformanceDiagnosticsHostChecks.class": {
+      "before": "5f63330eb59eb5d4b9a8b889ea25a9ec485e7fffd6fac919b0dd6ddfe68a531c",
+      "after": "5f63330eb59eb5d4b9a8b889ea25a9ec485e7fffd6fac919b0dd6ddfe68a531c"
+    },
+    "all-host/classes/cn/local/manga/PipelineChecks.class": {
+      "before": "e881aa4b85c7c5dbb742a97a3bc62874c90944027e2788fd9881ddb05966d70d",
+      "after": "e881aa4b85c7c5dbb742a97a3bc62874c90944027e2788fd9881ddb05966d70d"
+    },
+    "all-host/classes/cn/local/manga/PlacementCacheKeyChecks.class": {
+      "before": "d89805a1fe94d47dfa63a51e5e98acfce44c4c946dc8061aa6c0681ac83f0c02",
+      "after": "d89805a1fe94d47dfa63a51e5e98acfce44c4c946dc8061aa6c0681ac83f0c02"
+    },
+    "all-host/classes/cn/local/manga/PromptLanguageChecks.class": {
+      "before": "710e4a77d1d669bea82b4f9c1fcd85adc50149196c3548f99fd0d68b6a549d37",
+      "after": "710e4a77d1d669bea82b4f9c1fcd85adc50149196c3548f99fd0d68b6a549d37"
+    },
+    "all-host/classes/cn/local/manga/QueueRetryChecks.class": {
+      "before": "1c269ce80704801d77a2fa71f48f7c98d089f25e47f5cb696d1901ee012e81be",
+      "after": "1c269ce80704801d77a2fa71f48f7c98d089f25e47f5cb696d1901ee012e81be"
+    },
+    "all-host/classes/cn/local/manga/RealBubbleReview.class": {
+      "before": "4366689f58f9f08c8a9ab9b3755106d3c7ffa46e01c3e02c5bb05a0bd62369ad",
+      "after": "4366689f58f9f08c8a9ab9b3755106d3c7ffa46e01c3e02c5bb05a0bd62369ad"
+    },
+    "all-host/classes/cn/local/manga/RealMangaReview.class": {
+      "before": "4301e6ffafa575fb62d375180b2d242f3805adc7f56bc2693f3edeb6318cdf85",
+      "after": "4301e6ffafa575fb62d375180b2d242f3805adc7f56bc2693f3edeb6318cdf85"
+    },
+    "all-host/classes/cn/local/manga/RefactorHostRuntimeChecks.class": {
+      "before": "82ecb93c9e7e041c8c3513dbb719a87d17b8b854d38fb1432d7044a6b8ca7f52",
+      "after": "82ecb93c9e7e041c8c3513dbb719a87d17b8b854d38fb1432d7044a6b8ca7f52"
+    },
+    "all-host/classes/cn/local/manga/Release116Checks$Action.class": {
+      "before": "820e969ba651c16fa79b64864ff1a74c1f67eaf3fc9b2491e471d2614f6cf440",
+      "after": "820e969ba651c16fa79b64864ff1a74c1f67eaf3fc9b2491e471d2614f6cf440"
+    },
+    "all-host/classes/cn/local/manga/Release116Checks.class": {
+      "before": "323d7444646716c8fe7186fcc0a76ee73a344c124e7ef40da35a6aa80a427347",
+      "after": "323d7444646716c8fe7186fcc0a76ee73a344c124e7ef40da35a6aa80a427347"
+    },
+    "all-host/classes/cn/local/manga/RenderedPageCacheChecks.class": {
+      "before": "3f07926cc9aad85f175ee02a38abf548ee796b8eff2b64e58a6916d55efe05ac",
+      "after": "3f07926cc9aad85f175ee02a38abf548ee796b8eff2b64e58a6916d55efe05ac"
+    },
+    "all-host/classes/cn/local/manga/RepairAlignmentCandidateReview.class": {
+      "before": "6a8027024c7b66393f925e1edb1f9b70f4a808781c6d0629298045ddb1c07dd7",
+      "after": "6a8027024c7b66393f925e1edb1f9b70f4a808781c6d0629298045ddb1c07dd7"
+    },
+    "all-host/classes/cn/local/manga/RepairFeatherCandidateReview.class": {
+      "before": "0281d6d1c5e44e8974a4935e87d9aaa55b508cc73b1f0a164756d448571332be",
+      "after": "0281d6d1c5e44e8974a4935e87d9aaa55b508cc73b1f0a164756d448571332be"
+    },
+    "all-host/classes/cn/local/manga/RepairGroupIsolationChecks.class": {
+      "before": "fec96c76de7cb47859ead53f10066f7845a77f96391c2d5dfe04450b05533b01",
+      "after": "fec96c76de7cb47859ead53f10066f7845a77f96391c2d5dfe04450b05533b01"
+    },
+    "all-host/classes/cn/local/manga/RepairPixelsChecks$Attempt.class": {
+      "before": "9ad70ce9f2943777c607831593275c6b7e8f9cfb25f690f6a1db29c73df02fcc",
+      "after": "9ad70ce9f2943777c607831593275c6b7e8f9cfb25f690f6a1db29c73df02fcc"
+    },
+    "all-host/classes/cn/local/manga/RepairPixelsChecks.class": {
+      "before": "cfc5589b76140e363391ca5c64ca33180f9609b276cbc09d362b69ca25f91ddf",
+      "after": "cfc5589b76140e363391ca5c64ca33180f9609b276cbc09d362b69ca25f91ddf"
+    },
+    "all-host/classes/cn/local/manga/Repro113AliasPath.class": {
+      "before": "8d55a6088d68011a3f3baf23e7af5e90f35e11dc39aa50d380aec54351951b90",
+      "after": "8d55a6088d68011a3f3baf23e7af5e90f35e11dc39aa50d380aec54351951b90"
+    },
+    "all-host/classes/cn/local/manga/ReturnedCanvasReview.class": {
+      "before": "13f9203f3e6e5f80e0b2d741f77787a26fd67b83691fcd84a101217ab24ee5b3",
+      "after": "13f9203f3e6e5f80e0b2d741f77787a26fd67b83691fcd84a101217ab24ee5b3"
+    },
+    "all-host/classes/cn/local/manga/ReturnedPaddingChecks.class": {
+      "before": "2184fd7920fb6e1126151a34edc7277ae3313b116c77ee4ddc6ea9c8a52299e5",
+      "after": "2184fd7920fb6e1126151a34edc7277ae3313b116c77ee4ddc6ea9c8a52299e5"
+    },
+    "all-host/classes/cn/local/manga/RtDetrRegionsChecks.class": {
+      "before": "bdcd43d69aa1031e1f477a08e460fb989087e4152fa0105e9a2d7a9d1feefb8a",
+      "after": "bdcd43d69aa1031e1f477a08e460fb989087e4152fa0105e9a2d7a9d1feefb8a"
+    },
+    "all-host/classes/cn/local/manga/RtDetrRuntimeChecks.class": {
+      "before": "c41f89fc70ecf3cd3be989c77d1db836ac2b9b7b0059ca39e1f8b1fc4b6e2c28",
+      "after": "c41f89fc70ecf3cd3be989c77d1db836ac2b9b7b0059ca39e1f8b1fc4b6e2c28"
+    },
+    "all-host/classes/cn/local/manga/SearchTermsChecks.class": {
+      "before": "98b80ec3c6d20958b2800a771685d2771b53af5fb76bd34f1300c27f1f34660b",
+      "after": "98b80ec3c6d20958b2800a771685d2771b53af5fb76bd34f1300c27f1f34660b"
+    },
+    "all-host/classes/cn/local/manga/SelectionScopeChecks.class": {
+      "before": "5c91d4a89b5196a35a4e0dc532695eccee602cbea057e549f64119aa57cef9e3",
+      "after": "5c91d4a89b5196a35a4e0dc532695eccee602cbea057e549f64119aa57cef9e3"
+    },
+    "all-host/classes/cn/local/manga/ServiceTierMigrationChecks$1.class": {
+      "before": "065028605f7948ae519f201c36cbb8ac3cc919a1c50114d8278a31d57f56b2d2",
+      "after": "065028605f7948ae519f201c36cbb8ac3cc919a1c50114d8278a31d57f56b2d2"
+    },
+    "all-host/classes/cn/local/manga/ServiceTierMigrationChecks.class": {
+      "before": "e4820612105c73347accbe8ccb68761f492958c69c62c819d44004e106deff9e",
+      "after": "e4820612105c73347accbe8ccb68761f492958c69c62c819d44004e106deff9e"
+    },
+    "all-host/classes/cn/local/manga/Storage112Checks$1.class": {
+      "before": "30ddc9a621e341e761f2dd47ef6bbb35fee3d307e154e78eb0c0f34b3fdbf7e5",
+      "after": "30ddc9a621e341e761f2dd47ef6bbb35fee3d307e154e78eb0c0f34b3fdbf7e5"
+    },
+    "all-host/classes/cn/local/manga/Storage112Checks$Action.class": {
+      "before": "61b64656ab2924172fdee8f382d8f2211d9d12ad76f3f282e50bcd145ceffd74",
+      "after": "61b64656ab2924172fdee8f382d8f2211d9d12ad76f3f282e50bcd145ceffd74"
+    },
+    "all-host/classes/cn/local/manga/Storage112Checks.class": {
+      "before": "9e8587b9d5dd56b244c5f3fd3c8373c9754bf2acc626d6708f74902465735600",
+      "after": "9e8587b9d5dd56b244c5f3fd3c8373c9754bf2acc626d6708f74902465735600"
+    },
+    "all-host/classes/cn/local/manga/Storage115Checks$Action.class": {
+      "before": "fd74d82a7d6bdc6f4e23547b4845b8063c179890a3123f01c09a354d5f6d5719",
+      "after": "fd74d82a7d6bdc6f4e23547b4845b8063c179890a3123f01c09a354d5f6d5719"
+    },
+    "all-host/classes/cn/local/manga/Storage115Checks.class": {
+      "before": "525144683963e3434217a5a64f1711dc98125cb7835b9a5b82e9df76f7283879",
+      "after": "525144683963e3434217a5a64f1711dc98125cb7835b9a5b82e9df76f7283879"
+    },
+    "all-host/classes/cn/local/manga/TargetedBubbleChecks.class": {
+      "before": "9caf548932f00d57eb3105a6ac1c7a6b40952cbd6d4f3106cf54d00580d3e45e",
+      "after": "9caf548932f00d57eb3105a6ac1c7a6b40952cbd6d4f3106cf54d00580d3e45e"
+    },
+    "all-host/classes/cn/local/manga/ThresholdDiagnostic$Mask.class": {
+      "before": "ff9d11eb2c3c2d5050f43cf1e34b1e6fa88fe4806317a85b3f7d45c4048d50cc",
+      "after": "ff9d11eb2c3c2d5050f43cf1e34b1e6fa88fe4806317a85b3f7d45c4048d50cc"
+    },
+    "all-host/classes/cn/local/manga/ThresholdDiagnostic.class": {
+      "before": "fc5f3610d902898589e858f0ba8eba395b34f1b4f2441abe2ee5304deffba5e2",
+      "after": "fc5f3610d902898589e858f0ba8eba395b34f1b4f2441abe2ee5304deffba5e2"
+    },
+    "all-host/classes/cn/local/manga/ThresholdProbe.class": {
+      "before": "026a5494a5a22840460e064bec495935be018d4561fccaac882546c24a5adf75",
+      "after": "026a5494a5a22840460e064bec495935be018d4561fccaac882546c24a5adf75"
+    },
+    "all-host/classes/cn/local/manga/ThrottleResultChecks.class": {
+      "before": "e92100530f44f97b1a21d7c8e0c774476deca10287a57ec1160d4f2e688dd5fc",
+      "after": "e92100530f44f97b1a21d7c8e0c774476deca10287a57ec1160d4f2e688dd5fc"
+    },
+    "all-host/classes/cn/local/manga/TranscriptChecks.class": {
+      "before": "8d56f3acaef59ca4a5f66714c56a90c1b5e14d464681101f8efc4d964e22dc15",
+      "after": "8d56f3acaef59ca4a5f66714c56a90c1b5e14d464681101f8efc4d964e22dc15"
+    },
+    "all-host/classes/cn/local/manga/TruncationRetryChecks$1.class": {
+      "before": "102e373b2f4e825523bbf806a89eec3f57adc81a32862d88392b023d6c12207c",
+      "after": "102e373b2f4e825523bbf806a89eec3f57adc81a32862d88392b023d6c12207c"
+    },
+    "all-host/classes/cn/local/manga/TruncationRetryChecks.class": {
+      "before": "06ea088d2c2dfbe84291f067d1d2d1297d6bfd76c134e66bb487961d289bfd6f",
+      "after": "06ea088d2c2dfbe84291f067d1d2d1297d6bfd76c134e66bb487961d289bfd6f"
+    },
+    "all-host/classes/cn/local/manga/UiRefactorChecks.class": {
+      "before": "fcfe93046969c434b4c72fcf97829e6608692c2a5c3256560b166369e858df3f",
+      "after": "fcfe93046969c434b4c72fcf97829e6608692c2a5c3256560b166369e858df3f"
+    },
+    "all-host/classes/cn/local/manga/UnanchoredCropChecks.class": {
+      "before": "fb86960661895a737f6b3add61beb2b0bf6670e53ac6094ae215836c5b01142a",
+      "after": "fb86960661895a737f6b3add61beb2b0bf6670e53ac6094ae215836c5b01142a"
+    },
+    "all-host/classes/cn/local/manga/V072StyleChecks.class": {
+      "before": "37de9fc04049896661a8143a3e9117ec7ab7136eebc1295da531a31f6a75878c",
+      "after": "37de9fc04049896661a8143a3e9117ec7ab7136eebc1295da531a31f6a75878c"
+    },
+    "all-host/classes/cn/local/manga/V073CacheChecks.class": {
+      "before": "7dc557663d61b44ebdfa2b2c67c520cb44843c9e6df71ea1930cd7e377d4e410",
+      "after": "7dc557663d61b44ebdfa2b2c67c520cb44843c9e6df71ea1930cd7e377d4e410"
+    },
+    "all-host/classes/cn/local/manga/V073CleanupBenchmark$Cut.class": {
+      "before": "58c7b8a51b4176c5dfb3ea0daeb259a84d4999bacdc6e40339b7da16fad55542",
+      "after": "58c7b8a51b4176c5dfb3ea0daeb259a84d4999bacdc6e40339b7da16fad55542"
+    },
+    "all-host/classes/cn/local/manga/V073CleanupBenchmark.class": {
+      "before": "c68839229c4077e6240416ebeff29b6a0f3d52b872832a3eee674a7afb00616c",
+      "after": "c68839229c4077e6240416ebeff29b6a0f3d52b872832a3eee674a7afb00616c"
+    },
+    "all-host/classes/cn/local/manga/V073SchedulerBenchmark.class": {
+      "before": "1b83a3c91324a0d57846630ee492fe1c3aede6bfd3a36bdc7520428de2389fba",
+      "after": "1b83a3c91324a0d57846630ee492fe1c3aede6bfd3a36bdc7520428de2389fba"
+    },
+    "all-host/classes/cn/local/manga/V073SchedulerChecks.class": {
+      "before": "bbe06ed6e3c692c713ee35a000e97b4a7aa0ef032826167ed35639a9de173b43",
+      "after": "bbe06ed6e3c692c713ee35a000e97b4a7aa0ef032826167ed35639a9de173b43"
+    },
+    "all-host/classes/cn/local/manga/V07Checks.class": {
+      "before": "f2f5593b04b8fe390b7956d81fd0ff66e5a8e0d9b8572f012100cfef9139b89e",
+      "after": "f2f5593b04b8fe390b7956d81fd0ff66e5a8e0d9b8572f012100cfef9139b89e"
+    },
+    "all-host/classes/cn/local/manga/V090AnchorDiagnostic.class": {
+      "before": "ff989cc90b27b370fc7fc0862b462865ee12239c5e5ab9c30dca416af43fc51b",
+      "after": "ff989cc90b27b370fc7fc0862b462865ee12239c5e5ab9c30dca416af43fc51b"
+    },
+    "all-host/classes/cn/local/manga/V092ClosedPaperChecks.class": {
+      "before": "6dc2c862e548f479844c1f9f1f53e688cbc69cf1e9477d8ece29e14e84e7014d",
+      "after": "6dc2c862e548f479844c1f9f1f53e688cbc69cf1e9477d8ece29e14e84e7014d"
+    },
+    "all-host/classes/cn/local/manga/V092ClosedPaperReview.class": {
+      "before": "9714e90143df689854a94da7a12fc29592b0f5cdf267903962b58a64264f31b4",
+      "after": "9714e90143df689854a94da7a12fc29592b0f5cdf267903962b58a64264f31b4"
+    },
+    "all-host/classes/cn/local/manga/V092ReuseHistoricalRaw.class": {
+      "before": "81d3fd992d11d3383fb06e0a6bb9e91298448c386ebc82d322964ddf99174af1",
+      "after": "81d3fd992d11d3383fb06e0a6bb9e91298448c386ebc82d322964ddf99174af1"
+    },
+    "all-host/classes/cn/local/manga/WebsiteMangaInput.class": {
+      "before": "2573a13ab691e1ecc381499a9c3befa462584b312feae8f28e4a84efa0fcdeb4",
+      "after": "2573a13ab691e1ecc381499a9c3befa462584b312feae8f28e4a84efa0fcdeb4"
+    },
+    "all-host/classes/cn/local/manga/WebsiteReviewInputChecks.class": {
+      "before": "8436f6ac42550cb559c817f440ce283a53edfe75b4fecd82cebfb030214f21e9",
+      "after": "8436f6ac42550cb559c817f440ce283a53edfe75b4fecd82cebfb030214f21e9"
+    },
+    "all-host/classes/cn/local/manga/WhiteBubbleCleanerV04$Mask.class": {
+      "before": "e985892fac8e38225ae3b580ad84a2d3694b12fc3c6638c8afcac04c95ccc1ec",
+      "after": "e985892fac8e38225ae3b580ad84a2d3694b12fc3c6638c8afcac04c95ccc1ec"
+    },
+    "all-host/classes/cn/local/manga/WhiteBubbleCleanerV04.class": {
+      "before": "897c5ce61194585a09623779fd9dbc1418d33f114876caa9225f8e4825471771",
+      "after": "897c5ce61194585a09623779fd9dbc1418d33f114876caa9225f8e4825471771"
+    },
+    "all-host/isolated/0.9.4验证/请求与设置/host/android/content/Context/android/content/Context.class": {
+      "before": "375e84160474d7fb18aafaa741beb1bc1e82ff58ca3cd1e7d54486c7545da5bd",
+      "after": "375e84160474d7fb18aafaa741beb1bc1e82ff58ca3cd1e7d54486c7545da5bd"
+    },
+    "all-host/isolated/RtDetrSessionChecks/cn/local/manga/RtDetrDetector.class": {
+      "before": "1f513d75786f92da09dc9411f0cc690bf79fa3042c3b36e01b2ea6b8f2a94368",
+      "after": "1f513d75786f92da09dc9411f0cc690bf79fa3042c3b36e01b2ea6b8f2a94368"
+    },
+    "all-host/isolated/RtDetrSessionChecks/cn/local/manga/RtDetrSessionChecks.class": {
+      "before": "8636ee2098a934267369b0245eab0e88c0b7b164dc678a5f1ebb934d004c15d9",
+      "after": "8636ee2098a934267369b0245eab0e88c0b7b164dc678a5f1ebb934d004c15d9"
+    },
+    "all-host/isolated/V073IntegrationChecks/cn/local/manga/RtDetrDetector.class": {
+      "before": "1f513d75786f92da09dc9411f0cc690bf79fa3042c3b36e01b2ea6b8f2a94368",
+      "after": "1f513d75786f92da09dc9411f0cc690bf79fa3042c3b36e01b2ea6b8f2a94368"
+    },
+    "all-host/isolated/V073IntegrationChecks/cn/local/manga/V073IntegrationChecks.class": {
+      "before": "4251f5f041eab3187102983ce63372eafea6c55aa21a8096df13ff3584db4231",
+      "after": "4251f5f041eab3187102983ce63372eafea6c55aa21a8096df13ff3584db4231"
+    },
+    "all-host/isolated/rtdetr-session-host/cn/local/manga/RtDetrDetector/cn/local/manga/RtDetrDetector.class": {
+      "before": "1f513d75786f92da09dc9411f0cc690bf79fa3042c3b36e01b2ea6b8f2a94368",
+      "after": "1f513d75786f92da09dc9411f0cc690bf79fa3042c3b36e01b2ea6b8f2a94368"
+    },
+    "all-host/isolated/storage-host/cn/local/manga/PerformanceDiagnostics/cn/local/manga/PerformanceDiagnostics.class": {
+      "before": "9b0506dd8befc15937c22e28c8640368bfdf6732b36f69e74f057f6604026c3a",
+      "after": "9b0506dd8befc15937c22e28c8640368bfdf6732b36f69e74f057f6604026c3a"
+    },
+    "all-host/isolated/v060-host/android/content/Context/android/content/Context.class": {
+      "before": "3525aa702d56c329f78b75a45c28127c80655d14273eae2b5c9b3f3879d6f018",
+      "after": "3525aa702d56c329f78b75a45c28127c80655d14273eae2b5c9b3f3879d6f018"
+    },
+    "all-host/isolated/v073-cache-host/android/graphics/Bitmap/android/graphics/Bitmap.class": {
+      "before": "d003885d3801b216c07a42aac69376c627399abc1d197615b7f5993c6daba52d",
+      "after": "d003885d3801b216c07a42aac69376c627399abc1d197615b7f5993c6daba52d"
+    },
+    "all-host/isolated/v073-cache-host/android/graphics/ImageDecoder/android/graphics/ImageDecoder$DecodeException.class": {
+      "before": "2b42a2d18623aea3beec7bf67e9cdc200d322a6dd81e236773c12c04b3f99177",
+      "after": "2b42a2d18623aea3beec7bf67e9cdc200d322a6dd81e236773c12c04b3f99177"
+    },
+    "all-host/isolated/v073-cache-host/android/graphics/ImageDecoder/android/graphics/ImageDecoder$ImageInfo.class": {
+      "before": "881abee1fc0dcd3583d7a80eee1d0f9d4f148fb7c67d842a621e068020473ad5",
+      "after": "881abee1fc0dcd3583d7a80eee1d0f9d4f148fb7c67d842a621e068020473ad5"
+    },
+    "all-host/isolated/v073-cache-host/android/graphics/ImageDecoder/android/graphics/ImageDecoder$OnHeaderDecodedListener.class": {
+      "before": "978fbee295e1af6656b03eed50a6ddea240a8e8b26814fe3a0e735887b3b7292",
+      "after": "978fbee295e1af6656b03eed50a6ddea240a8e8b26814fe3a0e735887b3b7292"
+    },
+    "all-host/isolated/v073-cache-host/android/graphics/ImageDecoder/android/graphics/ImageDecoder$OnPartialImageListener.class": {
+      "before": "f5f056bdf2d076ad70555d5832ab8bdbfa05b0bafb5f5c0e2ba1dc5787c1181b",
+      "after": "f5f056bdf2d076ad70555d5832ab8bdbfa05b0bafb5f5c0e2ba1dc5787c1181b"
+    },
+    "all-host/isolated/v073-cache-host/android/graphics/ImageDecoder/android/graphics/ImageDecoder$Source.class": {
+      "before": "d09d380786f69a82262311912d7d1a1284230c6ff70793d4de38406556ba1392",
+      "after": "d09d380786f69a82262311912d7d1a1284230c6ff70793d4de38406556ba1392"
+    },
+    "all-host/isolated/v073-cache-host/android/graphics/ImageDecoder/android/graphics/ImageDecoder.class": {
+      "before": "25620bf0509b084b5226c2277ab740d2f60933e94b774441fbf730f0959e301d",
+      "after": "25620bf0509b084b5226c2277ab740d2f60933e94b774441fbf730f0959e301d"
+    },
+    "all-host/isolated/v073-cache-host/android/util/Size/android/util/Size.class": {
+      "before": "63c9245046c18e3e3d4f2725702d693248204c56d0653c06786d438642872b1d",
+      "after": "63c9245046c18e3e3d4f2725702d693248204c56d0653c06786d438642872b1d"
+    },
+    "app-debug/cn/local/manga/ApiClient$BodyWriter.class": {
+      "before": "d4706bb18dd1fea201487da4e1083aa10f0577c90b8bdd751997e96bf6dce512",
+      "after": "d4706bb18dd1fea201487da4e1083aa10f0577c90b8bdd751997e96bf6dce512"
+    },
+    "app-debug/cn/local/manga/ApiClient$RequestFailure.class": {
+      "before": "2fdf6f36db979a5c8c3a9c712be59f8f9419a7dc9700e5e164fcf6be09a9aef8",
+      "after": "2fdf6f36db979a5c8c3a9c712be59f8f9419a7dc9700e5e164fcf6be09a9aef8"
+    },
+    "app-debug/cn/local/manga/ApiClient$TranslationReplyFailure.class": {
+      "before": "b923d9adef91721a23e23efa0a4f8145f8a443087016e90d192dad0a4675a157",
+      "after": "b923d9adef91721a23e23efa0a4f8145f8a443087016e90d192dad0a4675a157"
+    },
+    "app-debug/cn/local/manga/ApiClient.class": {
+      "before": "2e90b32c4c03c12db02298acd65433c0f1aef88eb6e66e4e6b46e9b307a05ad0",
+      "after": "2e90b32c4c03c12db02298acd65433c0f1aef88eb6e66e4e6b46e9b307a05ad0"
+    },
+    "app-debug/cn/local/manga/ApiPresets$Preset.class": {
+      "before": "dce53f81ee592f14fd6113569f244241e2013a06e251ee7272587744bc131fe2",
+      "after": "dce53f81ee592f14fd6113569f244241e2013a06e251ee7272587744bc131fe2"
+    },
+    "app-debug/cn/local/manga/ApiPresets.class": {
+      "before": "487a9e027907e93860362792fa992959489baa5a9fd8383f107f712c029cd547",
+      "after": "487a9e027907e93860362792fa992959489baa5a9fd8383f107f712c029cd547"
+    },
+    "app-debug/cn/local/manga/AppSettings.class": {
+      "before": "beab51ea2f352a3d3d79b98c10d5c55b1c34b617fe3005c42608358acf4839b7",
+      "after": "beab51ea2f352a3d3d79b98c10d5c55b1c34b617fe3005c42608358acf4839b7"
+    },
+    "app-debug/cn/local/manga/AutoTranslationQueue$Image.class": {
+      "before": "53a9b04be520cfffb6ca98d263fcf480a8b3d49ffd7cbc6b701765be29b3c9f8",
+      "after": "53a9b04be520cfffb6ca98d263fcf480a8b3d49ffd7cbc6b701765be29b3c9f8"
+    },
+    "app-debug/cn/local/manga/AutoTranslationQueue$Record.class": {
+      "before": "d52002686a802767bc70ecb577f01572aa7528cc399cc71e1ef50681c2ba5e11",
+      "after": "d52002686a802767bc70ecb577f01572aa7528cc399cc71e1ef50681c2ba5e11"
+    },
+    "app-debug/cn/local/manga/AutoTranslationQueue.class": {
+      "before": "470516385f5f3348a79cfcce1014eb4ad3ebbd47e895ca56ee155a7c82b6e50f",
+      "after": "470516385f5f3348a79cfcce1014eb4ad3ebbd47e895ca56ee155a7c82b6e50f"
+    },
+    "app-debug/cn/local/manga/BlobStore$Prepared.class": {
+      "before": "f753b7a2a89f7be7eb5e862278e41205ed898602d89f6f1a4d96366c26da70f4",
+      "after": "f753b7a2a89f7be7eb5e862278e41205ed898602d89f6f1a4d96366c26da70f4"
+    },
+    "app-debug/cn/local/manga/BlobStore.class": {
+      "before": "65e9eb9e9b811ee1c90ef730fc550063c9039696fb9f9d4819dae980100d86d0",
+      "after": "65e9eb9e9b811ee1c90ef730fc550063c9039696fb9f9d4819dae980100d86d0"
+    },
+    "app-debug/cn/local/manga/BrowserActivity$1.class": {
+      "before": "9eb4906962500891c5daa0fa300bb101c27bc63c2824eced00be6c28b0187e2e",
+      "after": "9eb4906962500891c5daa0fa300bb101c27bc63c2824eced00be6c28b0187e2e"
+    },
+    "app-debug/cn/local/manga/BrowserActivity$2.class": {
+      "before": "43bfa3bd7df07ecc3248299f486c12ab1990d12c9f8978fda6be1cd887b53223",
+      "after": "43bfa3bd7df07ecc3248299f486c12ab1990d12c9f8978fda6be1cd887b53223"
+    },
+    "app-debug/cn/local/manga/BrowserActivity$3.class": {
+      "before": "5d18fabd0d48c4ca54c44bb466fea59a8cc4dbbb848218446bfc95b18e8fdb91",
+      "after": "5d18fabd0d48c4ca54c44bb466fea59a8cc4dbbb848218446bfc95b18e8fdb91"
+    },
+    "app-debug/cn/local/manga/BrowserActivity.class": {
+      "before": "88bd25e46585236bd31eeb02fceaba0437c44dd2e164366b0481900269c1e75e",
+      "after": "88bd25e46585236bd31eeb02fceaba0437c44dd2e164366b0481900269c1e75e"
+    },
+    "app-debug/cn/local/manga/BrowserAddress.class": {
+      "before": "91a4f1b927373d12ec387a01199b8d67c01debe4db409c531d95c405d548964a",
+      "after": "91a4f1b927373d12ec387a01199b8d67c01debe4db409c531d95c405d548964a"
+    },
+    "app-debug/cn/local/manga/BrowserImageLoader$HttpFailure.class": {
+      "before": "9231557c42e3b4d7109e8c1890aacd54db4c7ac75be4c37296e9cadeffd72c01",
+      "after": "9231557c42e3b4d7109e8c1890aacd54db4c7ac75be4c37296e9cadeffd72c01"
+    },
+    "app-debug/cn/local/manga/BrowserImageLoader.class": {
+      "before": "48b6fa125e8ef08918d20494914df995c19b5d073b94fc8b641be57a8148fb69",
+      "after": "48b6fa125e8ef08918d20494914df995c19b5d073b94fc8b641be57a8148fb69"
+    },
+    "app-debug/cn/local/manga/BrowserLibrary$Callback.class": {
+      "before": "79559ea2c8e2c30088fb4c89e6c33c650ade461717feda790998c845880d87ac",
+      "after": "79559ea2c8e2c30088fb4c89e6c33c650ade461717feda790998c845880d87ac"
+    },
+    "app-debug/cn/local/manga/BrowserLibrary$ListCallback.class": {
+      "before": "ed9ac46a28038bdf3e6535e8ec026134d99b97404eb7f4f72319dee060582b39",
+      "after": "ed9ac46a28038bdf3e6535e8ec026134d99b97404eb7f4f72319dee060582b39"
+    },
+    "app-debug/cn/local/manga/BrowserLibrary$Mutation.class": {
+      "before": "d5caabdca4d0999ab1f846b4d5570f501b1aaed2b6e5a9674ffc21c48a777042",
+      "after": "d5caabdca4d0999ab1f846b4d5570f501b1aaed2b6e5a9674ffc21c48a777042"
+    },
+    "app-debug/cn/local/manga/BrowserLibrary$SitesCallback.class": {
+      "before": "ac6b8f0a72ed7dbc429bfae250a9b9b312c015fb258b3d0ddff313cfcbe742b7",
+      "after": "ac6b8f0a72ed7dbc429bfae250a9b9b312c015fb258b3d0ddff313cfcbe742b7"
+    },
+    "app-debug/cn/local/manga/BrowserLibrary.class": {
+      "before": "4ba8c71cd9ba6219c0f4b9c10077cd897026d78d84d20db79d115dc88a20c71e",
+      "after": "4ba8c71cd9ba6219c0f4b9c10077cd897026d78d84d20db79d115dc88a20c71e"
+    },
+    "app-debug/cn/local/manga/BrowserSearch$1.class": {
+      "before": "4fb5a5e7392abeb88c135b99d0cabb2e80b8a383838d3ebc21b43b8b814402da",
+      "after": "4fb5a5e7392abeb88c135b99d0cabb2e80b8a383838d3ebc21b43b8b814402da"
+    },
+    "app-debug/cn/local/manga/BrowserSearch.class": {
+      "before": "067324174bf3c3be73a6795fb19971d71567235af1ef330cde242dda5409ab50",
+      "after": "067324174bf3c3be73a6795fb19971d71567235af1ef330cde242dda5409ab50"
+    },
+    "app-debug/cn/local/manga/BubbleLayout$Lobe.class": {
+      "before": "95ccac4628f8b2c90f51b9d3b068fe82b40d483834ca8790360cd751bdb1a184",
+      "after": "95ccac4628f8b2c90f51b9d3b068fe82b40d483834ca8790360cd751bdb1a184"
+    },
+    "app-debug/cn/local/manga/BubbleLayout$Plan.class": {
+      "before": "85fd25d0e1f7373484048f1c55ff1bc241423b2f0c56c9f2ceef5c2848f0400d",
+      "after": "85fd25d0e1f7373484048f1c55ff1bc241423b2f0c56c9f2ceef5c2848f0400d"
+    },
+    "app-debug/cn/local/manga/BubbleLayout$Space.class": {
+      "before": "5e052887c21e30b91d435f74121a787d98e97623f4a8e301d12ea2b53538cd84",
+      "after": "5e052887c21e30b91d435f74121a787d98e97623f4a8e301d12ea2b53538cd84"
+    },
+    "app-debug/cn/local/manga/BubbleLayout.class": {
+      "before": "729d35a5ee0f4b6650d49c1b86f46a99364d4318fe4888b73b25b46bc9348c4c",
+      "after": "729d35a5ee0f4b6650d49c1b86f46a99364d4318fe4888b73b25b46bc9348c4c"
+    },
+    "app-debug/cn/local/manga/BubbleStore.class": {
+      "before": "9eb5407f2a4f12aa8698b3f66b3ff4d013c3890f23df305494e7563c99462d13",
+      "after": "9eb5407f2a4f12aa8698b3f66b3ff4d013c3890f23df305494e7563c99462d13"
+    },
+    "app-debug/cn/local/manga/BuildConfig.class": {
+      "before": "0784287e7b8e4959582c9c4d566f449da39d89400d45eec4271e4a98ea93fd30",
+      "after": "0784287e7b8e4959582c9c4d566f449da39d89400d45eec4271e4a98ea93fd30"
+    },
+    "app-debug/cn/local/manga/CacheFiles$Writer.class": {
+      "before": "e67c18613881ae84959612b001cbd7a90897582a46a4935ba8aed734c48dc047",
+      "after": "e67c18613881ae84959612b001cbd7a90897582a46a4935ba8aed734c48dc047"
+    },
+    "app-debug/cn/local/manga/CacheFiles.class": {
+      "before": "7fd658182027e3bc2cfd9cef4e1ffb2d284814228824b0c1da27e41c6608dd93",
+      "after": "7fd658182027e3bc2cfd9cef4e1ffb2d284814228824b0c1da27e41c6608dd93"
+    },
+    "app-debug/cn/local/manga/CacheStorage$1.class": {
+      "before": "6ec69a3a13741930a9c921d55482296b7f4a0298dfd9ba9203af73aacd97cfb6",
+      "after": "6ec69a3a13741930a9c921d55482296b7f4a0298dfd9ba9203af73aacd97cfb6"
+    },
+    "app-debug/cn/local/manga/CacheStorage$2.class": {
+      "before": "c9547356fc8144f21c20b68c7b57754c7d434423b70d1ff2b94f9ad07bbd423c",
+      "after": "c9547356fc8144f21c20b68c7b57754c7d434423b70d1ff2b94f9ad07bbd423c"
+    },
+    "app-debug/cn/local/manga/CacheStorage$Result.class": {
+      "before": "9ce606fea5efc897a4d71871f3c6e074aab7191a80c607e6378b8b6df66aeb16",
+      "after": "9ce606fea5efc897a4d71871f3c6e074aab7191a80c607e6378b8b6df66aeb16"
+    },
+    "app-debug/cn/local/manga/CacheStorage.class": {
+      "before": "766d6439972ce8e5382e21e204c4138fb47058076e93ece00abdde93b9f581db",
+      "after": "766d6439972ce8e5382e21e204c4138fb47058076e93ece00abdde93b9f581db"
+    },
+    "app-debug/cn/local/manga/CanvasCapture$Draw.class": {
+      "before": "868b50f3f039f8dc09ab0b06fca27eae0a1b26f2c3b76f74ee34721399cdfb81",
+      "after": "868b50f3f039f8dc09ab0b06fca27eae0a1b26f2c3b76f74ee34721399cdfb81"
+    },
+    "app-debug/cn/local/manga/CanvasCapture$Loader.class": {
+      "before": "945ae8e083ae0bf7142a9a9916cac4498c7cfb36803723d54d94d41d0837990b",
+      "after": "945ae8e083ae0bf7142a9a9916cac4498c7cfb36803723d54d94d41d0837990b"
+    },
+    "app-debug/cn/local/manga/CanvasCapture.class": {
+      "before": "7789f571076e5ccbbc0a1a730f0952b38f1b9f54d1af57d0bc8b289eebf4e81c",
+      "after": "7789f571076e5ccbbc0a1a730f0952b38f1b9f54d1af57d0bc8b289eebf4e81c"
+    },
+    "app-debug/cn/local/manga/CleanupPlan.class": {
+      "before": "f8af3baddf576e19169ea03532998a7e6f97ed69eb817ba2518bf23cfee8c6f0",
+      "after": "f8af3baddf576e19169ea03532998a7e6f97ed69eb817ba2518bf23cfee8c6f0"
+    },
+    "app-debug/cn/local/manga/ComicProject$Page.class": {
+      "before": "71b1249a00d2eadd5340df3036ea5a7b85731b84f15c40c7ec48cf8aa420e32f",
+      "after": "71b1249a00d2eadd5340df3036ea5a7b85731b84f15c40c7ec48cf8aa420e32f"
+    },
+    "app-debug/cn/local/manga/ComicProject.class": {
+      "before": "9918dc41a5c7a33da0ec8e086bdbe4363cf7bac41f98403886a93224ad5c2c8f",
+      "after": "9918dc41a5c7a33da0ec8e086bdbe4363cf7bac41f98403886a93224ad5c2c8f"
+    },
+    "app-debug/cn/local/manga/DatabaseLibrary.class": {
+      "before": "a5778bc84411f3ef89c0893d6489d5a9674ea1ff18d214539a5ea23efc729849",
+      "after": "a5778bc84411f3ef89c0893d6489d5a9674ea1ff18d214539a5ea23efc729849"
+    },
+    "app-debug/cn/local/manga/DetectionCache.class": {
+      "before": "3819f481435fc0e6bc997590e469c7b9717ee252a1c61c1c1797b64373ef5896",
+      "after": "3819f481435fc0e6bc997590e469c7b9717ee252a1c61c1c1797b64373ef5896"
+    },
+    "app-debug/cn/local/manga/Detector.class": {
+      "before": "8faf951993552bfe3e1dccebe1c47e60a7fb6839c6273c4aca2f5f1f5750cd54",
+      "after": "8faf951993552bfe3e1dccebe1c47e60a7fb6839c6273c4aca2f5f1f5750cd54"
+    },
+    "app-debug/cn/local/manga/DetectorModels$Spec.class": {
+      "before": "056216de31a01052107f66da5aeecb374822eaab822b42c644ce2b74da1c49c4",
+      "after": "056216de31a01052107f66da5aeecb374822eaab822b42c644ce2b74da1c49c4"
+    },
+    "app-debug/cn/local/manga/DetectorModels.class": {
+      "before": "aad03d40faf7dd4e64ef708dd3f58a2a73ad09d0feeb32c48a48a85ab384928f",
+      "after": "aad03d40faf7dd4e64ef708dd3f58a2a73ad09d0feeb32c48a48a85ab384928f"
+    },
+    "app-debug/cn/local/manga/ExportFlow$1.class": {
+      "before": "cff95d8f6d5425b1445f099f6e1687befb1a6d0febacca646f93040a03dc9a90",
+      "after": "cff95d8f6d5425b1445f099f6e1687befb1a6d0febacca646f93040a03dc9a90"
+    },
+    "app-debug/cn/local/manga/ExportFlow$WriterFactory.class": {
+      "before": "6e6fd18dd45b06db0251eb547eab61107a55b2c31dbcb13ac054e022179a8a15",
+      "after": "6e6fd18dd45b06db0251eb547eab61107a55b2c31dbcb13ac054e022179a8a15"
+    },
+    "app-debug/cn/local/manga/ExportFlow.class": {
+      "before": "82c59017a7eaa4e6555ca171f1dc5de9acce92979526b971e119fceb5e43e9b7",
+      "after": "82c59017a7eaa4e6555ca171f1dc5de9acce92979526b971e119fceb5e43e9b7"
+    },
+    "app-debug/cn/local/manga/ExportJob$Listener.class": {
+      "before": "29e285884ff7e1f83446cc2e911ea62d38e035f3b62a9bfa0ae516633caa0e1b",
+      "after": "29e285884ff7e1f83446cc2e911ea62d38e035f3b62a9bfa0ae516633caa0e1b"
+    },
+    "app-debug/cn/local/manga/ExportJob$Options.class": {
+      "before": "c99a7bb93f43b80258d98ea87585563a4e95ef57a2a4c1222b0dff70767b3dbb",
+      "after": "c99a7bb93f43b80258d98ea87585563a4e95ef57a2a4c1222b0dff70767b3dbb"
+    },
+    "app-debug/cn/local/manga/ExportJob.class": {
+      "before": "5bbd3161cbf334ef279bc24c7193c55f9f3dc77a27d8b4b5aa3964a85e6373e8",
+      "after": "5bbd3161cbf334ef279bc24c7193c55f9f3dc77a27d8b4b5aa3964a85e6373e8"
+    },
+    "app-debug/cn/local/manga/ExportWriters$FolderWriter.class": {
+      "before": "aac736ac0ca4463152462c769d6201906a62b381a50e488faffed983a4a8354e",
+      "after": "aac736ac0ca4463152462c769d6201906a62b381a50e488faffed983a4a8354e"
+    },
+    "app-debug/cn/local/manga/ExportWriters$GalleryWriter.class": {
+      "before": "380855eb45fd614c9626b5640ee068af3631e5c70672f6d6750cffd44098d3b5",
+      "after": "380855eb45fd614c9626b5640ee068af3631e5c70672f6d6750cffd44098d3b5"
+    },
+    "app-debug/cn/local/manga/ExportWriters$Writer.class": {
+      "before": "d19259ee9f5d64b165dc0de00dba9b67db1db9334f81ad2f22fd1096f2554e9c",
+      "after": "d19259ee9f5d64b165dc0de00dba9b67db1db9334f81ad2f22fd1096f2554e9c"
+    },
+    "app-debug/cn/local/manga/ExportWriters$ZipWriter.class": {
+      "before": "12c87879507c3f8cf01d65c1f6067982a86f680b9a34df2ff484c9eb275e4b24",
+      "after": "12c87879507c3f8cf01d65c1f6067982a86f680b9a34df2ff484c9eb275e4b24"
+    },
+    "app-debug/cn/local/manga/ExportWriters.class": {
+      "before": "f2afe5b4ab6010b9a516762bd7487156aac91c70f39b885bb63d2311a030af4f",
+      "after": "f2afe5b4ab6010b9a516762bd7487156aac91c70f39b885bb63d2311a030af4f"
+    },
+    "app-debug/cn/local/manga/FontChoices.class": {
+      "before": "f9a16646c943559f0ccc48cc0cc9eb6e0474ac2229c2d1deef45a6b5feeda409",
+      "after": "f9a16646c943559f0ccc48cc0cc9eb6e0474ac2229c2d1deef45a6b5feeda409"
+    },
+    "app-debug/cn/local/manga/GrayGlyphRepair.class": {
+      "before": "034a30870071ed4d26c4bdbd21922dea7b1c2fe2c5b79151ef5114be7d478252",
+      "after": "034a30870071ed4d26c4bdbd21922dea7b1c2fe2c5b79151ef5114be7d478252"
+    },
+    "app-debug/cn/local/manga/Icons.class": {
+      "before": "fbab947b7c827f67b0b259a61d153f95a545303f59e7ddaa9696d5219d5d6abb",
+      "after": "fbab947b7c827f67b0b259a61d153f95a545303f59e7ddaa9696d5219d5d6abb"
+    },
+    "app-debug/cn/local/manga/ImageCleanup.class": {
+      "before": "3fe032cfcdba0bae340d1ef91b395fe4bbbc0075ccd9d218c97c95caca7ad0f4",
+      "after": "3fe032cfcdba0bae340d1ef91b395fe4bbbc0075ccd9d218c97c95caca7ad0f4"
+    },
+    "app-debug/cn/local/manga/LibraryActivity$1.class": {
+      "before": "18d0ec0ea911dcfb92ddd2bfc8bb23fe09bb4e6f1b4ad5d8befa11cf58654e91",
+      "after": "18d0ec0ea911dcfb92ddd2bfc8bb23fe09bb4e6f1b4ad5d8befa11cf58654e91"
+    },
+    "app-debug/cn/local/manga/LibraryActivity$2.class": {
+      "before": "efa0c5c2cac34c8860678151b7e22cc0c5b960d8e20a3e17c584bc8236163e2e",
+      "after": "efa0c5c2cac34c8860678151b7e22cc0c5b960d8e20a3e17c584bc8236163e2e"
+    },
+    "app-debug/cn/local/manga/LibraryActivity.class": {
+      "before": "b893aec924d4c01d8fed8e19dd579bbdba315f90ce1d1ed54c4831844a5930a2",
+      "after": "b893aec924d4c01d8fed8e19dd579bbdba315f90ce1d1ed54c4831844a5930a2"
+    },
+    "app-debug/cn/local/manga/LibraryStore$Entry.class": {
+      "before": "1a4936d32e4b8129b3b88cf1b7d35a646f21de2f06b14765325db66460943a12",
+      "after": "1a4936d32e4b8129b3b88cf1b7d35a646f21de2f06b14765325db66460943a12"
+    },
+    "app-debug/cn/local/manga/LibraryStore$Persistence.class": {
+      "before": "b0d680a34d24d74dfeadf30952eeced403073f5b35490fa14f8bb80de0f1e4ea",
+      "after": "b0d680a34d24d74dfeadf30952eeced403073f5b35490fa14f8bb80de0f1e4ea"
+    },
+    "app-debug/cn/local/manga/LibraryStore.class": {
+      "before": "a43e6daf65f9c67c902ee88374852cd6adc6c26ca114af4761061a4e75d14c7d",
+      "after": "a43e6daf65f9c67c902ee88374852cd6adc6c26ca114af4761061a4e75d14c7d"
+    },
+    "app-debug/cn/local/manga/LocalBatch$Job.class": {
+      "before": "1b1c310e4f3b3c77855cff8b95497512cbb6f7d4e6aceac36d0776fa8cfa49ac",
+      "after": "1b1c310e4f3b3c77855cff8b95497512cbb6f7d4e6aceac36d0776fa8cfa49ac"
+    },
+    "app-debug/cn/local/manga/LocalBatch$Listener.class": {
+      "before": "865da4e868da5e96f263f886f8f239a91d22b31a65fc12bf95dda5a5c5661a6c",
+      "after": "865da4e868da5e96f263f886f8f239a91d22b31a65fc12bf95dda5a5c5661a6c"
+    },
+    "app-debug/cn/local/manga/LocalBatch.class": {
+      "before": "149ca998229883c0e279d5fc543fa081c47850071dc433dc5dde6192e4766569",
+      "after": "149ca998229883c0e279d5fc543fa081c47850071dc433dc5dde6192e4766569"
+    },
+    "app-debug/cn/local/manga/LocalComics$1.class": {
+      "before": "261e2e51216084b974f4197829cb39dec76e851cfe96336301cd3737803c8148",
+      "after": "261e2e51216084b974f4197829cb39dec76e851cfe96336301cd3737803c8148"
+    },
+    "app-debug/cn/local/manga/LocalComics$Entry.class": {
+      "before": "7569e11c3dea27e2cfa1cb57e76c4e0a4a0a7dd171e91a2018fa3088ece346db",
+      "after": "7569e11c3dea27e2cfa1cb57e76c4e0a4a0a7dd171e91a2018fa3088ece346db"
+    },
+    "app-debug/cn/local/manga/LocalComics$Folder.class": {
+      "before": "86197a562a980234576dd1838d8c6cf99d5a4c1a3ceb8bb42f6362a274769df1",
+      "after": "86197a562a980234576dd1838d8c6cf99d5a4c1a3ceb8bb42f6362a274769df1"
+    },
+    "app-debug/cn/local/manga/LocalComics$Listing.class": {
+      "before": "55745fe90999131e661293365c1ce1ee8ee34cc5df67f338b0f10f49e82c1b1d",
+      "after": "55745fe90999131e661293365c1ce1ee8ee34cc5df67f338b0f10f49e82c1b1d"
+    },
+    "app-debug/cn/local/manga/LocalComics$Page.class": {
+      "before": "60cb7ce9572946bc5691191a9d51050a2a675f3f9da7109a8bfbb3431152f73a",
+      "after": "60cb7ce9572946bc5691191a9d51050a2a675f3f9da7109a8bfbb3431152f73a"
+    },
+    "app-debug/cn/local/manga/LocalComics$Recent.class": {
+      "before": "5daf71f8f61727213d26e03fc90a559154d8abc7f8e7174bba1851e45ba1ba85",
+      "after": "5daf71f8f61727213d26e03fc90a559154d8abc7f8e7174bba1851e45ba1ba85"
+    },
+    "app-debug/cn/local/manga/LocalComics$State.class": {
+      "before": "bfb536d0eb3cb6060027a905cb453c7b327cd44df620d02228b28ef451463283",
+      "after": "bfb536d0eb3cb6060027a905cb453c7b327cd44df620d02228b28ef451463283"
+    },
+    "app-debug/cn/local/manga/LocalComics.class": {
+      "before": "48facd317c5c8b7306393f05a174b4b2aac1246944be63ec09dd919b56fe7867",
+      "after": "48facd317c5c8b7306393f05a174b4b2aac1246944be63ec09dd919b56fe7867"
+    },
+    "app-debug/cn/local/manga/LocalFolderActivity$1.class": {
+      "before": "e6d1c9ef6b4412210d608d3909424e8e0d688222f7dbbff50c528c36be078694",
+      "after": "e6d1c9ef6b4412210d608d3909424e8e0d688222f7dbbff50c528c36be078694"
+    },
+    "app-debug/cn/local/manga/LocalFolderActivity$2.class": {
+      "before": "195e8301efeb450b1a631972079933f16c2be7cf3eeaa4f7307a892a2dcf93b5",
+      "after": "195e8301efeb450b1a631972079933f16c2be7cf3eeaa4f7307a892a2dcf93b5"
+    },
+    "app-debug/cn/local/manga/LocalFolderActivity$Adapter.class": {
+      "before": "dfb63d11afb51111cf3c12eec051a32be1e4ec1bac2ec2e3943d1b9a05e0e344",
+      "after": "dfb63d11afb51111cf3c12eec051a32be1e4ec1bac2ec2e3943d1b9a05e0e344"
+    },
+    "app-debug/cn/local/manga/LocalFolderActivity.class": {
+      "before": "629dda5f6f698a6d78a3cd424873c096222b98ecbec03af33a12905005e72121",
+      "after": "629dda5f6f698a6d78a3cd424873c096222b98ecbec03af33a12905005e72121"
+    },
+    "app-debug/cn/local/manga/LocalImport.class": {
+      "before": "8f0c8241ee15937d16004e931df57c659bb5ad54f1eb66697354aaa9070b2576",
+      "after": "8f0c8241ee15937d16004e931df57c659bb5ad54f1eb66697354aaa9070b2576"
+    },
+    "app-debug/cn/local/manga/LocalLibraryActivity$1.class": {
+      "before": "d4ed29fb300020ecc6e1c0bc5891f334eebd5290258864eda95bfb6162c6a614",
+      "after": "d4ed29fb300020ecc6e1c0bc5891f334eebd5290258864eda95bfb6162c6a614"
+    },
+    "app-debug/cn/local/manga/LocalLibraryActivity.class": {
+      "before": "4e712bf6fdbd6d7c380f296f5a5005928439231f403ea881318c8e3d8488c6d1",
+      "after": "4e712bf6fdbd6d7c380f296f5a5005928439231f403ea881318c8e3d8488c6d1"
+    },
+    "app-debug/cn/local/manga/LocalProjectReaderActivity.class": {
+      "before": "331c20f1e85b7cb11cd6cc2b192dc94c27cc845b38f817e9e86e1e9e3631bae2",
+      "after": "331c20f1e85b7cb11cd6cc2b192dc94c27cc845b38f817e9e86e1e9e3631bae2"
+    },
+    "app-debug/cn/local/manga/LocalReaderActivity$1.class": {
+      "before": "3c5faab0679d789c6d951d354cd61dc6bc11ae2949ef08de7926f6ba1eff1dc9",
+      "after": "3c5faab0679d789c6d951d354cd61dc6bc11ae2949ef08de7926f6ba1eff1dc9"
+    },
+    "app-debug/cn/local/manga/LocalReaderActivity.class": {
+      "before": "4901f32ca77dbdb7d2078a30b3020b51777cef35ab040e9ec9dba91d69750de8",
+      "after": "4901f32ca77dbdb7d2078a30b3020b51777cef35ab040e9ec9dba91d69750de8"
+    },
+    "app-debug/cn/local/manga/LocalWorkbenchActivity.class": {
+      "before": "8b8503a93a4a08ab2a4356a0f0ae79531c9cb31cbd496122e203318be94c8991",
+      "after": "8b8503a93a4a08ab2a4356a0f0ae79531c9cb31cbd496122e203318be94c8991"
+    },
+    "app-debug/cn/local/manga/LogsActivity$1.class": {
+      "before": "161dc206c1e5c525549b6b87099df0b554387687873094ff90a09b59b68c69f9",
+      "after": "161dc206c1e5c525549b6b87099df0b554387687873094ff90a09b59b68c69f9"
+    },
+    "app-debug/cn/local/manga/LogsActivity.class": {
+      "before": "e31579cead3499fcad2b750dd002f255362331218701efadba79fb65cb0bd21b",
+      "after": "e31579cead3499fcad2b750dd002f255362331218701efadba79fb65cb0bd21b"
+    },
+    "app-debug/cn/local/manga/MainActivity.class": {
+      "before": "56a6490b72e3b1ef8926c407fdc4a3abb22e0ba32878622b10ebc6de6df663e9",
+      "after": "56a6490b72e3b1ef8926c407fdc4a3abb22e0ba32878622b10ebc6de6df663e9"
+    },
+    "app-debug/cn/local/manga/MangaApplication.class": {
+      "before": "04dd921267f6b920845f0f43b69dde99ac49ba8f645f8c93668a6ff24f76ee09",
+      "after": "04dd921267f6b920845f0f43b69dde99ac49ba8f645f8c93668a6ff24f76ee09"
+    },
+    "app-debug/cn/local/manga/MigrationRunner$Ledger.class": {
+      "before": "327ea361347eb25fe1133ce85ea7178bc685d81fff6202ece156770e2013b1a0",
+      "after": "327ea361347eb25fe1133ce85ea7178bc685d81fff6202ece156770e2013b1a0"
+    },
+    "app-debug/cn/local/manga/MigrationRunner$Step.class": {
+      "before": "4195ecd454409b00ee86f1049cb949850dbc54e5039408791fe386fb8fd7bf81",
+      "after": "4195ecd454409b00ee86f1049cb949850dbc54e5039408791fe386fb8fd7bf81"
+    },
+    "app-debug/cn/local/manga/MigrationRunner.class": {
+      "before": "fd606980190e6841e6df99e70400177dcc7be313b3b17193638f2e4b81d8e801",
+      "after": "fd606980190e6841e6df99e70400177dcc7be313b3b17193638f2e4b81d8e801"
+    },
+    "app-debug/cn/local/manga/NaturalOrder.class": {
+      "before": "ac9724d4948d83c65b01bee2bffa2ee4bff6bbc33a23a74ad8cbd0279b78d9e8",
+      "after": "ac9724d4948d83c65b01bee2bffa2ee4bff6bbc33a23a74ad8cbd0279b78d9e8"
+    },
+    "app-debug/cn/local/manga/NearbyTextLayout$Plan.class": {
+      "before": "6c23f80386c20e80f6b878fcc5fe20a8dbe769828b88e6473ab64738c11748c4",
+      "after": "6c23f80386c20e80f6b878fcc5fe20a8dbe769828b88e6473ab64738c11748c4"
+    },
+    "app-debug/cn/local/manga/NearbyTextLayout$SourceGroup.class": {
+      "before": "26e661ad1afa07e134f2d915486a78b6171905e3523b02d2029e1a5899033e56",
+      "after": "26e661ad1afa07e134f2d915486a78b6171905e3523b02d2029e1a5899033e56"
+    },
+    "app-debug/cn/local/manga/NearbyTextLayout.class": {
+      "before": "46956ac078e6d44b4ac519fe12d3e756f48010d53ee7440d0e498f37c88873b7",
+      "after": "46956ac078e6d44b4ac519fe12d3e756f48010d53ee7440d0e498f37c88873b7"
+    },
+    "app-debug/cn/local/manga/PageCacheStore$StorageFullException.class": {
+      "before": "8beb21d944323916e50ecf0600d313f3f30727a49acb1eeecce9fa06423904b7",
+      "after": "8beb21d944323916e50ecf0600d313f3f30727a49acb1eeecce9fa06423904b7"
+    },
+    "app-debug/cn/local/manga/PageCacheStore.class": {
+      "before": "e284f01263572abbdb85cd1cc1e6a2a2e9026611cd63449cb890e253db3364ef",
+      "after": "e284f01263572abbdb85cd1cc1e6a2a2e9026611cd63449cb890e253db3364ef"
+    },
+    "app-debug/cn/local/manga/PageComposer$Edit.class": {
+      "before": "e971f2cd265c84c7a6b449dff60df67499a58e942b14106d28d21ea4674e2aa2",
+      "after": "e971f2cd265c84c7a6b449dff60df67499a58e942b14106d28d21ea4674e2aa2"
+    },
+    "app-debug/cn/local/manga/PageComposer$Mode.class": {
+      "before": "347fa79c988c0a3fb25e1792f6a2db9e88d92b1b5b696dafa28401066f502280",
+      "after": "347fa79c988c0a3fb25e1792f6a2db9e88d92b1b5b696dafa28401066f502280"
+    },
+    "app-debug/cn/local/manga/PageComposer$Placement.class": {
+      "before": "b67ace6c8e7127e352c546ff40ac7ea136263db621c3bb47564991b7c836304b",
+      "after": "b67ace6c8e7127e352c546ff40ac7ea136263db621c3bb47564991b7c836304b"
+    },
+    "app-debug/cn/local/manga/PageComposer.class": {
+      "before": "7cfeaaaff3e0ef8fe2028dc1f8b04d4b5e78ad7641c1df54e19a246904d047c6",
+      "after": "7cfeaaaff3e0ef8fe2028dc1f8b04d4b5e78ad7641c1df54e19a246904d047c6"
+    },
+    "app-debug/cn/local/manga/PageDraft$Item.class": {
+      "before": "52688e4cbd420808c01cf46188982e1b67f7098d2242da213a19a3f2514000ba",
+      "after": "52688e4cbd420808c01cf46188982e1b67f7098d2242da213a19a3f2514000ba"
+    },
+    "app-debug/cn/local/manga/PageDraft.class": {
+      "before": "57bf006972a48a1c309169d196f5e97a201b67687691a732163b1d133d38d89d",
+      "after": "57bf006972a48a1c309169d196f5e97a201b67687691a732163b1d133d38d89d"
+    },
+    "app-debug/cn/local/manga/PageDraftStore.class": {
+      "before": "5fff56cc77f870d24fadc7e805dac7a75a402752ce2934672ab85fee2ee6b355",
+      "after": "5fff56cc77f870d24fadc7e805dac7a75a402752ce2934672ab85fee2ee6b355"
+    },
+    "app-debug/cn/local/manga/PageGrid$1.class": {
+      "before": "ae7c74c49d8b436fff86d042e858dc45db868ef873bb8ece18ebe17a4414c941",
+      "after": "ae7c74c49d8b436fff86d042e858dc45db868ef873bb8ece18ebe17a4414c941"
+    },
+    "app-debug/cn/local/manga/PageGrid.class": {
+      "before": "da79892222a47f741e42a19d89aeb6f4475c44f37d22dd564a16202fa8ea95fc",
+      "after": "da79892222a47f741e42a19d89aeb6f4475c44f37d22dd564a16202fa8ea95fc"
+    },
+    "app-debug/cn/local/manga/PageOutcome$Timings.class": {
+      "before": "1fd48c1338d24b179ef0aa4b268c1345f5b67e9ee8746b9a36d581a53cbf5f44",
+      "after": "1fd48c1338d24b179ef0aa4b268c1345f5b67e9ee8746b9a36d581a53cbf5f44"
+    },
+    "app-debug/cn/local/manga/PageOutcome.class": {
+      "before": "136fd643bdf50991e9c59166f7f05db7454fb61619dd2bb94029611f2cdfe913",
+      "after": "136fd643bdf50991e9c59166f7f05db7454fb61619dd2bb94029611f2cdfe913"
+    },
+    "app-debug/cn/local/manga/PagePipeline$Page.class": {
+      "before": "bad914c9b1bf1e09879b75cebc9f3f6a9027b82a089c38a6d0688b8e58807bc6",
+      "after": "bad914c9b1bf1e09879b75cebc9f3f6a9027b82a089c38a6d0688b8e58807bc6"
+    },
+    "app-debug/cn/local/manga/PagePipeline.class": {
+      "before": "c0ba0f5fde68c98bee9f797e214c6ce39da5fa1d68b966e7294446ee9b61ae34",
+      "after": "c0ba0f5fde68c98bee9f797e214c6ce39da5fa1d68b966e7294446ee9b61ae34"
+    },
+    "app-debug/cn/local/manga/PartialTranslations$Reply.class": {
+      "before": "de47e795d9cc4feb1fab60f1103e8ba145f9a12f3e2ff3c27cbf451371ff1b5b",
+      "after": "de47e795d9cc4feb1fab60f1103e8ba145f9a12f3e2ff3c27cbf451371ff1b5b"
+    },
+    "app-debug/cn/local/manga/PartialTranslations.class": {
+      "before": "b29d2dd9cd974ed8652446da429a995d80be4f3ed0ac83c428784ae2b90c11d5",
+      "after": "b29d2dd9cd974ed8652446da429a995d80be4f3ed0ac83c428784ae2b90c11d5"
+    },
+    "app-debug/cn/local/manga/PerformanceDiagnostics$1.class": {
+      "before": "f2f580d4c49d45f3d1e285eae5cd9f01e024e5b32e34724b6cce5c3b294f3e41",
+      "after": "f2f580d4c49d45f3d1e285eae5cd9f01e024e5b32e34724b6cce5c3b294f3e41"
+    },
+    "app-debug/cn/local/manga/PerformanceDiagnostics$CountingStream.class": {
+      "before": "82d7f518da72f2ac34d158dc28f0413125f7712b43ad3f9b572d3a0ccabd494f",
+      "after": "82d7f518da72f2ac34d158dc28f0413125f7712b43ad3f9b572d3a0ccabd494f"
+    },
+    "app-debug/cn/local/manga/PerformanceDiagnostics$Page.class": {
+      "before": "0f04fa9355a7faaa35b510a5bf62fde6dbc118b540d455a7b2b0bb31490c0208",
+      "after": "0f04fa9355a7faaa35b510a5bf62fde6dbc118b540d455a7b2b0bb31490c0208"
+    },
+    "app-debug/cn/local/manga/PerformanceDiagnostics.class": {
+      "before": "d4ddf939ae62dde6b2a53b0630c9c8b6cd3882c24ee718b8b3974c537f99f10a",
+      "after": "d4ddf939ae62dde6b2a53b0630c9c8b6cd3882c24ee718b8b3974c537f99f10a"
+    },
+    "app-debug/cn/local/manga/ProgressRingDrawable.class": {
+      "before": "5acfb0769bc62e044bd79c3b24cfae1122ca7f4dd18ccbcf5da21e3d8c52910e",
+      "after": "5acfb0769bc62e044bd79c3b24cfae1122ca7f4dd18ccbcf5da21e3d8c52910e"
+    },
+    "app-debug/cn/local/manga/ProjectCover$1.class": {
+      "before": "6c4b1cbfd67c20529d1e3a19ab6c33e34628a8e45e8dac2e15910f972f021a31",
+      "after": "6c4b1cbfd67c20529d1e3a19ab6c33e34628a8e45e8dac2e15910f972f021a31"
+    },
+    "app-debug/cn/local/manga/ProjectCover.class": {
+      "before": "1a0d0559c5ebfd2c93b6a59ce0fc6c19074d542f616cef4e4344938cf73fed62",
+      "after": "1a0d0559c5ebfd2c93b6a59ce0fc6c19074d542f616cef4e4344938cf73fed62"
+    },
+    "app-debug/cn/local/manga/ProjectLauncher$Gathered.class": {
+      "before": "bc4ca9dc7e7884da3810c4341c6e2886f480d6f70ea25904361579ce59a711f3",
+      "after": "bc4ca9dc7e7884da3810c4341c6e2886f480d6f70ea25904361579ce59a711f3"
+    },
+    "app-debug/cn/local/manga/ProjectLauncher$Gatherer.class": {
+      "before": "313df31438fb5e30a01e18cb8e6aa20417f9faf39448a1adbec249197e473a69",
+      "after": "313df31438fb5e30a01e18cb8e6aa20417f9faf39448a1adbec249197e473a69"
+    },
+    "app-debug/cn/local/manga/ProjectLauncher.class": {
+      "before": "5b58f8f00726fa5cdc59cbf198ff85cf78f07660fd4618c6b23e69f572074242",
+      "after": "5b58f8f00726fa5cdc59cbf198ff85cf78f07660fd4618c6b23e69f572074242"
+    },
+    "app-debug/cn/local/manga/ProjectListActivity$1.class": {
+      "before": "f8bb9ca4041d2a5fee09adf027c0f2204f39e13d00004c91f79b0f2d98928b20",
+      "after": "f8bb9ca4041d2a5fee09adf027c0f2204f39e13d00004c91f79b0f2d98928b20"
+    },
+    "app-debug/cn/local/manga/ProjectListActivity.class": {
+      "before": "b01611df1c35839337c0be02dd5be36c317d49b3becc5552552f37de45e7944f",
+      "after": "b01611df1c35839337c0be02dd5be36c317d49b3becc5552552f37de45e7944f"
+    },
+    "app-debug/cn/local/manga/ProjectReaderActivity$1.class": {
+      "before": "bcbae73cfb8190459e3a2835c759c9f4752afe434b85955b572678c9c670dd86",
+      "after": "bcbae73cfb8190459e3a2835c759c9f4752afe434b85955b572678c9c670dd86"
+    },
+    "app-debug/cn/local/manga/ProjectReaderActivity$2.class": {
+      "before": "83c5cf7648396bae3633f97d44db94a5f41c4507d04683b88c816970ea2026e6",
+      "after": "83c5cf7648396bae3633f97d44db94a5f41c4507d04683b88c816970ea2026e6"
+    },
+    "app-debug/cn/local/manga/ProjectReaderActivity$Pages$1.class": {
+      "before": "7f24a75e815ebdba73dff63c8017acdacef11159ea6fe8ffeaba0ee40ef1c325",
+      "after": "7f24a75e815ebdba73dff63c8017acdacef11159ea6fe8ffeaba0ee40ef1c325"
+    },
+    "app-debug/cn/local/manga/ProjectReaderActivity$Pages.class": {
+      "before": "1503a1d07862d0086c4afaefc548e9f0c3b5df8a7f94c7ecc63b078aac637c15",
+      "after": "1503a1d07862d0086c4afaefc548e9f0c3b5df8a7f94c7ecc63b078aac637c15"
+    },
+    "app-debug/cn/local/manga/ProjectReaderActivity.class": {
+      "before": "599d84216e26bbbad81c3124db145600fb0eb070f0fc9ac215a724379bac8d5f",
+      "after": "599d84216e26bbbad81c3124db145600fb0eb070f0fc9ac215a724379bac8d5f"
+    },
+    "app-debug/cn/local/manga/ProjectStore$PageSpec.class": {
+      "before": "1d98163a1e6b97c0b193aa1f2dbf23d005d507e4e7a63bfa0551a2a84264dc61",
+      "after": "1d98163a1e6b97c0b193aa1f2dbf23d005d507e4e7a63bfa0551a2a84264dc61"
+    },
+    "app-debug/cn/local/manga/ProjectStore$Progress.class": {
+      "before": "56c28213960b8ad7a8c0a31963e3aa4baf6c423a47849eefdbd19a98177dfdb9",
+      "after": "56c28213960b8ad7a8c0a31963e3aa4baf6c423a47849eefdbd19a98177dfdb9"
+    },
+    "app-debug/cn/local/manga/ProjectStore.class": {
+      "before": "7904c9137101d4408258ebea5f8cd3bf614efbd46bf7512af3d3996efc57ee9d",
+      "after": "7904c9137101d4408258ebea5f8cd3bf614efbd46bf7512af3d3996efc57ee9d"
+    },
+    "app-debug/cn/local/manga/ProjectTranslation.class": {
+      "before": "1f1d2dbba6b3fdb64440d70a65bd1bdfaa4896546daf6332546f6ea2c636ad78",
+      "after": "1f1d2dbba6b3fdb64440d70a65bd1bdfaa4896546daf6332546f6ea2c636ad78"
+    },
+    "app-debug/cn/local/manga/QuickPageRail.class": {
+      "before": "374c1a5cf34aaf323ce40a66e50230c99906950eaf1972734a7e3330abafceff",
+      "after": "374c1a5cf34aaf323ce40a66e50230c99906950eaf1972734a7e3330abafceff"
+    },
+    "app-debug/cn/local/manga/Region.class": {
+      "before": "6461687aa083e3736f2f7a701bf6214ab66d84132f69ed03f96de95cc9dbfd5c",
+      "after": "6461687aa083e3736f2f7a701bf6214ab66d84132f69ed03f96de95cc9dbfd5c"
+    },
+    "app-debug/cn/local/manga/RenderedPageCache$Entry.class": {
+      "before": "54676266dacf85723180dbea70dcee3a30ecdd8acad8aaf71c5b2e1bd8c4e9f4",
+      "after": "54676266dacf85723180dbea70dcee3a30ecdd8acad8aaf71c5b2e1bd8c4e9f4"
+    },
+    "app-debug/cn/local/manga/RenderedPageCache.class": {
+      "before": "b3081b4c8c7c7d66348195304a8c1bbed6abf1546a98eaff5a2ed5af06210353",
+      "after": "b3081b4c8c7c7d66348195304a8c1bbed6abf1546a98eaff5a2ed5af06210353"
+    },
+    "app-debug/cn/local/manga/RepairPixels$Normalized.class": {
+      "before": "3c7cdd74128826286edb7131ee9ee9cae91f75370bb123270efeb6da9a8ee3b2",
+      "after": "3c7cdd74128826286edb7131ee9ee9cae91f75370bb123270efeb6da9a8ee3b2"
+    },
+    "app-debug/cn/local/manga/RepairPixels.class": {
+      "before": "3ed9be401763b798164b7743f0aa5bf7601c5a4eb1df9b96c1b2d34bef3b728a",
+      "after": "3ed9be401763b798164b7743f0aa5bf7601c5a4eb1df9b96c1b2d34bef3b728a"
+    },
+    "app-debug/cn/local/manga/ResultView$1.class": {
+      "before": "2da4005f88a4ef183b100aa445269d080d7ee9832d60570a32b6651669077d24",
+      "after": "2da4005f88a4ef183b100aa445269d080d7ee9832d60570a32b6651669077d24"
+    },
+    "app-debug/cn/local/manga/ResultView$2.class": {
+      "before": "865a5efaaccb5b919671981ee62ebf76b589deceab5e5d0f3087f65ff5a3be81",
+      "after": "865a5efaaccb5b919671981ee62ebf76b589deceab5e5d0f3087f65ff5a3be81"
+    },
+    "app-debug/cn/local/manga/ResultView$3.class": {
+      "before": "c73722b5a530e9e2fedc867d5a36588f1d0749e5f4dce7118e7d560f20c7ecaf",
+      "after": "c73722b5a530e9e2fedc867d5a36588f1d0749e5f4dce7118e7d560f20c7ecaf"
+    },
+    "app-debug/cn/local/manga/ResultView.class": {
+      "before": "597d80a539ae2d5827e2e568bcf4e532f849da34e796281ad86edc8949d6c665",
+      "after": "597d80a539ae2d5827e2e568bcf4e532f849da34e796281ad86edc8949d6c665"
+    },
+    "app-debug/cn/local/manga/RtDetrDetector.class": {
+      "before": "b4c86a5206290fb9d4cebc0763d3cfc4b2a1bc67fdb8ad9c8435da3ab9882a31",
+      "after": "b4c86a5206290fb9d4cebc0763d3cfc4b2a1bc67fdb8ad9c8435da3ab9882a31"
+    },
+    "app-debug/cn/local/manga/RtDetrRegions$Candidate.class": {
+      "before": "919a8bf7ae458e2a2924cf219e568c88496955c9900e5a0bd188eec4ec21e884",
+      "after": "919a8bf7ae458e2a2924cf219e568c88496955c9900e5a0bd188eec4ec21e884"
+    },
+    "app-debug/cn/local/manga/RtDetrRegions$Paper.class": {
+      "before": "fad03cd76bd0ce0291f37ed777685a608ad2c3d8f247008b0d9892c4df90a171",
+      "after": "fad03cd76bd0ce0291f37ed777685a608ad2c3d8f247008b0d9892c4df90a171"
+    },
+    "app-debug/cn/local/manga/RtDetrRegions.class": {
+      "before": "b43ebed018200886e427d5a039e631c8419399acb2282af257e21d136fe7bd9e",
+      "after": "b43ebed018200886e427d5a039e631c8419399acb2282af257e21d136fe7bd9e"
+    },
+    "app-debug/cn/local/manga/SearchTerms.class": {
+      "before": "51ab8cf13b1d222e546f1897d2e3bce2d0f4751301a94053ba0dc0ac5c0cf6e1",
+      "after": "51ab8cf13b1d222e546f1897d2e3bce2d0f4751301a94053ba0dc0ac5c0cf6e1"
+    },
+    "app-debug/cn/local/manga/SessionRepository.class": {
+      "before": "089c08d7b421dddd60f40429ddd526bc2c7f0f03c39f74c92c9465820529ed55",
+      "after": "089c08d7b421dddd60f40429ddd526bc2c7f0f03c39f74c92c9465820529ed55"
+    },
+    "app-debug/cn/local/manga/SettingsActivity$1.class": {
+      "before": "4b3cef4eb6b9948be1c3b5cb486d333fde7258bd00cb1432e1f9f6c3a8ff8ed1",
+      "after": "4b3cef4eb6b9948be1c3b5cb486d333fde7258bd00cb1432e1f9f6c3a8ff8ed1"
+    },
+    "app-debug/cn/local/manga/SettingsActivity$2.class": {
+      "before": "7e6accad3466dfef623dd4692856a32b7352bc80f0e228096eb35144bc211787",
+      "after": "7e6accad3466dfef623dd4692856a32b7352bc80f0e228096eb35144bc211787"
+    },
+    "app-debug/cn/local/manga/SettingsActivity$3.class": {
+      "before": "0caefafc90b157e28867ff297e6915a2795d723314cdc8c4b7c92d8af380eda6",
+      "after": "0caefafc90b157e28867ff297e6915a2795d723314cdc8c4b7c92d8af380eda6"
+    },
+    "app-debug/cn/local/manga/SettingsActivity$4.class": {
+      "before": "ce3a0de6348fa855c98b905546e79e2433456bf0282d2d4da87f0ee79153a700",
+      "after": "ce3a0de6348fa855c98b905546e79e2433456bf0282d2d4da87f0ee79153a700"
+    },
+    "app-debug/cn/local/manga/SettingsActivity$5.class": {
+      "before": "a05d19fe4224b8c3b9e1efa3e54424ebf058eb778e37f19729d14628903af77f",
+      "after": "a05d19fe4224b8c3b9e1efa3e54424ebf058eb778e37f19729d14628903af77f"
+    },
+    "app-debug/cn/local/manga/SettingsActivity$6.class": {
+      "before": "2a2417202d8053b9fa6f3bf90c8e88dd3b00a9826dc8ec3f3f553a277770ee71",
+      "after": "2a2417202d8053b9fa6f3bf90c8e88dd3b00a9826dc8ec3f3f553a277770ee71"
+    },
+    "app-debug/cn/local/manga/SettingsActivity.class": {
+      "before": "42c415709ceec58d6d5c7a5c3a307d22cdea1106a5800e60257d61f915d70f35",
+      "after": "42c415709ceec58d6d5c7a5c3a307d22cdea1106a5800e60257d61f915d70f35"
+    },
+    "app-debug/cn/local/manga/ShellActivity.class": {
+      "before": "6ec80a9a4d65987d7a00ee492e498e626f5622909e08a849176f1a2d8b1890d2",
+      "after": "6ec80a9a4d65987d7a00ee492e498e626f5622909e08a849176f1a2d8b1890d2"
+    },
+    "app-debug/cn/local/manga/SourceImageCache$Entry.class": {
+      "before": "23a1e864071166be8d85c0303c3709c5fdc11704edede4f673ce2c178ca8543a",
+      "after": "23a1e864071166be8d85c0303c3709c5fdc11704edede4f673ce2c178ca8543a"
+    },
+    "app-debug/cn/local/manga/SourceImageCache.class": {
+      "before": "5337f3c25eb3fe6e20c736b050e7bd397ee94b0b81aef39766d215042cd39f9a",
+      "after": "5337f3c25eb3fe6e20c736b050e7bd397ee94b0b81aef39766d215042cd39f9a"
+    },
+    "app-debug/cn/local/manga/Storage.class": {
+      "before": "f1b5250779ed4462d63eeca9d2044d90b35ce0a8682011d285077ddc2eca787f",
+      "after": "f1b5250779ed4462d63eeca9d2044d90b35ce0a8682011d285077ddc2eca787f"
+    },
+    "app-debug/cn/local/manga/StorageCensus$1.class": {
+      "before": "6678dd73381e138f0070563d9ca95e857641f467fadac0d1c0f872f8dc9921a4",
+      "after": "6678dd73381e138f0070563d9ca95e857641f467fadac0d1c0f872f8dc9921a4"
+    },
+    "app-debug/cn/local/manga/StorageCensus$Group.class": {
+      "before": "a8876000feeb77394ad2455f5fc899c7492198f432385378df9ad1f5ad1edb8c",
+      "after": "a8876000feeb77394ad2455f5fc899c7492198f432385378df9ad1f5ad1edb8c"
+    },
+    "app-debug/cn/local/manga/StorageCensus.class": {
+      "before": "43bd8b5446f5fc98814cdc457b153a5b0a12eeeab2cb6e13013f4ce917ac1f2f",
+      "after": "43bd8b5446f5fc98814cdc457b153a5b0a12eeeab2cb6e13013f4ce917ac1f2f"
+    },
+    "app-debug/cn/local/manga/StorageDatabase$1.class": {
+      "before": "e367caad6ed890a07cd13e1e3e3cfdf9e86f57a525b4e49c3402a499ce3503a7",
+      "after": "e367caad6ed890a07cd13e1e3e3cfdf9e86f57a525b4e49c3402a499ce3503a7"
+    },
+    "app-debug/cn/local/manga/StorageDatabase$Work.class": {
+      "before": "f8220742bdd1880435955b662d2a02d8309cb737c817b4da9f248ba451b66e8b",
+      "after": "f8220742bdd1880435955b662d2a02d8309cb737c817b4da9f248ba451b66e8b"
+    },
+    "app-debug/cn/local/manga/StorageDatabase.class": {
+      "before": "d699353ad1d85bcccf12c212b0d1c02266cbff697f8cf66579c73ba2b56b386c",
+      "after": "d699353ad1d85bcccf12c212b0d1c02266cbff697f8cf66579c73ba2b56b386c"
+    },
+    "app-debug/cn/local/manga/StorageDiagnostics.class": {
+      "before": "4417f4baa4c66dae7c57ca9e56c34a46b8e2179f1a43c2ed52604f66a4962140",
+      "after": "4417f4baa4c66dae7c57ca9e56c34a46b8e2179f1a43c2ed52604f66a4962140"
+    },
+    "app-debug/cn/local/manga/StorageFiles$Writer.class": {
+      "before": "c1a1d14cf01758721151433b221d64d6e438d566e9ad26e0db42ce174f1dcdc4",
+      "after": "c1a1d14cf01758721151433b221d64d6e438d566e9ad26e0db42ce174f1dcdc4"
+    },
+    "app-debug/cn/local/manga/StorageFiles.class": {
+      "before": "da87d6b0df113fb987250c532bf1bbf1ecc21733e4237ca611443267235d544a",
+      "after": "da87d6b0df113fb987250c532bf1bbf1ecc21733e4237ca611443267235d544a"
+    },
+    "app-debug/cn/local/manga/StorageJson.class": {
+      "before": "b4e04c63e107f2775fc4f541b2e314347013cce2a4e8b1854a5578fbf732c971",
+      "after": "b4e04c63e107f2775fc4f541b2e314347013cce2a4e8b1854a5578fbf732c971"
+    },
+    "app-debug/cn/local/manga/StorageMigration.class": {
+      "before": "6316b1bdacf096237aa94d9b0e30df22f0127896c398e7eaf14ed9eda80e16dd",
+      "after": "6316b1bdacf096237aa94d9b0e30df22f0127896c398e7eaf14ed9eda80e16dd"
+    },
+    "app-debug/cn/local/manga/StoragePolicy.class": {
+      "before": "06f8cbbbc2cf32adeee3b044614e560c61d9e71957a30eeb56476690fcd80cf7",
+      "after": "06f8cbbbc2cf32adeee3b044614e560c61d9e71957a30eeb56476690fcd80cf7"
+    },
+    "app-debug/cn/local/manga/StorageQuota$1.class": {
+      "before": "7d27eb3d9f8dc27bd9b1c9849afc317ae53cef11f39509ab90f0271ba08cf087",
+      "after": "7d27eb3d9f8dc27bd9b1c9849afc317ae53cef11f39509ab90f0271ba08cf087"
+    },
+    "app-debug/cn/local/manga/StorageQuota$2.class": {
+      "before": "086b100fa018524bed4855121b85f3635a3410554afe96f86dde179826d0af86",
+      "after": "086b100fa018524bed4855121b85f3635a3410554afe96f86dde179826d0af86"
+    },
+    "app-debug/cn/local/manga/StorageQuota.class": {
+      "before": "230f843454264fecd4615d9231febf92c57d3878e8167dbf8a8aa85b912a2a72",
+      "after": "230f843454264fecd4615d9231febf92c57d3878e8167dbf8a8aa85b912a2a72"
+    },
+    "app-debug/cn/local/manga/StorageSchema.class": {
+      "before": "04d60a068724932791176c580ee353f91c4cb699f481bc7151f0b216387853f6",
+      "after": "04d60a068724932791176c580ee353f91c4cb699f481bc7151f0b216387853f6"
+    },
+    "app-debug/cn/local/manga/StorageTools$Action.class": {
+      "before": "b0147768995ee6e13a82b2a8fc448e34069df3ecca4515b3a17ff09dfb86f93f",
+      "after": "b0147768995ee6e13a82b2a8fc448e34069df3ecca4515b3a17ff09dfb86f93f"
+    },
+    "app-debug/cn/local/manga/StorageTools.class": {
+      "before": "7b6c317742d322eb5739539af5c1c208cd6347e584cfac93b7a1fa7b1d7126c4",
+      "after": "7b6c317742d322eb5739539af5c1c208cd6347e584cfac93b7a1fa7b1d7126c4"
+    },
+    "app-debug/cn/local/manga/StoredCache$Entry.class": {
+      "before": "82c5859f45de832cdba6d2612435ccdbcd7eecd191901e114dc938d21add4e32",
+      "after": "82c5859f45de832cdba6d2612435ccdbcd7eecd191901e114dc938d21add4e32"
+    },
+    "app-debug/cn/local/manga/StoredCache.class": {
+      "before": "35d58299e0aa094a8e541f6a96cefe881dad3491b2555334c3e9d4553da5811d",
+      "after": "35d58299e0aa094a8e541f6a96cefe881dad3491b2555334c3e9d4553da5811d"
+    },
+    "app-debug/cn/local/manga/StoredDrafts$Prepared.class": {
+      "before": "23b462ce3d3492b31847b1c83a53822544dd0a58ca3b6ba342a6bd4d47c1f11a",
+      "after": "23b462ce3d3492b31847b1c83a53822544dd0a58ca3b6ba342a6bd4d47c1f11a"
+    },
+    "app-debug/cn/local/manga/StoredDrafts.class": {
+      "before": "90bb8e09b4b0e22a37d7496d590f6f042bcbfa378efcac24070df532cdc77500",
+      "after": "90bb8e09b4b0e22a37d7496d590f6f042bcbfa378efcac24070df532cdc77500"
+    },
+    "app-debug/cn/local/manga/StoredSessions.class": {
+      "before": "b376edb8dd68b100a961982eecf044f018faf42fdeab2751fdfb88589efa8d1d",
+      "after": "b376edb8dd68b100a961982eecf044f018faf42fdeab2751fdfb88589efa8d1d"
+    },
+    "app-debug/cn/local/manga/StylePanel$1.class": {
+      "before": "47dc6677493ea5c772c958cfa2d89913e5ef0749b0464a3575a175e1bb0e4ab8",
+      "after": "47dc6677493ea5c772c958cfa2d89913e5ef0749b0464a3575a175e1bb0e4ab8"
+    },
+    "app-debug/cn/local/manga/StylePanel$2.class": {
+      "before": "8fcf0731d1dc57bbf34293f804c090b3936cb171bbe9c940485487acd1599f21",
+      "after": "8fcf0731d1dc57bbf34293f804c090b3936cb171bbe9c940485487acd1599f21"
+    },
+    "app-debug/cn/local/manga/StylePanel$3.class": {
+      "before": "6cc897c869eafb5bb5dd752c883b3444bba44cf9c405fb0da375b369f6f21f8d",
+      "after": "6cc897c869eafb5bb5dd752c883b3444bba44cf9c405fb0da375b369f6f21f8d"
+    },
+    "app-debug/cn/local/manga/StylePanel$4.class": {
+      "before": "afe4dc526b153e6da9a89c94d11ed8998060365d624902584d756425e4463bdd",
+      "after": "afe4dc526b153e6da9a89c94d11ed8998060365d624902584d756425e4463bdd"
+    },
+    "app-debug/cn/local/manga/StylePanel$Editor$1.class": {
+      "before": "8a9f9c04598148e00ef205fe32d9b749dc4b4cd5bc5ed513947ce01696f090f0",
+      "after": "8a9f9c04598148e00ef205fe32d9b749dc4b4cd5bc5ed513947ce01696f090f0"
+    },
+    "app-debug/cn/local/manga/StylePanel$Editor.class": {
+      "before": "a4f8026aed9e2ba57be687cb65789950bc73004f970858536aa8fbf34c96c1df",
+      "after": "a4f8026aed9e2ba57be687cb65789950bc73004f970858536aa8fbf34c96c1df"
+    },
+    "app-debug/cn/local/manga/StylePanel.class": {
+      "before": "f964b1227508091483525298d9bcfdcd064d4add3529764c1c34bdee5bd9354e",
+      "after": "f964b1227508091483525298d9bcfdcd064d4add3529764c1c34bdee5bd9354e"
+    },
+    "app-debug/cn/local/manga/TextRenderer.class": {
+      "before": "f9095c138ee27ea1fa54edb6b095dd75145f75a66ec59487e2a8d6a519b9de69",
+      "after": "f9095c138ee27ea1fa54edb6b095dd75145f75a66ec59487e2a8d6a519b9de69"
+    },
+    "app-debug/cn/local/manga/TextStyle.class": {
+      "before": "9c6b951e82e3652e1ae4aec0498f7806b2e9f727a352978ff93557c20fb70d99",
+      "after": "9c6b951e82e3652e1ae4aec0498f7806b2e9f727a352978ff93557c20fb70d99"
+    },
+    "app-debug/cn/local/manga/TranscriptDialog.class": {
+      "before": "3f2e0bd3cf441677b8c9ce7e15c0fb97c4ebf5e52d085624c1be83d1418ae515",
+      "after": "3f2e0bd3cf441677b8c9ce7e15c0fb97c4ebf5e52d085624c1be83d1418ae515"
+    },
+    "app-debug/cn/local/manga/TranslationEngine$CleanupGeometry.class": {
+      "before": "7c88b771433cbbf0e741e191cba565c85783d54b821a47d42c02ad0bfbc1be98",
+      "after": "7c88b771433cbbf0e741e191cba565c85783d54b821a47d42c02ad0bfbc1be98"
+    },
+    "app-debug/cn/local/manga/TranslationEngine$PreparedText.class": {
+      "before": "85d77450bce0ef69cece8f0597dc1c02fd157c6233134d7ce8aa895887a34dbb",
+      "after": "85d77450bce0ef69cece8f0597dc1c02fd157c6233134d7ce8aa895887a34dbb"
+    },
+    "app-debug/cn/local/manga/TranslationEngine$Progress.class": {
+      "before": "68b3b82563dbb989dd7ed5e2232e8c96a304149533acdea4f9de6d2f748303a3",
+      "after": "68b3b82563dbb989dd7ed5e2232e8c96a304149533acdea4f9de6d2f748303a3"
+    },
+    "app-debug/cn/local/manga/TranslationEngine$Result.class": {
+      "before": "b0af2ffb0d7093c6cac995be75093c8e3d1c78e70b557d639fa65cf37565f648",
+      "after": "b0af2ffb0d7093c6cac995be75093c8e3d1c78e70b557d639fa65cf37565f648"
+    },
+    "app-debug/cn/local/manga/TranslationEngine$TextBatch.class": {
+      "before": "4394bac0359f241fbea9c9f28d38f8cc56c6e0024a989936e3b03f25725a920c",
+      "after": "4394bac0359f241fbea9c9f28d38f8cc56c6e0024a989936e3b03f25725a920c"
+    },
+    "app-debug/cn/local/manga/TranslationEngine.class": {
+      "before": "9f51344a96202bac33853092b3acc857c6169108bd8e0b768ee708c09e21e976",
+      "after": "9f51344a96202bac33853092b3acc857c6169108bd8e0b768ee708c09e21e976"
+    },
+    "app-debug/cn/local/manga/TranslationLog.class": {
+      "before": "cc80fadc0c4ec1801cfead13890cc65caa5bc65cc7dba88ca67ebec849cd57b8",
+      "after": "cc80fadc0c4ec1801cfead13890cc65caa5bc65cc7dba88ca67ebec849cd57b8"
+    },
+    "app-debug/cn/local/manga/TranslationService.class": {
+      "before": "b6fc7d2831a6276ff4428b42ab937b14de6f2909aabdff5f4d4e928b06561e19",
+      "after": "b6fc7d2831a6276ff4428b42ab937b14de6f2909aabdff5f4d4e928b06561e19"
+    },
+    "app-debug/cn/local/manga/TranslationStages$Lease.class": {
+      "before": "0027e7ef7d7bcbd39baf1cf02de1a716455551d88473d31200eba623846c97a8",
+      "after": "0027e7ef7d7bcbd39baf1cf02de1a716455551d88473d31200eba623846c97a8"
+    },
+    "app-debug/cn/local/manga/TranslationStages$RequestContext.class": {
+      "before": "043dd33357f9c594bedbb3826ad9a17a0fd304b25fda1ff80ac210e2d3f8e7b1",
+      "after": "043dd33357f9c594bedbb3826ad9a17a0fd304b25fda1ff80ac210e2d3f8e7b1"
+    },
+    "app-debug/cn/local/manga/TranslationStages$Waiter.class": {
+      "before": "9fe35fe652d0213a28d108c85559d42109d205e497041c52770873f5f3d9c728",
+      "after": "9fe35fe652d0213a28d108c85559d42109d205e497041c52770873f5f3d9c728"
+    },
+    "app-debug/cn/local/manga/TranslationStages.class": {
+      "before": "e4b889bc928e91935d7cbf59c02ce665a62910e72f132b86c9b181cd8c6071f9",
+      "after": "e4b889bc928e91935d7cbf59c02ce665a62910e72f132b86c9b181cd8c6071f9"
+    },
+    "app-debug/cn/local/manga/TranslationTaskManager$State.class": {
+      "before": "d7658d1b3a7567ea672b8bdfe001b412824b3deadd38e0cf4f9eb36d4ee1b9cd",
+      "after": "d7658d1b3a7567ea672b8bdfe001b412824b3deadd38e0cf4f9eb36d4ee1b9cd"
+    },
+    "app-debug/cn/local/manga/TranslationTaskManager.class": {
+      "before": "325c6c986e1b4a34b75c8b0e71222a8ae6b63cbae98b3af399d2b8ddc3b0beba",
+      "after": "325c6c986e1b4a34b75c8b0e71222a8ae6b63cbae98b3af399d2b8ddc3b0beba"
+    },
+    "app-debug/cn/local/manga/TranslationTranscript$Row.class": {
+      "before": "c179319d11abc4ee43c9b3ef344fab5a6ee18640471f740a73c786df8423bf52",
+      "after": "c179319d11abc4ee43c9b3ef344fab5a6ee18640471f740a73c786df8423bf52"
+    },
+    "app-debug/cn/local/manga/TranslationTranscript.class": {
+      "before": "af3f4d81ba28075544dd79fbd2a2de2f54465f6112cb1b1e57fc98cb83978953",
+      "after": "af3f4d81ba28075544dd79fbd2a2de2f54465f6112cb1b1e57fc98cb83978953"
+    },
+    "app-debug/cn/local/manga/Typesetter$Bubble.class": {
+      "before": "b051dd9ebf425dfd2487179a1030241f77891dac71480db8632b845b84c23d2f",
+      "after": "b051dd9ebf425dfd2487179a1030241f77891dac71480db8632b845b84c23d2f"
+    },
+    "app-debug/cn/local/manga/Typesetter$BubbleText.class": {
+      "before": "b6bdde78edee62ecbd8304d6c1fc51d1b6a3740575dfed010109aa03817af33d",
+      "after": "b6bdde78edee62ecbd8304d6c1fc51d1b6a3740575dfed010109aa03817af33d"
+    },
+    "app-debug/cn/local/manga/Typesetter$NearbyText.class": {
+      "before": "8a8b4c3ebf0d8074dd8152fb84583937ddbb96f109b5db8ca043d936f90b6080",
+      "after": "8a8b4c3ebf0d8074dd8152fb84583937ddbb96f109b5db8ca043d936f90b6080"
+    },
+    "app-debug/cn/local/manga/Typesetter$Style.class": {
+      "before": "e18eb78cc99ffa01a868ac173d02b2495482b33a071ca02e1612b5d0ae2798c8",
+      "after": "e18eb78cc99ffa01a868ac173d02b2495482b33a071ca02e1612b5d0ae2798c8"
+    },
+    "app-debug/cn/local/manga/Typesetter.class": {
+      "before": "1b76e106214e96f4d2763e0f4d41b86629644f3b82cef1ac9d990322b215ab94",
+      "after": "1b76e106214e96f4d2763e0f4d41b86629644f3b82cef1ac9d990322b215ab94"
+    },
+    "app-debug/cn/local/manga/Ui$1.class": {
+      "before": "c3dacf7ad2c29713954e92372e17ebd7eda11f820823e360635529e5c73cb6c8",
+      "after": "c3dacf7ad2c29713954e92372e17ebd7eda11f820823e360635529e5c73cb6c8"
+    },
+    "app-debug/cn/local/manga/Ui$Segmented.class": {
+      "before": "e7ac2d828aff4202fdad1ef925b6e3354dc6a1599c38aaa6c41b8cdcf9cce883",
+      "after": "e7ac2d828aff4202fdad1ef925b6e3354dc6a1599c38aaa6c41b8cdcf9cce883"
+    },
+    "app-debug/cn/local/manga/Ui$Sheet.class": {
+      "before": "ceb7da5574a77098082dd1f382cf7d6ba812b0b237ed845ac23dd1087ae64e65",
+      "after": "ceb7da5574a77098082dd1f382cf7d6ba812b0b237ed845ac23dd1087ae64e65"
+    },
+    "app-debug/cn/local/manga/Ui$StatusText.class": {
+      "before": "170631d7d90e5f719b4e55ac341603ccaec77b049e316005f1920af616f81ee9",
+      "after": "170631d7d90e5f719b4e55ac341603ccaec77b049e316005f1920af616f81ee9"
+    },
+    "app-debug/cn/local/manga/Ui.class": {
+      "before": "341aeab8c87c1880df07b276b94eb931315a81da80a2776d0c20dab8eb81fd41",
+      "after": "341aeab8c87c1880df07b276b94eb931315a81da80a2776d0c20dab8eb81fd41"
+    },
+    "app-debug/cn/local/manga/WebPageBridge$Host.class": {
+      "before": "7ede3d2ca163296cdfa8881308e30d8e957bece99ce21ab57827460826195b64",
+      "after": "7ede3d2ca163296cdfa8881308e30d8e957bece99ce21ab57827460826195b64"
+    },
+    "app-debug/cn/local/manga/WebPageBridge.class": {
+      "before": "bd3aeca2c0f8107d0c58b773f9316e5c39a7a68a3d02076248e8f34092f18e44",
+      "after": "bd3aeca2c0f8107d0c58b773f9316e5c39a7a68a3d02076248e8f34092f18e44"
+    },
+    "app-debug/cn/local/manga/WhiteBubbleCleaner$BackgroundKind.class": {
+      "before": "8dccc15d26a3d4eb4f8d7aae8221999e82d570c5f55a034cfb87c8eb5022664c",
+      "after": "8dccc15d26a3d4eb4f8d7aae8221999e82d570c5f55a034cfb87c8eb5022664c"
+    },
+    "app-debug/cn/local/manga/WhiteBubbleCleaner$Mask.class": {
+      "before": "dcbb7fcb2581c0a5f1827d6e2ea7350b7fbdb4baed10b4b5dc6f3e51e0d6afc7",
+      "after": "dcbb7fcb2581c0a5f1827d6e2ea7350b7fbdb4baed10b4b5dc6f3e51e0d6afc7"
+    },
+    "app-debug/cn/local/manga/WhiteBubbleCleaner.class": {
+      "before": "9ed4f1d72d29774bdb8d1e410878c9153debbbbae3963cf81c6fb11f0ceb5b04",
+      "after": "9ed4f1d72d29774bdb8d1e410878c9153debbbbae3963cf81c6fb11f0ceb5b04"
+    },
+    "app-debug/cn/local/manga/WorkbenchActivity$1.class": {
+      "before": "9ccd5af0ac861e5c259cb9dcdd41434002f71f73ac58bf2e89d19a24977fddff",
+      "after": "9ccd5af0ac861e5c259cb9dcdd41434002f71f73ac58bf2e89d19a24977fddff"
+    },
+    "app-debug/cn/local/manga/WorkbenchActivity$2.class": {
+      "before": "ffffedee1f2a3f7c0dd6bf15181e11ad4c06a7777aa609e42f5056fa1a22a1b7",
+      "after": "ffffedee1f2a3f7c0dd6bf15181e11ad4c06a7777aa609e42f5056fa1a22a1b7"
+    },
+    "app-debug/cn/local/manga/WorkbenchActivity$3.class": {
+      "before": "b8d3985958278ec8a2ed44eb61f451668e8044fc99a8c123adb0229a9ced92ea",
+      "after": "b8d3985958278ec8a2ed44eb61f451668e8044fc99a8c123adb0229a9ced92ea"
+    },
+    "app-debug/cn/local/manga/WorkbenchActivity$4.class": {
+      "before": "64deaec62595afdbbc705475b2d6c2b36e7332480c4690db5845383c90ca8398",
+      "after": "64deaec62595afdbbc705475b2d6c2b36e7332480c4690db5845383c90ca8398"
+    },
+    "app-debug/cn/local/manga/WorkbenchActivity$Card.class": {
+      "before": "541e060c7f3067939dfcbb3e67e0b5b2d62721e034692ee2f25f356b2507ff1e",
+      "after": "541e060c7f3067939dfcbb3e67e0b5b2d62721e034692ee2f25f356b2507ff1e"
+    },
+    "app-debug/cn/local/manga/WorkbenchActivity$Step.class": {
+      "before": "1a57d3031d7f664d87d23b208f39d90ba6567a33ded3e31561a272489e3f2237",
+      "after": "1a57d3031d7f664d87d23b208f39d90ba6567a33ded3e31561a272489e3f2237"
+    },
+    "app-debug/cn/local/manga/WorkbenchActivity.class": {
+      "before": "ed94c69621ac496f7e1e823b7ec8678ae472cdf0ffd2d1dc173b409b2ab54c7b",
+      "after": "ed94c69621ac496f7e1e823b7ec8678ae472cdf0ffd2d1dc173b409b2ab54c7b"
+    },
+    "app-debugAndroidTest/cn/local/manga/BrowserImageLoaderChecks.class": {
+      "before": "86de30031a029f63f63dfaa394a6dda5b70e37bcf597503b35c36f33e9b8bdbb",
+      "after": "86de30031a029f63f63dfaa394a6dda5b70e37bcf597503b35c36f33e9b8bdbb"
+    },
+    "app-debugAndroidTest/cn/local/manga/ChecksInstrumentation.class": {
+      "before": "e2e54f2f8b4fd3d34a3e4e9597e90c75d676fc96c451df99881b3bd821e4a954",
+      "after": "e2e54f2f8b4fd3d34a3e4e9597e90c75d676fc96c451df99881b3bd821e4a954"
+    },
+    "app-debugAndroidTest/cn/local/manga/DetectorChecks.class": {
+      "before": "7f6f0b793974657979c35781f9e8b54c4bc80098924c0242f5c3f557a2b628c5",
+      "after": "7f6f0b793974657979c35781f9e8b54c4bc80098924c0242f5c3f557a2b628c5"
+    },
+    "app-debugAndroidTest/cn/local/manga/EngineChecks$1.class": {
+      "before": "61797ce78752e2e89ce36fe0923fa16af3811f234418aeee642433fcfb96e7f8",
+      "after": "61797ce78752e2e89ce36fe0923fa16af3811f234418aeee642433fcfb96e7f8"
+    },
+    "app-debugAndroidTest/cn/local/manga/EngineChecks.class": {
+      "before": "bab7dcb6aafbb5c9c652440bb24ac0e565feab112851502fa650cdac67cc9f96",
+      "after": "bab7dcb6aafbb5c9c652440bb24ac0e565feab112851502fa650cdac67cc9f96"
+    },
+    "app-debugAndroidTest/cn/local/manga/PerformanceDiagnosticsChecks.class": {
+      "before": "8922f0a6d63d4645a17c90f3f9f8b63e600342f77e119eed717c47bb59c49e94",
+      "after": "8922f0a6d63d4645a17c90f3f9f8b63e600342f77e119eed717c47bb59c49e94"
+    },
+    "app-debugAndroidTest/cn/local/manga/RefactorChecks.class": {
+      "before": "8b3298e8f2e2c1b305858a7f9946df52e44e6d2d60b3ab4ce6f6ba99bbb54f5a",
+      "after": "8b3298e8f2e2c1b305858a7f9946df52e44e6d2d60b3ab4ce6f6ba99bbb54f5a"
+    },
+    "app-debugAndroidTest/cn/local/manga/RtDetrInstrumentation.class": {
+      "before": "770df09d0000ba93dba7faffab9e8fb7048690864c5b5ad0b7d5f569d72643f1",
+      "after": "770df09d0000ba93dba7faffab9e8fb7048690864c5b5ad0b7d5f569d72643f1"
+    },
+    "app-debugAndroidTest/cn/local/manga/Ui110Checks$Action.class": {
+      "before": "14f7017f79036fb59adf9ecb3f0c939b0afb8ac775d693cf25aa541009c2e36e",
+      "after": "14f7017f79036fb59adf9ecb3f0c939b0afb8ac775d693cf25aa541009c2e36e"
+    },
+    "app-debugAndroidTest/cn/local/manga/Ui110Checks.class": {
+      "before": "72859867f9a95b2a71c9433e262fa5c167fc194ed211a94824659839ffae8463",
+      "after": "72859867f9a95b2a71c9433e262fa5c167fc194ed211a94824659839ffae8463"
+    },
+    "app-debugAndroidTest/cn/local/manga/UiShellChecks.class": {
+      "before": "35886168c06154db8029a8525e6e07743c4768bebd3670cf7af83a7fe2bc3d4b",
+      "after": "35886168c06154db8029a8525e6e07743c4768bebd3670cf7af83a7fe2bc3d4b"
+    },
+    "app-debugAndroidTest/cn/local/manga/Version116Checks$1.class": {
+      "before": "b57ce9c8efd4ffe12323de3d72da35adaf925cc0528dd1cd1f186eaa300b0601",
+      "after": "b57ce9c8efd4ffe12323de3d72da35adaf925cc0528dd1cd1f186eaa300b0601"
+    },
+    "app-debugAndroidTest/cn/local/manga/Version116Checks.class": {
+      "before": "de6d890d993f7ffbed157ec5fcc92952dea974a546e6f7676eb446001c2ea2b0",
+      "after": "de6d890d993f7ffbed157ec5fcc92952dea974a546e6f7676eb446001c2ea2b0"
+    },
+    "app-debugAndroidTest/cn/local/manga/WorkbenchChecks.class": {
+      "before": "66660d6be983dbd495cb5f1d7f623b1c78020d27ad1b31afe60f9f7f2efd3acc",
+      "after": "66660d6be983dbd495cb5f1d7f623b1c78020d27ad1b31afe60f9f7f2efd3acc"
+    },
+    "app-debugAndroidTest/cn/local/manga/test/BuildConfig.class": {
+      "before": "0d72388f90dfec10b2a7db611e0dce27470e6dd70e1e067eed5dfac7b8e71fff",
+      "after": "0d72388f90dfec10b2a7db611e0dce27470e6dd70e1e067eed5dfac7b8e71fff"
+    },
+    "app-release/cn/local/manga/ApiClient$BodyWriter.class": {
+      "before": "d4706bb18dd1fea201487da4e1083aa10f0577c90b8bdd751997e96bf6dce512",
+      "after": "d4706bb18dd1fea201487da4e1083aa10f0577c90b8bdd751997e96bf6dce512"
+    },
+    "app-release/cn/local/manga/ApiClient$RequestFailure.class": {
+      "before": "2fdf6f36db979a5c8c3a9c712be59f8f9419a7dc9700e5e164fcf6be09a9aef8",
+      "after": "2fdf6f36db979a5c8c3a9c712be59f8f9419a7dc9700e5e164fcf6be09a9aef8"
+    },
+    "app-release/cn/local/manga/ApiClient$TranslationReplyFailure.class": {
+      "before": "b923d9adef91721a23e23efa0a4f8145f8a443087016e90d192dad0a4675a157",
+      "after": "b923d9adef91721a23e23efa0a4f8145f8a443087016e90d192dad0a4675a157"
+    },
+    "app-release/cn/local/manga/ApiClient.class": {
+      "before": "2e90b32c4c03c12db02298acd65433c0f1aef88eb6e66e4e6b46e9b307a05ad0",
+      "after": "2e90b32c4c03c12db02298acd65433c0f1aef88eb6e66e4e6b46e9b307a05ad0"
+    },
+    "app-release/cn/local/manga/ApiPresets$Preset.class": {
+      "before": "dce53f81ee592f14fd6113569f244241e2013a06e251ee7272587744bc131fe2",
+      "after": "dce53f81ee592f14fd6113569f244241e2013a06e251ee7272587744bc131fe2"
+    },
+    "app-release/cn/local/manga/ApiPresets.class": {
+      "before": "487a9e027907e93860362792fa992959489baa5a9fd8383f107f712c029cd547",
+      "after": "487a9e027907e93860362792fa992959489baa5a9fd8383f107f712c029cd547"
+    },
+    "app-release/cn/local/manga/AppSettings.class": {
+      "before": "beab51ea2f352a3d3d79b98c10d5c55b1c34b617fe3005c42608358acf4839b7",
+      "after": "beab51ea2f352a3d3d79b98c10d5c55b1c34b617fe3005c42608358acf4839b7"
+    },
+    "app-release/cn/local/manga/AutoTranslationQueue$Image.class": {
+      "before": "53a9b04be520cfffb6ca98d263fcf480a8b3d49ffd7cbc6b701765be29b3c9f8",
+      "after": "53a9b04be520cfffb6ca98d263fcf480a8b3d49ffd7cbc6b701765be29b3c9f8"
+    },
+    "app-release/cn/local/manga/AutoTranslationQueue$Record.class": {
+      "before": "d52002686a802767bc70ecb577f01572aa7528cc399cc71e1ef50681c2ba5e11",
+      "after": "d52002686a802767bc70ecb577f01572aa7528cc399cc71e1ef50681c2ba5e11"
+    },
+    "app-release/cn/local/manga/AutoTranslationQueue.class": {
+      "before": "470516385f5f3348a79cfcce1014eb4ad3ebbd47e895ca56ee155a7c82b6e50f",
+      "after": "470516385f5f3348a79cfcce1014eb4ad3ebbd47e895ca56ee155a7c82b6e50f"
+    },
+    "app-release/cn/local/manga/BlobStore$Prepared.class": {
+      "before": "f753b7a2a89f7be7eb5e862278e41205ed898602d89f6f1a4d96366c26da70f4",
+      "after": "f753b7a2a89f7be7eb5e862278e41205ed898602d89f6f1a4d96366c26da70f4"
+    },
+    "app-release/cn/local/manga/BlobStore.class": {
+      "before": "65e9eb9e9b811ee1c90ef730fc550063c9039696fb9f9d4819dae980100d86d0",
+      "after": "65e9eb9e9b811ee1c90ef730fc550063c9039696fb9f9d4819dae980100d86d0"
+    },
+    "app-release/cn/local/manga/BrowserActivity$1.class": {
+      "before": "9eb4906962500891c5daa0fa300bb101c27bc63c2824eced00be6c28b0187e2e",
+      "after": "9eb4906962500891c5daa0fa300bb101c27bc63c2824eced00be6c28b0187e2e"
+    },
+    "app-release/cn/local/manga/BrowserActivity$2.class": {
+      "before": "43bfa3bd7df07ecc3248299f486c12ab1990d12c9f8978fda6be1cd887b53223",
+      "after": "43bfa3bd7df07ecc3248299f486c12ab1990d12c9f8978fda6be1cd887b53223"
+    },
+    "app-release/cn/local/manga/BrowserActivity$3.class": {
+      "before": "5d18fabd0d48c4ca54c44bb466fea59a8cc4dbbb848218446bfc95b18e8fdb91",
+      "after": "5d18fabd0d48c4ca54c44bb466fea59a8cc4dbbb848218446bfc95b18e8fdb91"
+    },
+    "app-release/cn/local/manga/BrowserActivity.class": {
+      "before": "88bd25e46585236bd31eeb02fceaba0437c44dd2e164366b0481900269c1e75e",
+      "after": "88bd25e46585236bd31eeb02fceaba0437c44dd2e164366b0481900269c1e75e"
+    },
+    "app-release/cn/local/manga/BrowserAddress.class": {
+      "before": "91a4f1b927373d12ec387a01199b8d67c01debe4db409c531d95c405d548964a",
+      "after": "91a4f1b927373d12ec387a01199b8d67c01debe4db409c531d95c405d548964a"
+    },
+    "app-release/cn/local/manga/BrowserImageLoader$HttpFailure.class": {
+      "before": "9231557c42e3b4d7109e8c1890aacd54db4c7ac75be4c37296e9cadeffd72c01",
+      "after": "9231557c42e3b4d7109e8c1890aacd54db4c7ac75be4c37296e9cadeffd72c01"
+    },
+    "app-release/cn/local/manga/BrowserImageLoader.class": {
+      "before": "48b6fa125e8ef08918d20494914df995c19b5d073b94fc8b641be57a8148fb69",
+      "after": "48b6fa125e8ef08918d20494914df995c19b5d073b94fc8b641be57a8148fb69"
+    },
+    "app-release/cn/local/manga/BrowserLibrary$Callback.class": {
+      "before": "79559ea2c8e2c30088fb4c89e6c33c650ade461717feda790998c845880d87ac",
+      "after": "79559ea2c8e2c30088fb4c89e6c33c650ade461717feda790998c845880d87ac"
+    },
+    "app-release/cn/local/manga/BrowserLibrary$ListCallback.class": {
+      "before": "ed9ac46a28038bdf3e6535e8ec026134d99b97404eb7f4f72319dee060582b39",
+      "after": "ed9ac46a28038bdf3e6535e8ec026134d99b97404eb7f4f72319dee060582b39"
+    },
+    "app-release/cn/local/manga/BrowserLibrary$Mutation.class": {
+      "before": "d5caabdca4d0999ab1f846b4d5570f501b1aaed2b6e5a9674ffc21c48a777042",
+      "after": "d5caabdca4d0999ab1f846b4d5570f501b1aaed2b6e5a9674ffc21c48a777042"
+    },
+    "app-release/cn/local/manga/BrowserLibrary$SitesCallback.class": {
+      "before": "ac6b8f0a72ed7dbc429bfae250a9b9b312c015fb258b3d0ddff313cfcbe742b7",
+      "after": "ac6b8f0a72ed7dbc429bfae250a9b9b312c015fb258b3d0ddff313cfcbe742b7"
+    },
+    "app-release/cn/local/manga/BrowserLibrary.class": {
+      "before": "4ba8c71cd9ba6219c0f4b9c10077cd897026d78d84d20db79d115dc88a20c71e",
+      "after": "4ba8c71cd9ba6219c0f4b9c10077cd897026d78d84d20db79d115dc88a20c71e"
+    },
+    "app-release/cn/local/manga/BrowserSearch$1.class": {
+      "before": "4fb5a5e7392abeb88c135b99d0cabb2e80b8a383838d3ebc21b43b8b814402da",
+      "after": "4fb5a5e7392abeb88c135b99d0cabb2e80b8a383838d3ebc21b43b8b814402da"
+    },
+    "app-release/cn/local/manga/BrowserSearch.class": {
+      "before": "067324174bf3c3be73a6795fb19971d71567235af1ef330cde242dda5409ab50",
+      "after": "067324174bf3c3be73a6795fb19971d71567235af1ef330cde242dda5409ab50"
+    },
+    "app-release/cn/local/manga/BubbleLayout$Lobe.class": {
+      "before": "95ccac4628f8b2c90f51b9d3b068fe82b40d483834ca8790360cd751bdb1a184",
+      "after": "95ccac4628f8b2c90f51b9d3b068fe82b40d483834ca8790360cd751bdb1a184"
+    },
+    "app-release/cn/local/manga/BubbleLayout$Plan.class": {
+      "before": "85fd25d0e1f7373484048f1c55ff1bc241423b2f0c56c9f2ceef5c2848f0400d",
+      "after": "85fd25d0e1f7373484048f1c55ff1bc241423b2f0c56c9f2ceef5c2848f0400d"
+    },
+    "app-release/cn/local/manga/BubbleLayout$Space.class": {
+      "before": "5e052887c21e30b91d435f74121a787d98e97623f4a8e301d12ea2b53538cd84",
+      "after": "5e052887c21e30b91d435f74121a787d98e97623f4a8e301d12ea2b53538cd84"
+    },
+    "app-release/cn/local/manga/BubbleLayout.class": {
+      "before": "729d35a5ee0f4b6650d49c1b86f46a99364d4318fe4888b73b25b46bc9348c4c",
+      "after": "729d35a5ee0f4b6650d49c1b86f46a99364d4318fe4888b73b25b46bc9348c4c"
+    },
+    "app-release/cn/local/manga/BubbleStore.class": {
+      "before": "9eb5407f2a4f12aa8698b3f66b3ff4d013c3890f23df305494e7563c99462d13",
+      "after": "9eb5407f2a4f12aa8698b3f66b3ff4d013c3890f23df305494e7563c99462d13"
+    },
+    "app-release/cn/local/manga/BuildConfig.class": {
+      "before": "e2a74cf5d8e82a09b7fb28254c4aa675375a2e21d96d97004ad4274ca5cf5b63",
+      "after": "e2a74cf5d8e82a09b7fb28254c4aa675375a2e21d96d97004ad4274ca5cf5b63"
+    },
+    "app-release/cn/local/manga/CacheFiles$Writer.class": {
+      "before": "e67c18613881ae84959612b001cbd7a90897582a46a4935ba8aed734c48dc047",
+      "after": "e67c18613881ae84959612b001cbd7a90897582a46a4935ba8aed734c48dc047"
+    },
+    "app-release/cn/local/manga/CacheFiles.class": {
+      "before": "7fd658182027e3bc2cfd9cef4e1ffb2d284814228824b0c1da27e41c6608dd93",
+      "after": "7fd658182027e3bc2cfd9cef4e1ffb2d284814228824b0c1da27e41c6608dd93"
+    },
+    "app-release/cn/local/manga/CacheStorage$1.class": {
+      "before": "6ec69a3a13741930a9c921d55482296b7f4a0298dfd9ba9203af73aacd97cfb6",
+      "after": "6ec69a3a13741930a9c921d55482296b7f4a0298dfd9ba9203af73aacd97cfb6"
+    },
+    "app-release/cn/local/manga/CacheStorage$2.class": {
+      "before": "c9547356fc8144f21c20b68c7b57754c7d434423b70d1ff2b94f9ad07bbd423c",
+      "after": "c9547356fc8144f21c20b68c7b57754c7d434423b70d1ff2b94f9ad07bbd423c"
+    },
+    "app-release/cn/local/manga/CacheStorage$Result.class": {
+      "before": "9ce606fea5efc897a4d71871f3c6e074aab7191a80c607e6378b8b6df66aeb16",
+      "after": "9ce606fea5efc897a4d71871f3c6e074aab7191a80c607e6378b8b6df66aeb16"
+    },
+    "app-release/cn/local/manga/CacheStorage.class": {
+      "before": "766d6439972ce8e5382e21e204c4138fb47058076e93ece00abdde93b9f581db",
+      "after": "766d6439972ce8e5382e21e204c4138fb47058076e93ece00abdde93b9f581db"
+    },
+    "app-release/cn/local/manga/CanvasCapture$Draw.class": {
+      "before": "868b50f3f039f8dc09ab0b06fca27eae0a1b26f2c3b76f74ee34721399cdfb81",
+      "after": "868b50f3f039f8dc09ab0b06fca27eae0a1b26f2c3b76f74ee34721399cdfb81"
+    },
+    "app-release/cn/local/manga/CanvasCapture$Loader.class": {
+      "before": "945ae8e083ae0bf7142a9a9916cac4498c7cfb36803723d54d94d41d0837990b",
+      "after": "945ae8e083ae0bf7142a9a9916cac4498c7cfb36803723d54d94d41d0837990b"
+    },
+    "app-release/cn/local/manga/CanvasCapture.class": {
+      "before": "7789f571076e5ccbbc0a1a730f0952b38f1b9f54d1af57d0bc8b289eebf4e81c",
+      "after": "7789f571076e5ccbbc0a1a730f0952b38f1b9f54d1af57d0bc8b289eebf4e81c"
+    },
+    "app-release/cn/local/manga/CleanupPlan.class": {
+      "before": "f8af3baddf576e19169ea03532998a7e6f97ed69eb817ba2518bf23cfee8c6f0",
+      "after": "f8af3baddf576e19169ea03532998a7e6f97ed69eb817ba2518bf23cfee8c6f0"
+    },
+    "app-release/cn/local/manga/ComicProject$Page.class": {
+      "before": "71b1249a00d2eadd5340df3036ea5a7b85731b84f15c40c7ec48cf8aa420e32f",
+      "after": "71b1249a00d2eadd5340df3036ea5a7b85731b84f15c40c7ec48cf8aa420e32f"
+    },
+    "app-release/cn/local/manga/ComicProject.class": {
+      "before": "9918dc41a5c7a33da0ec8e086bdbe4363cf7bac41f98403886a93224ad5c2c8f",
+      "after": "9918dc41a5c7a33da0ec8e086bdbe4363cf7bac41f98403886a93224ad5c2c8f"
+    },
+    "app-release/cn/local/manga/DatabaseLibrary.class": {
+      "before": "a5778bc84411f3ef89c0893d6489d5a9674ea1ff18d214539a5ea23efc729849",
+      "after": "a5778bc84411f3ef89c0893d6489d5a9674ea1ff18d214539a5ea23efc729849"
+    },
+    "app-release/cn/local/manga/DetectionCache.class": {
+      "before": "3819f481435fc0e6bc997590e469c7b9717ee252a1c61c1c1797b64373ef5896",
+      "after": "3819f481435fc0e6bc997590e469c7b9717ee252a1c61c1c1797b64373ef5896"
+    },
+    "app-release/cn/local/manga/Detector.class": {
+      "before": "8faf951993552bfe3e1dccebe1c47e60a7fb6839c6273c4aca2f5f1f5750cd54",
+      "after": "8faf951993552bfe3e1dccebe1c47e60a7fb6839c6273c4aca2f5f1f5750cd54"
+    },
+    "app-release/cn/local/manga/DetectorModels$Spec.class": {
+      "before": "056216de31a01052107f66da5aeecb374822eaab822b42c644ce2b74da1c49c4",
+      "after": "056216de31a01052107f66da5aeecb374822eaab822b42c644ce2b74da1c49c4"
+    },
+    "app-release/cn/local/manga/DetectorModels.class": {
+      "before": "aad03d40faf7dd4e64ef708dd3f58a2a73ad09d0feeb32c48a48a85ab384928f",
+      "after": "aad03d40faf7dd4e64ef708dd3f58a2a73ad09d0feeb32c48a48a85ab384928f"
+    },
+    "app-release/cn/local/manga/ExportFlow$1.class": {
+      "before": "cff95d8f6d5425b1445f099f6e1687befb1a6d0febacca646f93040a03dc9a90",
+      "after": "cff95d8f6d5425b1445f099f6e1687befb1a6d0febacca646f93040a03dc9a90"
+    },
+    "app-release/cn/local/manga/ExportFlow$WriterFactory.class": {
+      "before": "6e6fd18dd45b06db0251eb547eab61107a55b2c31dbcb13ac054e022179a8a15",
+      "after": "6e6fd18dd45b06db0251eb547eab61107a55b2c31dbcb13ac054e022179a8a15"
+    },
+    "app-release/cn/local/manga/ExportFlow.class": {
+      "before": "82c59017a7eaa4e6555ca171f1dc5de9acce92979526b971e119fceb5e43e9b7",
+      "after": "82c59017a7eaa4e6555ca171f1dc5de9acce92979526b971e119fceb5e43e9b7"
+    },
+    "app-release/cn/local/manga/ExportJob$Listener.class": {
+      "before": "29e285884ff7e1f83446cc2e911ea62d38e035f3b62a9bfa0ae516633caa0e1b",
+      "after": "29e285884ff7e1f83446cc2e911ea62d38e035f3b62a9bfa0ae516633caa0e1b"
+    },
+    "app-release/cn/local/manga/ExportJob$Options.class": {
+      "before": "c99a7bb93f43b80258d98ea87585563a4e95ef57a2a4c1222b0dff70767b3dbb",
+      "after": "c99a7bb93f43b80258d98ea87585563a4e95ef57a2a4c1222b0dff70767b3dbb"
+    },
+    "app-release/cn/local/manga/ExportJob.class": {
+      "before": "5bbd3161cbf334ef279bc24c7193c55f9f3dc77a27d8b4b5aa3964a85e6373e8",
+      "after": "5bbd3161cbf334ef279bc24c7193c55f9f3dc77a27d8b4b5aa3964a85e6373e8"
+    },
+    "app-release/cn/local/manga/ExportWriters$FolderWriter.class": {
+      "before": "aac736ac0ca4463152462c769d6201906a62b381a50e488faffed983a4a8354e",
+      "after": "aac736ac0ca4463152462c769d6201906a62b381a50e488faffed983a4a8354e"
+    },
+    "app-release/cn/local/manga/ExportWriters$GalleryWriter.class": {
+      "before": "380855eb45fd614c9626b5640ee068af3631e5c70672f6d6750cffd44098d3b5",
+      "after": "380855eb45fd614c9626b5640ee068af3631e5c70672f6d6750cffd44098d3b5"
+    },
+    "app-release/cn/local/manga/ExportWriters$Writer.class": {
+      "before": "d19259ee9f5d64b165dc0de00dba9b67db1db9334f81ad2f22fd1096f2554e9c",
+      "after": "d19259ee9f5d64b165dc0de00dba9b67db1db9334f81ad2f22fd1096f2554e9c"
+    },
+    "app-release/cn/local/manga/ExportWriters$ZipWriter.class": {
+      "before": "12c87879507c3f8cf01d65c1f6067982a86f680b9a34df2ff484c9eb275e4b24",
+      "after": "12c87879507c3f8cf01d65c1f6067982a86f680b9a34df2ff484c9eb275e4b24"
+    },
+    "app-release/cn/local/manga/ExportWriters.class": {
+      "before": "f2afe5b4ab6010b9a516762bd7487156aac91c70f39b885bb63d2311a030af4f",
+      "after": "f2afe5b4ab6010b9a516762bd7487156aac91c70f39b885bb63d2311a030af4f"
+    },
+    "app-release/cn/local/manga/FontChoices.class": {
+      "before": "f9a16646c943559f0ccc48cc0cc9eb6e0474ac2229c2d1deef45a6b5feeda409",
+      "after": "f9a16646c943559f0ccc48cc0cc9eb6e0474ac2229c2d1deef45a6b5feeda409"
+    },
+    "app-release/cn/local/manga/GrayGlyphRepair.class": {
+      "before": "034a30870071ed4d26c4bdbd21922dea7b1c2fe2c5b79151ef5114be7d478252",
+      "after": "034a30870071ed4d26c4bdbd21922dea7b1c2fe2c5b79151ef5114be7d478252"
+    },
+    "app-release/cn/local/manga/Icons.class": {
+      "before": "fbab947b7c827f67b0b259a61d153f95a545303f59e7ddaa9696d5219d5d6abb",
+      "after": "fbab947b7c827f67b0b259a61d153f95a545303f59e7ddaa9696d5219d5d6abb"
+    },
+    "app-release/cn/local/manga/ImageCleanup.class": {
+      "before": "3fe032cfcdba0bae340d1ef91b395fe4bbbc0075ccd9d218c97c95caca7ad0f4",
+      "after": "3fe032cfcdba0bae340d1ef91b395fe4bbbc0075ccd9d218c97c95caca7ad0f4"
+    },
+    "app-release/cn/local/manga/LibraryActivity$1.class": {
+      "before": "18d0ec0ea911dcfb92ddd2bfc8bb23fe09bb4e6f1b4ad5d8befa11cf58654e91",
+      "after": "18d0ec0ea911dcfb92ddd2bfc8bb23fe09bb4e6f1b4ad5d8befa11cf58654e91"
+    },
+    "app-release/cn/local/manga/LibraryActivity$2.class": {
+      "before": "efa0c5c2cac34c8860678151b7e22cc0c5b960d8e20a3e17c584bc8236163e2e",
+      "after": "efa0c5c2cac34c8860678151b7e22cc0c5b960d8e20a3e17c584bc8236163e2e"
+    },
+    "app-release/cn/local/manga/LibraryActivity.class": {
+      "before": "b893aec924d4c01d8fed8e19dd579bbdba315f90ce1d1ed54c4831844a5930a2",
+      "after": "b893aec924d4c01d8fed8e19dd579bbdba315f90ce1d1ed54c4831844a5930a2"
+    },
+    "app-release/cn/local/manga/LibraryStore$Entry.class": {
+      "before": "1a4936d32e4b8129b3b88cf1b7d35a646f21de2f06b14765325db66460943a12",
+      "after": "1a4936d32e4b8129b3b88cf1b7d35a646f21de2f06b14765325db66460943a12"
+    },
+    "app-release/cn/local/manga/LibraryStore$Persistence.class": {
+      "before": "b0d680a34d24d74dfeadf30952eeced403073f5b35490fa14f8bb80de0f1e4ea",
+      "after": "b0d680a34d24d74dfeadf30952eeced403073f5b35490fa14f8bb80de0f1e4ea"
+    },
+    "app-release/cn/local/manga/LibraryStore.class": {
+      "before": "a43e6daf65f9c67c902ee88374852cd6adc6c26ca114af4761061a4e75d14c7d",
+      "after": "a43e6daf65f9c67c902ee88374852cd6adc6c26ca114af4761061a4e75d14c7d"
+    },
+    "app-release/cn/local/manga/LocalBatch$Job.class": {
+      "before": "1b1c310e4f3b3c77855cff8b95497512cbb6f7d4e6aceac36d0776fa8cfa49ac",
+      "after": "1b1c310e4f3b3c77855cff8b95497512cbb6f7d4e6aceac36d0776fa8cfa49ac"
+    },
+    "app-release/cn/local/manga/LocalBatch$Listener.class": {
+      "before": "865da4e868da5e96f263f886f8f239a91d22b31a65fc12bf95dda5a5c5661a6c",
+      "after": "865da4e868da5e96f263f886f8f239a91d22b31a65fc12bf95dda5a5c5661a6c"
+    },
+    "app-release/cn/local/manga/LocalBatch.class": {
+      "before": "149ca998229883c0e279d5fc543fa081c47850071dc433dc5dde6192e4766569",
+      "after": "149ca998229883c0e279d5fc543fa081c47850071dc433dc5dde6192e4766569"
+    },
+    "app-release/cn/local/manga/LocalComics$1.class": {
+      "before": "261e2e51216084b974f4197829cb39dec76e851cfe96336301cd3737803c8148",
+      "after": "261e2e51216084b974f4197829cb39dec76e851cfe96336301cd3737803c8148"
+    },
+    "app-release/cn/local/manga/LocalComics$Entry.class": {
+      "before": "7569e11c3dea27e2cfa1cb57e76c4e0a4a0a7dd171e91a2018fa3088ece346db",
+      "after": "7569e11c3dea27e2cfa1cb57e76c4e0a4a0a7dd171e91a2018fa3088ece346db"
+    },
+    "app-release/cn/local/manga/LocalComics$Folder.class": {
+      "before": "86197a562a980234576dd1838d8c6cf99d5a4c1a3ceb8bb42f6362a274769df1",
+      "after": "86197a562a980234576dd1838d8c6cf99d5a4c1a3ceb8bb42f6362a274769df1"
+    },
+    "app-release/cn/local/manga/LocalComics$Listing.class": {
+      "before": "55745fe90999131e661293365c1ce1ee8ee34cc5df67f338b0f10f49e82c1b1d",
+      "after": "55745fe90999131e661293365c1ce1ee8ee34cc5df67f338b0f10f49e82c1b1d"
+    },
+    "app-release/cn/local/manga/LocalComics$Page.class": {
+      "before": "60cb7ce9572946bc5691191a9d51050a2a675f3f9da7109a8bfbb3431152f73a",
+      "after": "60cb7ce9572946bc5691191a9d51050a2a675f3f9da7109a8bfbb3431152f73a"
+    },
+    "app-release/cn/local/manga/LocalComics$Recent.class": {
+      "before": "5daf71f8f61727213d26e03fc90a559154d8abc7f8e7174bba1851e45ba1ba85",
+      "after": "5daf71f8f61727213d26e03fc90a559154d8abc7f8e7174bba1851e45ba1ba85"
+    },
+    "app-release/cn/local/manga/LocalComics$State.class": {
+      "before": "bfb536d0eb3cb6060027a905cb453c7b327cd44df620d02228b28ef451463283",
+      "after": "bfb536d0eb3cb6060027a905cb453c7b327cd44df620d02228b28ef451463283"
+    },
+    "app-release/cn/local/manga/LocalComics.class": {
+      "before": "48facd317c5c8b7306393f05a174b4b2aac1246944be63ec09dd919b56fe7867",
+      "after": "48facd317c5c8b7306393f05a174b4b2aac1246944be63ec09dd919b56fe7867"
+    },
+    "app-release/cn/local/manga/LocalFolderActivity$1.class": {
+      "before": "e6d1c9ef6b4412210d608d3909424e8e0d688222f7dbbff50c528c36be078694",
+      "after": "e6d1c9ef6b4412210d608d3909424e8e0d688222f7dbbff50c528c36be078694"
+    },
+    "app-release/cn/local/manga/LocalFolderActivity$2.class": {
+      "before": "195e8301efeb450b1a631972079933f16c2be7cf3eeaa4f7307a892a2dcf93b5",
+      "after": "195e8301efeb450b1a631972079933f16c2be7cf3eeaa4f7307a892a2dcf93b5"
+    },
+    "app-release/cn/local/manga/LocalFolderActivity$Adapter.class": {
+      "before": "dfb63d11afb51111cf3c12eec051a32be1e4ec1bac2ec2e3943d1b9a05e0e344",
+      "after": "dfb63d11afb51111cf3c12eec051a32be1e4ec1bac2ec2e3943d1b9a05e0e344"
+    },
+    "app-release/cn/local/manga/LocalFolderActivity.class": {
+      "before": "629dda5f6f698a6d78a3cd424873c096222b98ecbec03af33a12905005e72121",
+      "after": "629dda5f6f698a6d78a3cd424873c096222b98ecbec03af33a12905005e72121"
+    },
+    "app-release/cn/local/manga/LocalImport.class": {
+      "before": "8f0c8241ee15937d16004e931df57c659bb5ad54f1eb66697354aaa9070b2576",
+      "after": "8f0c8241ee15937d16004e931df57c659bb5ad54f1eb66697354aaa9070b2576"
+    },
+    "app-release/cn/local/manga/LocalLibraryActivity$1.class": {
+      "before": "d4ed29fb300020ecc6e1c0bc5891f334eebd5290258864eda95bfb6162c6a614",
+      "after": "d4ed29fb300020ecc6e1c0bc5891f334eebd5290258864eda95bfb6162c6a614"
+    },
+    "app-release/cn/local/manga/LocalLibraryActivity.class": {
+      "before": "4e712bf6fdbd6d7c380f296f5a5005928439231f403ea881318c8e3d8488c6d1",
+      "after": "4e712bf6fdbd6d7c380f296f5a5005928439231f403ea881318c8e3d8488c6d1"
+    },
+    "app-release/cn/local/manga/LocalProjectReaderActivity.class": {
+      "before": "331c20f1e85b7cb11cd6cc2b192dc94c27cc845b38f817e9e86e1e9e3631bae2",
+      "after": "331c20f1e85b7cb11cd6cc2b192dc94c27cc845b38f817e9e86e1e9e3631bae2"
+    },
+    "app-release/cn/local/manga/LocalReaderActivity$1.class": {
+      "before": "3c5faab0679d789c6d951d354cd61dc6bc11ae2949ef08de7926f6ba1eff1dc9",
+      "after": "3c5faab0679d789c6d951d354cd61dc6bc11ae2949ef08de7926f6ba1eff1dc9"
+    },
+    "app-release/cn/local/manga/LocalReaderActivity.class": {
+      "before": "4901f32ca77dbdb7d2078a30b3020b51777cef35ab040e9ec9dba91d69750de8",
+      "after": "4901f32ca77dbdb7d2078a30b3020b51777cef35ab040e9ec9dba91d69750de8"
+    },
+    "app-release/cn/local/manga/LocalWorkbenchActivity.class": {
+      "before": "8b8503a93a4a08ab2a4356a0f0ae79531c9cb31cbd496122e203318be94c8991",
+      "after": "8b8503a93a4a08ab2a4356a0f0ae79531c9cb31cbd496122e203318be94c8991"
+    },
+    "app-release/cn/local/manga/LogsActivity$1.class": {
+      "before": "161dc206c1e5c525549b6b87099df0b554387687873094ff90a09b59b68c69f9",
+      "after": "161dc206c1e5c525549b6b87099df0b554387687873094ff90a09b59b68c69f9"
+    },
+    "app-release/cn/local/manga/LogsActivity.class": {
+      "before": "e31579cead3499fcad2b750dd002f255362331218701efadba79fb65cb0bd21b",
+      "after": "e31579cead3499fcad2b750dd002f255362331218701efadba79fb65cb0bd21b"
+    },
+    "app-release/cn/local/manga/MainActivity.class": {
+      "before": "56a6490b72e3b1ef8926c407fdc4a3abb22e0ba32878622b10ebc6de6df663e9",
+      "after": "56a6490b72e3b1ef8926c407fdc4a3abb22e0ba32878622b10ebc6de6df663e9"
+    },
+    "app-release/cn/local/manga/MangaApplication.class": {
+      "before": "04dd921267f6b920845f0f43b69dde99ac49ba8f645f8c93668a6ff24f76ee09",
+      "after": "04dd921267f6b920845f0f43b69dde99ac49ba8f645f8c93668a6ff24f76ee09"
+    },
+    "app-release/cn/local/manga/MigrationRunner$Ledger.class": {
+      "before": "327ea361347eb25fe1133ce85ea7178bc685d81fff6202ece156770e2013b1a0",
+      "after": "327ea361347eb25fe1133ce85ea7178bc685d81fff6202ece156770e2013b1a0"
+    },
+    "app-release/cn/local/manga/MigrationRunner$Step.class": {
+      "before": "4195ecd454409b00ee86f1049cb949850dbc54e5039408791fe386fb8fd7bf81",
+      "after": "4195ecd454409b00ee86f1049cb949850dbc54e5039408791fe386fb8fd7bf81"
+    },
+    "app-release/cn/local/manga/MigrationRunner.class": {
+      "before": "fd606980190e6841e6df99e70400177dcc7be313b3b17193638f2e4b81d8e801",
+      "after": "fd606980190e6841e6df99e70400177dcc7be313b3b17193638f2e4b81d8e801"
+    },
+    "app-release/cn/local/manga/NaturalOrder.class": {
+      "before": "ac9724d4948d83c65b01bee2bffa2ee4bff6bbc33a23a74ad8cbd0279b78d9e8",
+      "after": "ac9724d4948d83c65b01bee2bffa2ee4bff6bbc33a23a74ad8cbd0279b78d9e8"
+    },
+    "app-release/cn/local/manga/NearbyTextLayout$Plan.class": {
+      "before": "6c23f80386c20e80f6b878fcc5fe20a8dbe769828b88e6473ab64738c11748c4",
+      "after": "6c23f80386c20e80f6b878fcc5fe20a8dbe769828b88e6473ab64738c11748c4"
+    },
+    "app-release/cn/local/manga/NearbyTextLayout$SourceGroup.class": {
+      "before": "26e661ad1afa07e134f2d915486a78b6171905e3523b02d2029e1a5899033e56",
+      "after": "26e661ad1afa07e134f2d915486a78b6171905e3523b02d2029e1a5899033e56"
+    },
+    "app-release/cn/local/manga/NearbyTextLayout.class": {
+      "before": "46956ac078e6d44b4ac519fe12d3e756f48010d53ee7440d0e498f37c88873b7",
+      "after": "46956ac078e6d44b4ac519fe12d3e756f48010d53ee7440d0e498f37c88873b7"
+    },
+    "app-release/cn/local/manga/PageCacheStore$StorageFullException.class": {
+      "before": "8beb21d944323916e50ecf0600d313f3f30727a49acb1eeecce9fa06423904b7",
+      "after": "8beb21d944323916e50ecf0600d313f3f30727a49acb1eeecce9fa06423904b7"
+    },
+    "app-release/cn/local/manga/PageCacheStore.class": {
+      "before": "e284f01263572abbdb85cd1cc1e6a2a2e9026611cd63449cb890e253db3364ef",
+      "after": "e284f01263572abbdb85cd1cc1e6a2a2e9026611cd63449cb890e253db3364ef"
+    },
+    "app-release/cn/local/manga/PageComposer$Edit.class": {
+      "before": "e971f2cd265c84c7a6b449dff60df67499a58e942b14106d28d21ea4674e2aa2",
+      "after": "e971f2cd265c84c7a6b449dff60df67499a58e942b14106d28d21ea4674e2aa2"
+    },
+    "app-release/cn/local/manga/PageComposer$Mode.class": {
+      "before": "347fa79c988c0a3fb25e1792f6a2db9e88d92b1b5b696dafa28401066f502280",
+      "after": "347fa79c988c0a3fb25e1792f6a2db9e88d92b1b5b696dafa28401066f502280"
+    },
+    "app-release/cn/local/manga/PageComposer$Placement.class": {
+      "before": "b67ace6c8e7127e352c546ff40ac7ea136263db621c3bb47564991b7c836304b",
+      "after": "b67ace6c8e7127e352c546ff40ac7ea136263db621c3bb47564991b7c836304b"
+    },
+    "app-release/cn/local/manga/PageComposer.class": {
+      "before": "7cfeaaaff3e0ef8fe2028dc1f8b04d4b5e78ad7641c1df54e19a246904d047c6",
+      "after": "7cfeaaaff3e0ef8fe2028dc1f8b04d4b5e78ad7641c1df54e19a246904d047c6"
+    },
+    "app-release/cn/local/manga/PageDraft$Item.class": {
+      "before": "52688e4cbd420808c01cf46188982e1b67f7098d2242da213a19a3f2514000ba",
+      "after": "52688e4cbd420808c01cf46188982e1b67f7098d2242da213a19a3f2514000ba"
+    },
+    "app-release/cn/local/manga/PageDraft.class": {
+      "before": "57bf006972a48a1c309169d196f5e97a201b67687691a732163b1d133d38d89d",
+      "after": "57bf006972a48a1c309169d196f5e97a201b67687691a732163b1d133d38d89d"
+    },
+    "app-release/cn/local/manga/PageDraftStore.class": {
+      "before": "5fff56cc77f870d24fadc7e805dac7a75a402752ce2934672ab85fee2ee6b355",
+      "after": "5fff56cc77f870d24fadc7e805dac7a75a402752ce2934672ab85fee2ee6b355"
+    },
+    "app-release/cn/local/manga/PageGrid$1.class": {
+      "before": "ae7c74c49d8b436fff86d042e858dc45db868ef873bb8ece18ebe17a4414c941",
+      "after": "ae7c74c49d8b436fff86d042e858dc45db868ef873bb8ece18ebe17a4414c941"
+    },
+    "app-release/cn/local/manga/PageGrid.class": {
+      "before": "da79892222a47f741e42a19d89aeb6f4475c44f37d22dd564a16202fa8ea95fc",
+      "after": "da79892222a47f741e42a19d89aeb6f4475c44f37d22dd564a16202fa8ea95fc"
+    },
+    "app-release/cn/local/manga/PageOutcome$Timings.class": {
+      "before": "1fd48c1338d24b179ef0aa4b268c1345f5b67e9ee8746b9a36d581a53cbf5f44",
+      "after": "1fd48c1338d24b179ef0aa4b268c1345f5b67e9ee8746b9a36d581a53cbf5f44"
+    },
+    "app-release/cn/local/manga/PageOutcome.class": {
+      "before": "136fd643bdf50991e9c59166f7f05db7454fb61619dd2bb94029611f2cdfe913",
+      "after": "136fd643bdf50991e9c59166f7f05db7454fb61619dd2bb94029611f2cdfe913"
+    },
+    "app-release/cn/local/manga/PagePipeline$Page.class": {
+      "before": "bad914c9b1bf1e09879b75cebc9f3f6a9027b82a089c38a6d0688b8e58807bc6",
+      "after": "bad914c9b1bf1e09879b75cebc9f3f6a9027b82a089c38a6d0688b8e58807bc6"
+    },
+    "app-release/cn/local/manga/PagePipeline.class": {
+      "before": "c0ba0f5fde68c98bee9f797e214c6ce39da5fa1d68b966e7294446ee9b61ae34",
+      "after": "c0ba0f5fde68c98bee9f797e214c6ce39da5fa1d68b966e7294446ee9b61ae34"
+    },
+    "app-release/cn/local/manga/PartialTranslations$Reply.class": {
+      "before": "de47e795d9cc4feb1fab60f1103e8ba145f9a12f3e2ff3c27cbf451371ff1b5b",
+      "after": "de47e795d9cc4feb1fab60f1103e8ba145f9a12f3e2ff3c27cbf451371ff1b5b"
+    },
+    "app-release/cn/local/manga/PartialTranslations.class": {
+      "before": "b29d2dd9cd974ed8652446da429a995d80be4f3ed0ac83c428784ae2b90c11d5",
+      "after": "b29d2dd9cd974ed8652446da429a995d80be4f3ed0ac83c428784ae2b90c11d5"
+    },
+    "app-release/cn/local/manga/PerformanceDiagnostics$1.class": {
+      "before": "f2f580d4c49d45f3d1e285eae5cd9f01e024e5b32e34724b6cce5c3b294f3e41",
+      "after": "f2f580d4c49d45f3d1e285eae5cd9f01e024e5b32e34724b6cce5c3b294f3e41"
+    },
+    "app-release/cn/local/manga/PerformanceDiagnostics$CountingStream.class": {
+      "before": "82d7f518da72f2ac34d158dc28f0413125f7712b43ad3f9b572d3a0ccabd494f",
+      "after": "82d7f518da72f2ac34d158dc28f0413125f7712b43ad3f9b572d3a0ccabd494f"
+    },
+    "app-release/cn/local/manga/PerformanceDiagnostics$Page.class": {
+      "before": "0f04fa9355a7faaa35b510a5bf62fde6dbc118b540d455a7b2b0bb31490c0208",
+      "after": "0f04fa9355a7faaa35b510a5bf62fde6dbc118b540d455a7b2b0bb31490c0208"
+    },
+    "app-release/cn/local/manga/PerformanceDiagnostics.class": {
+      "before": "d4ddf939ae62dde6b2a53b0630c9c8b6cd3882c24ee718b8b3974c537f99f10a",
+      "after": "d4ddf939ae62dde6b2a53b0630c9c8b6cd3882c24ee718b8b3974c537f99f10a"
+    },
+    "app-release/cn/local/manga/ProgressRingDrawable.class": {
+      "before": "5acfb0769bc62e044bd79c3b24cfae1122ca7f4dd18ccbcf5da21e3d8c52910e",
+      "after": "5acfb0769bc62e044bd79c3b24cfae1122ca7f4dd18ccbcf5da21e3d8c52910e"
+    },
+    "app-release/cn/local/manga/ProjectCover$1.class": {
+      "before": "6c4b1cbfd67c20529d1e3a19ab6c33e34628a8e45e8dac2e15910f972f021a31",
+      "after": "6c4b1cbfd67c20529d1e3a19ab6c33e34628a8e45e8dac2e15910f972f021a31"
+    },
+    "app-release/cn/local/manga/ProjectCover.class": {
+      "before": "1a0d0559c5ebfd2c93b6a59ce0fc6c19074d542f616cef4e4344938cf73fed62",
+      "after": "1a0d0559c5ebfd2c93b6a59ce0fc6c19074d542f616cef4e4344938cf73fed62"
+    },
+    "app-release/cn/local/manga/ProjectLauncher$Gathered.class": {
+      "before": "bc4ca9dc7e7884da3810c4341c6e2886f480d6f70ea25904361579ce59a711f3",
+      "after": "bc4ca9dc7e7884da3810c4341c6e2886f480d6f70ea25904361579ce59a711f3"
+    },
+    "app-release/cn/local/manga/ProjectLauncher$Gatherer.class": {
+      "before": "313df31438fb5e30a01e18cb8e6aa20417f9faf39448a1adbec249197e473a69",
+      "after": "313df31438fb5e30a01e18cb8e6aa20417f9faf39448a1adbec249197e473a69"
+    },
+    "app-release/cn/local/manga/ProjectLauncher.class": {
+      "before": "5b58f8f00726fa5cdc59cbf198ff85cf78f07660fd4618c6b23e69f572074242",
+      "after": "5b58f8f00726fa5cdc59cbf198ff85cf78f07660fd4618c6b23e69f572074242"
+    },
+    "app-release/cn/local/manga/ProjectListActivity$1.class": {
+      "before": "f8bb9ca4041d2a5fee09adf027c0f2204f39e13d00004c91f79b0f2d98928b20",
+      "after": "f8bb9ca4041d2a5fee09adf027c0f2204f39e13d00004c91f79b0f2d98928b20"
+    },
+    "app-release/cn/local/manga/ProjectListActivity.class": {
+      "before": "b01611df1c35839337c0be02dd5be36c317d49b3becc5552552f37de45e7944f",
+      "after": "b01611df1c35839337c0be02dd5be36c317d49b3becc5552552f37de45e7944f"
+    },
+    "app-release/cn/local/manga/ProjectReaderActivity$1.class": {
+      "before": "bcbae73cfb8190459e3a2835c759c9f4752afe434b85955b572678c9c670dd86",
+      "after": "bcbae73cfb8190459e3a2835c759c9f4752afe434b85955b572678c9c670dd86"
+    },
+    "app-release/cn/local/manga/ProjectReaderActivity$2.class": {
+      "before": "83c5cf7648396bae3633f97d44db94a5f41c4507d04683b88c816970ea2026e6",
+      "after": "83c5cf7648396bae3633f97d44db94a5f41c4507d04683b88c816970ea2026e6"
+    },
+    "app-release/cn/local/manga/ProjectReaderActivity$Pages$1.class": {
+      "before": "7f24a75e815ebdba73dff63c8017acdacef11159ea6fe8ffeaba0ee40ef1c325",
+      "after": "7f24a75e815ebdba73dff63c8017acdacef11159ea6fe8ffeaba0ee40ef1c325"
+    },
+    "app-release/cn/local/manga/ProjectReaderActivity$Pages.class": {
+      "before": "1503a1d07862d0086c4afaefc548e9f0c3b5df8a7f94c7ecc63b078aac637c15",
+      "after": "1503a1d07862d0086c4afaefc548e9f0c3b5df8a7f94c7ecc63b078aac637c15"
+    },
+    "app-release/cn/local/manga/ProjectReaderActivity.class": {
+      "before": "599d84216e26bbbad81c3124db145600fb0eb070f0fc9ac215a724379bac8d5f",
+      "after": "599d84216e26bbbad81c3124db145600fb0eb070f0fc9ac215a724379bac8d5f"
+    },
+    "app-release/cn/local/manga/ProjectStore$PageSpec.class": {
+      "before": "1d98163a1e6b97c0b193aa1f2dbf23d005d507e4e7a63bfa0551a2a84264dc61",
+      "after": "1d98163a1e6b97c0b193aa1f2dbf23d005d507e4e7a63bfa0551a2a84264dc61"
+    },
+    "app-release/cn/local/manga/ProjectStore$Progress.class": {
+      "before": "56c28213960b8ad7a8c0a31963e3aa4baf6c423a47849eefdbd19a98177dfdb9",
+      "after": "56c28213960b8ad7a8c0a31963e3aa4baf6c423a47849eefdbd19a98177dfdb9"
+    },
+    "app-release/cn/local/manga/ProjectStore.class": {
+      "before": "7904c9137101d4408258ebea5f8cd3bf614efbd46bf7512af3d3996efc57ee9d",
+      "after": "7904c9137101d4408258ebea5f8cd3bf614efbd46bf7512af3d3996efc57ee9d"
+    },
+    "app-release/cn/local/manga/ProjectTranslation.class": {
+      "before": "1f1d2dbba6b3fdb64440d70a65bd1bdfaa4896546daf6332546f6ea2c636ad78",
+      "after": "1f1d2dbba6b3fdb64440d70a65bd1bdfaa4896546daf6332546f6ea2c636ad78"
+    },
+    "app-release/cn/local/manga/QuickPageRail.class": {
+      "before": "374c1a5cf34aaf323ce40a66e50230c99906950eaf1972734a7e3330abafceff",
+      "after": "374c1a5cf34aaf323ce40a66e50230c99906950eaf1972734a7e3330abafceff"
+    },
+    "app-release/cn/local/manga/Region.class": {
+      "before": "6461687aa083e3736f2f7a701bf6214ab66d84132f69ed03f96de95cc9dbfd5c",
+      "after": "6461687aa083e3736f2f7a701bf6214ab66d84132f69ed03f96de95cc9dbfd5c"
+    },
+    "app-release/cn/local/manga/RenderedPageCache$Entry.class": {
+      "before": "54676266dacf85723180dbea70dcee3a30ecdd8acad8aaf71c5b2e1bd8c4e9f4",
+      "after": "54676266dacf85723180dbea70dcee3a30ecdd8acad8aaf71c5b2e1bd8c4e9f4"
+    },
+    "app-release/cn/local/manga/RenderedPageCache.class": {
+      "before": "b3081b4c8c7c7d66348195304a8c1bbed6abf1546a98eaff5a2ed5af06210353",
+      "after": "b3081b4c8c7c7d66348195304a8c1bbed6abf1546a98eaff5a2ed5af06210353"
+    },
+    "app-release/cn/local/manga/RepairPixels$Normalized.class": {
+      "before": "3c7cdd74128826286edb7131ee9ee9cae91f75370bb123270efeb6da9a8ee3b2",
+      "after": "3c7cdd74128826286edb7131ee9ee9cae91f75370bb123270efeb6da9a8ee3b2"
+    },
+    "app-release/cn/local/manga/RepairPixels.class": {
+      "before": "3ed9be401763b798164b7743f0aa5bf7601c5a4eb1df9b96c1b2d34bef3b728a",
+      "after": "3ed9be401763b798164b7743f0aa5bf7601c5a4eb1df9b96c1b2d34bef3b728a"
+    },
+    "app-release/cn/local/manga/ResultView$1.class": {
+      "before": "2da4005f88a4ef183b100aa445269d080d7ee9832d60570a32b6651669077d24",
+      "after": "2da4005f88a4ef183b100aa445269d080d7ee9832d60570a32b6651669077d24"
+    },
+    "app-release/cn/local/manga/ResultView$2.class": {
+      "before": "865a5efaaccb5b919671981ee62ebf76b589deceab5e5d0f3087f65ff5a3be81",
+      "after": "865a5efaaccb5b919671981ee62ebf76b589deceab5e5d0f3087f65ff5a3be81"
+    },
+    "app-release/cn/local/manga/ResultView$3.class": {
+      "before": "c73722b5a530e9e2fedc867d5a36588f1d0749e5f4dce7118e7d560f20c7ecaf",
+      "after": "c73722b5a530e9e2fedc867d5a36588f1d0749e5f4dce7118e7d560f20c7ecaf"
+    },
+    "app-release/cn/local/manga/ResultView.class": {
+      "before": "597d80a539ae2d5827e2e568bcf4e532f849da34e796281ad86edc8949d6c665",
+      "after": "597d80a539ae2d5827e2e568bcf4e532f849da34e796281ad86edc8949d6c665"
+    },
+    "app-release/cn/local/manga/RtDetrDetector.class": {
+      "before": "b4c86a5206290fb9d4cebc0763d3cfc4b2a1bc67fdb8ad9c8435da3ab9882a31",
+      "after": "b4c86a5206290fb9d4cebc0763d3cfc4b2a1bc67fdb8ad9c8435da3ab9882a31"
+    },
+    "app-release/cn/local/manga/RtDetrRegions$Candidate.class": {
+      "before": "919a8bf7ae458e2a2924cf219e568c88496955c9900e5a0bd188eec4ec21e884",
+      "after": "919a8bf7ae458e2a2924cf219e568c88496955c9900e5a0bd188eec4ec21e884"
+    },
+    "app-release/cn/local/manga/RtDetrRegions$Paper.class": {
+      "before": "fad03cd76bd0ce0291f37ed777685a608ad2c3d8f247008b0d9892c4df90a171",
+      "after": "fad03cd76bd0ce0291f37ed777685a608ad2c3d8f247008b0d9892c4df90a171"
+    },
+    "app-release/cn/local/manga/RtDetrRegions.class": {
+      "before": "b43ebed018200886e427d5a039e631c8419399acb2282af257e21d136fe7bd9e",
+      "after": "b43ebed018200886e427d5a039e631c8419399acb2282af257e21d136fe7bd9e"
+    },
+    "app-release/cn/local/manga/SearchTerms.class": {
+      "before": "51ab8cf13b1d222e546f1897d2e3bce2d0f4751301a94053ba0dc0ac5c0cf6e1",
+      "after": "51ab8cf13b1d222e546f1897d2e3bce2d0f4751301a94053ba0dc0ac5c0cf6e1"
+    },
+    "app-release/cn/local/manga/SessionRepository.class": {
+      "before": "089c08d7b421dddd60f40429ddd526bc2c7f0f03c39f74c92c9465820529ed55",
+      "after": "089c08d7b421dddd60f40429ddd526bc2c7f0f03c39f74c92c9465820529ed55"
+    },
+    "app-release/cn/local/manga/SettingsActivity$1.class": {
+      "before": "4b3cef4eb6b9948be1c3b5cb486d333fde7258bd00cb1432e1f9f6c3a8ff8ed1",
+      "after": "4b3cef4eb6b9948be1c3b5cb486d333fde7258bd00cb1432e1f9f6c3a8ff8ed1"
+    },
+    "app-release/cn/local/manga/SettingsActivity$2.class": {
+      "before": "7e6accad3466dfef623dd4692856a32b7352bc80f0e228096eb35144bc211787",
+      "after": "7e6accad3466dfef623dd4692856a32b7352bc80f0e228096eb35144bc211787"
+    },
+    "app-release/cn/local/manga/SettingsActivity$3.class": {
+      "before": "0caefafc90b157e28867ff297e6915a2795d723314cdc8c4b7c92d8af380eda6",
+      "after": "0caefafc90b157e28867ff297e6915a2795d723314cdc8c4b7c92d8af380eda6"
+    },
+    "app-release/cn/local/manga/SettingsActivity$4.class": {
+      "before": "ce3a0de6348fa855c98b905546e79e2433456bf0282d2d4da87f0ee79153a700",
+      "after": "ce3a0de6348fa855c98b905546e79e2433456bf0282d2d4da87f0ee79153a700"
+    },
+    "app-release/cn/local/manga/SettingsActivity$5.class": {
+      "before": "a05d19fe4224b8c3b9e1efa3e54424ebf058eb778e37f19729d14628903af77f",
+      "after": "a05d19fe4224b8c3b9e1efa3e54424ebf058eb778e37f19729d14628903af77f"
+    },
+    "app-release/cn/local/manga/SettingsActivity$6.class": {
+      "before": "2a2417202d8053b9fa6f3bf90c8e88dd3b00a9826dc8ec3f3f553a277770ee71",
+      "after": "2a2417202d8053b9fa6f3bf90c8e88dd3b00a9826dc8ec3f3f553a277770ee71"
+    },
+    "app-release/cn/local/manga/SettingsActivity.class": {
+      "before": "42c415709ceec58d6d5c7a5c3a307d22cdea1106a5800e60257d61f915d70f35",
+      "after": "42c415709ceec58d6d5c7a5c3a307d22cdea1106a5800e60257d61f915d70f35"
+    },
+    "app-release/cn/local/manga/ShellActivity.class": {
+      "before": "6ec80a9a4d65987d7a00ee492e498e626f5622909e08a849176f1a2d8b1890d2",
+      "after": "6ec80a9a4d65987d7a00ee492e498e626f5622909e08a849176f1a2d8b1890d2"
+    },
+    "app-release/cn/local/manga/SourceImageCache$Entry.class": {
+      "before": "23a1e864071166be8d85c0303c3709c5fdc11704edede4f673ce2c178ca8543a",
+      "after": "23a1e864071166be8d85c0303c3709c5fdc11704edede4f673ce2c178ca8543a"
+    },
+    "app-release/cn/local/manga/SourceImageCache.class": {
+      "before": "5337f3c25eb3fe6e20c736b050e7bd397ee94b0b81aef39766d215042cd39f9a",
+      "after": "5337f3c25eb3fe6e20c736b050e7bd397ee94b0b81aef39766d215042cd39f9a"
+    },
+    "app-release/cn/local/manga/Storage.class": {
+      "before": "f1b5250779ed4462d63eeca9d2044d90b35ce0a8682011d285077ddc2eca787f",
+      "after": "f1b5250779ed4462d63eeca9d2044d90b35ce0a8682011d285077ddc2eca787f"
+    },
+    "app-release/cn/local/manga/StorageCensus$1.class": {
+      "before": "6678dd73381e138f0070563d9ca95e857641f467fadac0d1c0f872f8dc9921a4",
+      "after": "6678dd73381e138f0070563d9ca95e857641f467fadac0d1c0f872f8dc9921a4"
+    },
+    "app-release/cn/local/manga/StorageCensus$Group.class": {
+      "before": "a8876000feeb77394ad2455f5fc899c7492198f432385378df9ad1f5ad1edb8c",
+      "after": "a8876000feeb77394ad2455f5fc899c7492198f432385378df9ad1f5ad1edb8c"
+    },
+    "app-release/cn/local/manga/StorageCensus.class": {
+      "before": "43bd8b5446f5fc98814cdc457b153a5b0a12eeeab2cb6e13013f4ce917ac1f2f",
+      "after": "43bd8b5446f5fc98814cdc457b153a5b0a12eeeab2cb6e13013f4ce917ac1f2f"
+    },
+    "app-release/cn/local/manga/StorageDatabase$1.class": {
+      "before": "e367caad6ed890a07cd13e1e3e3cfdf9e86f57a525b4e49c3402a499ce3503a7",
+      "after": "e367caad6ed890a07cd13e1e3e3cfdf9e86f57a525b4e49c3402a499ce3503a7"
+    },
+    "app-release/cn/local/manga/StorageDatabase$Work.class": {
+      "before": "f8220742bdd1880435955b662d2a02d8309cb737c817b4da9f248ba451b66e8b",
+      "after": "f8220742bdd1880435955b662d2a02d8309cb737c817b4da9f248ba451b66e8b"
+    },
+    "app-release/cn/local/manga/StorageDatabase.class": {
+      "before": "d699353ad1d85bcccf12c212b0d1c02266cbff697f8cf66579c73ba2b56b386c",
+      "after": "d699353ad1d85bcccf12c212b0d1c02266cbff697f8cf66579c73ba2b56b386c"
+    },
+    "app-release/cn/local/manga/StorageDiagnostics.class": {
+      "before": "4417f4baa4c66dae7c57ca9e56c34a46b8e2179f1a43c2ed52604f66a4962140",
+      "after": "4417f4baa4c66dae7c57ca9e56c34a46b8e2179f1a43c2ed52604f66a4962140"
+    },
+    "app-release/cn/local/manga/StorageFiles$Writer.class": {
+      "before": "c1a1d14cf01758721151433b221d64d6e438d566e9ad26e0db42ce174f1dcdc4",
+      "after": "c1a1d14cf01758721151433b221d64d6e438d566e9ad26e0db42ce174f1dcdc4"
+    },
+    "app-release/cn/local/manga/StorageFiles.class": {
+      "before": "da87d6b0df113fb987250c532bf1bbf1ecc21733e4237ca611443267235d544a",
+      "after": "da87d6b0df113fb987250c532bf1bbf1ecc21733e4237ca611443267235d544a"
+    },
+    "app-release/cn/local/manga/StorageJson.class": {
+      "before": "b4e04c63e107f2775fc4f541b2e314347013cce2a4e8b1854a5578fbf732c971",
+      "after": "b4e04c63e107f2775fc4f541b2e314347013cce2a4e8b1854a5578fbf732c971"
+    },
+    "app-release/cn/local/manga/StorageMigration.class": {
+      "before": "6316b1bdacf096237aa94d9b0e30df22f0127896c398e7eaf14ed9eda80e16dd",
+      "after": "6316b1bdacf096237aa94d9b0e30df22f0127896c398e7eaf14ed9eda80e16dd"
+    },
+    "app-release/cn/local/manga/StoragePolicy.class": {
+      "before": "06f8cbbbc2cf32adeee3b044614e560c61d9e71957a30eeb56476690fcd80cf7",
+      "after": "06f8cbbbc2cf32adeee3b044614e560c61d9e71957a30eeb56476690fcd80cf7"
+    },
+    "app-release/cn/local/manga/StorageQuota$1.class": {
+      "before": "7d27eb3d9f8dc27bd9b1c9849afc317ae53cef11f39509ab90f0271ba08cf087",
+      "after": "7d27eb3d9f8dc27bd9b1c9849afc317ae53cef11f39509ab90f0271ba08cf087"
+    },
+    "app-release/cn/local/manga/StorageQuota$2.class": {
+      "before": "086b100fa018524bed4855121b85f3635a3410554afe96f86dde179826d0af86",
+      "after": "086b100fa018524bed4855121b85f3635a3410554afe96f86dde179826d0af86"
+    },
+    "app-release/cn/local/manga/StorageQuota.class": {
+      "before": "230f843454264fecd4615d9231febf92c57d3878e8167dbf8a8aa85b912a2a72",
+      "after": "230f843454264fecd4615d9231febf92c57d3878e8167dbf8a8aa85b912a2a72"
+    },
+    "app-release/cn/local/manga/StorageSchema.class": {
+      "before": "04d60a068724932791176c580ee353f91c4cb699f481bc7151f0b216387853f6",
+      "after": "04d60a068724932791176c580ee353f91c4cb699f481bc7151f0b216387853f6"
+    },
+    "app-release/cn/local/manga/StorageTools$Action.class": {
+      "before": "b0147768995ee6e13a82b2a8fc448e34069df3ecca4515b3a17ff09dfb86f93f",
+      "after": "b0147768995ee6e13a82b2a8fc448e34069df3ecca4515b3a17ff09dfb86f93f"
+    },
+    "app-release/cn/local/manga/StorageTools.class": {
+      "before": "7b6c317742d322eb5739539af5c1c208cd6347e584cfac93b7a1fa7b1d7126c4",
+      "after": "7b6c317742d322eb5739539af5c1c208cd6347e584cfac93b7a1fa7b1d7126c4"
+    },
+    "app-release/cn/local/manga/StoredCache$Entry.class": {
+      "before": "82c5859f45de832cdba6d2612435ccdbcd7eecd191901e114dc938d21add4e32",
+      "after": "82c5859f45de832cdba6d2612435ccdbcd7eecd191901e114dc938d21add4e32"
+    },
+    "app-release/cn/local/manga/StoredCache.class": {
+      "before": "35d58299e0aa094a8e541f6a96cefe881dad3491b2555334c3e9d4553da5811d",
+      "after": "35d58299e0aa094a8e541f6a96cefe881dad3491b2555334c3e9d4553da5811d"
+    },
+    "app-release/cn/local/manga/StoredDrafts$Prepared.class": {
+      "before": "23b462ce3d3492b31847b1c83a53822544dd0a58ca3b6ba342a6bd4d47c1f11a",
+      "after": "23b462ce3d3492b31847b1c83a53822544dd0a58ca3b6ba342a6bd4d47c1f11a"
+    },
+    "app-release/cn/local/manga/StoredDrafts.class": {
+      "before": "90bb8e09b4b0e22a37d7496d590f6f042bcbfa378efcac24070df532cdc77500",
+      "after": "90bb8e09b4b0e22a37d7496d590f6f042bcbfa378efcac24070df532cdc77500"
+    },
+    "app-release/cn/local/manga/StoredSessions.class": {
+      "before": "b376edb8dd68b100a961982eecf044f018faf42fdeab2751fdfb88589efa8d1d",
+      "after": "b376edb8dd68b100a961982eecf044f018faf42fdeab2751fdfb88589efa8d1d"
+    },
+    "app-release/cn/local/manga/StylePanel$1.class": {
+      "before": "47dc6677493ea5c772c958cfa2d89913e5ef0749b0464a3575a175e1bb0e4ab8",
+      "after": "47dc6677493ea5c772c958cfa2d89913e5ef0749b0464a3575a175e1bb0e4ab8"
+    },
+    "app-release/cn/local/manga/StylePanel$2.class": {
+      "before": "8fcf0731d1dc57bbf34293f804c090b3936cb171bbe9c940485487acd1599f21",
+      "after": "8fcf0731d1dc57bbf34293f804c090b3936cb171bbe9c940485487acd1599f21"
+    },
+    "app-release/cn/local/manga/StylePanel$3.class": {
+      "before": "6cc897c869eafb5bb5dd752c883b3444bba44cf9c405fb0da375b369f6f21f8d",
+      "after": "6cc897c869eafb5bb5dd752c883b3444bba44cf9c405fb0da375b369f6f21f8d"
+    },
+    "app-release/cn/local/manga/StylePanel$4.class": {
+      "before": "afe4dc526b153e6da9a89c94d11ed8998060365d624902584d756425e4463bdd",
+      "after": "afe4dc526b153e6da9a89c94d11ed8998060365d624902584d756425e4463bdd"
+    },
+    "app-release/cn/local/manga/StylePanel$Editor$1.class": {
+      "before": "8a9f9c04598148e00ef205fe32d9b749dc4b4cd5bc5ed513947ce01696f090f0",
+      "after": "8a9f9c04598148e00ef205fe32d9b749dc4b4cd5bc5ed513947ce01696f090f0"
+    },
+    "app-release/cn/local/manga/StylePanel$Editor.class": {
+      "before": "a4f8026aed9e2ba57be687cb65789950bc73004f970858536aa8fbf34c96c1df",
+      "after": "a4f8026aed9e2ba57be687cb65789950bc73004f970858536aa8fbf34c96c1df"
+    },
+    "app-release/cn/local/manga/StylePanel.class": {
+      "before": "f964b1227508091483525298d9bcfdcd064d4add3529764c1c34bdee5bd9354e",
+      "after": "f964b1227508091483525298d9bcfdcd064d4add3529764c1c34bdee5bd9354e"
+    },
+    "app-release/cn/local/manga/TextRenderer.class": {
+      "before": "f9095c138ee27ea1fa54edb6b095dd75145f75a66ec59487e2a8d6a519b9de69",
+      "after": "f9095c138ee27ea1fa54edb6b095dd75145f75a66ec59487e2a8d6a519b9de69"
+    },
+    "app-release/cn/local/manga/TextStyle.class": {
+      "before": "9c6b951e82e3652e1ae4aec0498f7806b2e9f727a352978ff93557c20fb70d99",
+      "after": "9c6b951e82e3652e1ae4aec0498f7806b2e9f727a352978ff93557c20fb70d99"
+    },
+    "app-release/cn/local/manga/TranscriptDialog.class": {
+      "before": "3f2e0bd3cf441677b8c9ce7e15c0fb97c4ebf5e52d085624c1be83d1418ae515",
+      "after": "3f2e0bd3cf441677b8c9ce7e15c0fb97c4ebf5e52d085624c1be83d1418ae515"
+    },
+    "app-release/cn/local/manga/TranslationEngine$CleanupGeometry.class": {
+      "before": "7c88b771433cbbf0e741e191cba565c85783d54b821a47d42c02ad0bfbc1be98",
+      "after": "7c88b771433cbbf0e741e191cba565c85783d54b821a47d42c02ad0bfbc1be98"
+    },
+    "app-release/cn/local/manga/TranslationEngine$PreparedText.class": {
+      "before": "85d77450bce0ef69cece8f0597dc1c02fd157c6233134d7ce8aa895887a34dbb",
+      "after": "85d77450bce0ef69cece8f0597dc1c02fd157c6233134d7ce8aa895887a34dbb"
+    },
+    "app-release/cn/local/manga/TranslationEngine$Progress.class": {
+      "before": "68b3b82563dbb989dd7ed5e2232e8c96a304149533acdea4f9de6d2f748303a3",
+      "after": "68b3b82563dbb989dd7ed5e2232e8c96a304149533acdea4f9de6d2f748303a3"
+    },
+    "app-release/cn/local/manga/TranslationEngine$Result.class": {
+      "before": "b0af2ffb0d7093c6cac995be75093c8e3d1c78e70b557d639fa65cf37565f648",
+      "after": "b0af2ffb0d7093c6cac995be75093c8e3d1c78e70b557d639fa65cf37565f648"
+    },
+    "app-release/cn/local/manga/TranslationEngine$TextBatch.class": {
+      "before": "4394bac0359f241fbea9c9f28d38f8cc56c6e0024a989936e3b03f25725a920c",
+      "after": "4394bac0359f241fbea9c9f28d38f8cc56c6e0024a989936e3b03f25725a920c"
+    },
+    "app-release/cn/local/manga/TranslationEngine.class": {
+      "before": "9f51344a96202bac33853092b3acc857c6169108bd8e0b768ee708c09e21e976",
+      "after": "9f51344a96202bac33853092b3acc857c6169108bd8e0b768ee708c09e21e976"
+    },
+    "app-release/cn/local/manga/TranslationLog.class": {
+      "before": "cc80fadc0c4ec1801cfead13890cc65caa5bc65cc7dba88ca67ebec849cd57b8",
+      "after": "cc80fadc0c4ec1801cfead13890cc65caa5bc65cc7dba88ca67ebec849cd57b8"
+    },
+    "app-release/cn/local/manga/TranslationService.class": {
+      "before": "b6fc7d2831a6276ff4428b42ab937b14de6f2909aabdff5f4d4e928b06561e19",
+      "after": "b6fc7d2831a6276ff4428b42ab937b14de6f2909aabdff5f4d4e928b06561e19"
+    },
+    "app-release/cn/local/manga/TranslationStages$Lease.class": {
+      "before": "0027e7ef7d7bcbd39baf1cf02de1a716455551d88473d31200eba623846c97a8",
+      "after": "0027e7ef7d7bcbd39baf1cf02de1a716455551d88473d31200eba623846c97a8"
+    },
+    "app-release/cn/local/manga/TranslationStages$RequestContext.class": {
+      "before": "043dd33357f9c594bedbb3826ad9a17a0fd304b25fda1ff80ac210e2d3f8e7b1",
+      "after": "043dd33357f9c594bedbb3826ad9a17a0fd304b25fda1ff80ac210e2d3f8e7b1"
+    },
+    "app-release/cn/local/manga/TranslationStages$Waiter.class": {
+      "before": "9fe35fe652d0213a28d108c85559d42109d205e497041c52770873f5f3d9c728",
+      "after": "9fe35fe652d0213a28d108c85559d42109d205e497041c52770873f5f3d9c728"
+    },
+    "app-release/cn/local/manga/TranslationStages.class": {
+      "before": "e4b889bc928e91935d7cbf59c02ce665a62910e72f132b86c9b181cd8c6071f9",
+      "after": "e4b889bc928e91935d7cbf59c02ce665a62910e72f132b86c9b181cd8c6071f9"
+    },
+    "app-release/cn/local/manga/TranslationTaskManager$State.class": {
+      "before": "d7658d1b3a7567ea672b8bdfe001b412824b3deadd38e0cf4f9eb36d4ee1b9cd",
+      "after": "d7658d1b3a7567ea672b8bdfe001b412824b3deadd38e0cf4f9eb36d4ee1b9cd"
+    },
+    "app-release/cn/local/manga/TranslationTaskManager.class": {
+      "before": "325c6c986e1b4a34b75c8b0e71222a8ae6b63cbae98b3af399d2b8ddc3b0beba",
+      "after": "325c6c986e1b4a34b75c8b0e71222a8ae6b63cbae98b3af399d2b8ddc3b0beba"
+    },
+    "app-release/cn/local/manga/TranslationTranscript$Row.class": {
+      "before": "c179319d11abc4ee43c9b3ef344fab5a6ee18640471f740a73c786df8423bf52",
+      "after": "c179319d11abc4ee43c9b3ef344fab5a6ee18640471f740a73c786df8423bf52"
+    },
+    "app-release/cn/local/manga/TranslationTranscript.class": {
+      "before": "af3f4d81ba28075544dd79fbd2a2de2f54465f6112cb1b1e57fc98cb83978953",
+      "after": "af3f4d81ba28075544dd79fbd2a2de2f54465f6112cb1b1e57fc98cb83978953"
+    },
+    "app-release/cn/local/manga/Typesetter$Bubble.class": {
+      "before": "b051dd9ebf425dfd2487179a1030241f77891dac71480db8632b845b84c23d2f",
+      "after": "b051dd9ebf425dfd2487179a1030241f77891dac71480db8632b845b84c23d2f"
+    },
+    "app-release/cn/local/manga/Typesetter$BubbleText.class": {
+      "before": "b6bdde78edee62ecbd8304d6c1fc51d1b6a3740575dfed010109aa03817af33d",
+      "after": "b6bdde78edee62ecbd8304d6c1fc51d1b6a3740575dfed010109aa03817af33d"
+    },
+    "app-release/cn/local/manga/Typesetter$NearbyText.class": {
+      "before": "8a8b4c3ebf0d8074dd8152fb84583937ddbb96f109b5db8ca043d936f90b6080",
+      "after": "8a8b4c3ebf0d8074dd8152fb84583937ddbb96f109b5db8ca043d936f90b6080"
+    },
+    "app-release/cn/local/manga/Typesetter$Style.class": {
+      "before": "e18eb78cc99ffa01a868ac173d02b2495482b33a071ca02e1612b5d0ae2798c8",
+      "after": "e18eb78cc99ffa01a868ac173d02b2495482b33a071ca02e1612b5d0ae2798c8"
+    },
+    "app-release/cn/local/manga/Typesetter.class": {
+      "before": "1b76e106214e96f4d2763e0f4d41b86629644f3b82cef1ac9d990322b215ab94",
+      "after": "1b76e106214e96f4d2763e0f4d41b86629644f3b82cef1ac9d990322b215ab94"
+    },
+    "app-release/cn/local/manga/Ui$1.class": {
+      "before": "c3dacf7ad2c29713954e92372e17ebd7eda11f820823e360635529e5c73cb6c8",
+      "after": "c3dacf7ad2c29713954e92372e17ebd7eda11f820823e360635529e5c73cb6c8"
+    },
+    "app-release/cn/local/manga/Ui$Segmented.class": {
+      "before": "e7ac2d828aff4202fdad1ef925b6e3354dc6a1599c38aaa6c41b8cdcf9cce883",
+      "after": "e7ac2d828aff4202fdad1ef925b6e3354dc6a1599c38aaa6c41b8cdcf9cce883"
+    },
+    "app-release/cn/local/manga/Ui$Sheet.class": {
+      "before": "ceb7da5574a77098082dd1f382cf7d6ba812b0b237ed845ac23dd1087ae64e65",
+      "after": "ceb7da5574a77098082dd1f382cf7d6ba812b0b237ed845ac23dd1087ae64e65"
+    },
+    "app-release/cn/local/manga/Ui$StatusText.class": {
+      "before": "170631d7d90e5f719b4e55ac341603ccaec77b049e316005f1920af616f81ee9",
+      "after": "170631d7d90e5f719b4e55ac341603ccaec77b049e316005f1920af616f81ee9"
+    },
+    "app-release/cn/local/manga/Ui.class": {
+      "before": "341aeab8c87c1880df07b276b94eb931315a81da80a2776d0c20dab8eb81fd41",
+      "after": "341aeab8c87c1880df07b276b94eb931315a81da80a2776d0c20dab8eb81fd41"
+    },
+    "app-release/cn/local/manga/WebPageBridge$Host.class": {
+      "before": "7ede3d2ca163296cdfa8881308e30d8e957bece99ce21ab57827460826195b64",
+      "after": "7ede3d2ca163296cdfa8881308e30d8e957bece99ce21ab57827460826195b64"
+    },
+    "app-release/cn/local/manga/WebPageBridge.class": {
+      "before": "bd3aeca2c0f8107d0c58b773f9316e5c39a7a68a3d02076248e8f34092f18e44",
+      "after": "bd3aeca2c0f8107d0c58b773f9316e5c39a7a68a3d02076248e8f34092f18e44"
+    },
+    "app-release/cn/local/manga/WhiteBubbleCleaner$BackgroundKind.class": {
+      "before": "8dccc15d26a3d4eb4f8d7aae8221999e82d570c5f55a034cfb87c8eb5022664c",
+      "after": "8dccc15d26a3d4eb4f8d7aae8221999e82d570c5f55a034cfb87c8eb5022664c"
+    },
+    "app-release/cn/local/manga/WhiteBubbleCleaner$Mask.class": {
+      "before": "dcbb7fcb2581c0a5f1827d6e2ea7350b7fbdb4baed10b4b5dc6f3e51e0d6afc7",
+      "after": "dcbb7fcb2581c0a5f1827d6e2ea7350b7fbdb4baed10b4b5dc6f3e51e0d6afc7"
+    },
+    "app-release/cn/local/manga/WhiteBubbleCleaner.class": {
+      "before": "9ed4f1d72d29774bdb8d1e410878c9153debbbbae3963cf81c6fb11f0ceb5b04",
+      "after": "9ed4f1d72d29774bdb8d1e410878c9153debbbbae3963cf81c6fb11f0ceb5b04"
+    },
+    "app-release/cn/local/manga/WorkbenchActivity$1.class": {
+      "before": "9ccd5af0ac861e5c259cb9dcdd41434002f71f73ac58bf2e89d19a24977fddff",
+      "after": "9ccd5af0ac861e5c259cb9dcdd41434002f71f73ac58bf2e89d19a24977fddff"
+    },
+    "app-release/cn/local/manga/WorkbenchActivity$2.class": {
+      "before": "ffffedee1f2a3f7c0dd6bf15181e11ad4c06a7777aa609e42f5056fa1a22a1b7",
+      "after": "ffffedee1f2a3f7c0dd6bf15181e11ad4c06a7777aa609e42f5056fa1a22a1b7"
+    },
+    "app-release/cn/local/manga/WorkbenchActivity$3.class": {
+      "before": "b8d3985958278ec8a2ed44eb61f451668e8044fc99a8c123adb0229a9ced92ea",
+      "after": "b8d3985958278ec8a2ed44eb61f451668e8044fc99a8c123adb0229a9ced92ea"
+    },
+    "app-release/cn/local/manga/WorkbenchActivity$4.class": {
+      "before": "64deaec62595afdbbc705475b2d6c2b36e7332480c4690db5845383c90ca8398",
+      "after": "64deaec62595afdbbc705475b2d6c2b36e7332480c4690db5845383c90ca8398"
+    },
+    "app-release/cn/local/manga/WorkbenchActivity$Card.class": {
+      "before": "541e060c7f3067939dfcbb3e67e0b5b2d62721e034692ee2f25f356b2507ff1e",
+      "after": "541e060c7f3067939dfcbb3e67e0b5b2d62721e034692ee2f25f356b2507ff1e"
+    },
+    "app-release/cn/local/manga/WorkbenchActivity$Step.class": {
+      "before": "1a57d3031d7f664d87d23b208f39d90ba6567a33ded3e31561a272489e3f2237",
+      "after": "1a57d3031d7f664d87d23b208f39d90ba6567a33ded3e31561a272489e3f2237"
+    },
+    "app-release/cn/local/manga/WorkbenchActivity.class": {
+      "before": "ed94c69621ac496f7e1e823b7ec8678ae472cdf0ffd2d1dc173b409b2ab54c7b",
+      "after": "ed94c69621ac496f7e1e823b7ec8678ae472cdf0ffd2d1dc173b409b2ab54c7b"
+    },
+    "host/android/content/Context.class": {
+      "before": "b8157d52a1c366dbcdce49e34e3bb81b521e81fbea73438a8fac98a2fd67ad06",
+      "after": "b8157d52a1c366dbcdce49e34e3bb81b521e81fbea73438a8fac98a2fd67ad06"
+    },
+    "host/android/database/Cursor.class": {
+      "before": "2e693d8f0c69c5bc96507c4a892169824bf8e04a8eb76b2883fa05f5beaeeb89",
+      "after": "2e693d8f0c69c5bc96507c4a892169824bf8e04a8eb76b2883fa05f5beaeeb89"
+    },
+    "host/android/database/DatabaseErrorHandler.class": {
+      "before": "67a6f0ca4597018bc319efc77b2143d5325f4d571ceee519350cfc392facb9bc",
+      "after": "67a6f0ca4597018bc319efc77b2143d5325f4d571ceee519350cfc392facb9bc"
+    },
+    "host/android/database/sqlite/SQLiteDatabase$1.class": {
+      "before": "5712f6d178bd3633e93eca328e75a3f8e9f39e595c4904146b0923457831b612",
+      "after": "5712f6d178bd3633e93eca328e75a3f8e9f39e595c4904146b0923457831b612"
+    },
+    "host/android/database/sqlite/SQLiteDatabase$CursorFactory.class": {
+      "before": "6ccd790fa3a5125cd76b14ad96926cb0d229f7c664a99f4e18af3720baa65311",
+      "after": "6ccd790fa3a5125cd76b14ad96926cb0d229f7c664a99f4e18af3720baa65311"
+    },
+    "host/android/database/sqlite/SQLiteDatabase.class": {
+      "before": "2cdf7105d8e529175b245f9b9dc9453f8d3c31ceaa6a07e6e0ee13a1d2c8d090",
+      "after": "2cdf7105d8e529175b245f9b9dc9453f8d3c31ceaa6a07e6e0ee13a1d2c8d090"
+    },
+    "host/android/graphics/Bitmap$CompressFormat.class": {
+      "before": "fdcb88297056b805e60b030a31475592d718716d237a8311803e4bf47abbd2c0",
+      "after": "fdcb88297056b805e60b030a31475592d718716d237a8311803e4bf47abbd2c0"
+    },
+    "host/android/graphics/Bitmap$Config.class": {
+      "before": "db3a13d0c47d20e24e1a714d1f1975af690daeb85f22292b4e7c99c7a8240542",
+      "after": "db3a13d0c47d20e24e1a714d1f1975af690daeb85f22292b4e7c99c7a8240542"
+    },
+    "host/android/graphics/Bitmap.class": {
+      "before": "8e58c4d778eac47e4de781adb50aacd6b4e3d450330a525e648a6e70fbb15ce3",
+      "after": "8e58c4d778eac47e4de781adb50aacd6b4e3d450330a525e648a6e70fbb15ce3"
+    },
+    "host/android/graphics/Rect.class": {
+      "before": "fca87a7583788cd47cfdc4863e5e684dc04cc5d3d50816fd806ca088cad4f038",
+      "after": "fca87a7583788cd47cfdc4863e5e684dc04cc5d3d50816fd806ca088cad4f038"
+    },
+    "host/android/os/Looper.class": {
+      "before": "31845cd8ac8f7060723f3cd756f8b94ec778327388f7e4c614c52e8ce15cb4db",
+      "after": "31845cd8ac8f7060723f3cd756f8b94ec778327388f7e4c614c52e8ce15cb4db"
+    },
+    "host/android/os/StatFs.class": {
+      "before": "b523263b977f27ba096cf08c8e04ad390647ebcc43d1bb70a99e9600414d5b01",
+      "after": "b523263b977f27ba096cf08c8e04ad390647ebcc43d1bb70a99e9600414d5b01"
+    },
+    "host/android/os/SystemClock.class": {
+      "before": "fee112e8f21fe51c9bbab84ca9165518fb22f0e145ca2d9f535c789f3e68cade",
+      "after": "fee112e8f21fe51c9bbab84ca9165518fb22f0e145ca2d9f535c789f3e68cade"
+    },
+    "host/android/system/ErrnoException.class": {
+      "before": "a4b9199069ff8054461d15f9e3043962defaeb56d4a67118a1c111016d3b48ab",
+      "after": "a4b9199069ff8054461d15f9e3043962defaeb56d4a67118a1c111016d3b48ab"
+    },
+    "host/android/system/Os.class": {
+      "before": "0ba6f9a78fa7f60cb5db24b6a7d1ce31891b6068585a4a0c23fa8cfb1fe02656",
+      "after": "0ba6f9a78fa7f60cb5db24b6a7d1ce31891b6068585a4a0c23fa8cfb1fe02656"
+    },
+    "host/android/system/OsConstants.class": {
+      "before": "0b72f75198dfabe4c99ed8faa69cdc7a6e5380ce5d12b3feeba35a2513b00cb7",
+      "after": "0b72f75198dfabe4c99ed8faa69cdc7a6e5380ce5d12b3feeba35a2513b00cb7"
+    },
+    "host/android/system/StructStat.class": {
+      "before": "3bc474987c168ea8e566277db1e4518a8f700bfd621e76a22a71ec1c93a352be",
+      "after": "3bc474987c168ea8e566277db1e4518a8f700bfd621e76a22a71ec1c93a352be"
+    },
+    "host/android/util/Base64.class": {
+      "before": "d08e59ffb67b6111efd0dfc031ec1fc69e4b4ff08a4f45d7b97c7ee366e0b2a1",
+      "after": "d08e59ffb67b6111efd0dfc031ec1fc69e4b4ff08a4f45d7b97c7ee366e0b2a1"
+    },
+    "host/android/util/LruCache.class": {
+      "before": "3646e56867ce64ee8687686fa4b85540d3b32cf589d64618d01be1f9ffa8474b",
+      "after": "3646e56867ce64ee8687686fa4b85540d3b32cf589d64618d01be1f9ffa8474b"
+    },
+    "host/cn/local/manga/ApiPresetChecks$Action.class": {
+      "before": "e6fa0b31a32a80f0506c823da981b1b492b858440679752a6eedb162a5e3ca24",
+      "after": "e6fa0b31a32a80f0506c823da981b1b492b858440679752a6eedb162a5e3ca24"
+    },
+    "host/cn/local/manga/ApiPresetChecks.class": {
+      "before": "7bf5aa9063f410dd13d96a53d1d9e6b63f2bedffd074cfba363d95fcfc9de38c",
+      "after": "7bf5aa9063f410dd13d96a53d1d9e6b63f2bedffd074cfba363d95fcfc9de38c"
+    },
+    "host/cn/local/manga/RefactorHostRuntimeChecks.class": {
+      "before": "82ecb93c9e7e041c8c3513dbb719a87d17b8b854d38fb1432d7044a6b8ca7f52",
+      "after": "82ecb93c9e7e041c8c3513dbb719a87d17b8b854d38fb1432d7044a6b8ca7f52"
+    },
+    "host/cn/local/manga/Release116Checks$Action.class": {
+      "before": "820e969ba651c16fa79b64864ff1a74c1f67eaf3fc9b2491e471d2614f6cf440",
+      "after": "820e969ba651c16fa79b64864ff1a74c1f67eaf3fc9b2491e471d2614f6cf440"
+    },
+    "host/cn/local/manga/Release116Checks.class": {
+      "before": "323d7444646716c8fe7186fcc0a76ee73a344c124e7ef40da35a6aa80a427347",
+      "after": "323d7444646716c8fe7186fcc0a76ee73a344c124e7ef40da35a6aa80a427347"
+    },
+    "host/cn/local/manga/Storage112Checks$1.class": {
+      "before": "30ddc9a621e341e761f2dd47ef6bbb35fee3d307e154e78eb0c0f34b3fdbf7e5",
+      "after": "30ddc9a621e341e761f2dd47ef6bbb35fee3d307e154e78eb0c0f34b3fdbf7e5"
+    },
+    "host/cn/local/manga/Storage112Checks$Action.class": {
+      "before": "61b64656ab2924172fdee8f382d8f2211d9d12ad76f3f282e50bcd145ceffd74",
+      "after": "61b64656ab2924172fdee8f382d8f2211d9d12ad76f3f282e50bcd145ceffd74"
+    },
+    "host/cn/local/manga/Storage112Checks.class": {
+      "before": "9e8587b9d5dd56b244c5f3fd3c8373c9754bf2acc626d6708f74902465735600",
+      "after": "9e8587b9d5dd56b244c5f3fd3c8373c9754bf2acc626d6708f74902465735600"
+    },
+    "host/cn/local/manga/Storage115Checks$Action.class": {
+      "before": "fd74d82a7d6bdc6f4e23547b4845b8063c179890a3123f01c09a354d5f6d5719",
+      "after": "fd74d82a7d6bdc6f4e23547b4845b8063c179890a3123f01c09a354d5f6d5719"
+    },
+    "host/cn/local/manga/Storage115Checks.class": {
+      "before": "525144683963e3434217a5a64f1711dc98125cb7835b9a5b82e9df76f7283879",
+      "after": "525144683963e3434217a5a64f1711dc98125cb7835b9a5b82e9df76f7283879"
+    }
+  },
+  "passed": true
+}

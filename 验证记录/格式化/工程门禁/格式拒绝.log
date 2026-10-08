@@ -1,0 +1,6 @@
+E:\codexwork\漫画翻译助手\app\src\main\java\cn\local\manga\Region.java
+Exception: E:\codexwork\漫画翻译助手\工具\格式化.ps1:29
+Line |
+  29 |      if($code -ne 0){throw '代码格式检查/格式化失败；请运行 工具/格式化.ps1，检查上方文件及诊断'}
+     |                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | 代码格式检查/格式化失败；请运行 工具/格式化.ps1，检查上方文件及诊断

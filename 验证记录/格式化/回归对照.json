@@ -1,0 +1,30 @@
+{
+  "格式化前": {
+    "Release116Checks": 38,
+    "Storage115Checks": 36,
+    "Storage112Checks": 123,
+    "ApiPresetChecks": 182,
+    "RefactorHostRuntimeChecks": 32,
+    "RenderedPageCacheChecks": 11,
+    "TargetedBubbleChecks": 208,
+    "CropTextLayoutChecks": 248,
+    "PerformanceDiagnosticsHostChecks": 10,
+    "LocalOverlayChecks": 8,
+    "PartialRetryChecks": 34,
+    "CleanupPlanChecks": 79
+  },
+  "格式化后": {
+    "Release116Checks": 38,
+    "Storage115Checks": 36,
+    "Storage112Checks": 123,
+    "ApiPresetChecks": 182,
+    "RefactorHostRuntimeChecks": 32,
+    "TargetedBubbleChecks": 208,
+    "CleanupPlanChecks": 79,
+    "PerformanceDiagnosticsHostChecks": 10,
+    "RenderedPageCacheChecks": 11,
+    "CropTextLayoutChecks": 248,
+    "PartialRetryChecks": 34,
+    "LocalOverlayChecks": 8
+  }
+}
