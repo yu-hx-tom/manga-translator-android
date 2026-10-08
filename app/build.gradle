@@ -6,8 +6,8 @@ android {
         applicationId 'cn.local.manga'
         minSdk 29
         targetSdk 35
-        versionCode 45
-        versionName '1.1.6'
+        versionCode 46
+        versionName '1.1.7'
         testInstrumentationRunner 'cn.local.manga.ChecksInstrumentation'
     }
     buildFeatures { buildConfig true }

@@ -1,0 +1,33 @@
+漫画翻译助手 / 漫游浏览器 1.1.7 更新与验证
+日期：2026-10-08
+版本：1.1.7 / versionCode 46（基于 1.1.6 源码，仅修复一处）
+
+交付文件
+安装包：漫画翻译助手-1.1.7.apk
+SHA-256：2cdf2096843bc40e244944027e390f11ab788df42ffc9bbd2b18e8edd42e449e
+大小：32,302,337 字节
+签名证书 SHA-256：e61c186c4c5ea35320d6fa07fea40e26fe409cc5a0662aef752e318d8f27fe60（与此前一致，可覆盖安装）
+
+修复：底栏“开始翻译”启动时显示灰底，点一下才变蓝
+现象：1.1.6 启动后右下角按钮为灰底，触摸一次后变为蓝底白字。
+根因：Ui.style 先 setBackground(RippleDrawable)，再 setBackgroundTintList(null)。
+  后者会让 View 对背景执行 mutate()；RippleDrawable(LayerDrawable) 的 mutate 会克隆内部图层，
+  克隆出的 GradientDrawable 没有继承 drawable state（空状态），其底色 ColorStateList
+  在空状态下命中 {-state_enabled}，即“禁用灰”0xffE3E7EE。
+  随后 View 把同样的状态数组再设给 Ripple 时，因与原值相同被跳过，图层一直停在灰色；
+  直到按下产生新的状态（pressed）才把正确状态传给图层，于是“点一下变蓝”。
+  1.1.6 中 ShellActivity 每次 refreshTask 都重新 Ui.style，正好每次都重新触发此问题。
+修改：Ui.style 在设置背景和 tint 之后，先把背景状态清空、再设回 View 当前状态并 jumpToCurrentState，
+  强制把 enabled 状态下发到克隆后的图层。改动只有 Ui.java 一处，所有使用 Ui.style 的按钮同样受益。
+
+本轮验证
+- 构建：lintRelease、lintDebug、assembleRelease、assembleDebugAndroidTest 成功（验证记录/1.1.7/构建.log）。
+- Lint：0 错误，1 个旧警告（BlobStore SetWorldWritable，与 1.1.6 相同）。
+- APK 包名、versionCode 46 / versionName 1.1.7、签名证书已核对。
+- 未在手机或模拟器上运行（本机模拟器启动即崩溃）。
+
+手机验收
+1. 覆盖安装，设置中确认版本 1.1.7。
+2. 冷启动 App（先从最近任务划掉再打开），不触摸任何地方，确认右下角“开始翻译”直接是蓝底白字。
+3. 切换“浏览器 / 本地翻译 / 汉化工具”三个页签，确认按钮仍为蓝色。
+4. 开始一次翻译后应变为“停止翻译”（浅红），结束后回到蓝色。

@@ -91,6 +91,10 @@ final class Ui {
         if (stroke != 0) shape.setStroke(dp(c, 1), enabled(0xffE6EAF0, stroke));
         b.setBackground(ripple(shape, round(c, 0xffFFFFFF, 14), rippleColor));
         b.setBackgroundTintList(null);
+        // The tint call mutates the ripple, cloning its layers without their drawable state, so the
+        // fill would show its disabled color until the first touch. Push the view state down again.
+        Drawable background = b.getBackground();
+        background.setState(new int[0]); background.setState(b.getDrawableState()); background.jumpToCurrentState();
         b.setTextColor(enabled(textOff, text));
         b.setTypeface(MEDIUM);
         b.setAllCaps(false);
