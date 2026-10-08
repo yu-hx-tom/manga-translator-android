@@ -1,0 +1,8 @@
+ app/build.gradle                                   |   5 +-
+ app/src/main/java/cn/local/manga/BubbleLayout.java |  37 ++++++-
+ .../java/cn/local/manga/RenderedPageCache.java     |   2 +-
+ tests/AdaptiveTypographyChecks.java                |   4 +-
+ tests/BubbleFontSizeChecks.java                    | 118 +++++++++++++++++++++
+ tests/RenderedPageCacheChecks.java                 |  11 ++
+ tests/验证自适应字号.ps1                           |  18 ++++
+ 7 files changed, 186 insertions(+), 9 deletions(-)

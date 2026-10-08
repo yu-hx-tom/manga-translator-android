@@ -1,0 +1,25 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261008053503
+Username: PC-20220617PYMJ\Administrator
+RunAs User: PC-20220617PYMJ\Administrator
+Configuration Name: 
+Machine: PC-20220617PYMJ (Microsoft Windows NT 10.0.19044.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File 构建.ps1
+Process ID: 25584
+PSVersion: 5.1.19041.1620
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.1620
+BuildVersion: 10.0.19041.1620
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+构建提交：9b20b8297ebe97c1b2ffa28c4a6cb4aeadd5b7a7；dirty=False；AllowDirty=False
+
+打包来源验证通过：1.1.8 / 47 / 9b20b8297ebe97c1b2ffa28c4a6cb4aeadd5b7a7，可交付=True
+**********************
+Windows PowerShell transcript end
+End time: 20261008053541
+**********************
