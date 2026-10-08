@@ -298,8 +298,8 @@ public final class AdaptiveTypographyChecks {
                         "好", balloon, 220, 460, true, 18, new int[][] {{70, 70, 88, 250}});
         inside(aside, balloon, 220, 460, 1);
         ok(
-                aside.font >= 18 && aside.font <= 27 && large.font > aside.font * 3,
-                "small original aside only grows moderately despite a large empty balloon");
+                aside.font >= 50 && aside.font <= 75 && large.font > aside.font,
+                "small detected source in a large balloon grows while retaining whitespace");
         boolean[] split = rectangle(120, 260, 4, 4, 116, 256);
         int[][] anchors = {{92, 10, 112, 100}, {10, 145, 30, 240}};
         BubbleLayout.Plan divided =

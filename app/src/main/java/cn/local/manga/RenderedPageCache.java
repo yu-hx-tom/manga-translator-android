@@ -37,7 +37,7 @@ final class RenderedPageCache {
 
     static String key(String content, String configuration) throws Exception {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        digest.update("rendered-page-cleanup-20261006-r30\n".getBytes(StandardCharsets.UTF_8));
+        digest.update("rendered-page-bubble-font-20261008-r31\n".getBytes(StandardCharsets.UTF_8));
         digest.update(content.getBytes(StandardCharsets.UTF_8));
         digest.update((byte) 0);
         byte[] bytes = digest.digest(configuration.getBytes(StandardCharsets.UTF_8));

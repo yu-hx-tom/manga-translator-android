@@ -18,6 +18,17 @@ public final class RenderedPageCacheChecks {
         byte[] png = {(byte) 137, 80, 78, 71, 13, 10, 26, 10, 1, 2, 3};
         String key = RenderedPageCache.key("pixels-a", "settings-a");
         PageOutcome complete = new PageOutcome(3, 3, 0, 0, "complete");
+        byte[] oldDigest =
+                java.security.MessageDigest.getInstance("SHA-256")
+                        .digest(
+                                "rendered-page-cleanup-20261006-r30\npixels-a\0settings-a"
+                                        .getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        StringBuilder oldKey = new StringBuilder();
+        for (byte b : oldDigest) oldKey.append(String.format(Locale.ROOT, "%02x", b & 255));
+        cache.write(oldKey.toString(), png, complete);
+        ok(
+                !key.equals(oldKey.toString()) && cache.read(key) == null,
+                "new typography cannot reuse a page rendered with the old font algorithm");
         ok(cache.read(key) == null, "first visit misses");
         cache.write(key, png, complete);
         RenderedPageCache.Entry hit = new RenderedPageCache(root.toFile()).read(key);

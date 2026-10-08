@@ -55,7 +55,7 @@ final class BubbleLayout {
     /**
      * {@code scale} multiplies only the preferred (largest) lettering size; used by the workbench's
      * font control. The fit search still never leaves the safe interior, so enlarging stops at the
-     * bubble's capacity. scale=1 performs exactly the original arithmetic (x*1f==x).
+     * bubble's capacity. Apply it after both source and bubble-space estimates.
      */
     static Plan plan(
             String text,
@@ -190,6 +190,8 @@ final class BubbleLayout {
                                                         part.length)
                                                 * scale));
             }
+            preferred =
+                    Math.max(preferred, Math.round(spaceFont(space, lobe, part.length) * scale));
             Plan plan = fitLobe(part, space, lobe, vertical, preferred, compactMarks);
             if (plan == null) return null;
             for (int i = 0; i < plan.cells.length; i++) {
@@ -211,6 +213,20 @@ final class BubbleLayout {
         return point == '…' || point == '︙'
                 ? .5f
                 : "♥♡❤".indexOf(point) >= 0 ? .65f : "，。！？；：、,.!?;:".indexOf(point) >= 0 ? .5f : 1f;
+    }
+
+    private static float spaceFont(Space space, Lobe lobe, int characters) {
+        // Only count a safe rectangle containing this paragraph's anchor. Crop size, distant
+        // whitespace and another lobe must not inflate the font. The final grid still proves fit.
+        int[] r = largest(space.safe, space.w, space.h, space.owner, lobe.label, lobe.source);
+        if (r == null) return 0;
+        int width = r[2] - r[0], height = r[3] - r[1];
+        // Aim for 28% cell coverage; count short replies as at least six cells to retain
+        // whitespace.
+        return (float)
+                Math.min(
+                        Math.min(width, height) * .5,
+                        Math.sqrt(width * (double) height * .28 / Math.max(6, characters)));
     }
 
     static List<int[]> units(int[] points) {
@@ -917,18 +933,33 @@ final class BubbleLayout {
     }
 
     private static int[] largest(boolean[] mask, int w, int h) {
+        return largest(mask, w, h, null, 0, null);
+    }
+
+    private static int[] largest(
+            boolean[] mask, int w, int h, int[] owner, int label, int[] anchor) {
         int[] heights = new int[w], stack = new int[w + 1], best = null;
         int area = 0;
+        double cx = anchor == null ? 0 : (anchor[0] + anchor[2]) / 2.0;
+        double cy = anchor == null ? 0 : (anchor[1] + anchor[3]) / 2.0;
         for (int y = 0; y < h; y++) {
             int top = -1;
-            for (int x = 0; x < w; x++) heights[x] = mask[y * w + x] ? heights[x] + 1 : 0;
+            for (int x = 0; x < w; x++) {
+                int p = y * w + x;
+                heights[x] = mask[p] && (owner == null || owner[p] == label) ? heights[x] + 1 : 0;
+            }
             for (int x = 0; x <= w; x++) {
                 int value = x == w ? 0 : heights[x];
                 while (top >= 0 && heights[stack[top]] > value) {
                     int height = heights[stack[top--]],
                             left = top < 0 ? 0 : stack[top] + 1,
                             size = height * (x - left);
-                    if (size > area) {
+                    if (size > area
+                            && (anchor == null
+                                    || left <= cx
+                                            && cx < x
+                                            && y + 1 - height <= cy
+                                            && cy < y + 1)) {
                         area = size;
                         best = new int[] {left, y + 1 - height, x, y + 1};
                     }
