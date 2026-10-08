@@ -12,18 +12,6 @@
     "existsLiteral": true
   },
   {
-    "file": "tests/browser-real-search.cjs",
-    "line": 10,
-    "reference": "s://www.wikipedia.org/",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/browser-real-search.cjs",
-    "line": 10,
-    "reference": "s://www.google.com/",
-    "existsLiteral": false
-  },
-  {
     "file": "tests/browser-search-checks.cjs",
     "line": 1,
     "reference": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright",
@@ -36,42 +24,6 @@
     "existsLiteral": true
   },
   {
-    "file": "tests/browser-search-checks.cjs",
-    "line": 10,
-    "reference": "s://search.test/**",
-    "existsLiteral": null
-  },
-  {
-    "file": "tests/browser-search-checks.cjs",
-    "line": 12,
-    "reference": "s://search.test/",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/browser-search-checks.cjs",
-    "line": 28,
-    "reference": "s://search.test/next",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/browser-search-checks.cjs",
-    "line": 31,
-    "reference": "s://manga-home.invalid/**",
-    "existsLiteral": null
-  },
-  {
-    "file": "tests/browser-search-checks.cjs",
-    "line": 31,
-    "reference": "s://manga-home.invalid/",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/browser-search-checks.cjs",
-    "line": 33,
-    "reference": "s://manga-home.invalid/search",
-    "existsLiteral": false
-  },
-  {
     "file": "tests/browser-search-sequence.cjs",
     "line": 1,
     "reference": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright",
@@ -82,18 +34,6 @@
     "line": 6,
     "reference": "C:/Program Files/Google/Chrome/Application/chrome.exe",
     "existsLiteral": true
-  },
-  {
-    "file": "tests/browser-search-sequence.cjs",
-    "line": 11,
-    "reference": "s://search.test/**",
-    "existsLiteral": null
-  },
-  {
-    "file": "tests/browser-search-sequence.cjs",
-    "line": 12,
-    "reference": "s://search.test/",
-    "existsLiteral": false
   },
   {
     "file": "tests/compile_format_host.py",
@@ -126,42 +66,6 @@
     "existsLiteral": true
   },
   {
-    "file": "tests/home-sites-checks.cjs",
-    "line": 5,
-    "reference": "s://manga-home.invalid/",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/home-sites-checks.cjs",
-    "line": 6,
-    "reference": "s://manga-home.invalid/",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/home-sites-checks.cjs",
-    "line": 7,
-    "reference": "s://site",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/home-sites-checks.cjs",
-    "line": 15,
-    "reference": "s://site0.example",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/home-sites-checks.cjs",
-    "line": 16,
-    "reference": "s://site0.example/",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/home-sites-checks.cjs",
-    "line": 17,
-    "reference": "s://manga-home.invalid/shortcut-add",
-    "existsLiteral": false
-  },
-  {
     "file": "tests/v110-home-sites-checks.cjs",
     "line": 1,
     "reference": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright",
@@ -172,42 +76,6 @@
     "line": 3,
     "reference": "C:/Program Files/Google/Chrome/Application/chrome.exe",
     "existsLiteral": true
-  },
-  {
-    "file": "tests/v110-home-sites-checks.cjs",
-    "line": 5,
-    "reference": "s://manga-home.invalid/",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/v110-home-sites-checks.cjs",
-    "line": 6,
-    "reference": "s://manga-home.invalid/",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/v110-home-sites-checks.cjs",
-    "line": 7,
-    "reference": "s://site",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/v110-home-sites-checks.cjs",
-    "line": 15,
-    "reference": "s://site0.example",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/v110-home-sites-checks.cjs",
-    "line": 16,
-    "reference": "s://site0.example/",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/v110-home-sites-checks.cjs",
-    "line": 17,
-    "reference": "s://manga-home.invalid/shortcut-add",
-    "existsLiteral": false
   },
   {
     "file": "tests/v110-icon-preview.cjs",
@@ -276,18 +144,6 @@
     "existsLiteral": null
   },
   {
-    "file": "tests/打包验证1.1.1-alpha1.2.ps1",
-    "line": 44,
-    "reference": "a:\\(I\\)V",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/打包验证1.1.1-alpha1.2.ps1",
-    "line": 44,
-    "reference": "a:\\(F\\)V",
-    "existsLiteral": false
-  },
-  {
     "file": "tests/打包验证1.1.1-alpha1.ps1",
     "line": 7,
     "reference": "D:/claude-code-space/.toolchains/android/android-sdk/build-tools/36.0.0",
@@ -310,18 +166,6 @@
     "line": 7,
     "reference": "D:/claude-code-space/.toolchains/android/jdk/*/bin/java.exe",
     "existsLiteral": null
-  },
-  {
-    "file": "tests/打包验证1.1.2.ps1",
-    "line": 53,
-    "reference": "a:\\(I\\)V",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/打包验证1.1.2.ps1",
-    "line": 53,
-    "reference": "a:\\(F\\)V",
-    "existsLiteral": false
   },
   {
     "file": "tests/打包验证1.1.6.ps1",
@@ -480,51 +324,9 @@
     "existsLiteral": null
   },
   {
-    "file": "tests/mock-api/check.cjs",
-    "line": 9,
-    "reference": "p://127.0.0.1:",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/mock-api/check.cjs",
-    "line": 16,
-    "reference": "p://127.0.0.1:",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/mock-api/check.cjs",
-    "line": 17,
-    "reference": "p://127.0.0.1:",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/mock-api/check.cjs",
-    "line": 18,
-    "reference": "p://127.0.0.1:",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/mock-api/check.cjs",
-    "line": 19,
-    "reference": "p://127.0.0.1:",
-    "existsLiteral": false
-  },
-  {
     "file": "tests/mock-api/server.cjs",
     "line": 5,
     "reference": "E:/codexwork/漫画",
     "existsLiteral": true
-  },
-  {
-    "file": "tests/mock-api/server.cjs",
-    "line": 11,
-    "reference": "p://localhost",
-    "existsLiteral": false
-  },
-  {
-    "file": "tests/mock-api/server.cjs",
-    "line": 27,
-    "reference": "p://${nic.address}:${server.address().port}/v1  网页 http://${nic.address}:${server.address().port}/`)",
-    "existsLiteral": null
   }
 ]

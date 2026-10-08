@@ -22,11 +22,20 @@ $arguments+=@($files | ForEach-Object {$_.FullName.Replace('\','/')})
 $exports=@('api','code','file','parser','tree','util') | ForEach-Object {"--add-exports=jdk.compiler/com.sun.tools.javac.$_=ALL-UNNAMED"}
 $clock=[Diagnostics.Stopwatch]::StartNew()
 try {
-    $output=& (Join-Path $jdk.FullName 'bin/java.exe') '-Dfile.encoding=UTF-8' @exports -jar $jar "@$argFile" 2>&1
-    $code=$LASTEXITCODE
-    $output | Write-Output
-    if(($output -join "`n") -match 'Skipping non-Java file:'){throw '工具跳过了输入文件，不能认定通过'}
-    if($code -ne 0){throw '代码格式检查/格式化失败；请运行 工具/格式化.ps1，检查上方文件及诊断'}
+    # 此版本在折分长字符串后，第二轮可能继续调整 AOSP 续行缩进。
+    # 默认运行两轮官方 formatter，再只读验证；绝不手工改写其输出。
+    $rounds=if($Check){1}else{3}
+    for($round=1;$round -le $rounds;$round++){
+        if(!$Check -and $round -eq 3){
+            $verifyArgs=@('--aosp','--dry-run','--set-exit-if-changed')+@($files | ForEach-Object {$_.FullName.Replace('\','/')})
+            [IO.File]::WriteAllLines($argFile,$verifyArgs,[Text.UTF8Encoding]::new($false))
+        }
+        $output=& (Join-Path $jdk.FullName 'bin/java.exe') '-Dfile.encoding=UTF-8' @exports -jar $jar "@$argFile" 2>&1
+        $code=$LASTEXITCODE
+        $output | Write-Output
+        if(($output -join "`n") -match 'Skipping non-Java file:'){throw '工具跳过了输入文件，不能认定通过'}
+        if($code -ne 0){throw '代码格式检查/格式化失败；请运行 工具/格式化.ps1，检查上方文件及诊断'}
+    }
     Write-Host ('Java 格式'+$(if($Check){'检查'}else{'化'})+'通过：'+$files.Count+' 个文件，'+[Math]::Round($clock.Elapsed.TotalSeconds,2)+' 秒')
 } finally {
     Remove-Item -LiteralPath $argFile
