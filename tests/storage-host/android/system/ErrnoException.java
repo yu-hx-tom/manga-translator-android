@@ -1,2 +1,7 @@
 package android.system;
-public class ErrnoException extends Exception {public ErrnoException(String message,int errno){super(message+" errno="+errno);}}
+
+public class ErrnoException extends Exception {
+    public ErrnoException(String message, int errno) {
+        super(message + " errno=" + errno);
+    }
+}

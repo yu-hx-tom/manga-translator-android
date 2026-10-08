@@ -1,0 +1,9 @@
+# 这些历史实验程序不适用于当前 1.1.7；保留原始字节，不格式化。
+# 缺失旧 Before* 依赖、已删除方法或旧测试夹具。详见工程规范化报告。
+tests/AdaptiveTypographyReview.java
+tests/CacheBenchmark.java
+tests/ProductionCleanupFlowChecks.java
+tests/V090AnchorChecks.java
+tests/V090MaskAudit.java
+tests/V090PlainRenderingChecks.java
+tests/V090SurfaceChecks.java

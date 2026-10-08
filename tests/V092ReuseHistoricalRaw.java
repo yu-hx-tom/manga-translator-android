@@ -1,47 +1,276 @@
 package cn.local.manga;
 
 import static cn.local.manga.BatchMangaTranslationReview.*;
+
+import org.json.*;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.security.MessageDigest;
 import java.util.*;
-import org.json.*;
 
 /** Offline reuse only. No API client, credentials, retry loop, or image regeneration. */
 public final class V092ReuseHistoricalRaw {
-    static String sha(String s)throws Exception{return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(s.getBytes(StandardCharsets.UTF_8)));}
-    static void same(JSONObject expected,JSONObject actual,String key,String id)throws Exception{if(!expected.has(key)||!actual.has(key)||!expected.get(key).toString().equals(actual.get(key).toString()))throw new Exception(id+" historical mismatch: "+key);}
-    static Map<String,JSONObject> index(JSONArray array,String key)throws Exception{Map<String,JSONObject> result=new LinkedHashMap<>();for(Object raw:array){JSONObject row=(JSONObject)raw;String id=row.get(key).toString();if(result.put(id,row)!=null)throw new Exception("Duplicate identity "+id);}return result;}
-    static Path inside(Path root,String value)throws Exception{Path p=resolved(root,value).toAbsolutePath().normalize();if(!p.startsWith(root.toAbsolutePath().normalize()))throw new Exception("Historical evidence escapes its batch: "+value);return p;}
-    public static void main(String[] args)throws Exception{
-        Path out=Paths.get(args[0]).toAbsolutePath().normalize(),previous=Paths.get(args[1]).toAbsolutePath().normalize();boolean checkOnly=args.length>2&&args[2].equals("check");
-        if(out.equals(previous)||out.toString().contains("0.9.1验证"))throw new Exception("Historical batch cannot be a destination");
-        JSONObject plan=json(out.resolve("translation_plan.json")),oldPlan=json(previous.resolve("translation_plan.json"));
-        if(!plan.optBoolean("paragraphBoundsRecovery"))throw new Exception("Destination was not prepared in 0.9.2 mode");
-        same(plan.getJSONObject("productionSourceSha256"),oldPlan.getJSONObject("productionSourceSha256"),"ImageCleanup","production prompt source");
-        JSONObject terminal=json(previous.resolve("status.json"));if(!terminal.optBoolean("runFinished")||terminal.optInt("inFlightUnknown")!=0)throw new Exception("Historical API batch is not terminal");
-        Map<String,JSONObject> pages=index(plan.getJSONArray("pages"),"page"),oldPages=index(oldPlan.getJSONArray("pages"),"page");
-        for(String id:pages.keySet()){JSONObject page=pages.get(id),old=oldPages.get(id);if(old==null)throw new Exception("Missing historical page "+id);for(String key:new String[]{"sourceSha256","translationSha256","predictionSha256","width","height"})same(page,old,key,id);if(!hash(Paths.get(page.getString("sourcePage"))).equals(page.getString("sourceSha256")))throw new Exception("Source page changed "+id);}
-        Map<String,JSONObject> requests=index(json(out.resolve("cleanup_manifest.json")).getJSONArray("regions"),"id"),oldRequests=index(json(previous.resolve("cleanup_manifest.json")).getJSONArray("regions"),"id");
-        JSONArray prepared=new JSONArray(),proofs=new JSONArray();int success=0,failed=0,historicalCalls=0;
-        for(String id:requests.keySet()){
-            JSONObject input=requests.get(id),oldInput=oldRequests.get(id);if(!id.matches("[A-Za-z0-9_-]{1,80}")||oldInput==null)throw new Exception("No exact historical region "+id);
-            Path target=inside(out,"requests/"+id+"/request_result.json"),recordPath=inside(previous,"requests/"+id+"/request_result.json");if(Files.exists(target))throw new Exception("Destination already contains request evidence "+id);
-            JSONObject old=json(recordPath);for(String key:new String[]{"id","page","regionId","inputSha256","width","height","targetBoxes","protectedBoxes","sourceCrop","sourceSize"}){same(input,oldInput,key,id);same(input,old,key,id);}
-            String status=old.getString("status");if(!(status.equals("success")&&old.optBoolean("success"))&&!(status.equals("terminal_failed")&&!old.optBoolean("success")))throw new Exception("Historical region is not terminal "+id);
-            if(!old.getString("model").equals("gpt-image-2.5")||!old.getString("promptVersion").equals(ImageCleanup.PROMPT_VERSION))throw new Exception("Historical model/prompt differs "+id);
-            Path inputNew=inside(out,input.getString("inputPng")),inputOld=inside(previous,oldInput.getString("inputPng"));if(!hash(inputNew).equals(input.getString("inputSha256"))||!hash(inputOld).equals(input.getString("inputSha256")))throw new Exception("Input PNG byte SHA mismatch "+id);
-            String prompt=ImageCleanup.prompt(input.getInt("width"),input.getInt("height"),boxes(input.getJSONArray("targetBoxes")),boxes(input.getJSONArray("protectedBoxes")));Path oldPrompt=recordPath.getParent().resolve("prompt.txt");if(!hash(oldPrompt).equals(sha(prompt)))throw new Exception("Exact production prompt SHA mismatch "+id);
-            int calls=old.optInt("actualRequests",old.optInt("attemptsStarted"));if(calls<1||calls>3)throw new Exception("Historical attempt count invalid "+id);boolean successfulAttempt=false;
-            for(int i=1;i<=calls;i++){Path attempt=recordPath.getParent().resolve(String.format("attempt_%02d",i));JSONObject start=json(attempt.resolve("start.json")),end=json(attempt.resolve("result.json"));for(String key:new String[]{"id","identitySha256","inputSha256","width","height","targetBoxes","protectedBoxes","model","promptVersion"}){same(old,start,key,id);same(old,end,key,id);}if(start.getInt("attempt")!=i||end.getInt("attempt")!=i)throw new Exception("Historical attempt sequence differs "+id);if(end.optBoolean("success")&&old.optBoolean("success")&&end.optString("outputSha256").equals(old.getString("outputSha256")))successfulAttempt=true;}
-            if(Files.exists(recordPath.getParent().resolve(String.format("attempt_%02d/start.json",calls+1))))throw new Exception("Unaccounted historical attempt "+id);
-            JSONObject reuse=new JSONObject(old.toString()).put("input",inputNew.toString()).put("actualRequests",0).put("attemptsStarted",0).put("paidApiRequests",0).put("apiRequestSentThisBatch",false).put("liveRequestThisBatch",false).put("origin","historical_raw_verified").put("reused",true).put("cacheUsed",true).put("cacheSource","strict_historical_raw").put("historicalActualRequests",calls).put("reusedFrom",recordPath.toString()).put("historicalRequestResultSha256",hash(recordPath)).put("promptSha256",sha(prompt)).put("historicalPromptPath",oldPrompt.toString()).put("strictReuseVerified",true);
-            if(Files.exists(target.getParent().resolve("prompt.txt"))||Files.exists(target.getParent().resolve("historical_request_result.json")))throw new Exception("Destination already contains historical evidence "+id);
-            if(old.optBoolean("success")){Path returned=inside(previous,old.getString("returnedPath"));if(!successfulAttempt||!hash(returned).equals(old.getString("outputSha256")))throw new Exception("Historical returned raw SHA/attempt mismatch "+id);Path copy=target.getParent().resolve(returned.getFileName());if(Files.exists(copy))throw new Exception("Destination raw already exists "+id);reuse.put("historicalRawPath",returned.toString()).put("returnedPath",copy.toString()).put("output",copy.toString());success++;}else failed++;
-            historicalCalls+=calls;prepared.put(reuse);proofs.put(new JSONObject().put("id",id).put("historicalRecord",recordPath.toString()).put("historicalRecordSha256",hash(recordPath)).put("inputSha256",input.getString("inputSha256")).put("promptSha256",sha(prompt)).put("historicalStatus",status).put("historicalActualRequests",calls).put("paidApiRequests",0));
+    static String sha(String s) throws Exception {
+        return HexFormat.of()
+                .formatHex(
+                        MessageDigest.getInstance("SHA-256")
+                                .digest(s.getBytes(StandardCharsets.UTF_8)));
+    }
+
+    static void same(JSONObject expected, JSONObject actual, String key, String id)
+            throws Exception {
+        if (!expected.has(key)
+                || !actual.has(key)
+                || !expected.get(key).toString().equals(actual.get(key).toString()))
+            throw new Exception(id + " historical mismatch: " + key);
+    }
+
+    static Map<String, JSONObject> index(JSONArray array, String key) throws Exception {
+        Map<String, JSONObject> result = new LinkedHashMap<>();
+        for (Object raw : array) {
+            JSONObject row = (JSONObject) raw;
+            String id = row.get(key).toString();
+            if (result.put(id, row) != null) throw new Exception("Duplicate identity " + id);
         }
-        JSONObject report=new JSONObject().put("strictReuseVerified",true).put("checkOnly",checkOnly).put("reusedFrom",previous.toString()).put("destination",out.toString()).put("regions",prepared.length()).put("historicalSuccessfulRaw",success).put("historicalTerminalFailed",failed).put("historicalRequestsReferenced",historicalCalls).put("paidApiRequests",0).put("applicationCallsStarted",0).put("geometryExact",true).put("inputPngBytesExact",true).put("promptUtf8BytesExact",true).put("rawOutputBytesExact",true).put("evidence",proofs);
-        if(!checkOnly){for(Object raw:prepared){JSONObject result=(JSONObject)raw;Path dir=inside(out,"requests/"+result.getString("id"));Files.copy(Paths.get(result.getString("reusedFrom")),dir.resolve("historical_request_result.json"));Files.copy(Paths.get(result.getString("historicalPromptPath")),dir.resolve("prompt.txt"));if(result.optBoolean("success")){Path copy=Paths.get(result.getString("returnedPath"));Files.copy(Paths.get(result.getString("historicalRawPath")),copy);if(!hash(copy).equals(result.getString("outputSha256")))throw new Exception("Copied raw SHA differs");}save(dir.resolve("request_result.json"),result);}save(out.resolve("历史raw严格复用验证.json"),report);save(out.resolve("status.json"),new JSONObject().put("runFinished",true).put("inFlightUnknown",0).put("applicationCallsStarted",0).put("paidApiRequests",0).put("total",prepared.length()).put("succeeded",success).put("terminalFailed",failed).put("regions",prepared));}
-        System.out.println("HISTORICAL RAW "+(checkOnly?"CHECK":"REUSE")+" regions="+prepared.length()+" success="+success+" terminalFailed="+failed+" historicalRequests="+historicalCalls+" paidApiRequests=0");
+        return result;
+    }
+
+    static Path inside(Path root, String value) throws Exception {
+        Path p = resolved(root, value).toAbsolutePath().normalize();
+        if (!p.startsWith(root.toAbsolutePath().normalize()))
+            throw new Exception("Historical evidence escapes its batch: " + value);
+        return p;
+    }
+
+    public static void main(String[] args) throws Exception {
+        Path out = Paths.get(args[0]).toAbsolutePath().normalize(),
+                previous = Paths.get(args[1]).toAbsolutePath().normalize();
+        boolean checkOnly = args.length > 2 && args[2].equals("check");
+        if (out.equals(previous) || out.toString().contains("0.9.1验证"))
+            throw new Exception("Historical batch cannot be a destination");
+        JSONObject plan = json(out.resolve("translation_plan.json")),
+                oldPlan = json(previous.resolve("translation_plan.json"));
+        if (!plan.optBoolean("paragraphBoundsRecovery"))
+            throw new Exception("Destination was not prepared in 0.9.2 mode");
+        same(
+                plan.getJSONObject("productionSourceSha256"),
+                oldPlan.getJSONObject("productionSourceSha256"),
+                "ImageCleanup",
+                "production prompt source");
+        JSONObject terminal = json(previous.resolve("status.json"));
+        if (!terminal.optBoolean("runFinished") || terminal.optInt("inFlightUnknown") != 0)
+            throw new Exception("Historical API batch is not terminal");
+        Map<String, JSONObject> pages = index(plan.getJSONArray("pages"), "page"),
+                oldPages = index(oldPlan.getJSONArray("pages"), "page");
+        for (String id : pages.keySet()) {
+            JSONObject page = pages.get(id), old = oldPages.get(id);
+            if (old == null) throw new Exception("Missing historical page " + id);
+            for (String key :
+                    new String[] {
+                        "sourceSha256", "translationSha256", "predictionSha256", "width", "height"
+                    }) same(page, old, key, id);
+            if (!hash(Paths.get(page.getString("sourcePage")))
+                    .equals(page.getString("sourceSha256")))
+                throw new Exception("Source page changed " + id);
+        }
+        Map<String, JSONObject>
+                requests =
+                        index(
+                                json(out.resolve("cleanup_manifest.json")).getJSONArray("regions"),
+                                "id"),
+                oldRequests =
+                        index(
+                                json(previous.resolve("cleanup_manifest.json"))
+                                        .getJSONArray("regions"),
+                                "id");
+        JSONArray prepared = new JSONArray(), proofs = new JSONArray();
+        int success = 0, failed = 0, historicalCalls = 0;
+        for (String id : requests.keySet()) {
+            JSONObject input = requests.get(id), oldInput = oldRequests.get(id);
+            if (!id.matches("[A-Za-z0-9_-]{1,80}") || oldInput == null)
+                throw new Exception("No exact historical region " + id);
+            Path target = inside(out, "requests/" + id + "/request_result.json"),
+                    recordPath = inside(previous, "requests/" + id + "/request_result.json");
+            if (Files.exists(target))
+                throw new Exception("Destination already contains request evidence " + id);
+            JSONObject old = json(recordPath);
+            for (String key :
+                    new String[] {
+                        "id",
+                        "page",
+                        "regionId",
+                        "inputSha256",
+                        "width",
+                        "height",
+                        "targetBoxes",
+                        "protectedBoxes",
+                        "sourceCrop",
+                        "sourceSize"
+                    }) {
+                same(input, oldInput, key, id);
+                same(input, old, key, id);
+            }
+            String status = old.getString("status");
+            if (!(status.equals("success") && old.optBoolean("success"))
+                    && !(status.equals("terminal_failed") && !old.optBoolean("success")))
+                throw new Exception("Historical region is not terminal " + id);
+            if (!old.getString("model").equals("gpt-image-2.5")
+                    || !old.getString("promptVersion").equals(ImageCleanup.PROMPT_VERSION))
+                throw new Exception("Historical model/prompt differs " + id);
+            Path inputNew = inside(out, input.getString("inputPng")),
+                    inputOld = inside(previous, oldInput.getString("inputPng"));
+            if (!hash(inputNew).equals(input.getString("inputSha256"))
+                    || !hash(inputOld).equals(input.getString("inputSha256")))
+                throw new Exception("Input PNG byte SHA mismatch " + id);
+            String prompt =
+                    ImageCleanup.prompt(
+                            input.getInt("width"),
+                            input.getInt("height"),
+                            boxes(input.getJSONArray("targetBoxes")),
+                            boxes(input.getJSONArray("protectedBoxes")));
+            Path oldPrompt = recordPath.getParent().resolve("prompt.txt");
+            if (!hash(oldPrompt).equals(sha(prompt)))
+                throw new Exception("Exact production prompt SHA mismatch " + id);
+            int calls = old.optInt("actualRequests", old.optInt("attemptsStarted"));
+            if (calls < 1 || calls > 3)
+                throw new Exception("Historical attempt count invalid " + id);
+            boolean successfulAttempt = false;
+            for (int i = 1; i <= calls; i++) {
+                Path attempt = recordPath.getParent().resolve(String.format("attempt_%02d", i));
+                JSONObject start = json(attempt.resolve("start.json")),
+                        end = json(attempt.resolve("result.json"));
+                for (String key :
+                        new String[] {
+                            "id",
+                            "identitySha256",
+                            "inputSha256",
+                            "width",
+                            "height",
+                            "targetBoxes",
+                            "protectedBoxes",
+                            "model",
+                            "promptVersion"
+                        }) {
+                    same(old, start, key, id);
+                    same(old, end, key, id);
+                }
+                if (start.getInt("attempt") != i || end.getInt("attempt") != i)
+                    throw new Exception("Historical attempt sequence differs " + id);
+                if (end.optBoolean("success")
+                        && old.optBoolean("success")
+                        && end.optString("outputSha256").equals(old.getString("outputSha256")))
+                    successfulAttempt = true;
+            }
+            if (Files.exists(
+                    recordPath
+                            .getParent()
+                            .resolve(String.format("attempt_%02d/start.json", calls + 1))))
+                throw new Exception("Unaccounted historical attempt " + id);
+            JSONObject reuse =
+                    new JSONObject(old.toString())
+                            .put("input", inputNew.toString())
+                            .put("actualRequests", 0)
+                            .put("attemptsStarted", 0)
+                            .put("paidApiRequests", 0)
+                            .put("apiRequestSentThisBatch", false)
+                            .put("liveRequestThisBatch", false)
+                            .put("origin", "historical_raw_verified")
+                            .put("reused", true)
+                            .put("cacheUsed", true)
+                            .put("cacheSource", "strict_historical_raw")
+                            .put("historicalActualRequests", calls)
+                            .put("reusedFrom", recordPath.toString())
+                            .put("historicalRequestResultSha256", hash(recordPath))
+                            .put("promptSha256", sha(prompt))
+                            .put("historicalPromptPath", oldPrompt.toString())
+                            .put("strictReuseVerified", true);
+            if (Files.exists(target.getParent().resolve("prompt.txt"))
+                    || Files.exists(target.getParent().resolve("historical_request_result.json")))
+                throw new Exception("Destination already contains historical evidence " + id);
+            if (old.optBoolean("success")) {
+                Path returned = inside(previous, old.getString("returnedPath"));
+                if (!successfulAttempt || !hash(returned).equals(old.getString("outputSha256")))
+                    throw new Exception("Historical returned raw SHA/attempt mismatch " + id);
+                Path copy = target.getParent().resolve(returned.getFileName());
+                if (Files.exists(copy)) throw new Exception("Destination raw already exists " + id);
+                reuse.put("historicalRawPath", returned.toString())
+                        .put("returnedPath", copy.toString())
+                        .put("output", copy.toString());
+                success++;
+            } else failed++;
+            historicalCalls += calls;
+            prepared.put(reuse);
+            proofs.put(
+                    new JSONObject()
+                            .put("id", id)
+                            .put("historicalRecord", recordPath.toString())
+                            .put("historicalRecordSha256", hash(recordPath))
+                            .put("inputSha256", input.getString("inputSha256"))
+                            .put("promptSha256", sha(prompt))
+                            .put("historicalStatus", status)
+                            .put("historicalActualRequests", calls)
+                            .put("paidApiRequests", 0));
+        }
+        JSONObject report =
+                new JSONObject()
+                        .put("strictReuseVerified", true)
+                        .put("checkOnly", checkOnly)
+                        .put("reusedFrom", previous.toString())
+                        .put("destination", out.toString())
+                        .put("regions", prepared.length())
+                        .put("historicalSuccessfulRaw", success)
+                        .put("historicalTerminalFailed", failed)
+                        .put("historicalRequestsReferenced", historicalCalls)
+                        .put("paidApiRequests", 0)
+                        .put("applicationCallsStarted", 0)
+                        .put("geometryExact", true)
+                        .put("inputPngBytesExact", true)
+                        .put("promptUtf8BytesExact", true)
+                        .put("rawOutputBytesExact", true)
+                        .put("evidence", proofs);
+        if (!checkOnly) {
+            for (Object raw : prepared) {
+                JSONObject result = (JSONObject) raw;
+                Path dir = inside(out, "requests/" + result.getString("id"));
+                Files.copy(
+                        Paths.get(result.getString("reusedFrom")),
+                        dir.resolve("historical_request_result.json"));
+                Files.copy(
+                        Paths.get(result.getString("historicalPromptPath")),
+                        dir.resolve("prompt.txt"));
+                if (result.optBoolean("success")) {
+                    Path copy = Paths.get(result.getString("returnedPath"));
+                    Files.copy(Paths.get(result.getString("historicalRawPath")), copy);
+                    if (!hash(copy).equals(result.getString("outputSha256")))
+                        throw new Exception("Copied raw SHA differs");
+                }
+                save(dir.resolve("request_result.json"), result);
+            }
+            save(out.resolve("历史raw严格复用验证.json"), report);
+            save(
+                    out.resolve("status.json"),
+                    new JSONObject()
+                            .put("runFinished", true)
+                            .put("inFlightUnknown", 0)
+                            .put("applicationCallsStarted", 0)
+                            .put("paidApiRequests", 0)
+                            .put("total", prepared.length())
+                            .put("succeeded", success)
+                            .put("terminalFailed", failed)
+                            .put("regions", prepared));
+        }
+        System.out.println(
+                "HISTORICAL RAW "
+                        + (checkOnly ? "CHECK" : "REUSE")
+                        + " regions="
+                        + prepared.length()
+                        + " success="
+                        + success
+                        + " terminalFailed="
+                        + failed
+                        + " historicalRequests="
+                        + historicalCalls
+                        + " paidApiRequests=0");
     }
 }

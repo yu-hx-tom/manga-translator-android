@@ -1,3 +1,79 @@
 package cn.local.manga;
-import java.nio.file.*;import java.awt.image.*;import javax.imageio.*;import java.util.*;import org.json.*;import android.graphics.Rect;
-public class ThresholdProbe {public static void main(String[] args)throws Exception{Path root=Paths.get(args[0]);for(int page:new int[]{2,6}){BufferedImage im=ImageIO.read(root.resolve(String.format("tests/0.5.1验证/原始素材/样本%02d.png",page)).toFile());JSONObject p=new JSONObject(Files.readString(Paths.get("E:/codexwork/漫画检测模型评测_20260929/results/rtdetr_legacy_r50_int8_t4/"+String.format("page%02d.json",page))));List<Region> regions=RtDetrRegionsChecks.predict(im,p);for(Region r:regions)if(r.id.equals(page==2?"rt_6":"rt_5")){Rect roi=RtDetrRegions.renderBounds(r,im.getWidth(),im.getHeight());int w=roi.right-roi.left,h=roi.bottom-roi.top;int[] rgb=im.getRGB(roi.left,roi.top,w,h,null,0,w);int[][] lines=new int[r.lines.size()][4];int[] edges=new int[lines.length];for(int i=0;i<lines.length;i++){Rect b=r.lines.get(i);lines[i]=new int[]{b.left-roi.left,b.top-roi.top,b.right-roi.left,b.bottom-roi.top};edges[i]=Math.min(b.right-b.left,b.bottom-b.top);}System.out.println("lines="+Arrays.deepToString(lines));Arrays.sort(edges);int size=edges[edges.length/2];var method=ThresholdDiagnostic.class.getDeclaredMethod("findAtThreshold",int[].class,int.class,int.class,int[][].class,int.class,int.class);method.setAccessible(true);for(int threshold:new int[]{245,235,225,215,210,200,190,180,160}){var m=(ThresholdDiagnostic.Mask)method.invoke(null,rgb,w,h,lines,size,threshold);System.out.println(page+" "+r.id+" threshold="+threshold+" valid="+m.whiteBackground+" textured="+m.texturedBackground+" erase="+m.pixels);}}}}}
+
+import android.graphics.Rect;
+
+import org.json.*;
+
+import java.awt.image.*;
+import java.nio.file.*;
+import java.util.*;
+
+import javax.imageio.*;
+
+public class ThresholdProbe {
+    public static void main(String[] args) throws Exception {
+        Path root = Paths.get(args[0]);
+        for (int page : new int[] {2, 6}) {
+            BufferedImage im =
+                    ImageIO.read(
+                            root.resolve(String.format("tests/0.5.1验证/原始素材/样本%02d.png", page))
+                                    .toFile());
+            JSONObject p =
+                    new JSONObject(
+                            Files.readString(
+                                    Paths.get(
+                                            "E:/codexwork/漫画检测模型评测_20260929/results/rtdetr_legacy_r50_int8_t4/"
+                                                    + String.format("page%02d.json", page))));
+            List<Region> regions = RtDetrRegionsChecks.predict(im, p);
+            for (Region r : regions)
+                if (r.id.equals(page == 2 ? "rt_6" : "rt_5")) {
+                    Rect roi = RtDetrRegions.renderBounds(r, im.getWidth(), im.getHeight());
+                    int w = roi.right - roi.left, h = roi.bottom - roi.top;
+                    int[] rgb = im.getRGB(roi.left, roi.top, w, h, null, 0, w);
+                    int[][] lines = new int[r.lines.size()][4];
+                    int[] edges = new int[lines.length];
+                    for (int i = 0; i < lines.length; i++) {
+                        Rect b = r.lines.get(i);
+                        lines[i] =
+                                new int[] {
+                                    b.left - roi.left,
+                                    b.top - roi.top,
+                                    b.right - roi.left,
+                                    b.bottom - roi.top
+                                };
+                        edges[i] = Math.min(b.right - b.left, b.bottom - b.top);
+                    }
+                    System.out.println("lines=" + Arrays.deepToString(lines));
+                    Arrays.sort(edges);
+                    int size = edges[edges.length / 2];
+                    var method =
+                            ThresholdDiagnostic.class.getDeclaredMethod(
+                                    "findAtThreshold",
+                                    int[].class,
+                                    int.class,
+                                    int.class,
+                                    int[][].class,
+                                    int.class,
+                                    int.class);
+                    method.setAccessible(true);
+                    for (int threshold : new int[] {245, 235, 225, 215, 210, 200, 190, 180, 160}) {
+                        var m =
+                                (ThresholdDiagnostic.Mask)
+                                        method.invoke(null, rgb, w, h, lines, size, threshold);
+                        System.out.println(
+                                page
+                                        + " "
+                                        + r.id
+                                        + " threshold="
+                                        + threshold
+                                        + " valid="
+                                        + m.whiteBackground
+                                        + " textured="
+                                        + m.texturedBackground
+                                        + " erase="
+                                        + m.pixels);
+                    }
+                }
+        }
+    }
+}

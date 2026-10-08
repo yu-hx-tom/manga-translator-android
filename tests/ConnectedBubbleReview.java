@@ -1,70 +1,484 @@
 package cn.local.manga;
 
 import static cn.local.manga.BatchMangaTranslationReview.*;
+
+import org.json.*;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.nio.file.*;
 import java.util.*;
 import java.util.List;
+
 import javax.imageio.ImageIO;
-import org.json.*;
 
 /** Independent, annotated original-image regression checks. No network and no fixture mutation. */
 public final class ConnectedBubbleReview {
-    static void check(boolean condition,String message,JSONArray failures){if(!condition)failures.put(message);}
-    static void write(Path path,BufferedImage b)throws Exception{Files.createDirectories(path.getParent());ImageIO.write(b,"png",path.toFile());}
-    static int[] distances(boolean[] safe,int w,int h){
-        int[] d=new int[safe.length];for(int y=0;y<h;y++)for(int x=0;x<w;x++){int p=y*w+x;d[p]=safe[p]?1+Math.min(x==0?0:d[p-1],y==0?0:d[p-w]):0;}
-        for(int y=h-1;y>=0;y--)for(int x=w-1;x>=0;x--){int p=y*w+x;if(d[p]>0)d[p]=Math.min(d[p],1+Math.min(x==w-1?0:d[p+1],y==h-1?0:d[p+w]));}return d;
+    static void check(boolean condition, String message, JSONArray failures) {
+        if (!condition) failures.put(message);
     }
-    static BufferedImage mask(boolean[] safe,int[] d,Geometry g,int threshold){
-        int[] pixels=g.pixels.clone();for(int p=0;p<pixels.length;p++)if(safe[p]){int value=Math.min(255,d[p]*8);pixels[p]=threshold<0?(0xff000000|value<<16|value<<8|value):(d[p]>threshold?0xff36c7b1:0xffdcdcdc);}
-        BufferedImage b=image(pixels,g.w,g.h);Graphics2D a=b.createGraphics();a.setStroke(new BasicStroke(1));a.setFont(new Font("Dialog",Font.BOLD,12));for(int i=0;i<g.lines.length;i++){int[] r=g.lines[i];a.setColor(Color.RED);a.drawRect(r[0],r[1],r[2]-r[0],r[3]-r[1]);a.drawString(Integer.toString(i),r[0]+2,r[1]+12);}a.dispose();return b;
+
+    static void write(Path path, BufferedImage b) throws Exception {
+        Files.createDirectories(path.getParent());
+        ImageIO.write(b, "png", path.toFile());
     }
-    static JSONObject coreEvidence(int[] d,Geometry g){
-        int[] peaks=new int[g.lines.length];int limit=Integer.MAX_VALUE;for(int k=0;k<g.lines.length;k++){int[] r=g.lines[k];for(int y=r[1];y<r[3];y++)for(int x=r[0];x<r[2];x++)peaks[k]=Math.max(peaks[k],d[y*g.w+x]);limit=Math.min(limit,peaks[k]-2);}JSONArray steps=new JSONArray();int[] queue=new int[d.length];
-        for(int threshold=Math.max(2,g.estimate/8);threshold<=limit;threshold++){boolean[] seen=new boolean[d.length];JSONArray components=new JSONArray();for(int p=0;p<d.length;p++)if(!seen[p]&&d[p]>threshold){int head=0,tail=1;queue[0]=p;seen[p]=true;int[] hits=new int[g.lines.length],bounds={g.w,g.h,0,0};while(head<tail){int at=queue[head++],x=at%g.w,y=at/g.w;bounds[0]=Math.min(bounds[0],x);bounds[1]=Math.min(bounds[1],y);bounds[2]=Math.max(bounds[2],x+1);bounds[3]=Math.max(bounds[3],y+1);for(int k=0;k<g.lines.length;k++){int[] r=g.lines[k];if(x>=r[0]&&x<r[2]&&y>=r[1]&&y<r[3])hits[k]++;}for(int neighbor:new int[]{x>0?at-1:-1,x+1<g.w?at+1:-1,y>0?at-g.w:-1,y+1<g.h?at+g.w:-1})if(neighbor>=0&&!seen[neighbor]&&d[neighbor]>threshold){seen[neighbor]=true;queue[tail++]=neighbor;}}
-                boolean anchored=false;for(int count:hits)anchored|=count>0;if(anchored)components.put(new JSONObject().put("area",tail).put("bounds",new JSONArray(bounds)).put("lineHitPixels",new JSONArray(hits)));}steps.put(new JSONObject().put("threshold",threshold).put("anchoredCoreCount",components.length()).put("cores",components));}
-        return new JSONObject().put("sourceLineMaximumDistance",new JSONArray(peaks)).put("thresholdConvention","four-connected distance > threshold; anchored means at least one core pixel inside an original source line rectangle").put("steps",steps);
+
+    static int[] distances(boolean[] safe, int w, int h) {
+        int[] d = new int[safe.length];
+        for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++) {
+                int p = y * w + x;
+                d[p] = safe[p] ? 1 + Math.min(x == 0 ? 0 : d[p - 1], y == 0 ? 0 : d[p - w]) : 0;
+            }
+        for (int y = h - 1; y >= 0; y--)
+            for (int x = w - 1; x >= 0; x--) {
+                int p = y * w + x;
+                if (d[p] > 0)
+                    d[p] =
+                            Math.min(
+                                    d[p],
+                                    1
+                                            + Math.min(
+                                                    x == w - 1 ? 0 : d[p + 1],
+                                                    y == h - 1 ? 0 : d[p + w]));
+            }
+        return d;
     }
-    static int lobe(int[] cell,int[][] boxes,int[][] centers){
-        double x=(cell[0]+cell[2])/2.0,y=(cell[1]+cell[3])/2.0,best=Double.MAX_VALUE;int selected=-1;
-        for(int k=0;k<boxes.length;k++){int[] b=boxes[k];if(x<b[0]||y<b[1]||x>=b[2]||y>=b[3])continue;double d=Math.hypot(x-centers[k][0],y-centers[k][1]);if(d<best){best=d;selected=k;}}return selected;
+
+    static BufferedImage mask(boolean[] safe, int[] d, Geometry g, int threshold) {
+        int[] pixels = g.pixels.clone();
+        for (int p = 0; p < pixels.length; p++)
+            if (safe[p]) {
+                int value = Math.min(255, d[p] * 8);
+                pixels[p] =
+                        threshold < 0
+                                ? (0xff000000 | value << 16 | value << 8 | value)
+                                : (d[p] > threshold ? 0xff36c7b1 : 0xffdcdcdc);
+            }
+        BufferedImage b = image(pixels, g.w, g.h);
+        Graphics2D a = b.createGraphics();
+        a.setStroke(new BasicStroke(1));
+        a.setFont(new Font("Dialog", Font.BOLD, 12));
+        for (int i = 0; i < g.lines.length; i++) {
+            int[] r = g.lines[i];
+            a.setColor(Color.RED);
+            a.drawRect(r[0], r[1], r[2] - r[0], r[3] - r[1]);
+            a.drawString(Integer.toString(i), r[0] + 2, r[1] + 12);
+        }
+        a.dispose();
+        return b;
     }
-    static boolean oneCluster(int[][] cells,int step){
-        boolean[] seen=new boolean[cells.length];seen[0]=true;boolean added=true;while(added){added=false;for(int i=0;i<cells.length;i++)if(!seen[i])for(int j=0;j<cells.length;j++)if(seen[j]){int[] a=cells[i],b=cells[j];int dx=Math.max(0,Math.max(a[0]-b[2],b[0]-a[2])),dy=Math.max(0,Math.max(a[1]-b[3],b[1]-a[3]));if(Math.hypot(dx,dy)<=step*.65){seen[i]=true;added=true;break;}}}for(boolean value:seen)if(!value)return false;return true;
+
+    static JSONObject coreEvidence(int[] d, Geometry g) {
+        int[] peaks = new int[g.lines.length];
+        int limit = Integer.MAX_VALUE;
+        for (int k = 0; k < g.lines.length; k++) {
+            int[] r = g.lines[k];
+            for (int y = r[1]; y < r[3]; y++)
+                for (int x = r[0]; x < r[2]; x++) peaks[k] = Math.max(peaks[k], d[y * g.w + x]);
+            limit = Math.min(limit, peaks[k] - 2);
+        }
+        JSONArray steps = new JSONArray();
+        int[] queue = new int[d.length];
+        for (int threshold = Math.max(2, g.estimate / 8); threshold <= limit; threshold++) {
+            boolean[] seen = new boolean[d.length];
+            JSONArray components = new JSONArray();
+            for (int p = 0; p < d.length; p++)
+                if (!seen[p] && d[p] > threshold) {
+                    int head = 0, tail = 1;
+                    queue[0] = p;
+                    seen[p] = true;
+                    int[] hits = new int[g.lines.length], bounds = {g.w, g.h, 0, 0};
+                    while (head < tail) {
+                        int at = queue[head++], x = at % g.w, y = at / g.w;
+                        bounds[0] = Math.min(bounds[0], x);
+                        bounds[1] = Math.min(bounds[1], y);
+                        bounds[2] = Math.max(bounds[2], x + 1);
+                        bounds[3] = Math.max(bounds[3], y + 1);
+                        for (int k = 0; k < g.lines.length; k++) {
+                            int[] r = g.lines[k];
+                            if (x >= r[0] && x < r[2] && y >= r[1] && y < r[3]) hits[k]++;
+                        }
+                        for (int neighbor :
+                                new int[] {
+                                    x > 0 ? at - 1 : -1,
+                                    x + 1 < g.w ? at + 1 : -1,
+                                    y > 0 ? at - g.w : -1,
+                                    y + 1 < g.h ? at + g.w : -1
+                                })
+                            if (neighbor >= 0 && !seen[neighbor] && d[neighbor] > threshold) {
+                                seen[neighbor] = true;
+                                queue[tail++] = neighbor;
+                            }
+                    }
+                    boolean anchored = false;
+                    for (int count : hits) anchored |= count > 0;
+                    if (anchored)
+                        components.put(
+                                new JSONObject()
+                                        .put("area", tail)
+                                        .put("bounds", new JSONArray(bounds))
+                                        .put("lineHitPixels", new JSONArray(hits)));
+                }
+            steps.put(
+                    new JSONObject()
+                            .put("threshold", threshold)
+                            .put("anchoredCoreCount", components.length())
+                            .put("cores", components));
+        }
+        return new JSONObject()
+                .put("sourceLineMaximumDistance", new JSONArray(peaks))
+                .put(
+                        "thresholdConvention",
+                        "four-connected distance > threshold; anchored means at least one core"
+                                + " pixel inside an original source line rectangle")
+                .put("steps", steps);
     }
-    static String geometricReadback(BubbleLayout.Plan plan,int[][] lobes,int[][] centers,boolean vertical){
-        StringBuilder text=new StringBuilder();for(int group=0;group<lobes.length;group++){List<Integer> indices=new ArrayList<>();for(int i=0;i<plan.cells.length;i++)if(lobe(plan.cells[i],lobes,centers)==group)indices.add(i);int across=vertical?0:1,along=vertical?1:0;
-            indices.sort((a,b)->Integer.compare(plan.cells[a][across]+plan.cells[a][across+2],plan.cells[b][across]+plan.cells[b][across+2])*(vertical?-1:1));
-            for(int first=0;first<indices.size();){int end=first+1;int[] firstCell=plan.cells[indices.get(first)];int center=firstCell[across]+firstCell[across+2];while(end<indices.size()){int[] cell=plan.cells[indices.get(end)];if(Math.abs(cell[across]+cell[across+2]-center)>4)break;end++;}List<Integer> line=indices.subList(first,end);line.sort((a,b)->Integer.compare(plan.cells[a][along],plan.cells[b][along]));for(int index:line)text.appendCodePoint(plan.codepoints[index]);first=end;}}
+
+    static int lobe(int[] cell, int[][] boxes, int[][] centers) {
+        double x = (cell[0] + cell[2]) / 2.0,
+                y = (cell[1] + cell[3]) / 2.0,
+                best = Double.MAX_VALUE;
+        int selected = -1;
+        for (int k = 0; k < boxes.length; k++) {
+            int[] b = boxes[k];
+            if (x < b[0] || y < b[1] || x >= b[2] || y >= b[3]) continue;
+            double d = Math.hypot(x - centers[k][0], y - centers[k][1]);
+            if (d < best) {
+                best = d;
+                selected = k;
+            }
+        }
+        return selected;
+    }
+
+    static boolean oneCluster(int[][] cells, int step) {
+        boolean[] seen = new boolean[cells.length];
+        seen[0] = true;
+        boolean added = true;
+        while (added) {
+            added = false;
+            for (int i = 0; i < cells.length; i++)
+                if (!seen[i])
+                    for (int j = 0; j < cells.length; j++)
+                        if (seen[j]) {
+                            int[] a = cells[i], b = cells[j];
+                            int dx = Math.max(0, Math.max(a[0] - b[2], b[0] - a[2])),
+                                    dy = Math.max(0, Math.max(a[1] - b[3], b[1] - a[3]));
+                            if (Math.hypot(dx, dy) <= step * .65) {
+                                seen[i] = true;
+                                added = true;
+                                break;
+                            }
+                        }
+        }
+        for (boolean value : seen) if (!value) return false;
+        return true;
+    }
+
+    static String geometricReadback(
+            BubbleLayout.Plan plan, int[][] lobes, int[][] centers, boolean vertical) {
+        StringBuilder text = new StringBuilder();
+        for (int group = 0; group < lobes.length; group++) {
+            List<Integer> indices = new ArrayList<>();
+            for (int i = 0; i < plan.cells.length; i++)
+                if (lobe(plan.cells[i], lobes, centers) == group) indices.add(i);
+            int across = vertical ? 0 : 1, along = vertical ? 1 : 0;
+            indices.sort(
+                    (a, b) ->
+                            Integer.compare(
+                                            plan.cells[a][across] + plan.cells[a][across + 2],
+                                            plan.cells[b][across] + plan.cells[b][across + 2])
+                                    * (vertical ? -1 : 1));
+            for (int first = 0; first < indices.size(); ) {
+                int end = first + 1;
+                int[] firstCell = plan.cells[indices.get(first)];
+                int center = firstCell[across] + firstCell[across + 2];
+                while (end < indices.size()) {
+                    int[] cell = plan.cells[indices.get(end)];
+                    if (Math.abs(cell[across] + cell[across + 2] - center) > 4) break;
+                    end++;
+                }
+                List<Integer> line = indices.subList(first, end);
+                line.sort((a, b) -> Integer.compare(plan.cells[a][along], plan.cells[b][along]));
+                for (int index : line) text.appendCodePoint(plan.codepoints[index]);
+                first = end;
+            }
+        }
         return text.toString();
     }
-    static void panel(Path out,BufferedImage original,BufferedImage clean,BufferedImage translated,BufferedImage distances,JSONObject result)throws Exception{
-        int scale=Math.min(3,Math.max(1,700/original.getHeight())),w=original.getWidth()*scale,h=original.getHeight()*scale;
-        BufferedImage b=new BufferedImage(w*4,h+35,BufferedImage.TYPE_INT_RGB);Graphics2D a=b.createGraphics();a.setColor(Color.WHITE);a.fillRect(0,0,b.getWidth(),b.getHeight());a.setColor(Color.BLACK);a.setFont(new Font("Microsoft YaHei",Font.PLAIN,16));a.drawString(result.getString("id")+"  font="+result.optInt("font")+"  failures="+result.getJSONArray("failures").length()+"   原图 / 去字 / 本段中文 / 距离场与原行",8,24);a.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);BufferedImage[] images={original,clean,translated,distances};for(int i=0;i<images.length;i++)a.drawImage(images[i],i*w,35,w,h,null);a.dispose();write(out,b);b.flush();
+
+    static void panel(
+            Path out,
+            BufferedImage original,
+            BufferedImage clean,
+            BufferedImage translated,
+            BufferedImage distances,
+            JSONObject result)
+            throws Exception {
+        int scale = Math.min(3, Math.max(1, 700 / original.getHeight())),
+                w = original.getWidth() * scale,
+                h = original.getHeight() * scale;
+        BufferedImage b = new BufferedImage(w * 4, h + 35, BufferedImage.TYPE_INT_RGB);
+        Graphics2D a = b.createGraphics();
+        a.setColor(Color.WHITE);
+        a.fillRect(0, 0, b.getWidth(), b.getHeight());
+        a.setColor(Color.BLACK);
+        a.setFont(new Font("Microsoft YaHei", Font.PLAIN, 16));
+        a.drawString(
+                result.getString("id")
+                        + "  font="
+                        + result.optInt("font")
+                        + "  failures="
+                        + result.getJSONArray("failures").length()
+                        + "   原图 / 去字 / 本段中文 / 距离场与原行",
+                8,
+                24);
+        a.setRenderingHint(
+                RenderingHints.KEY_INTERPOLATION,
+                RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+        BufferedImage[] images = {original, clean, translated, distances};
+        for (int i = 0; i < images.length; i++) a.drawImage(images[i], i * w, 35, w, h, null);
+        a.dispose();
+        write(out, b);
+        b.flush();
     }
-    public static void main(String[] args)throws Exception{
-        Path project=Paths.get(args[0]),baseline=Paths.get(args[1]),out=Paths.get(args[2]);JSONObject frozen=json(baseline.resolve("translation_plan.json")),annotations=json(project.resolve("tests/connected_bubble_expectations.json"));JSONArray records=new JSONArray();int failed=0;
-        for(Object raw:annotations.getJSONArray("cases")){JSONObject expected=(JSONObject)raw;String id=expected.getString("id");JSONObject page=null,row=null;for(Object p:frozen.getJSONArray("pages"))for(Object r:((JSONObject)p).getJSONArray("regions"))if(((JSONObject)r).getString("id").equals(id)){page=(JSONObject)p;row=(JSONObject)r;}
-            if(row==null)throw new Exception("Missing original fixture "+id);Path pageFile=Paths.get(page.getString("sourcePage")),sourceDir=pageFile.getParent();
-            if(!hash(pageFile).equals(page.getString("sourceSha256"))||!hash(sourceDir.resolve("检测原始结果.json")).equals(page.getString("predictionSha256"))||!hash(sourceDir.resolve("真实译文.json")).equals(page.getString("translationSha256")))throw new Exception("Immutable original evidence changed "+id);
-            BufferedImage source=ImageIO.read(pageFile.toFile());List<Region> regions=predict(source,json(sourceDir.resolve("检测原始结果.json")));Region region=null;for(Region r:regions)if(r.id.equals(row.getString("regionId")))region=r;if(region==null)throw new Exception("Prediction geometry lost "+id);Geometry g=new Geometry(source,region);
-            if(!Arrays.equals(box(g.roi),ints(row.getJSONArray("renderRoi"))))throw new Exception("Render ROI changed "+id);if(!Arrays.deepEquals(g.lines,boxes(row.getJSONArray("clippedLines"))))throw new Exception("Original lines changed "+id);
-            int[][] foreign=RtDetrRegions.foreignLines(regions,region.id,g.roi.left,g.roi.top);boolean[] safe=WhiteBubbleCleaner.excludeForeign(g.mask.interior,g.w,g.h,foreign),erase=WhiteBubbleCleaner.excludeForeign(g.mask.erase,g.w,g.h,foreign);int[] d=distances(safe,g.w,g.h),cleaned=g.pixels.clone();for(int p=0;p<cleaned.length;p++)if(erase[p])cleaned[p]=g.mask.fillColors==null?0xffffffff:g.mask.fillColors[p];
-            BufferedImage original=image(g.pixels,g.w,g.h),clean=image(cleaned,g.w,g.h),translated=image(cleaned,g.w,g.h),distance=mask(safe,d,g,-1);JSONArray failures=new JSONArray();JSONObject result=new JSONObject().put("id",id).put("font",0).put("failures",failures).put("expected",expected).put("sourcePageSha256",hash(pageFile)).put("renderRoi",new JSONArray(box(g.roi))).put("sourceLines",new JSONArray(g.lines)).put("sourceFont",g.estimate).put("zh",row.getString("zh"));
-            check(g.mask.whiteBackground&&g.mask.backgroundKind==WhiteBubbleCleaner.BackgroundKind.PLAIN_PAPER,"original candidate lost verified paper route",failures);
-            try{BubbleLayout.Plan p=BubbleLayout.plan(row.getString("zh"),safe,g.w,g.h,region.vertical,g.estimate,g.lines);result.put("font",p.font).put("cells",new JSONArray(p.cells)).put("codepoints",new JSONArray(p.codepoints));fontEvidence(result,p);
-                String normalized=row.getString("zh").replaceAll("\\s+","");if(region.vertical)normalized=normalized.replace('「','﹁').replace('」','﹂').replace('“','﹁').replace('”','﹂').replace('—','丨').replace('…','︙');check(Arrays.equals(normalized.codePoints().toArray(),p.codepoints),"translation character content or order changed",failures);
-                check(p.cells.length==p.codepoints.length,"glyph count mismatch",failures);float leastLetterFont=Float.MAX_VALUE;for(int i=0;i<p.codepoints.length;i++)if(Character.isLetterOrDigit(p.codepoints[i]))leastLetterFont=Math.min(leastLetterFont,cellFont(p,i));if(leastLetterFont==Float.MAX_VALUE)leastLetterFont=p.font;result.put("leastNonPunctuationFont",leastLetterFont);check(leastLetterFont>=expected.getInt("minFont"),"readable non-punctuation font floor "+expected.getInt("minFont")+" not reached",failures);check(!BubbleLayout.touchesForeignLines(p,foreign),"foreign paragraph overlapped",failures);
-                int[][] lobes=boxes(expected.getJSONArray("lobes"));int[][] centers=new int[lobes.length][2];for(int k=0;k<centers.length;k++){centers[k][0]=expected.getJSONArray("centers").getJSONArray(k).getInt(0);centers[k][1]=expected.getJSONArray("centers").getJSONArray(k).getInt(1);}int[] counts=new int[lobes.length];JSONArray assignments=new JSONArray();int prior=-1;boolean pixelsSafe=true,overlap=false,ordered=true,outside=false;
-                for(int i=0;i<p.cells.length;i++){int[] c=p.cells[i];int owner=lobe(c,lobes,centers);assignments.put(owner);if(owner<0)outside=true;else{counts[owner]++;if(owner<prior)ordered=false;prior=owner;}for(int y=c[1];y<c[3];y++)for(int x=c[0];x<c[2];x++)if(x<0||y<0||x>=g.w||y>=g.h||!safe[y*g.w+x])pixelsSafe=false;for(int j=0;j<i;j++){int[] b=p.cells[j];if(c[0]<b[2]&&c[2]>b[0]&&c[1]<b[3]&&c[3]>b[1])overlap=true;}}
-                check(pixelsSafe,"cell leaves independently checked safe pixels",failures);check(!overlap,"translated cells overlap",failures);check(!outside,"translation escaped annotated original balloons into unrelated white area",failures);check(ordered,"original balloon reading order reversed",failures);for(int k=0;k<counts.length;k++)check(counts[k]>0,"original balloon "+k+" left empty",failures);if(expected.optBoolean("singleCluster"))check(oneCluster(p.cells,p.step),"ordinary single balloon split into remote text clusters",failures);for(int k=0;k<expected.optInt("firstLobePrefix");k++)check(assignments.getInt(k)==0,"introductory phrase left its original first balloon",failures);String readback=geometricReadback(p,lobes,centers,region.vertical);result.put("geometricReadback",readback);check(readback.equals(normalized),"geometric reading of actual glyph boxes changes the original character sequence",failures);result.put("lobeGlyphCounts",new JSONArray(counts)).put("lobeSequence",assignments);BufferedImage ink=new BufferedImage(g.w,g.h,BufferedImage.TYPE_INT_ARGB);BatchMangaTranslationReview.drawLocal(ink,p);JSONArray glyphInk=new JSONArray();for(int i=0;i<p.cells.length;i++){int[] c=p.cells[i];int visible=0;for(int y=c[1];y<c[3];y++)for(int x=c[0];x<c[2];x++)if((ink.getRGB(x,y)>>>24)>32)visible++;glyphInk.put(visible);check(visible>0,"glyph "+i+" became invisible after cell clipping",failures);}result.put("visibleInkPixelsPerGlyph",glyphInk);ink.flush();BatchMangaTranslationReview.drawLocal(translated,p);
-            }catch(Exception error){failures.put(error.toString());}
-            Path dir=out.resolve(id);save(dir.resolve("逐级内缩核心.json"),coreEvidence(d,g));write(dir.resolve("原图ROI.png"),original);write(dir.resolve("生产仅去字ROI.png"),clean);write(dir.resolve("本段实际中文ROI.png"),translated);write(dir.resolve("距离场_原行红框.png"),distance);for(int threshold:new int[]{Math.max(2,g.estimate/8),Math.max(3,g.estimate/4),Math.max(4,g.estimate/3)}){BufferedImage core=mask(safe,d,g,threshold);write(dir.resolve("白域内缩_"+threshold+"px.png"),core);core.flush();}
-            result.put("passed",failures.length()==0);if(failures.length()>0)failed++;save(dir.resolve("结果.json"),result);panel(dir.resolve("原图_去字_中文_距离场.png"),original,clean,translated,distance,result);records.put(result);source.flush();original.flush();clean.flush();translated.flush();distance.flush();System.out.println("CONNECTED "+id+" font="+result.getInt("font")+" "+failures);
+
+    public static void main(String[] args) throws Exception {
+        Path project = Paths.get(args[0]), baseline = Paths.get(args[1]), out = Paths.get(args[2]);
+        JSONObject frozen = json(baseline.resolve("translation_plan.json")),
+                annotations = json(project.resolve("tests/connected_bubble_expectations.json"));
+        JSONArray records = new JSONArray();
+        int failed = 0;
+        for (Object raw : annotations.getJSONArray("cases")) {
+            JSONObject expected = (JSONObject) raw;
+            String id = expected.getString("id");
+            JSONObject page = null, row = null;
+            for (Object p : frozen.getJSONArray("pages"))
+                for (Object r : ((JSONObject) p).getJSONArray("regions"))
+                    if (((JSONObject) r).getString("id").equals(id)) {
+                        page = (JSONObject) p;
+                        row = (JSONObject) r;
+                    }
+            if (row == null) throw new Exception("Missing original fixture " + id);
+            Path pageFile = Paths.get(page.getString("sourcePage")),
+                    sourceDir = pageFile.getParent();
+            if (!hash(pageFile).equals(page.getString("sourceSha256"))
+                    || !hash(sourceDir.resolve("检测原始结果.json"))
+                            .equals(page.getString("predictionSha256"))
+                    || !hash(sourceDir.resolve("真实译文.json"))
+                            .equals(page.getString("translationSha256")))
+                throw new Exception("Immutable original evidence changed " + id);
+            BufferedImage source = ImageIO.read(pageFile.toFile());
+            List<Region> regions = predict(source, json(sourceDir.resolve("检测原始结果.json")));
+            Region region = null;
+            for (Region r : regions) if (r.id.equals(row.getString("regionId"))) region = r;
+            if (region == null) throw new Exception("Prediction geometry lost " + id);
+            Geometry g = new Geometry(source, region);
+            if (!Arrays.equals(box(g.roi), ints(row.getJSONArray("renderRoi"))))
+                throw new Exception("Render ROI changed " + id);
+            if (!Arrays.deepEquals(g.lines, boxes(row.getJSONArray("clippedLines"))))
+                throw new Exception("Original lines changed " + id);
+            int[][] foreign = RtDetrRegions.foreignLines(regions, region.id, g.roi.left, g.roi.top);
+            boolean[] safe = WhiteBubbleCleaner.excludeForeign(g.mask.interior, g.w, g.h, foreign),
+                    erase = WhiteBubbleCleaner.excludeForeign(g.mask.erase, g.w, g.h, foreign);
+            int[] d = distances(safe, g.w, g.h), cleaned = g.pixels.clone();
+            for (int p = 0; p < cleaned.length; p++)
+                if (erase[p])
+                    cleaned[p] = g.mask.fillColors == null ? 0xffffffff : g.mask.fillColors[p];
+            BufferedImage original = image(g.pixels, g.w, g.h),
+                    clean = image(cleaned, g.w, g.h),
+                    translated = image(cleaned, g.w, g.h),
+                    distance = mask(safe, d, g, -1);
+            JSONArray failures = new JSONArray();
+            JSONObject result =
+                    new JSONObject()
+                            .put("id", id)
+                            .put("font", 0)
+                            .put("failures", failures)
+                            .put("expected", expected)
+                            .put("sourcePageSha256", hash(pageFile))
+                            .put("renderRoi", new JSONArray(box(g.roi)))
+                            .put("sourceLines", new JSONArray(g.lines))
+                            .put("sourceFont", g.estimate)
+                            .put("zh", row.getString("zh"));
+            check(
+                    g.mask.whiteBackground
+                            && g.mask.backgroundKind
+                                    == WhiteBubbleCleaner.BackgroundKind.PLAIN_PAPER,
+                    "original candidate lost verified paper route",
+                    failures);
+            try {
+                BubbleLayout.Plan p =
+                        BubbleLayout.plan(
+                                row.getString("zh"),
+                                safe,
+                                g.w,
+                                g.h,
+                                region.vertical,
+                                g.estimate,
+                                g.lines);
+                result.put("font", p.font)
+                        .put("cells", new JSONArray(p.cells))
+                        .put("codepoints", new JSONArray(p.codepoints));
+                fontEvidence(result, p);
+                String normalized = row.getString("zh").replaceAll("\\s+", "");
+                if (region.vertical)
+                    normalized =
+                            normalized
+                                    .replace('「', '﹁')
+                                    .replace('」', '﹂')
+                                    .replace('“', '﹁')
+                                    .replace('”', '﹂')
+                                    .replace('—', '丨')
+                                    .replace('…', '︙');
+                check(
+                        Arrays.equals(normalized.codePoints().toArray(), p.codepoints),
+                        "translation character content or order changed",
+                        failures);
+                check(p.cells.length == p.codepoints.length, "glyph count mismatch", failures);
+                float leastLetterFont = Float.MAX_VALUE;
+                for (int i = 0; i < p.codepoints.length; i++)
+                    if (Character.isLetterOrDigit(p.codepoints[i]))
+                        leastLetterFont = Math.min(leastLetterFont, cellFont(p, i));
+                if (leastLetterFont == Float.MAX_VALUE) leastLetterFont = p.font;
+                result.put("leastNonPunctuationFont", leastLetterFont);
+                check(
+                        leastLetterFont >= expected.getInt("minFont"),
+                        "readable non-punctuation font floor "
+                                + expected.getInt("minFont")
+                                + " not reached",
+                        failures);
+                check(
+                        !BubbleLayout.touchesForeignLines(p, foreign),
+                        "foreign paragraph overlapped",
+                        failures);
+                int[][] lobes = boxes(expected.getJSONArray("lobes"));
+                int[][] centers = new int[lobes.length][2];
+                for (int k = 0; k < centers.length; k++) {
+                    centers[k][0] = expected.getJSONArray("centers").getJSONArray(k).getInt(0);
+                    centers[k][1] = expected.getJSONArray("centers").getJSONArray(k).getInt(1);
+                }
+                int[] counts = new int[lobes.length];
+                JSONArray assignments = new JSONArray();
+                int prior = -1;
+                boolean pixelsSafe = true, overlap = false, ordered = true, outside = false;
+                for (int i = 0; i < p.cells.length; i++) {
+                    int[] c = p.cells[i];
+                    int owner = lobe(c, lobes, centers);
+                    assignments.put(owner);
+                    if (owner < 0) outside = true;
+                    else {
+                        counts[owner]++;
+                        if (owner < prior) ordered = false;
+                        prior = owner;
+                    }
+                    for (int y = c[1]; y < c[3]; y++)
+                        for (int x = c[0]; x < c[2]; x++)
+                            if (x < 0 || y < 0 || x >= g.w || y >= g.h || !safe[y * g.w + x])
+                                pixelsSafe = false;
+                    for (int j = 0; j < i; j++) {
+                        int[] b = p.cells[j];
+                        if (c[0] < b[2] && c[2] > b[0] && c[1] < b[3] && c[3] > b[1])
+                            overlap = true;
+                    }
+                }
+                check(pixelsSafe, "cell leaves independently checked safe pixels", failures);
+                check(!overlap, "translated cells overlap", failures);
+                check(
+                        !outside,
+                        "translation escaped annotated original balloons into unrelated white area",
+                        failures);
+                check(ordered, "original balloon reading order reversed", failures);
+                for (int k = 0; k < counts.length; k++)
+                    check(counts[k] > 0, "original balloon " + k + " left empty", failures);
+                if (expected.optBoolean("singleCluster"))
+                    check(
+                            oneCluster(p.cells, p.step),
+                            "ordinary single balloon split into remote text clusters",
+                            failures);
+                for (int k = 0; k < expected.optInt("firstLobePrefix"); k++)
+                    check(
+                            assignments.getInt(k) == 0,
+                            "introductory phrase left its original first balloon",
+                            failures);
+                String readback = geometricReadback(p, lobes, centers, region.vertical);
+                result.put("geometricReadback", readback);
+                check(
+                        readback.equals(normalized),
+                        "geometric reading of actual glyph boxes changes the original character"
+                                + " sequence",
+                        failures);
+                result.put("lobeGlyphCounts", new JSONArray(counts))
+                        .put("lobeSequence", assignments);
+                BufferedImage ink = new BufferedImage(g.w, g.h, BufferedImage.TYPE_INT_ARGB);
+                BatchMangaTranslationReview.drawLocal(ink, p);
+                JSONArray glyphInk = new JSONArray();
+                for (int i = 0; i < p.cells.length; i++) {
+                    int[] c = p.cells[i];
+                    int visible = 0;
+                    for (int y = c[1]; y < c[3]; y++)
+                        for (int x = c[0]; x < c[2]; x++)
+                            if ((ink.getRGB(x, y) >>> 24) > 32) visible++;
+                    glyphInk.put(visible);
+                    check(
+                            visible > 0,
+                            "glyph " + i + " became invisible after cell clipping",
+                            failures);
+                }
+                result.put("visibleInkPixelsPerGlyph", glyphInk);
+                ink.flush();
+                BatchMangaTranslationReview.drawLocal(translated, p);
+            } catch (Exception error) {
+                failures.put(error.toString());
+            }
+            Path dir = out.resolve(id);
+            save(dir.resolve("逐级内缩核心.json"), coreEvidence(d, g));
+            write(dir.resolve("原图ROI.png"), original);
+            write(dir.resolve("生产仅去字ROI.png"), clean);
+            write(dir.resolve("本段实际中文ROI.png"), translated);
+            write(dir.resolve("距离场_原行红框.png"), distance);
+            for (int threshold :
+                    new int[] {
+                        Math.max(2, g.estimate / 8),
+                        Math.max(3, g.estimate / 4),
+                        Math.max(4, g.estimate / 3)
+                    }) {
+                BufferedImage core = mask(safe, d, g, threshold);
+                write(dir.resolve("白域内缩_" + threshold + "px.png"), core);
+                core.flush();
+            }
+            result.put("passed", failures.length() == 0);
+            if (failures.length() > 0) failed++;
+            save(dir.resolve("结果.json"), result);
+            panel(dir.resolve("原图_去字_中文_距离场.png"), original, clean, translated, distance, result);
+            records.put(result);
+            source.flush();
+            original.flush();
+            clean.flush();
+            translated.flush();
+            distance.flush();
+            System.out.println(
+                    "CONNECTED " + id + " font=" + result.getInt("font") + " " + failures);
         }
-        save(out.resolve("结果.json"),new JSONObject().put("productionSourceSha256",hashes(project)).put("hostRendererSha256",hash(project.resolve("tests/BatchMangaTranslationReview.java"))).put("annotationSha256",hash(project.resolve("tests/connected_bubble_expectations.json"))).put("frozenPlanSha256",hash(baseline.resolve("translation_plan.json"))).put("cases",records).put("passed",failed==0).put("caseCount",records.length()).put("failedCases",failed).put("apiCalls",0).put("androidCanvasVerified",false));
-        if(failed>0)throw new AssertionError(failed+" connected balloon fixtures failed; evidence saved");
+        save(
+                out.resolve("结果.json"),
+                new JSONObject()
+                        .put("productionSourceSha256", hashes(project))
+                        .put(
+                                "hostRendererSha256",
+                                hash(project.resolve("tests/BatchMangaTranslationReview.java")))
+                        .put(
+                                "annotationSha256",
+                                hash(project.resolve("tests/connected_bubble_expectations.json")))
+                        .put("frozenPlanSha256", hash(baseline.resolve("translation_plan.json")))
+                        .put("cases", records)
+                        .put("passed", failed == 0)
+                        .put("caseCount", records.length())
+                        .put("failedCases", failed)
+                        .put("apiCalls", 0)
+                        .put("androidCanvasVerified", false));
+        if (failed > 0)
+            throw new AssertionError(failed + " connected balloon fixtures failed; evidence saved");
     }
 }

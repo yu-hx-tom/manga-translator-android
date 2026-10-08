@@ -1,25 +1,19 @@
 package cn.local.manga;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Insets;
-import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -31,10 +25,32 @@ public final class MainActivity extends ShellActivity {
     private static final int IMPORT = 31;
     private static final int INK = Ui.INK, MUTED = Ui.MUTED, ACCENT = Ui.ACCENT;
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
-    private final java.util.concurrent.atomic.AtomicInteger activeWorkers=new java.util.concurrent.atomic.AtomicInteger();
+    private final java.util.concurrent.atomic.AtomicInteger activeWorkers =
+            new java.util.concurrent.atomic.AtomicInteger();
     private String settling;
-    private Future<?> submit(Runnable job){final int token=generation;return worker.submit(()->{activeWorkers.incrementAndGet();try{if(token==generation&&!isDestroyed())job.run();}finally{activeWorkers.decrementAndGet();runOnUiThread(this::settle);}});}
-    private void settle(){if(settling!=null&&activeWorkers.get()==0){String value=settling;settling=null;TranslationTaskManager.done("single",value);}}
+
+    private Future<?> submit(Runnable job) {
+        final int token = generation;
+        return worker.submit(
+                () -> {
+                    activeWorkers.incrementAndGet();
+                    try {
+                        if (token == generation && !isDestroyed()) job.run();
+                    } finally {
+                        activeWorkers.decrementAndGet();
+                        runOnUiThread(this::settle);
+                    }
+                });
+    }
+
+    private void settle() {
+        if (settling != null && activeWorkers.get() == 0) {
+            String value = settling;
+            settling = null;
+            TranslationTaskManager.done("single", value);
+        }
+    }
+
     private final List<View> lockedWhileBusy = new ArrayList<>();
     private TranslationEngine engine;
     private AppSettings settings;
@@ -42,9 +58,18 @@ public final class MainActivity extends ShellActivity {
     private ResultView preview;
     private TextView status, selectionInfo, imageInfo;
     private ProgressBar progress;
-    private Button detectButton, translateButton, compareButton, saveImageButton, reviewButton, cancelButton, transcriptButton, workbenchButton;
+    private Button detectButton,
+            translateButton,
+            compareButton,
+            saveImageButton,
+            reviewButton,
+            cancelButton,
+            transcriptButton,
+            workbenchButton;
+
     /** Staged workbench draft of the shown translation; filed only if the user opens 编辑与导出. */
     private java.io.File draft;
+
     private TranslationTranscript transcript;
     private LinearLayout reviewActions, statusCard;
     private GradientDrawable statusBackground;
@@ -53,7 +78,8 @@ public final class MainActivity extends ShellActivity {
     private int generation = 0;
     private boolean busy = false, showingOriginal = true, reviewed = false;
 
-    @Override public void onCreate(Bundle bundle) {
+    @Override
+    public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         engine = new TranslationEngine(getApplicationContext());
         settings = AppSettings.load(this);
@@ -63,8 +89,11 @@ public final class MainActivity extends ShellActivity {
     }
 
     private void buildUi() {
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+        getWindow()
+                .getDecorView()
+                .setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                                | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         LinearLayout shell = column();
         shell.setBackgroundColor(Ui.BG);
         Ui.insets(shell, 0, 0, 0, 0, false);
@@ -78,8 +107,18 @@ public final class MainActivity extends ShellActivity {
         shell.addView(scroll, new LinearLayout.LayoutParams(-1, -1));
         setContentView(shell);
 
-        page.addView(Ui.appBar(this,Icons.iconButton(this,R.drawable.ic_arrow_back,"返回",v->finish()),"分享图片翻译",null,Icons.iconButton(this,R.drawable.ic_settings,"设置",v->startActivity(new Intent(this,SettingsActivity.class)))));
-        LinearLayout imageCard=card(page,"分享来的图片","本地检测、确认选区、翻译并保存。",8);
+        page.addView(
+                Ui.appBar(
+                        this,
+                        Icons.iconButton(this, R.drawable.ic_arrow_back, "返回", v -> finish()),
+                        "分享图片翻译",
+                        null,
+                        Icons.iconButton(
+                                this,
+                                R.drawable.ic_settings,
+                                "设置",
+                                v -> startActivity(new Intent(this, SettingsActivity.class)))));
+        LinearLayout imageCard = card(page, "分享来的图片", "本地检测、确认选区、翻译并保存。", 8);
         imageInfo = label("从相册、文件管理器或其他应用分享图片到这里", 12, MUTED);
         imageCard.addView(imageInfo, space(0, 0, 0, 8));
         preview = new ResultView(this);
@@ -91,31 +130,47 @@ public final class MainActivity extends ShellActivity {
         reviewActions = row();
         Button all = button("全选", false, v -> preview.selectAll(true));
         Button none = button("全不选", false, v -> preview.selectAll(false));
-        addEqual(reviewActions, all, 0); addEqual(reviewActions, none, 8);
-        lockedWhileBusy.add(all); lockedWhileBusy.add(none);
+        addEqual(reviewActions, all, 0);
+        addEqual(reviewActions, none, 8);
+        lockedWhileBusy.add(all);
+        lockedWhileBusy.add(none);
         imageCard.addView(reviewActions);
         reviewActions.setVisibility(View.GONE);
         LinearLayout actionRow = row();
         detectButton = button("1  检测文字", false, v -> detect());
         translateButton = button("2  翻译选区", true, v -> translate());
-        addEqual(actionRow, detectButton, 0); addEqual(actionRow, translateButton, 8);
+        addEqual(actionRow, detectButton, 0);
+        addEqual(actionRow, translateButton, 8);
         imageCard.addView(actionRow, space(0, 8, 0, 0));
         LinearLayout resultRow = row();
         compareButton = button("查看原图", false, v -> compare());
         saveImageButton = button("保存译图", false, v -> saveImage());
-        addEqual(resultRow, compareButton, 0); addEqual(resultRow, saveImageButton, 8);
+        addEqual(resultRow, compareButton, 0);
+        addEqual(resultRow, saveImageButton, 8);
         imageCard.addView(resultRow, space(0, 6, 0, 0));
-        transcriptButton=Icons.iconTextButton(this,R.drawable.ic_subtitles,"识读原文 / 译文",Ui.OUTLINED,v->TranscriptDialog.show(this,transcript));
-        imageCard.addView(transcriptButton,space(0,5,0,0));
-        workbenchButton=Icons.iconTextButton(this,R.drawable.ic_edit_note,"编辑与导出",Ui.TONAL,v->openWorkbench());
-        imageCard.addView(workbenchButton,space(0,5,0,0));
-        reviewButton = button("调整选区", false, v -> {
-            preview.setBitmap(original);
-            preview.setShowBoxes(true);
-            showingOriginal = true;
-            reviewed = true;
-            updateSelection();
-        });
+        transcriptButton =
+                Icons.iconTextButton(
+                        this,
+                        R.drawable.ic_subtitles,
+                        "识读原文 / 译文",
+                        Ui.OUTLINED,
+                        v -> TranscriptDialog.show(this, transcript));
+        imageCard.addView(transcriptButton, space(0, 5, 0, 0));
+        workbenchButton =
+                Icons.iconTextButton(
+                        this, R.drawable.ic_edit_note, "编辑与导出", Ui.TONAL, v -> openWorkbench());
+        imageCard.addView(workbenchButton, space(0, 5, 0, 0));
+        reviewButton =
+                button(
+                        "调整选区",
+                        false,
+                        v -> {
+                            preview.setBitmap(original);
+                            preview.setShowBoxes(true);
+                            showingOriginal = true;
+                            reviewed = true;
+                            updateSelection();
+                        });
         imageCard.addView(reviewButton, space(0, 5, 0, 0));
 
         statusCard = column();
@@ -127,7 +182,9 @@ public final class MainActivity extends ShellActivity {
         page.addView(statusCard, space(0, 14, 0, 0));
         status = new Ui.StatusText(this);
         status.setText("接收分享的图片。文字检测无需联网。");
-        status.setTextSize(14); status.setTextColor(INK); status.setLineSpacing(dp(3), 1f);
+        status.setTextSize(14);
+        status.setTextColor(INK);
+        status.setLineSpacing(dp(3), 1f);
         status.setTextIsSelectable(true);
         statusCard.addView(status);
         progress = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
@@ -139,7 +196,10 @@ public final class MainActivity extends ShellActivity {
         cancelButton.setVisibility(View.GONE);
         statusCard.addView(cancelButton, space(0, 6, 0, 0));
 
-        Icons.setIcon(detectButton,R.drawable.ic_document_scanner,Ui.ACCENT,18);Icons.setIcon(translateButton,R.drawable.ic_translate,Ui.SURFACE,18);Icons.setIcon(compareButton,R.drawable.ic_compare,Ui.ACCENT,18);Icons.setIcon(saveImageButton,R.drawable.ic_ios_share,Ui.ACCENT,18);
+        Icons.setIcon(detectButton, R.drawable.ic_document_scanner, Ui.ACCENT, 18);
+        Icons.setIcon(translateButton, R.drawable.ic_translate, Ui.SURFACE, 18);
+        Icons.setIcon(compareButton, R.drawable.ic_compare, Ui.ACCENT, 18);
+        Icons.setIcon(saveImageButton, R.drawable.ic_ios_share, Ui.ACCENT, 18);
         updateControls();
         Ui.enter(page, 40);
     }
@@ -147,133 +207,228 @@ public final class MainActivity extends ShellActivity {
     private void receiveImage(Intent intent) {
         if (intent == null) return;
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
-            Uri uri = Build.VERSION.SDK_INT >= 33 ? intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri.class)
-                    : intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            Uri uri =
+                    Build.VERSION.SDK_INT >= 33
+                            ? intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri.class)
+                            : intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if (uri != null && "content".equals(uri.getScheme())) importImage(uri, null);
         } else if (intent.hasExtra("imagePath")) {
             importImage(null, intent.getStringExtra("imagePath"));
         } else if (intent.hasExtra("imageUri")) {
             String value = intent.getStringExtra("imageUri");
-            if (value != null && "content".equals(Uri.parse(value).getScheme())) importImage(Uri.parse(value), null);
+            if (value != null && "content".equals(Uri.parse(value).getScheme()))
+                importImage(Uri.parse(value), null);
         }
     }
 
-    @Override protected void onNewIntent(Intent intent) {
+    @Override
+    protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
         if (busy) cancelTask();
         receiveImage(intent);
     }
 
-    @Override protected void onResume() {
-        super.onResume();AppSettings current=AppSettings.load(this);
-        if(settings!=null&&!settings.detectorModel.equals(current.detectorModel)){
-            cancelTask();reviewed=false;showingOriginal=true;
-            Bitmap old=translated;translated=null;transcript=null;
-            if(preview!=null){preview.setBitmap(original);preview.setRegions(new ArrayList<>());preview.setShowBoxes(true);}
-            if(old!=null&&old!=original&&!old.isRecycled())old.recycle();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppSettings current = AppSettings.load(this);
+        if (settings != null && !settings.detectorModel.equals(current.detectorModel)) {
+            cancelTask();
+            reviewed = false;
+            showingOriginal = true;
+            Bitmap old = translated;
+            translated = null;
+            transcript = null;
+            if (preview != null) {
+                preview.setBitmap(original);
+                preview.setRegions(new ArrayList<>());
+                preview.setShowBoxes(true);
+            }
+            if (old != null && old != original && !old.isRecycled()) old.recycle();
             finish("本地检测模型已改变，请重新检测文字；旧选区和译图已清除。");
         }
-        settings=current;
+        settings = current;
     }
 
     private void importImage(Uri uri, String path) {
         int token = begin("正在读取图片…");
-        active = submit(() -> {
-            try {
-                Bitmap loaded = path == null ? Storage.load(this, uri) : Storage.loadCached(this, path);
-                deliver(token, () -> {
-                    original = loaded;
-                    translated = null;
-                    replaceDraft(null);
-                    transcript = null;
-                    reviewed = false;
-                    showingOriginal = true;
-                    preview.setBitmap(original);
-                    preview.resetZoom();
-                    preview.setRegions(new ArrayList<>());
-                    preview.setShowBoxes(true);
-                    imageInfo.setText(imageInfo.getContext().getString(R.string.main_activity_message_12, original.getWidth(), original.getHeight()));
-                    finish("图片已载入。点击“检测文字”，确认选区后再翻译。");
-                });
-            } catch (Exception | OutOfMemoryError error) { fail(token, error); }
-        });
+        active =
+                submit(
+                        () -> {
+                            try {
+                                Bitmap loaded =
+                                        path == null
+                                                ? Storage.load(this, uri)
+                                                : Storage.loadCached(this, path);
+                                deliver(
+                                        token,
+                                        () -> {
+                                            original = loaded;
+                                            translated = null;
+                                            replaceDraft(null);
+                                            transcript = null;
+                                            reviewed = false;
+                                            showingOriginal = true;
+                                            preview.setBitmap(original);
+                                            preview.resetZoom();
+                                            preview.setRegions(new ArrayList<>());
+                                            preview.setShowBoxes(true);
+                                            imageInfo.setText(
+                                                    imageInfo
+                                                            .getContext()
+                                                            .getString(
+                                                                    R.string
+                                                                            .main_activity_message_12,
+                                                                    original.getWidth(),
+                                                                    original.getHeight()));
+                                            finish("图片已载入。点击“检测文字”，确认选区后再翻译。");
+                                        });
+                            } catch (Exception | OutOfMemoryError error) {
+                                fail(token, error);
+                            }
+                        });
     }
 
     private void detect() {
         if (original == null || busy) return;
         Bitmap input = original;
-        final AppSettings detectionSettings=AppSettings.load(this);
+        final AppSettings detectionSettings = AppSettings.load(this);
         int token = begin("正在手机本地检测文字，首次加载模型可能稍慢…");
-        active = submit(() -> {
-            try {
-                List<Region> regions = engine.detect(input,detectionSettings);
-                deliver(token, () -> {
-                    reviewed = true;
-                    preview.setBitmap(original);
-                    preview.setRegions(regions);
-                    preview.setShowBoxes(true);
-                    showingOriginal = true;
-                    finish(regions.isEmpty() ? "未检测到文字。请导入更清晰的单页图片，或放大漫画后重新截屏。"
-                            : "检测到 " + regions.size() + " 个段落。绿色选中，灰色排除；点框可调整。");
-                });
-            } catch (Exception | OutOfMemoryError error) { fail(token, error); }
-        });
+        active =
+                submit(
+                        () -> {
+                            try {
+                                List<Region> regions = engine.detect(input, detectionSettings);
+                                deliver(
+                                        token,
+                                        () -> {
+                                            reviewed = true;
+                                            preview.setBitmap(original);
+                                            preview.setRegions(regions);
+                                            preview.setShowBoxes(true);
+                                            showingOriginal = true;
+                                            finish(
+                                                    regions.isEmpty()
+                                                            ? "未检测到文字。请导入更清晰的单页图片，或放大漫画后重新截屏。"
+                                                            : "检测到 "
+                                                                    + regions.size()
+                                                                    + " 个段落。绿色选中，灰色排除；点框可调整。");
+                                        });
+                            } catch (Exception | OutOfMemoryError error) {
+                                fail(token, error);
+                            }
+                        });
     }
 
-    protected String translationDisabled(){return original==null?"请先选择图片":preview.getSelectedRegions().isEmpty()?"请先检测并选择文字框":null;}
-    protected void startTranslation(){translate();}
+    protected String translationDisabled() {
+        return original == null
+                ? "请先选择图片"
+                : preview.getSelectedRegions().isEmpty() ? "请先检测并选择文字框" : null;
+    }
+
+    protected void startTranslation() {
+        translate();
+    }
+
     private void translate() {
         List<Region> selected = preview.getSelectedRegions();
         List<Region> protectionRegions = preview.getAllRegions();
         if (original == null || selected.isEmpty() || busy) return;
         AppSettings configuration;
-        try { configuration = AppSettings.load(this); configuration.validate(); }
-        catch (Exception error) { setStatus(safeMessage(error), true); startActivity(new Intent(this,SettingsActivity.class)); return; }
-        if(!TranslationTaskManager.begin(this,"single",this::cancelTask)){android.widget.Toast.makeText(this,StorageQuota.admissionProblem(),android.widget.Toast.LENGTH_SHORT).show();return;}
+        try {
+            configuration = AppSettings.load(this);
+            configuration.validate();
+        } catch (Exception error) {
+            setStatus(safeMessage(error), true);
+            startActivity(new Intent(this, SettingsActivity.class));
+            return;
+        }
+        if (!TranslationTaskManager.begin(this, "single", this::cancelTask)) {
+            android.widget.Toast.makeText(
+                            this,
+                            StorageQuota.admissionProblem(),
+                            android.widget.Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
         Bitmap input = original;
         int token = begin("准备翻译 " + selected.size() + " 个选区…");
         AtomicBoolean cancelled = cancellation;
-        active = submit(() -> {
-            PerformanceDiagnostics.Page diagnostic=PerformanceDiagnostics.begin("single_selection");String diagnosticResult="failed";
-            PerformanceDiagnostics.bind(input,configuration);
-            try {
-                TranslationEngine.Result result = engine.translate(input, selected, protectionRegions, configuration,
-                        (message, done, total) -> deliver(token, () -> {
-                            status.setText(message);
-                            progress.setIndeterminate(total <= 0);
-                            if (total > 0) { progress.setMax(total); progress.setProgress(done, true); }
-                        }), cancelled::get);
-                PerformanceDiagnostics.pixels("master",result.image);diagnosticResult=result.failed>0?"partial":"new";
-                runOnUiThread(() -> {
-                    if(isDestroyed() || token != generation || cancellation.get()) {
-                        if(result.image != input && !result.image.isRecycled())result.image.recycle();
-                        return;
-                    }
-                    settings = configuration;
-                    transcript = result.transcript;
-                    replaceDraft(result.succeeded > 0 ? result.draft : null);
-                    if (result.succeeded == 0) PageDraftStore.discard(result.draft);
-                    if (result.succeeded == 0) {
-                        if(result.image != input && !result.image.isRecycled())result.image.recycle();
-                        translated = null;
-                        preview.setBitmap(original);
-                        preview.setShowBoxes(true);
-                        showingOriginal = true;
-                        reviewed = true;
-                        finish(result.summary + "\n本次没有可回填的译文，原图已保留。可调整选区或检查接口后重试。");
-                        return;
-                    }
-                    translated = result.image;
-                    preview.setBitmap(translated);
-                    preview.setShowBoxes(false);
-                    showingOriginal = false;
-                    reviewed = false;
-                    finish(result.summary + "\n可以查看原图对比，或保存到相册。");
-                });
-            } catch (Exception | OutOfMemoryError error) { fail(token, error); }
-            finally{PerformanceDiagnostics.finish(diagnostic,diagnosticResult);}
-        });
+        active =
+                submit(
+                        () -> {
+                            PerformanceDiagnostics.Page diagnostic =
+                                    PerformanceDiagnostics.begin("single_selection");
+                            String diagnosticResult = "failed";
+                            PerformanceDiagnostics.bind(input, configuration);
+                            try {
+                                TranslationEngine.Result result =
+                                        engine.translate(
+                                                input,
+                                                selected,
+                                                protectionRegions,
+                                                configuration,
+                                                (message, done, total) ->
+                                                        deliver(
+                                                                token,
+                                                                () -> {
+                                                                    status.setText(message);
+                                                                    progress.setIndeterminate(
+                                                                            total <= 0);
+                                                                    if (total > 0) {
+                                                                        progress.setMax(total);
+                                                                        progress.setProgress(
+                                                                                done, true);
+                                                                    }
+                                                                }),
+                                                cancelled::get);
+                                PerformanceDiagnostics.pixels("master", result.image);
+                                diagnosticResult = result.failed > 0 ? "partial" : "new";
+                                runOnUiThread(
+                                        () -> {
+                                            if (isDestroyed()
+                                                    || token != generation
+                                                    || cancellation.get()) {
+                                                if (result.image != input
+                                                        && !result.image.isRecycled())
+                                                    result.image.recycle();
+                                                return;
+                                            }
+                                            settings = configuration;
+                                            transcript = result.transcript;
+                                            replaceDraft(
+                                                    result.succeeded > 0 ? result.draft : null);
+                                            if (result.succeeded == 0)
+                                                PageDraftStore.discard(result.draft);
+                                            if (result.succeeded == 0) {
+                                                if (result.image != input
+                                                        && !result.image.isRecycled())
+                                                    result.image.recycle();
+                                                translated = null;
+                                                preview.setBitmap(original);
+                                                preview.setShowBoxes(true);
+                                                showingOriginal = true;
+                                                reviewed = true;
+                                                finish(
+                                                        result.summary
+                                                                + "\n"
+                                                                + "本次没有可回填的译文，原图已保留。可调整选区或检查接口后重试。");
+                                                return;
+                                            }
+                                            translated = result.image;
+                                            preview.setBitmap(translated);
+                                            preview.setShowBoxes(false);
+                                            showingOriginal = false;
+                                            reviewed = false;
+                                            finish(result.summary + "\n可以查看原图对比，或保存到相册。");
+                                        });
+                            } catch (Exception | OutOfMemoryError error) {
+                                fail(token, error);
+                            } finally {
+                                PerformanceDiagnostics.finish(diagnostic, diagnosticResult);
+                            }
+                        });
     }
 
     private void compare() {
@@ -289,19 +444,34 @@ public final class MainActivity extends ShellActivity {
         if (translated == null || busy) return;
         Bitmap output = translated;
         int token = begin("正在保存 PNG 到相册…");
-        active = submit(() -> {
-            try {
-                Storage.save(this, output, "漫画译图");
-                deliver(token, () -> finish("已保存到相册的“漫画翻译助手”文件夹。"));
-            } catch (Exception error) { fail(token, error); }
-        });
+        active =
+                submit(
+                        () -> {
+                            try {
+                                Storage.save(this, output, "漫画译图");
+                                deliver(token, () -> finish("已保存到相册的“漫画翻译助手”文件夹。"));
+                            } catch (Exception error) {
+                                fail(token, error);
+                            }
+                        });
     }
 
-    @Override protected void onActivityResult(int requestCode,int resultCode,Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode==IMPORT&&resultCode==RESULT_OK&&data!=null&&data.getData()!=null){
-            Uri uri=data.getData();try{if((data.getFlags()&Intent.FLAG_GRANT_READ_URI_PERMISSION)!=0)getContentResolver().takePersistableUriPermission(uri,Intent.FLAG_GRANT_READ_URI_PERMISSION);}catch(Exception ignored){}
-            importImage(uri,null);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == IMPORT
+                && resultCode == RESULT_OK
+                && data != null
+                && data.getData() != null) {
+            Uri uri = data.getData();
+            try {
+                if ((data.getFlags() & Intent.FLAG_GRANT_READ_URI_PERMISSION) != 0)
+                    getContentResolver()
+                            .takePersistableUriPermission(
+                                    uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            } catch (Exception ignored) {
+            }
+            importImage(uri, null);
         }
     }
 
@@ -318,10 +488,15 @@ public final class MainActivity extends ShellActivity {
     }
 
     private void deliver(int token, Runnable action) {
-        runOnUiThread(() -> { if (!isDestroyed() && token == generation && !cancellation.get()) action.run(); });
+        runOnUiThread(
+                () -> {
+                    if (!isDestroyed() && token == generation && !cancellation.get()) action.run();
+                });
     }
 
-    private void finish(String message) {settling=message;settle();
+    private void finish(String message) {
+        settling = message;
+        settle();
         busy = false;
         progress.setVisibility(View.GONE);
         cancelButton.setVisibility(View.GONE);
@@ -330,13 +505,21 @@ public final class MainActivity extends ShellActivity {
     }
 
     private void fail(int token, Throwable error) {
-        new TranslationLog(new java.io.File(getFilesDir(),"diagnostics")).record("single-page","","page_failure",safeMessage(error),AppSettings.load(this));
-        deliver(token, () -> {
-            finish(safeMessage(error));
-            status.setTextColor(Ui.DANGER);
-            Ui.tint(statusCard, statusBackground, Ui.DANGER_SOFT);
-            Ui.shake(statusCard);
-        });
+        new TranslationLog(new java.io.File(getFilesDir(), "diagnostics"))
+                .record(
+                        "single-page",
+                        "",
+                        "page_failure",
+                        safeMessage(error),
+                        AppSettings.load(this));
+        deliver(
+                token,
+                () -> {
+                    finish(safeMessage(error));
+                    status.setTextColor(Ui.DANGER);
+                    Ui.tint(statusCard, statusBackground, Ui.DANGER_SOFT);
+                    Ui.shake(statusCard);
+                });
     }
 
     private String safeMessage(Throwable error) {
@@ -359,8 +542,12 @@ public final class MainActivity extends ShellActivity {
     private void updateSelection() {
         if (selectionInfo == null) return;
         int count = preview.getSelectedRegions().size();
-        selectionInfo.setText(reviewed ? "已选 " + count + " 个段落 · 点文字框切换选择，双指放大查看"
-                : translated != null ? (showingOriginal ? "当前显示原图" : "当前显示译图") : "检测后可点选文字框，排除误检。");
+        selectionInfo.setText(
+                reviewed
+                        ? "已选 " + count + " 个段落 · 点文字框切换选择，双指放大查看"
+                        : translated != null
+                                ? (showingOriginal ? "当前显示原图" : "当前显示译图")
+                                : "检测后可点选文字框，排除误检。");
         updateControls();
     }
 
@@ -368,12 +555,14 @@ public final class MainActivity extends ShellActivity {
         if (detectButton == null || preview == null) return;
         for (View view : lockedWhileBusy) view.setEnabled(!busy);
         detectButton.setEnabled(!busy && original != null);
-        translateButton.setEnabled(!busy && original != null && !preview.getSelectedRegions().isEmpty());
+        translateButton.setEnabled(
+                !busy && original != null && !preview.getSelectedRegions().isEmpty());
         compareButton.setEnabled(!busy && translated != null);
         compareButton.setText(showingOriginal ? "查看译图" : "查看原图");
         saveImageButton.setEnabled(!busy && translated != null);
         transcriptButton.setEnabled(!busy && transcript != null);
-        workbenchButton.setVisibility(translated != null && draft != null ? View.VISIBLE : View.GONE);
+        workbenchButton.setVisibility(
+                translated != null && draft != null ? View.VISIBLE : View.GONE);
         workbenchButton.setEnabled(!busy);
         reviewButton.setVisibility(translated != null ? View.VISIBLE : View.GONE);
         reviewButton.setEnabled(!busy);
@@ -392,58 +581,110 @@ public final class MainActivity extends ShellActivity {
     /** Files this page's draft and opens it as a one-page project in the workbench. */
     private void openWorkbench() {
         if (draft == null || busy) return;
-        java.io.File staged = draft; draft = null;
+        java.io.File staged = draft;
+        draft = null;
         String key = LocalComics.sha("single\n" + java.util.UUID.randomUUID());
-        if (!PageDraftStore.commit(this, staged, key)) { setStatus("无法保存可编辑草稿，请检查存储空间后重新翻译。", true); updateControls(); return; }
+        if (!PageDraftStore.commit(this, staged, key)) {
+            setStatus("无法保存可编辑草稿，请检查存储空间后重新翻译。", true);
+            updateControls();
+            return;
+        }
         updateControls();
-        ProjectLauncher.launch(this, ProjectLauncher.dated("单页翻译"), "single", null,
-                () -> new ProjectLauncher.Gathered(java.util.Collections.singletonList(new ProjectStore.PageSpec("单页", key, null, null, false)), ""), null);
+        ProjectLauncher.launch(
+                this,
+                ProjectLauncher.dated("单页翻译"),
+                "single",
+                null,
+                () ->
+                        new ProjectLauncher.Gathered(
+                                java.util.Collections.singletonList(
+                                        new ProjectStore.PageSpec("单页", key, null, null, false)),
+                                ""),
+                null);
     }
 
     private void setStatus(String message, boolean error) {
         status.setText(message);
         status.setTextColor(error ? Ui.DANGER : INK);
-        Ui.tint(statusCard, statusBackground, error ? Ui.DANGER_SOFT : busy ? Ui.ACCENT_SOFT : Ui.INFO_SOFT);
+        Ui.tint(
+                statusCard,
+                statusBackground,
+                error ? Ui.DANGER_SOFT : busy ? Ui.ACCENT_SOFT : Ui.INFO_SOFT);
         if (error) Ui.shake(statusCard);
     }
 
-    private LinearLayout column() { LinearLayout view = new LinearLayout(this); view.setOrientation(LinearLayout.VERTICAL); return view; }
-    private LinearLayout row() { LinearLayout view = new LinearLayout(this); view.setOrientation(LinearLayout.HORIZONTAL); return view; }
+    private LinearLayout column() {
+        LinearLayout view = new LinearLayout(this);
+        view.setOrientation(LinearLayout.VERTICAL);
+        return view;
+    }
+
+    private LinearLayout row() {
+        LinearLayout view = new LinearLayout(this);
+        view.setOrientation(LinearLayout.HORIZONTAL);
+        return view;
+    }
+
     private TextView label(String text, int sp, int color) {
         TextView view = new TextView(this);
-        view.setText(text); view.setTextSize(sp); view.setTextColor(color);
+        view.setText(text);
+        view.setTextSize(sp);
+        view.setTextColor(color);
         view.setLineSpacing(dp(3), 1f);
         return view;
     }
+
     private LinearLayout card(LinearLayout parent, String heading, String detail, int top) {
         return Ui.section(this, parent, heading, detail, top);
     }
+
     private Button button(String text, boolean primary, View.OnClickListener listener) {
         return Ui.button(this, text, primary ? Ui.PRIMARY : Ui.TONAL, listener);
     }
+
     private void addEqual(LinearLayout row, View child, int left) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, -2, 1f);
-        params.leftMargin = dp(left); row.addView(child, params);
+        params.leftMargin = dp(left);
+        row.addView(child, params);
     }
+
     private LinearLayout.LayoutParams space(int left, int top, int right, int bottom) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-1, -2);
-        params.setMargins(dp(left), dp(top), dp(right), dp(bottom)); return params;
+        params.setMargins(dp(left), dp(top), dp(right), dp(bottom));
+        return params;
     }
-    private GradientDrawable round(int color, int radius) {
-        GradientDrawable shape = new GradientDrawable(); shape.setColor(color); shape.setCornerRadius(dp(radius)); return shape;
-    }
-    private int dp(float value) { return Math.round(value * getResources().getDisplayMetrics().density); }
 
-    @Override protected void onDestroy() {
-        TranslationTaskManager.stopping("single");settling="单页任务已停止，已保存文件保留";settle();
+    private GradientDrawable round(int color, int radius) {
+        GradientDrawable shape = new GradientDrawable();
+        shape.setColor(color);
+        shape.setCornerRadius(dp(radius));
+        return shape;
+    }
+
+    private int dp(float value) {
+        return Math.round(value * getResources().getDisplayMetrics().density);
+    }
+
+    @Override
+    protected void onDestroy() {
+        TranslationTaskManager.stopping("single");
+        settling = "单页任务已停止，已保存文件保留";
+        settle();
         replaceDraft(null);
         cancellation.set(true);
         generation++;
         if (active != null) active.cancel(true);
         worker.shutdownNow();
-        if(engine!=null)new Thread(()->{try{engine.close();}catch(Exception ignored){}},"manga-detector-close").start();
+        if (engine != null)
+            new Thread(
+                            () -> {
+                                try {
+                                    engine.close();
+                                } catch (Exception ignored) {
+                                }
+                            },
+                            "manga-detector-close")
+                    .start();
         super.onDestroy();
     }
 }
-
-
