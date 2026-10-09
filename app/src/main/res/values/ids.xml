@@ -2,4 +2,5 @@
 <resources>
     <item name="ui_tint_color" type="id" />
     <item name="ui_tint_animator" type="id" />
+    <item name="ui_icon_resource" type="id" />
 </resources>

@@ -1,4 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="app_background">#F6F8FC</color>
+    <color name="ui_bg">#FFF6F8FC</color>
+    <color name="ui_surface">#FFFFFFFF</color>
+    <color name="ui_surface_soft">#FFF1F4F9</color>
+    <color name="ui_outline">#FFE3E8F0</color>
+    <color name="ui_ink">#FF1F2430</color>
+    <color name="ui_muted">#FF667085</color>
+    <color name="ui_accent">#FF1A73E8</color>
+    <color name="ui_accent_deep">#FF0B57D0</color>
+    <color name="ui_accent_soft">#FFE8F0FE</color>
+    <color name="ui_danger">#FFB3261E</color>
+    <color name="ui_danger_soft">#FFFCE8E6</color>
+    <color name="ui_info_soft">#FFE8EEF8</color>
+    <color name="ui_icon">#FF3C4657</color>
+    <color name="ui_success">#FF137333</color>
+    <color name="ui_success_soft">#FFE6F4EA</color>
+    <color name="ui_warning">#FF8A5700</color>
+    <color name="ui_warning_soft">#FFFFF3D6</color>
+    <color name="ui_disabled">#FF8C96A6</color>
+    <color name="ui_disabled_soft">#FFEEF1F5</color>
+    <color name="ui_placeholder">#FFA9B1BD</color>
+    <color name="ui_ripple">#241A73E8</color>
+    <color name="ui_transparent">#00000000</color>
+    <color name="ui_overlay">#CCFFFFFF</color>
+    <color name="ui_black">#FF000000</color>
 </resources>
